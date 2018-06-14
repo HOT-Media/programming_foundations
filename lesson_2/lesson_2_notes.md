@@ -77,12 +77,9 @@ end
 
 Flow Charts:
 
+!http://d1b1wr57ag5rdp.cloudfront.net/images/flowchart_components.jpg
 
-## Images
-http://d1b1wr57ag5rdp.cloudfront.net/images/flowchart_components.jpg
+!http://d1b1wr57ag5rdp.cloudfront.net/images/flowchart_largest.jpg
 
-http://d1b1wr57ag5rdp.cloudfront.net/images/flowchart_largest.jpg
-
-ls
 
 
