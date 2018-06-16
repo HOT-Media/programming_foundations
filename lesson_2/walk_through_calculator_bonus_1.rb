@@ -1,29 +1,13 @@
-# require "pry"
+require "pry"
+
 def prompt(message)
   Kernel.puts("=> #{message}")
 end
 
-#def valid_number?(x)
-  #x.to_i() != 0
-  # String.to integer to string to integer
-  # "1"  1    "1" 
-  #x.to_i.to_s.to_i == x
-  
-#end
-
-# true or false
-
 def valid_number?(x)
   y = x
-#vn = number1
-    #puts vn
-    #if number1.to_i.to_s == vn
-      x.to_i.to_s == y && x != "0"
-   end
-
-
-
-
+  x.to_i.to_s == y && x != "0"
+end
 
 def operation_to_message(op)
   case op
@@ -60,9 +44,6 @@ loop do
     prompt("What's the first number?")
     number1 = Kernel.gets().chomp()
     if valid_number?(number1)
-    #vn = number1
-    #puts vn
-    #if number1.to_i.to_s == vn 
       break # if valid_number? true:  break
     else
       prompt("Please enter a valid number.")
