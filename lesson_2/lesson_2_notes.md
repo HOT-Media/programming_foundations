@@ -191,4 +191,7 @@ PEDAC stands for: Understand the Problem, Write Examples/Test Cases, Data Struct
 
 A programming algorithm is a computer procedure that is a lot like a recipe (called a procedure) and tells your computer precisely what steps to take to solve a problem or reach a goal. The ingredients are called inputs, while the results are called the outputs.
 
+```
+
+
 
