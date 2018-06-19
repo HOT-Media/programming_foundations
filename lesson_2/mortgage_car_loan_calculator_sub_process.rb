@@ -54,7 +54,7 @@ loop do
 
     if number?(la) # true
       la = la.gsub(/[, ' ' ' %  $ ]/, '') # remove other characters
-      la = la.to_f # convert to a float
+      la = la.to_f.truncate(2) 
       break 
     else
       prompt("Please enter a valid number.")
@@ -95,8 +95,8 @@ loop do
 
 m = la * (j / (1 - (1 + j)**(-n)))
 #m = m.truncate(3).round(2)
+m = m.truncate(2)
 puts m
-puts m.truncate(3)
 puts la.class
 puts j.class
 puts n.class

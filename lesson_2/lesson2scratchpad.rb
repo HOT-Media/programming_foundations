@@ -123,4 +123,4 @@ end
 puts apr
 puts j
 
-
+'%.2f' % 500
