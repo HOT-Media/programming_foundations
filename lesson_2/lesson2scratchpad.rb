@@ -124,3 +124,11 @@ puts apr
 puts j
 
 '%.2f' % 500
+
+
+prompt =<<-MSG
+"The monthly payment for a la.to_i at 4% interest,
+for 4 years, is: $ 588 per month.")
+MSG
+
+

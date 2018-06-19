@@ -1,9 +1,9 @@
 def input_cleanup(clean)
-  clean = clean.gsub(/[, ' ' ' %  $ ]/, '')
+  clean.gsub(/[, ' ' ' %  $ ]/, '')
 end
 
 def pct(x)
-  x.start_with?("%") # true if starts with %
+  x.gsub(/[' ' ]/, '').start_with?("%") # true if starts with %
 end
 
 def number?(x)
@@ -56,18 +56,17 @@ loop do
   loop do
     prompt("What's the annual percentage rate?")
     apr = Kernel.gets().chomp()
-      if number?(apr) && pct(apr) == false # safe to clean up data
-        apr = input_cleanup(apr)
-        j = apr.to_f * 0.01 / 12
-        break # if apr is an integer or float break and does not start with %
-               # valid number but % in front
-      elsif number?(apr) && pct(apr) # true and true
-        prompt ("The interest rate can not begin with the %\ symbol")
-        prompt ("Please enter a valid number with the %\ sign in 
-          the correct location.")
-      elsif number?(apr) == false # && pct(apr) == nil
-        prompt("Please enter a valid number")
-      end
+    if number?(apr) && pct(apr) == false # safe to clean up data
+      apr = input_cleanup(apr)
+      j = apr.to_f * 0.01 / 12
+      break # if apr is an integer or float break and does not start with %
+    # valid number but % in front
+    elsif number?(apr) && pct(apr) # true and true
+      prompt "The interest rate can not begin with the %\ symbol.
+  Enter a valid number with the %\ sign in the correct location."
+    elsif number?(apr) == false # && pct(apr) == nil
+      prompt("Please enter a valid number")
+    end
   end
 
   duration = ''
@@ -84,12 +83,12 @@ loop do
     end
   end
 
-  m = la * (j / (1 - (1 + j)**(-n)))
+  m = la * (j / (1 - (1 + j)**-n))
   m = m.truncate(2)
-# puts m
-# puts la.class
-# puts j.class
-# puts n.class
+  # puts m
+  # puts la.class
+  # puts j.class
+  # puts n.class
   prompt("The monthly payment for a $#{la.to_i} at #{apr}%\ interest,
    for #{duration} years, is: #{m} per month.")
 
