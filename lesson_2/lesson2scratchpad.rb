@@ -132,3 +132,33 @@ for 4 years, is: $ 588 per month.")
 MSG
 
 
+
+years = "$25,000.00"
+
+
+zero validate individually in the get data loop 
+0 works with ammount and apr
+
+reject -negative input for  duration, ammount, apr
+-8.negative? true
+if true ...
+
+
+2.5 * 12 % 2 == 0
+=> true
+if n % 2 == 0 break
+works with half years .5
+
+
+reject 0 duration
+if duration == "0" ... 
+
+
+#done
+output data in 2 decimal places
+'%.2f' % [(5.101 * 100).round / 100.0] # => "5.10"
+
+x = 5.101
+'%.2f' % [(x * 100).round / 100.0]
+
+

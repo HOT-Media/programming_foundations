@@ -84,13 +84,13 @@ loop do
   end
 
   m = la * (j / (1 - (1 + j)**-n))
-  m = m.truncate(2)
+  m = '%.2f' % [(m * 100).round / 100.0]
   # puts m
   # puts la.class
   # puts j.class
   # puts n.class
   prompt("The monthly payment for a $#{la.to_i} at #{apr}%\ interest,
-   for #{duration} years, is: #{m} per month.")
+   for #{duration} years, is: $#{m} per month.")
 
   prompt("Do you want to perform another calculation? (Y to calculate again)")
   answer = Kernel.gets().chomp()
