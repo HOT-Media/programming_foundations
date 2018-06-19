@@ -5,13 +5,24 @@ end
 def pct(x)
   x.gsub(/[' ' ]/, '').start_with?("%") # true if starts with %
 end
+=begin 
+def number?(x)
+  x = x.gsub(/[, ' ' ' %  $ ]/, '')
+  y = x
+  fl = x
+  #return false if x == "0.0"
+  #return false if x == "0"
+  x.to_i.to_s == y || x.to_f.to_s == fl
+end
+=end
 
 def number?(x)
   x = x.gsub(/[, ' ' ' %  $ ]/, '')
   y = x
   fl = x
-  return false if x == "0.0"
-  return false if x == "0"
+  #return 0.0 if x == "0.0"
+  #return 0 if x == "0"
+  x = "0" if x == "0.0"
   x.to_i.to_s == y || x.to_f.to_s == fl
 end
 
@@ -83,7 +94,18 @@ loop do
     end
   end
 
-  m = la * (j / (1 - (1 + j)**-n))
+m = nil
+loop do 
+  if j == 0
+    m = la / n
+    break
+  else
+    m = la * (j / (1 - (1 + j)**-n))
+    break
+  end
+end
+puts m
+
   m = '%.2f' % [(m * 100).round / 100.0]
   # puts m
   # puts la.class

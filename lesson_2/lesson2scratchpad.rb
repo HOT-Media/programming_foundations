@@ -136,7 +136,7 @@ MSG
 years = "$25,000.00"
 
 
-zero validate individually in the get data loop 
+
 0 works with ammount and apr
 
 reject -negative input for  duration, ammount, apr
@@ -154,11 +154,38 @@ reject 0 duration
 if duration == "0" ... 
 
 
-#done
+DONE
 output data in 2 decimal places
-'%.2f' % [(5.101 * 100).round / 100.0] # => "5.10"
-
 x = 5.101
 '%.2f' % [(x * 100).round / 100.0]
+****************************************************
 
+def prompt(message)
+  Kernel.puts("=> #{message}")
+end
+
+zero and zero.zero passes as a valid integer
+def number?(x)
+  x = x.gsub(/[, ' ' ' %  $ ]/, '')
+  y = x
+  fl = x
+  #return 0.0 if x == "0.0"
+  #return 0 if x == "0"
+  x = "0" if x == "0.0"
+  x.to_i.to_s == y || x.to_f.to_s == fl
+end
+
+loop do
+  la = ''
+  loop do
+    prompt("What's the loan amount?")
+    la = Kernel.gets().chomp()
+    if number?(la) # == true && number?(la) == "0.0" # true
+      la = la.gsub(/[, ' ' ' %  $ ]/, '') # remove other characters
+      la = la.to_f.truncate(2)
+      break
+    else
+      prompt("Please enter a valid number.")
+    end
+  end
 
