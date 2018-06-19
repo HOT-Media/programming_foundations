@@ -79,7 +79,8 @@ loop do
       prompt("Please enter a valid number")
     end
   end
-
+  
+=begin 
   duration = ''
   n = ''
   loop do
@@ -87,6 +88,27 @@ loop do
     duration = Kernel.gets().chomp()
     if number?(duration)
       # input_cleanup(duration)
+      n = duration.to_f * 12.0
+      break # if duration is an integer or float
+    else
+      prompt("Please enter a valid number.")
+    end
+  end
+=end
+
+duration = ''
+  n = ''
+  x = ''
+  loop do
+    prompt("What's duration of the loan in years?")
+    duration = Kernel.gets().chomp()
+    #x = duration.to_i.to_s == duration.to_f.to_s
+    x = duration.to_f.to_s == duration # true if float false if integer
+    if number?(duration) && x == false # 3  pass
+      n = duration.to_f * 12.0
+      break # if duration is a valid integer or float, and duation is an integer
+      # input_cleanup(duration)
+    elsif number?(duration) &&  duration.to_f * 12 % 2 == 0                #duration.include?(".5")  
       n = duration.to_f * 12.0
       break # if duration is an integer or float
     else

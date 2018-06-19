@@ -136,12 +136,13 @@ MSG
 years = "$25,000.00"
 
 
-
+DONE
 0 works with ammount and apr
 
 reject -negative input for  duration, ammount, apr
 -8.negative? true
 if true ...
+
 
 
 2.5 * 12 % 2 == 0
@@ -188,4 +189,83 @@ loop do
       prompt("Please enter a valid number.")
     end
   end
+
+  if j == 0
+
+    m = la * (j / (1 - (1 + j)**-n))
+
+    la / 36
+    la / n
+
+loop do 
+  if j == 0
+    m = la / n
+    break
+  else
+    m = la * (j / (1 - (1 + j)**-n))
+    break
+  end
+end
+
+  puts m
+
+  m = '%.2f' % [(m * 100).round / 100.0]
+
+
+duration 
+2.5 * 12 % 2 == 0
+=> true
+if n % 2 == 0 break
+works with half years .5
+
+
+duration comes in as a float or integer 
+duration = ''
+  n = ''
+  x = ''
+  loop do
+    prompt("What's duration of the loan in years?")
+    duration = Kernel.gets().chomp()
+    #x = duration.to_i.to_s == duration.to_f.to_s
+    x = duration.to_f.to_s == duration # true if float false if integer
+    if number?(duration) && x == false # 3  pass
+      n = duration.to_f * 12.0
+      break # if duration is a valid integer or float, and duation is an integer
+      # input_cleanup(duration)
+    elsif number?(duration) &&  duration.to_f * 12 % 2 == 0                #duration.include?(".5")  
+      n = duration.to_f * 12.0
+      break # if duration is an integer or float
+    else
+      prompt("Please enter a valid number.")
+    end
+  end
+
+def flori(x)
+if x is an integer
+  3
+  if duration float
+    3.5
+
+if x * 2 % 2 == 0
+
+      3.5     3    "3"  ==  3.5    3.5 
+x = duration.to_i.to_s == duration.to_f.to_s
+
+duration.to_i == true && duration.to_f == true
+duration.to_i == duration
+duration.include? ".5"   #=> true
+
+
+duration is already a string "3.5"
+if duration to_f == duration true 
+     "3.5".to_s  = duration 
+
+
+float starts as a float, converted to a float is still a float when converted to a string.
+x.to_f.to_s == x
+
+
+
+
+
 
