@@ -101,7 +101,7 @@ puts la.class
 puts j.class
 puts n.class
 puts la * (j / (1 - (1 + j)**(-n))) # chop down to .00
-  prompt("The monthly payment for a $#{la} at #{apr}%\ interest, for #{duration} years,
+  prompt("The monthly payment for a $#{la.to_i} at #{apr}%\ interest, for #{duration} years,
    is: #{m} per month.")
 
   prompt("Do you want to perform another calculation? (Y to calculate again)")
