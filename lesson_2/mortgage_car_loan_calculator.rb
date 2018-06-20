@@ -71,11 +71,15 @@ loop do
       la = la.gsub(/[, ' ' ' %  $ ]/, '') # remove other characters
       la = la.to_f.truncate(2)
       break
+    elsif la.to_i.negative? == true
+      prompt("the loan amount can't be negative")
     else
       prompt("Please enter a valid number.")
     end
   end
 
+
+=begin 
   apr = ''
   j = ''
   loop do
@@ -93,6 +97,31 @@ loop do
       prompt("Please enter a valid number")
     end
   end
+=end
+
+apr = ''
+  j = ''
+  loop do
+    prompt("What's the annual percentage rate?")
+    apr = Kernel.gets().chomp()
+    if number?(apr) && pct(apr) == false # safe to clean up data
+      apr = input_cleanup(apr)
+      j = apr.to_f * 0.01 / 12
+      break # if apr is an integer or float break and does not start with %
+    # valid number but % in front
+    elsif number?(apr) && pct(apr) # true and true
+      prompt "The interest rate can not begin with the %\ symbol.
+  Enter a valid number with the %\ sign in the correct location."
+  elsif apr.to_i.negative?
+  prompt("The apr can't be negative")
+    elsif number?(apr) == false # && pct(apr) == nil
+      prompt("Please enter a valid number")
+    end
+  end
+  
+
+
+
 
 =begin 
   duration = ''
