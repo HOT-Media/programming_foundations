@@ -110,6 +110,7 @@ loop do
   end
 =end
 
+=begin 
 duration = ''
   n = ''
   x = ''
@@ -129,6 +130,47 @@ duration = ''
       prompt("Please enter a valid number.")
     end
   end
+=end
+duration = ''
+x = ''
+n = ''
+loop do  
+  prompt("What's duration of the loan in years?")
+    duration = Kernel.gets().chomp()
+   x = duration.to_f.to_s == duration # duration is "3" - false
+
+  n = case 
+  when duration.to_i.negative?
+    prompt("The duration can't be negative.")
+  when number?(duration) == false
+    #puts "Enter a number for the duration of the loan"
+    prompt("Enter a number for the duration of the loan")
+
+    # duration is a valid number to get here:
+  when duration.to_f * 12 % 2 != 0
+    puts "We lend in 6 month increments"
+    prompt("We lend in 6 month increments")
+
+  when duration == "0" || duration == "0.0"
+    puts "The term of the loan can't be zero"
+    prompt(puts "The term of the loan can't be zero")
+      #valid number       and    integer
+        #true             and    true 
+  when  number?(duration) && x == false       then n = duration.to_f * 12.0
+
+
+             # valid number and   valid float with .5
+  when  number?(duration) && duration.to_f * 12 % 2 == 0  then n = duration.to_f * 12.0
+
+
+  end
+
+  if n != nil
+    break
+  end
+
+end
+puts "this is #{n}"
 
 m = nil
 loop do 

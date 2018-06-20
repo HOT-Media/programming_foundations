@@ -323,3 +323,155 @@ else
   end
 end
 
+
+== 0
+
+zero? true
+
+zero.object_id
+
+zero? → true or false
+
+def number?(x)
+  x = x.gsub(/[, ' ' ' %  $ ]/, '')
+  if x.to_f < 0
+    return false
+  end
+  y = x
+  fl = x
+  #return 0.0 if x == "0.0"
+  #return 0 if x == "0"
+  x = "0" if x == "0.0"
+  x.to_i.to_s == y || x.to_f.to_s == fl
+end
+
+def prompt(message)
+  Kernel.puts("=> #{message}")
+end
+
+
+duration = ''
+  n = ''
+  x = ''
+  loop do
+    prompt("What's duration of the loan in years?")
+    duration = Kernel.gets().chomp()
+    #x = duration.to_i.to_s == duration.to_f.to_s
+    x = duration.to_f.to_s == duration   true or false# true if float false if integer
+
+       
+    if number?(duration) && x == false # 3  pass
+      n = duration.to_f * 12.0
+      break # if duration is a valid integer or float, and duation is an integer
+      # input_cleanup(duration)
+    elsif number?(duration) &&  duration.to_f * 12 % 2 == 0                #duration.include?(".5")  
+      n = duration.to_f * 12.0
+      break # if duration is an integer or float
+    else
+      prompt("Please enter a valid number.")
+    end
+  end
+
+x = duration.to_f.to_s == duration - true means the input was a float x = true
+x = duration.to_f.to_s == duration - false means the imput was an integer x = false
+
+#duration = ''
+  #n = ''
+  #x = ''
+
+loop do  
+  prompt("What's duration of the loan in years?")
+    duration = Kernel.gets().chomp()
+   x = duration.to_f.to_s == duration # duration is "3" - false
+
+  n = case 
+  when number?(duration) == false
+    puts "Enter a number for the duration of the loan"
+
+    # duration is a valid number to get here:
+  when duration.to_f * 12 % 2 != 0
+    puts "We lend in 6 month increments"
+
+  when duration == "0" || duration == "0.0"
+    puts "The term of the loan can't be zero"
+      #valid number       and    integer
+        #true             and    true 
+  when  number?(duration) && x == false       then n = duration.to_f * 12.0
+
+
+             # valid number and   valid float with .5
+  when  number?(duration) && duration.to_f * 12 % 2 == 0  then n = duration.to_f * 12.0
+
+
+  end
+
+  if n != nil
+    break
+  end
+
+end
+
+
+
+
+a = 2
+
+case
+when a == 1, a == 2
+  puts "a is one or two"
+when a == 3
+  puts "a is three"
+else
+  puts "I don't know what a is"
+end
+
+
+
+
+=> n = 3.0 * 12
+
+when 
+
+
+
+
+
+
+mo = case a
+when 1
+  1 + 2
+end
+
+
+
+
+
+a = 1
+
+case a
+  when 1
+    "one"
+  when 2
+    "two"
+  when 3
+    "three"
+  when 4 
+    "four"
+  else
+   "not enough"
+  end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
