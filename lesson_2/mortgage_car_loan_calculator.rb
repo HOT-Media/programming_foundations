@@ -5,28 +5,7 @@ end
 def pct(x)
   x.gsub(/[' ' ]/, '').start_with?("%") # true if starts with %
 end
-=begin 
-def number?(x)
-  x = x.gsub(/[, ' ' ' %  $ ]/, '')
-  y = x
-  fl = x
-  #return false if x == "0.0"
-  #return false if x == "0"
-  x.to_i.to_s == y || x.to_f.to_s == fl
-end
-=end
 
-=begin 
-def number?(x)
-  x = x.gsub(/[, ' ' ' %  $ ]/, '')
-  y = x
-  fl = x
-  #return 0.0 if x == "0.0"
-  #return 0 if x == "0"
-  x = "0" if x == "0.0"
-  x.to_i.to_s == y || x.to_f.to_s == fl
-end
-=end
 def number?(x)
   x = x.gsub(/[, ' ' ' %  $ ]/, '')
   if x.to_f < 0
@@ -34,8 +13,8 @@ def number?(x)
   end
   y = x
   fl = x
-  #return 0.0 if x == "0.0"
-  #return 0 if x == "0"
+  # return 0.0 if x == "0.0"
+  # return 0 if x == "0"
   x = "0" if x == "0.0"
   x.to_i.to_s == y || x.to_f.to_s == fl
 end
@@ -54,7 +33,7 @@ name = ''
 loop do
   name = Kernel.gets().chomp()
   if name.empty?()
-    prompt("Make sure to use a valid name")
+    prompt("Make sure to use a valid name with letters only.")
   else
     break
   end
@@ -91,64 +70,49 @@ loop do
     elsif number?(apr) && pct(apr) # true and true
       prompt "The interest rate can not begin with the %\ symbol.
   Enter a valid number with the %\ sign in the correct location."
+    elsif apr.to_i.negative?
+      prompt("The apr can't be negative")
     elsif number?(apr) == false # && pct(apr) == nil
       prompt("Please enter a valid number")
     end
   end
 
-
-duration = ''
-x = ''
-n = ''
-loop do  
-  prompt("What's duration of the loan in years?")
+  duration = ''
+  x = ''
+  n = ''
+  loop do
+    prompt("What's duration of the loan in years?")
     duration = Kernel.gets().chomp()
-   x = duration.to_f.to_s == duration # duration is "3" - false
+    x = duration.to_f.to_s == duration # duration is "3" - false
 
-  n = case 
-  when duration.to_i.negative?
-    prompt("The duration can't be negative.")
-  when number?(duration) == false
-    #puts "Enter a number for the duration of the loan"
-    prompt("Enter a number for the duration of the loan")
-
-    # duration is a valid number to get here:
-  when duration.to_f * 12 % 2 != 0
-    puts "We lend in 6 month increments"
-    prompt("We lend in 6 month increments")
-
-  when duration == "0" || duration == "0.0"
-    puts "The term of the loan can't be zero"
-    prompt(puts "The term of the loan can't be zero")
-      #valid number       and    integer
-        #true             and    true 
-  when  number?(duration) && x == false       then n = duration.to_f * 12.0
-
-
-             # valid number and   valid float with .5
-  when  number?(duration) && duration.to_f * 12 % 2 == 0  then n = duration.to_f * 12.0
-
-
+    n = case
+        when duration.to_i.negative?
+          prompt("The duration can't be negative.")
+        when number?(duration) == false
+          prompt("Enter a number for the duration of the loan")
+        when duration.to_f * 12 % 2 != 0
+          prompt("We lend in 6 month increments")
+        when duration == "0" || duration == "0.0"
+          prompt("The term of the loan can't be zero")
+        when  number?(duration) && x == false then n = duration.to_f * 12.0
+        when  number?(duration) && duration.to_f * 12 % 2 == 0 then n = duration.to_f * 12.0
+        end
+    if n != nil
+      break
+    end
   end
+  # puts "this is #{n}"
 
-  if n != nil
-    break
+  m = nil
+  loop do
+    if j == 0
+      m = la / n
+      break
+    else
+      m = la * (j / (1 - (1 + j)**-n))
+      break
+    end
   end
-
-end
-puts "this is #{n}"
-
-m = nil
-loop do 
-  if j == 0
-    m = la / n
-    break
-  else
-    m = la * (j / (1 - (1 + j)**-n))
-    break
-  end
-end
-#puts m
 
   m = '%.2f' % [(m * 100).round / 100.0]
   # puts m
