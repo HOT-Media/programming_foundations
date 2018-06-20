@@ -265,7 +265,61 @@ float starts as a float, converted to a float is still a float when converted to
 x.to_f.to_s == x
 
 
+fix accepts 0 as duration
+fix accepts negative numbers for all questions.
+
+duration = ''
+  n = ''
+  x = ''
+  loop do
+    prompt("What's duration of the loan in years?")
+    duration = Kernel.gets().chomp()
+    #x = duration.to_i.to_s == duration.to_f.to_s
+    x = duration.to_f.to_s == duration # true if float false if integer
+    if number?(duration) && x == false # 3  pass
+      n = duration.to_f * 12.0
+      break # if duration is a valid integer or float, and duation is an integer
+      # input_cleanup(duration)
+    elsif number?(duration) &&  duration.to_f * 12 % 2 == 0                #duration.include?(".5")  
+      n = duration.to_f * 12.0
+      break # if duration is an integer or float
+    else
+      prompt("Please enter a valid number.")
+    end
+  end
 
 
 
+
+
+
+accept .5 
+and reject 0 without crashing.
+
+duration = ''
+  n = ''
+  x = ''
+  loop do
+    prompt("What's duration of the loan in years?")
+    duration = Kernel.gets().chomp()
+    #x = duration.to_i.to_s == duration.to_f.to_s
+    x = duration.to_f.to_s == duration # true if float false if integer
+    puts duration
+    puts duration.class
+    puts x
+    puts x.class
+case duration
+when number?(duration) # && x == false
+  n = duration.to_f * 12.0
+  break
+when number?(duration) &&  duration.to_f * 12 % 2 == 0
+  n = duration.to_f * 12.0
+  break
+when duration == '0' || '0'
+  prompt("We don't lend for 'zero' time. Enter a number other than 0")
+else
+  prompt("We lend for durations incremented by 6 months, or half years.
+  A valid duration for a 5 1/2 year loan would be 5.5 etc.")
+  end
+end
 

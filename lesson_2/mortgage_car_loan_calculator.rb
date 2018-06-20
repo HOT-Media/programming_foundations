@@ -16,8 +16,22 @@ def number?(x)
 end
 =end
 
+=begin 
 def number?(x)
   x = x.gsub(/[, ' ' ' %  $ ]/, '')
+  y = x
+  fl = x
+  #return 0.0 if x == "0.0"
+  #return 0 if x == "0"
+  x = "0" if x == "0.0"
+  x.to_i.to_s == y || x.to_f.to_s == fl
+end
+=end
+def number?(x)
+  x = x.gsub(/[, ' ' ' %  $ ]/, '')
+  if x.to_f < 0
+    return false
+  end
   y = x
   fl = x
   #return 0.0 if x == "0.0"
@@ -79,7 +93,7 @@ loop do
       prompt("Please enter a valid number")
     end
   end
-  
+
 =begin 
   duration = ''
   n = ''
@@ -126,7 +140,7 @@ loop do
     break
   end
 end
-puts m
+#puts m
 
   m = '%.2f' % [(m * 100).round / 100.0]
   # puts m
