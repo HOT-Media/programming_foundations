@@ -78,8 +78,6 @@ loop do
     end
   end
 
-
-=begin 
   apr = ''
   j = ''
   loop do
@@ -97,69 +95,8 @@ loop do
       prompt("Please enter a valid number")
     end
   end
-=end
-
-apr = ''
-  j = ''
-  loop do
-    prompt("What's the annual percentage rate?")
-    apr = Kernel.gets().chomp()
-    if number?(apr) && pct(apr) == false # safe to clean up data
-      apr = input_cleanup(apr)
-      j = apr.to_f * 0.01 / 12
-      break # if apr is an integer or float break and does not start with %
-    # valid number but % in front
-    elsif number?(apr) && pct(apr) # true and true
-      prompt "The interest rate can not begin with the %\ symbol.
-  Enter a valid number with the %\ sign in the correct location."
-  elsif apr.to_i.negative?
-  prompt("The apr can't be negative")
-    elsif number?(apr) == false # && pct(apr) == nil
-      prompt("Please enter a valid number")
-    end
-  end
-  
 
 
-
-
-=begin 
-  duration = ''
-  n = ''
-  loop do
-    prompt("What's duration of the loan in years?")
-    duration = Kernel.gets().chomp()
-    if number?(duration)
-      # input_cleanup(duration)
-      n = duration.to_f * 12.0
-      break # if duration is an integer or float
-    else
-      prompt("Please enter a valid number.")
-    end
-  end
-=end
-
-=begin 
-duration = ''
-  n = ''
-  x = ''
-  loop do
-    prompt("What's duration of the loan in years?")
-    duration = Kernel.gets().chomp()
-    #x = duration.to_i.to_s == duration.to_f.to_s
-    x = duration.to_f.to_s == duration # true if float false if integer
-    if number?(duration) && x == false # 3  pass
-      n = duration.to_f * 12.0
-      break # if duration is a valid integer or float, and duation is an integer
-      # input_cleanup(duration)
-    elsif number?(duration) &&  duration.to_f * 12 % 2 == 0                #duration.include?(".5")  
-      n = duration.to_f * 12.0
-      break # if duration is an integer or float
-    else
-      prompt("Please enter a valid number.")
-    end
-  end
-=end
 duration = ''
 x = ''
 n = ''

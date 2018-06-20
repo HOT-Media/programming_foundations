@@ -465,7 +465,83 @@ case a
 
 
 
+apr = ''
+  j = ''
+  loop do
+    prompt("What's the annual percentage rate?")
+    apr = Kernel.gets().chomp()
+        valid number and no front %
+    if number?(apr) && pct(apr) == false # safe to clean up data
+      apr = input_cleanup(apr)
+      j = apr.to_f * 0.01 / 12
+      break # if apr is an integer or float break and does not start with %
+    # valid number but % in front
+    elsif number?(apr) && pct(apr) # true and true
+      prompt "The interest rate can not begin with the %\ symbol.
+  Enter a valid number with the %\ sign in the correct location."
+#elsif apr.to_i.negative
+  #prompt("The apr can't be negative")
+    elsif number?(apr) == false # && pct(apr) == nil
+      prompt("Please enter a valid number")
+    end
+  end
 
+apr = ''
+  j = ''
+  loop do
+    prompt("What's the annual percentage rate?")
+    apr = Kernel.gets().chomp()
+    if number?(apr) && pct(apr) == false # safe to clean up data
+      apr = input_cleanup(apr)
+      j = apr.to_f * 0.01 / 12
+      break # if apr is an integer or float break and does not start with %
+    # valid number but % in front
+    elsif number?(apr) && pct(apr) # true and true
+      prompt "The interest rate can not begin with the %\ symbol.
+  Enter a valid number with the %\ sign in the correct location."
+  elsif apr.to_i.negative?
+  prompt("The apr can't be negative")
+    elsif number?(apr) == false # && pct(apr) == nil
+      prompt("Please enter a valid number")
+    end
+  end
+
+duration = ''
+x = ''
+n = ''
+loop do  
+  prompt("What's duration of the loan in years?")
+    duration = Kernel.gets().chomp()
+   x = duration.to_f.to_s == duration # duration is "3" - false
+
+  n = case 
+  when duration.to_i.negative?
+    prompt("The duration can't be negative.")
+  when number?(duration) == false
+    #puts "Enter a number for the duration of the loan"
+    prompt("Enter a number for the duration of the loan")
+
+    # duration is a valid number to get here:
+  when duration.to_f * 12 % 2 != 0
+    prompt("We lend in 6 month increments")
+
+  when duration == "0" || duration == "0.0"
+    prompt( "The term of the loan can't be zero")
+      #valid number       and    integer
+        #true             and    true 
+  when  number?(duration) && x == false       then n = duration.to_f * 12.0
+
+
+             # valid number and   valid float with .5
+  when  number?(duration) && duration.to_f * 12 % 2 == 0  then n = duration.to_f * 12.0
+
+
+  end
+
+  if n != nil
+    break
+  end
+end
 
 
 
