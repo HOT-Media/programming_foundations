@@ -39,7 +39,10 @@ end
 
 prompt("Hi #{name}")
 
+# START OVER HERE IF CALCULATE AGAIN IS YES
+
 loop do
+
   la = ''
   loop do
     prompt("What's the loan amount?")
@@ -115,9 +118,30 @@ loop do
   prompt("The monthly payment for a $#{la.to_i} at #{apr}%\ interest,
    for #{duration} years, is: $#{m} per month.")
 
-  prompt("Do you want to perform another calculation? (Y to calculate again)")
-  answer = Kernel.gets().chomp()
-  break unless answer.downcase().start_with?('y')
+
+# prompt("calculate again Y or exit F")
+# answer = gets().chomp()
+
+# answer = letter_validation(answer)
+
+
+
+# answer = "y"
+# break if answer == "f"
+
+# answer = "f"
+# break if answer == "f"
+
 end
 
+
+
 prompt('Thank you for using monthly payment calculator, good bye!')
+
+
+
+
+
+
+
+
