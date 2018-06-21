@@ -77,6 +77,7 @@ loop do
   duration = ''
   x = ''
   n = ''
+  twelve_month_denominator_remainder = 0
   loop do
     prompt("What's duration of the loan in years?")
     duration = Kernel.gets().chomp()
@@ -86,7 +87,7 @@ loop do
         prompt("The duration can't be negative.")
       elsif number?(duration) == false
         prompt("Enter a number for the duration of the loan")
-      elsif duration.to_f * 12 % 2 != 0
+      elsif duration.to_f * 12 % 2 != twelve_month_denominator_remainder
         prompt("We lend in 6 month increments")
       elsif duration == "0" || duration == "0.0"
         prompt("The term of the loan can't be zero")
