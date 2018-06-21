@@ -94,7 +94,7 @@ loop do
       elsif number?(duration) && duration.to_f * 12 % 2 == 0
       then n = duration.to_f * 12.0
       end
-    break if n != nil
+    break if !n.nil?
   end
 
   m = nil
