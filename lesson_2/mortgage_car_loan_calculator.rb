@@ -119,18 +119,18 @@ loop do
    for #{duration} years, is: $#{m} per month.")
 
 
-# prompt("calculate again Y or exit F")
-# answer = gets().chomp()
+ prompt("calculate again Y or exit F")
+ answer = gets().chomp()
 
-# answer = letter_validation(answer)
+ # answer = exit_letter_validation(answer)
 
 
 
 # answer = "y"
 # break if answer == "f"
 
-# answer = "f"
-# break if answer == "f"
+ #answer = "f"
+ break if answer == "f"
 
 end
 
