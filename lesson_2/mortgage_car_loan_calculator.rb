@@ -13,8 +13,6 @@ def number?(x)
   end
   y = x
   fl = x
-  # return 0.0 if x == "0.0"
-  # return 0 if x == "0"
   x = "0" if x == "0.0"
   x.to_i.to_s == y || x.to_f.to_s == fl
 end
@@ -47,7 +45,7 @@ loop do
     prompt("What's the loan amount?")
     la = Kernel.gets().chomp()
     if number?(la) # true
-      la = la.gsub(/[, ' ' ' %  $ ]/, '') # remove other characters
+      la = la.gsub(/[, ' ' ' %  $ ]/, '') 
       la = la.to_f.truncate(2)
       break
     elsif la.to_i.negative? == true
@@ -62,17 +60,16 @@ loop do
   loop do
     prompt("What's the annual percentage rate?")
     apr = Kernel.gets().chomp()
-    if number?(apr) && pct(apr) == false # safe to clean up data
+    if number?(apr) && pct(apr) == false 
       apr = input_cleanup(apr)
       j = apr.to_f * 0.01 / 12
-      break # if apr is an integer or float break and does not start with %
-    # valid number but % in front
-    elsif number?(apr) && pct(apr) # true and true
+      break 
+    elsif number?(apr) && pct(apr) 
       prompt "The interest rate can not begin with the %\ symbol.
   Enter a valid number with the %\ sign in the correct location."
     elsif apr.to_i.negative?
       prompt("The apr can't be negative")
-    elsif number?(apr) == false # && pct(apr) == nil
+    elsif number?(apr) == false 
       prompt("Please enter a valid number")
     end
   end
@@ -83,7 +80,7 @@ loop do
   loop do
     prompt("What's duration of the loan in years?")
     duration = Kernel.gets().chomp()
-    x = duration.to_f.to_s == duration # duration is "3" - false
+    x = duration.to_f.to_s == duration 
 
     n = case
         when duration.to_i.negative?
@@ -101,7 +98,6 @@ loop do
       break
     end
   end
-  # puts "this is #{n}"
 
   m = nil
   loop do
@@ -115,10 +111,7 @@ loop do
   end
 
   m = '%.2f' % [(m * 100).round / 100.0]
-  # puts m
-  # puts la.class
-  # puts j.class
-  # puts n.class
+  
   prompt("The monthly payment for a $#{la.to_i} at #{apr}%\ interest,
    for #{duration} years, is: $#{m} per month.")
 
