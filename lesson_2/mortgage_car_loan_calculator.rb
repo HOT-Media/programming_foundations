@@ -119,18 +119,62 @@ loop do
    for #{duration} years, is: $#{m} per month.")
 
 
- prompt("calculate again Y or exit F")
- answer = gets().chomp()
+ 
+ #answer = gets().chomp()
 
- # answer = exit_letter_validation(answer)
+#answer = exit_letter_validation(answer)
+
+
+#def exit_letter_validation(str)
+ # str.to_i.to_s == str
+  #str.to_f.to_s == str
+ # str.to_s == str
+  #str == "f"
+#end
 
 
 
-# answer = "y"
+# answer = exit_letter_validation(answer)
+#=> "f" 
+#answer = "f" -> break 
+
+=begin
+quit loop do 
+  puts "quit y or f"
+  answer = gets.chomp
+
+    break if answer == "y" || answer == "f"
+    #if number ask again
+    puts "only y or f accepted"
+      end
+
+=end
+puts 
+
+answer = ''
+loop do 
+  prompt("Would you like to continue? Enter 'Y' or 'N'")
+  answer = gets().chomp()
+    if answer.downcase == "y" || answer.downcase == "n"
+      break
+    else
+      prompt("Only 'Y' or 'N' are accepted.")
+      puts
+    end
+end
+
+break if answer.downcase == "n"
+
+
+
+#answer = "y"
 # break if answer == "f"
 
- #answer = "f"
- break if answer == "f"
+#answer = "3"
+# ask again 
+
+ # answer = "f"
+ # break if answer == "f"
 
 end
 
