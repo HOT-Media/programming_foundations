@@ -3,7 +3,7 @@ def input_cleanup(clean)
 end
 
 def pct(x)
-  x.gsub(/[' ' ]/, '').start_with?("%") # true if starts with %
+  x.gsub(/[' ' ]/, '').start_with?("%")
 end
 
 def number?(x)
@@ -38,8 +38,6 @@ loop do
 end
 
 prompt("Hi #{name}")
-
-# START OVER HERE IF CALCULATE AGAIN IS YES
 
 loop do
 
@@ -84,22 +82,19 @@ loop do
     prompt("What's duration of the loan in years?")
     duration = Kernel.gets().chomp()
     x = duration.to_f.to_s == duration 
-
-    n = case
-        when duration.to_i.negative?
-          prompt("The duration can't be negative.")
-        when number?(duration) == false
-          prompt("Enter a number for the duration of the loan")
-        when duration.to_f * 12 % 2 != 0
-          prompt("We lend in 6 month increments")
-        when duration == "0" || duration == "0.0"
-          prompt("The term of the loan can't be zero")
-        when  number?(duration) && x == false then n = duration.to_f * 12.0
-        when  number?(duration) && duration.to_f * 12 % 2 == 0 then n = duration.to_f * 12.0
-        end
-    if n != nil
-      break
+    
+n = if duration.to_i.negative?
+      prompt("The duration can't be negative.")
+    elsif number?(duration) == false
+      prompt("Enter a number for the duration of the loan")
+    elsif duration.to_f * 12 % 2 != 0
+      prompt("We lend in 6 month increments")
+    elsif duration == "0" || duration == "0.0"
+      prompt("The term of the loan can't be zero")
+    elsif number?(duration) && x == false then n = duration.to_f * 12.0
+    elsif number?(duration) && duration.to_f * 12 % 2 == 0 then n = duration.to_f * 12.0
     end
+    break if n != nil 
   end
 
   m = nil
@@ -118,37 +113,6 @@ loop do
   prompt("The monthly payment for a $#{la.to_i} at #{apr}%\ interest,
    for #{duration} years, is: $#{m} per month.")
 
-
- 
- #answer = gets().chomp()
-
-#answer = exit_letter_validation(answer)
-
-
-#def exit_letter_validation(str)
- # str.to_i.to_s == str
-  #str.to_f.to_s == str
- # str.to_s == str
-  #str == "f"
-#end
-
-
-
-# answer = exit_letter_validation(answer)
-#=> "f" 
-#answer = "f" -> break 
-
-=begin
-quit loop do 
-  puts "quit y or f"
-  answer = gets.chomp
-
-    break if answer == "y" || answer == "f"
-    #if number ask again
-    puts "only y or f accepted"
-      end
-
-=end
 puts 
 
 answer = ''
@@ -162,23 +126,8 @@ loop do
       puts
     end
 end
-
 break if answer.downcase == "n"
-
-
-
-#answer = "y"
-# break if answer == "f"
-
-#answer = "3"
-# ask again 
-
- # answer = "f"
- # break if answer == "f"
-
 end
-
-
 
 prompt('Thank you for using monthly payment calculator, good bye!')
 
