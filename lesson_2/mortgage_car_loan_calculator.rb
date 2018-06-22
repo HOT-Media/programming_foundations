@@ -27,11 +27,32 @@ end
 
 prompt("Welcome to Calculator! Enter your name:")
 
+=begin
 name = ''
 loop do
   name = Kernel.gets().chomp()
   if name.empty?()
     prompt("Make sure to use a valid name with letters only.")
+  else
+    break
+  end
+end
+=end
+
+name = ''
+loop do
+prompt("Enter your name:")
+name = Kernel.gets().chomp()
+
+valid_name = if /[0-9]/.match(name)
+               # <MatchData "0-9">
+               false
+             end
+
+  if name.empty?()
+    prompt("Enter a valid name.")
+  elsif valid_name == false
+    prompt('Only letters are accepted')
   else
     break
   end
