@@ -102,16 +102,16 @@ loop do
   m = nil
 
   if j == 0 # apr is 0
-     m = la / n # monthly payment is loan ammout / months
+    m = la / n # monthly payment is loan ammout / months
   end
 
   if j != 0
     m = la * (j / (1 - (1 + j)**-n))
   end
 
-  m = '%.2f' % [(m * 100).round / 100.0]
+  m = sprintf "%.2f", m.to_s
 
-  prompt("The monthly payment for a $#{la.to_i} at #{apr}%\ interest,
+  prompt("The monthly payment for a $#{la.to_i} loan at #{apr}%\ interest,
    for #{duration} years, is: $#{m} per month.")
 
   puts
