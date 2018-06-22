@@ -109,7 +109,8 @@ loop do
     m = la * (j / (1 - (1 + j)**-n))
   end
 
-  m = sprintf "%.2f", m.to_s
+  m = m.to_s
+  m = format('%.2f', m)
 
   prompt("The monthly payment for a $#{la.to_i} loan at #{apr}%\ interest,
    for #{duration} years, is: $#{m} per month.")
