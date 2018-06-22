@@ -99,16 +99,14 @@ loop do
     break if !n.nil?
   end
 
-
   m = nil
-  loop do
-    if j == 0
-      m = la / n
-      break
-    else
-      m = la * (j / (1 - (1 + j)**-n))
-      break
-    end
+
+  if j == 0 # apr is 0
+     m = la / n # monthly payment is loan ammout / months
+  end
+
+  if j != 0
+    m = la * (j / (1 - (1 + j)**-n))
   end
 
   m = '%.2f' % [(m * 100).round / 100.0]
