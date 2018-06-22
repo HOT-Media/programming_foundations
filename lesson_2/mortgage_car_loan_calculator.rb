@@ -92,11 +92,13 @@ loop do
       elsif duration == "0" || duration == "0.0"
         prompt("The term of the loan can't be zero")
       elsif number?(duration) && x == false then n = duration.to_f * 12.0
-      elsif number?(duration) && duration.to_f * 12 % 2 == 0
+      elsif number?(duration) &&
+            duration.to_f * 12 % 2 == twelve_month_denominator_remainder
       then n = duration.to_f * 12.0
       end
     break if !n.nil?
   end
+
 
   m = nil
   loop do
