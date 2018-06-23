@@ -309,7 +309,7 @@ duration = ''
     puts x
     puts x.class
 case duration
-when number?(duration) # && x == false
+when number?(duration)  && x == false
   n = duration.to_f * 12.0
   break
 when number?(duration) &&  duration.to_f * 12 % 2 == 0
@@ -542,6 +542,393 @@ loop do
     break
   end
 end
+
+
+duration = ''
+  x = ''
+  n = ''
+  loop do
+    prompt("What's duration of the loan in years?")
+    duration = Kernel.gets().chomp()
+    x = duration.to_f.to_s == duration # duration is "3" - false
+
+    n = case duration
+        when duration.to_i.negative?
+          prompt("The duration can't be negative.")
+        when number?(duration) == false
+          prompt("Enter a number for the duration of the loan")
+        when duration.to_f * 12 % 2 != 0
+          prompt("We lend in 6 month increments")
+        when duration == "0" || duration == "0.0"
+          prompt("The term of the loan can't be zero")
+        when  number?(duration) && x == false then n = duration.to_f * 12.0
+        when  number?(duration) && duration.to_f * 12 % 2 == 0 then n = duration.to_f * 12.0
+        end
+    if n != nil
+      break
+    end
+  end
+
+
+def some_method
+  a = 1
+  5.times do
+    puts a
+    b = 2
+  end
+
+  puts a
+  puts b
+end
+
+some_method
+
+x = nil
+def some_method
+  a = 1
+  b = 2
+  x = a + b
+  5.times do
+    puts a
+    b = 2
+  end
+
+  puts a
+  puts b
+end
+
+puts x
+some_method
+
+
+
+
+
+
+gsub(/[, ' ' ' %  $ ]/, '')
+
+
+loop do # main loop
+  
+
+    puts("Enter 'Y' to calculate another monthly payment.
+      If you are finished calculating monthly payments,
+      enter 'F'.")
+
+    answer = Kernel.gets().chomp()
+
+        if answer.downcase().start_with?('f')
+        break
+        elsif
+          if answer is not y and is not f puts error message
+        answer.downcase() != 'y' && answer.downcase() != 'f' 
+        puts
+      end
+end
+puts "bye"
+
+
+break if answer.downcase().start_with?('f')
+puts "only y and f accepted" if answer.downcase() != 'y' && answer.downcase() != 'f'
+  
+    
+
+loop do # main loop
+  
+
+    puts("Enter 'Y' to calculate another monthly payment.
+      If you are finished calculating monthly payments,
+      enter 'F'.")
+
+    answer = Kernel.gets().chomp()
+   break if answer.downcase().start_with?('f')
+    puts "only y and f accepted" if answer.downcase() != 'y' && answer.downcase() != 'f'
+   end
+
+
+def l(str)
+  if str.to_i.to_s == str #- true
+    p("Numbers are not accepted, enter Y or F")
+  elsif str.to_f.to_s == str#- true
+    p("Numbers are not accepted, enter Y or F")
+  else
+    true
+end
+
+    
+big loop to exit
+
+ 
+loop do for exit validation
+  quit y or n
+  if y break
+    if n ask again
+
+
+
+  loop do 
+    prompt("Enter 'Y' to calculate another monthly payment.
+    If you are finished calculating monthly payments,
+    enter 'F'.")
+
+    answer = Kernel.gets().chomp()
+    
+    break if answer.downcase().start_with?('f')
+    
+    prompt ("only y and f accepted") if answer.downcase() != 'y' && answer.downcase() != 'f'
+    end
+  break 
+end
+
+
+main loop do 
+  enter your name etc..
+
+  quit loop
+
+    calculate again loop do 
+
+
+quit loop do 
+  puts "quit y or f"
+  answer = gets.chomp
+
+    break if answer == "y" || answer == "f"
+    #if number ask again
+    puts "only y or f accepted"
+      end
+
+
+quit loop do 
+  puts "quit y or f"
+  answer = gets.chomp
+
+    return answer if answer == "y" || answer == "f"
+    #if number ask again
+    puts "only y or f accepted"
+      end
+
+
+answer = loop do 
+  puts "quit y or f"
+  answer = gets.chomp
+
+   if 
+    answer == "y" || answer == "f"
+    break
+    #if number ask again
+    puts "only y or f accepted"
+      end
+
+
+answer = ''
+loop do 
+  puts "quit y or f"
+  answer = gets.chomp
+
+   if answer == "y" || answer == "f"
+      break
+    else
+      puts "only y or f accepted"
+    end
+  end
+
+
+# bad
+puts sprintf('%10s', 'hoge')
+puts '%10s' % 'hoge'
+
+# good
+puts format('%10s', 'hoge')
+
+m = '%.2f' % [(m * 100).round / 100.0]
+
+
+    '%10s' % 'hoge'
+
+m = '%.2f' % [(m * 100).round / 100.0]
+
+
+
+
+puts format('%10s', 'hoge')
+
+     format('%2f',[(m * 100).round / 100.0])
+
+m = '%.2f' % [(m * 100).round / 100.0]
+    '%10s' % 'hoge'
+
+# bad
+puts sprintf('%10s', 'hoge')
+puts '%10s' % 'hoge'
+m =  '%.2f' % [(m * 100).round / 100.0]
+
+
+
+# bad
+puts format('%10s', 'hoge')
+puts sprintf('%10s', 'hoge')
+
+# good
+puts '%10s' % [10.00]
+
+puts sprintf('%10s', [10.00])
+
+
+
+m = '%.2f' % [(m * 100).round / 100.0]
+m =  format('%.2f', [(m * 100).round / 100.0])
+
+
+puts format('%10s', [(m * 100).round / 100.0])
+
+
+
+
+
+
+monthly payment = m
+
+m = 124.1
+
+monthly_payment_array = [(m * 100).round / 100.0] -> [124.1]
+
+m = '%.2f' % [124.1]
+
+
+
+
+m = format ('%.2f' % m)
+
+
+m = 124.1
+
+
+m = sprintf "%.2f", m.to_s
+m = sprintf "%.2f", m
+
+
+
+
+prompt("Welcome to Calculator! ")
+
+
+name = ''
+loop do
+prompt("Enter your name:")
+name = Kernel.gets().chomp()
+
+
+  if name.empty?()
+    prompt("Make sure to use a valid name with letters only.")
+  elsif name.to_i.to_s != name
+    prompt('Only letters are accepted')
+  else
+    break
+  end
+end
+
+
+
+
+
+name = ''
+  loop do
+    prompt("Would you like to continue? Enter 'Y' or 'N'")
+    answer = gets().chomp()
+    if answer.downcase == "y" || answer.downcase == "n"
+      break
+    else
+      prompt("Only 'Y' or 'N' are accepted.")
+      puts
+    end
+  end
+  break if answer.downcase == "n"
+end
+
+
+
+/\d/ - A digit character ([0-9])
+/\w/ - A word character ([a-zA-Z0-9_])
+
+
+[4] pry(main)> name = if /[^a-eg-z]/.match('f')
+[4] pry(main)*   #<MatchData "f">
+[4] pry(main)*   true
+[4] pry(main)* end  
+=> true
+
+ if 
+
+name = "Jeremy1"
+valid_name = if /[0-9]/.match(name)
+#<MatchData "0-9">
+false
+end
+
+if valid_name == false
+  prompt ("Numbers are not accepted")
+
+
+
+
+
+
+
+
+
+
+
+name = "Jeremy1"
+valid_name = if /[0-9]/.match(name)
+               # <MatchData "0-9">
+               false
+             end
+
+puts valid_name
+
+
+
+name = ''
+loop do
+prompt("Enter your name:")
+name = Kernel.gets().chomp()
+
+valid_name = if /[0-9]/.match(name)
+               # <MatchData "0-9">
+               false
+             end
+
+  if name.empty?()
+    prompt("Make sure to use a valid name with letters only.")
+  elsif valid_name == false
+    prompt('Only letters are accepted')
+  else
+    break
+  end
+end
+
+puts name 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
