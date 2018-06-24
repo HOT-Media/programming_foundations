@@ -1,8 +1,6 @@
-
 def prompt(message)
   Kernel.puts("=> #{message}")
 end
-
 
 VALID_CHOICES = ['rock', 'paper', 'scissors']
 
@@ -40,18 +38,12 @@ loop do
 
   computer_choice = VALID_CHOICES.sample
 
-
-
   Kernel.puts("You chose: #{choice}; Computer chose: #{computer_choice}")
-
 
   # call the method prompt and pass in the return value of the method
   # display_results(choice, computer_choice))
 
   prompt(display_results(choice, computer_choice))
-
-
-  
 
   prompt("Do you want to play again?")
   answer = Kernel.gets().chomp()
