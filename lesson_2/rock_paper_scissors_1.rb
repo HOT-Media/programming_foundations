@@ -1,8 +1,7 @@
-VALID_CHOICES = ['rock', 'paper', 'scissors']
+# Ruby has late binding, so the call to prompt in display_results, will not 
+# be associated with the actual prompt before  display_results is called.
 
-def prompt(message)
-  Kernel.puts("=> #{message}")
-end
+VALID_CHOICES = ['rock', 'paper', 'scissors']
 
 def display_results(player, computer)
   if (player == 'rock' && computer == 'scissors') ||
@@ -16,6 +15,10 @@ def display_results(player, computer)
     else
       prompt("It's a tie!")
   end
+end
+
+def prompt(message)
+  Kernel.puts("=> #{message}")
 end
 
 
