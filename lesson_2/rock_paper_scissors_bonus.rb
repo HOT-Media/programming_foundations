@@ -3,7 +3,7 @@ VALID_CHOICES = %w(rock paper scissors lizzard spock)
 def prompt(message)
   Kernel.puts("=> #{message}")
 end
-
+=begin
 def win?(first, second)
   (first == 'rock' && second == 'scissors') ||
   (first == 'rock' && second == 'lizzard') ||
@@ -16,7 +16,9 @@ def win?(first, second)
   (first == 'spock' && second == 'scissors') ||
   (first == 'spock' && second == 'rock')  
 end
+=end
 
+=begin
 def display_results(player, computer)
   if win?(player, computer)
     prompt("You won!")
@@ -26,6 +28,7 @@ def display_results(player, computer)
     prompt("It's a tie!")
   end
 end
+=end
 
 loop do
   choice = ''
@@ -43,7 +46,22 @@ loop do
 
   Kernel.puts("You chose: #{choice}; Computer chose: #{computer_choice}")
 
+winning_combinations = 
+ {:rock=>["scissors", "lizzard"],
+ :paper=>["rock", "spock"],
+ :scissors=>["paper", "lizzard"],
+ :lizzard=>["spock", "paper"],
+ :spock=>["scissors", "rock"]}
+
+if winning_combinations.fetch(choice.to_sym).include?(computer_choice) == true
+     puts "You won"     
+   else     
+     puts "Computer won"    
+   end    
+=begin
   display_results(choice, computer_choice)
+=end
+
 
   prompt("Do you want to play again?")
   answer = Kernel.gets().chomp()
