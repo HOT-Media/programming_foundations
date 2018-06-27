@@ -910,23 +910,294 @@ end
 
 puts name 
 
+winning combinations = 
 
 
 
 
 
+def win?(first, second)
+  (first == 'rock' && second == 'scissors') ||
+  (first == 'rock' && second == 'lizzard') ||
+  (first == 'paper' && second == 'rock') ||
+  (first == 'paper' && second == 'spock') ||
+  (first == 'scissors' && second == 'paper')||
+  (first == 'scissors' && second == 'lizzard')||
+  (first == 'lizzard' && second == 'spock') ||
+  (first == 'lizzard' && second == 'paper') ||
+  (first == 'spock' && second == 'scissors') ||
+  (first == 'spock' && second == 'rock')  
+end
+
+{pet: "Piper"}
+
+  key        value
+ 
+ winning_combinations =        
+ rock = {rock: ['scissors','lizzard']}
+ paper = {paper: ['rock','spock']}
+scissors = {scissors: ['paper','lizzard']}
+lizzard = {lizzard: ['spock','paper']}
+ spock = {spock: ['scissors','rock']}
+
+player choice = gets.chomp
+
+if player choice = 'rock'
+  look up rock
+
+if win_with_rock.has_key?(:bike1) || 
+
+  def you_win (combinations_array)
+    if combinations_array == value.
+
+
+
+
+answer = 0
+
+if you win
+  answer += 1
+end
+
+loop do
+
+  answer += 1
+  break if answers == 5
+end
 
 
 
 
 
+key     value
+{rock:['paper', ]}
+
+
+
+if person choice == {rock: ['scissors', 'lizzard']}.include
+
+
+toys = {bike1: "Ducati", bike2: "Honda", bike3: "Touring Honda"}
+=> {:bike1=>"Ducati", :bike2=>"Honda", :bike3=>"Touring Honda"}
+   toys.keys
+=> [:bike1, :bike2, :bike3]
+   toys.keys.include?(:bike1)
+=> true
+   toys.keys.include?(:bike1 || :bike2)
+=> true
+
+winning_combinations ={        
+ rock: ['scissors','lizzard'],
+ paper: ['rock','spock'],
+scissors: ['paper','lizzard'],
+lizzard: ['spock','paper'],
+spock: ['scissors','rock']
+}
+
+
+winning_combinations
+=> {:rock=>["scissors", "lizzard"],
+ :paper=>["rock", "spock"],
+ :scissors=>["paper", "lizzard"],
+ :lizzard=>["spock", "paper"],
+ :spock=>["scissors", "rock"]}
+   computer_answer
+=> "paper"
+   person_answer
+=> "rock"
+   winning_combinations.keys.include?(:rock)
+=> true
+
+Hashes as optional parameters in methods
+I can use a hash to accept optional parameters when I am creating methods. 
+
+
+define method motogp    #( parameter 1,           parameter 2         )
+                        #( argument 1,       empty hash as argument 2 ) 
+   def motogp            ( motorcycle,       rider_specifications = {})
+  
+  
+  if rider_specifications.empty?
+  #if the rider_specifications hash is empty:
+    # print this:
+    puts "This is a #{motorcycle}"
+
+  else
+  #if the rider_specifications hash DOES contain key-value pairs: 
+  # print the values associated with the keys in the hash
+  # passed in as an argument to parameter 2
+
+  #                  {parameter 1}
+    puts "This is a #{motorcycle} and I ride it at"
+         +
+  #      { parameter 2, rider_specifications hash key :track1 }
+          "#{          rider_specifications[:track1]             }"
+         +
+          "with a top speed of "
+         +
+  #       { parameter 2, rider_specifications hash key :ts }
+         "#{           rider_specifications[:ts]            }."
+  end
+end
+
+  #     ( parameter 1)
+greeting(  "Ducati"  )
+
+  #     ( parameter 1                parameter 2               )
+        (  string                      hash                    )
+greeting(  "Ducati",    {track1: "Road America", ts: "135 mph"})
 
 
 
 
+def motogp ( motorcycle,rider_specifications = {})
+  if rider_specifications.empty?
+    puts "This is my #{motorcycle}"
+  else
+    puts "This is my #{motorcycle}, I ride it at #{rider_specifications[:track1]}
+    with a top speed of #{rider_specifications[:ts]}."
+  end
+end
+
+
+rider1 = {track1: "blackhawk", ts: "135 mph"}
+rider2 = {track1: "Road America", ts: "195 mph"}
+
+puts
+motogp("Honda", rider1)
+puts
+motogp("Ducati" , rider2)
+puts
+
+
+This is my Honda, I ride it at blackhawk
+    with a top speed of 135 mph.
+
+This is my Ducati, I ride it at Road America
+    with a top speed of 195 mph.
 
 
 
+
+toys = {bike1: "Ducati", bike2: "Honda", bike3: "Touring Honda"}
+
+The .values method returns
+an array
+of all the values in the hash CALLING the .values method. 
+
+toys.values
+=> ["Ducati", "Honda", "Touring Honda"]
+
+
+
+
+winning_combinations
+=> {:rock=>["scissors", "lizzard"],
+ :paper=>["rock", "spock"],
+ :scissors=>["paper", "lizzard"],
+ :lizzard=>["spock", "paper"],
+ :spock=>["scissors", "rock"]}
+   person_answer = 'rock'
+=> "rock"
+   winning_combinations.fetch(person_answer.to_sym).include?('scissors' || 'lizzard')
+=> true
+
+winning_combinations
+=> {:rock=>["scissors", "lizzard"],
+ :paper=>["rock", "spock"],
+ :scissors=>["paper", "lizzard"],
+ :lizzard=>["spock", "paper"],
+ :spock=>["scissors", "rock"]}
+   computer_answer
+=> "paper"
+   person_answer
+=> "rock"
+   winning_combinations.fetch(person_answer.to_sym).include?('scissors' || 'lizzard')
+=> true
+   winning_combinations.fetch(person_answer.to_sym).include?(computer_answer.to_sym)
+=> false
+   computer_answer = 'lizzard'
+=> "lizzard"
+   winning_combinations.fetch(person_answer.to_sym).include?(computer_answer.to_sym)
+=> false
+   winning_combinations.fetch(person_answer.to_sym).include?(computer_answer)
+=> true
+
+
+
+
+winning_combinations
+=> {:rock=>["scissors", "lizzard"],
+ :paper=>["rock", "spock"],
+ :scissors=>["paper", "lizzard"],
+ :lizzard=>["spock", "paper"],
+ :spock=>["scissors", "rock"]}
+   person_answer
+=> "rock"
+   computer_answer
+=> "lizzard"
+   # rock beats scissors and lizzard
+   # if person answer is rock and computer answer is inside the value of the rock key value pair, lizzard 
+   # person wins
+   winning_combinations.fetch(person_answer.to_sym).include?(computer_answer)
+=> true
+   person_answer = 'scissors'
+=> "scissors"
+   computer_answer = 'paper'
+=> "paper"
+   winning_combinations.fetch(person_answer.to_sym).include?(computer_answer)
+=> true
+   person_answer = 'paper'
+=> "paper"
+   computer_answer = 'lizzard'
+=> "lizzard"
+   
+   # computer answer beats person answer, lizzard beats paper
+   # if computer answer is not in the kv value of paper then computer wins.
+   if winning_combinations.fetch(person_answer.to_sym).include?(computer_answer) == false
+puts "computer won!"
+end
+if 
+   if winning_combinations.fetch(person_answer.to_sym).include?(computer_answer) == true
+    puts "You won!"
+
+def who_won(win,person_answer, computer_answer)
+  if 
+    win.fetch(person_answer.to_sym).include?(computer_answer)
+    puts "you won!"
+  else
+    puts "computer_won"
+  end
+end
+
+ if winning_combinations.fetch(person_answer.to_sym).include?(computer_answer) == true
+     puts "You won"
+   else
+    puts "Computer won"
+   end  
+
+----              ------
+| | | | | | | | | | | |
+V v v v v v v v v v v v 
+this works!!
+
+winning_combinations
+=> {:rock=>["scissors", "lizzard"],
+ :paper=>["rock", "spock"],
+ :scissors=>["paper", "lizzard"],
+ :lizzard=>["spock", "paper"],
+ :spock=>["scissors", "rock"]}
+   person_answer
+=> "paper"
+   computer_answer
+=> "lizzard"
+   if winning_combinations.fetch(person_answer.to_sym).include?(computer_answer) == true
+     puts "You won"     
+   else     
+     puts "Computer won"    
+   end       
+Computer won
+=> nil
 
 
 
