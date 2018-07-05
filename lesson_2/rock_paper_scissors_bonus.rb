@@ -3,34 +3,11 @@ VALID_CHOICES = %w(rock paper scissors lizzard spock)
 def prompt(message)
   Kernel.puts("=> #{message}")
 end
-=begin
-def win?(first, second)
-  (first == 'rock' && second == 'scissors') ||
-  (first == 'rock' && second == 'lizzard') ||
-  (first == 'paper' && second == 'rock') ||
-  (first == 'paper' && second == 'spock') ||
-  (first == 'scissors' && second == 'paper')||
-  (first == 'scissors' && second == 'lizzard')||
-  (first == 'lizzard' && second == 'spock') ||
-  (first == 'lizzard' && second == 'paper') ||
-  (first == 'spock' && second == 'scissors') ||
-  (first == 'spock' && second == 'rock')  
-end
-=end
 
-=begin
-def display_results(player, computer)
-  if win?(player, computer)
-    prompt("You won!")
-  elsif win?(computer, player)
-    prompt("Computer won!")
-  else
-    prompt("It's a tie!")
-  end
-end
-=end
+your_score = 0
+  computer_score = 0
 
-loop do
+loop do # continue playing the game until someone wins 5
   choice = ''
   loop do
     prompt("Choose one: #{VALID_CHOICES.join', '}")
@@ -44,6 +21,8 @@ loop do
 
   computer_choice = VALID_CHOICES.sample
 
+  puts
+
   Kernel.puts("You chose: #{choice}; Computer chose: #{computer_choice}")
 
 winning_combinations = 
@@ -53,19 +32,27 @@ winning_combinations =
  :lizzard=>["spock", "paper"],
  :spock=>["scissors", "rock"]}
 
-if winning_combinations.fetch(choice.to_sym).include?(computer_choice) == true
-     puts "You won"     
-   else     
-     puts "Computer won"    
-   end    
-=begin
-  display_results(choice, computer_choice)
-=end
+  if choice == computer_choice
+    prompt "It's a tie, no point awarded for this round."
+  elsif winning_combinations.fetch(choice.to_sym).include?(computer_choice) == true
+    prompt 'You won that round!'
+     your_score += 1    
+  else     
+    prompt 'The computer won that round!'
+      computer_score += 1    
+  end  
 
 
-  prompt("Do you want to play again?")
-  answer = Kernel.gets().chomp()
-  break unless answer.downcase().start_with?('y')
-end
+  prompt "Your score is: #{your_score} The computer's score is: #{computer_score}"
+puts
 
-prompt("Thank you for playing. Good bye!")
+  if your_score == 5
+    prompt 'You won the game!!'
+    break
+  elsif computer_score == 5
+    prompt 'The computer won the game!!'
+    break
+  end
+ 
+end # end the play again loop
+

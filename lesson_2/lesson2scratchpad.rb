@@ -1200,12 +1200,93 @@ Computer won
 => nil
 
 
+write a method that prints the outcome of the answers
+
+def who_won(winning_combinations, answers)
+
+if winning_combinations.fetch(answers[0].to_sym).include?(answers[1]) == true
+#if winning_combinations.fetch(choice.to_sym).include?(computer_choice) == true
+     puts "You won"     
+   else     
+     puts "Computer won"    
+   end    
+
+end
+
+answers = %w[computer_answer,person_answer]
+
+
+if choice .start_with(r)
+
+computer_score = 0
+your_score = 0
 
 
 
+if computer won this round
+  computer_score += 1
+elsif you won this round
+  your_score += 1
+    
+
+if computer_score == 5 
+prompt 'Compter won'
+break
+elseif
+your_score == 5 
+prompt 'You won!!'
+end
+
+
+loop do # loop until someone has 5
 
 
 
+  your_score = 0
+  computer_score = 0
+
+  if winning_combinations.fetch(choice.to_sym).include?(computer_choice) == true
+     your_score += 1    
+  else     
+      computer_score += 1    
+  end  
+
+  puts
+  prompt "Your score is: #{your_score}
+    The computer's score is: #{computer_score}"
+
+
+end
+
+# prompt("Do you want to play again?")
+  #answer = Kernel.gets().chomp()
+  # break the main loop
+
+  if your_score == 5
+    prompt 'You won the game!!'
+    break
+  elsif computer_score == 5
+    prompt 'The computer won the game!!'
+    break
+  end
+end
+
+      
+end # the play until someone wins loop
+
+
+if your_choice == computer_choice 
+
+
+  if choice == computer_choice
+    prompt "It's a tie, no point awarded for this round."
+  elsif winning_combinations.fetch(choice.to_sym).include?(computer_choice) == true
+    prompt 'You won that round!'
+     your_score += 1    
+  else     
+    prompt 'The computer won that round'
+      computer_score += 1    
+  end  
 
 
 
