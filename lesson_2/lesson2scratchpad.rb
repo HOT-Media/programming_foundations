@@ -1286,7 +1286,30 @@ if your_choice == computer_choice
   else     
     prompt 'The computer won that round'
       computer_score += 1    
-  end  
+  end 
+
+  r = rock
+  p = paper
+  l = lizzard
+
+def single_letter_choice(input)
+  loop do 
+  if input == 'r'
+    return 'rock'
+    break
+  elsif input == 'p'
+    return 'paper'
+    break
+  elsif input == 'l'
+    return 'lizzard'
+    break
+    elsif input == 's'
+      prompt "S" for spock, 's' for 'scissors'
+
+    
+
+def score_keeper (player1, player2)
+
 
 
 
