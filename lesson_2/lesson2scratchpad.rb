@@ -1313,3 +1313,24 @@ def score_keeper (player1, player2)
 
 
 
+
+winning_combinations =
+   {'rock'=>["scissors", "lizzard"],
+   'paper'=>["rock", "spock"],
+   'scissors'=>["paper", "lizzard"],
+   'lizzard'=>["spock", "paper"],
+   'spock'=>["scissors", "rock"]}
+
+if choice == computer_choice
+    puts "It's a tie, no point awarded for this round."
+  elsif winning_combinations.fetch(choice).include?(computer_choice) == true
+    puts 'You won that round!'
+    your_score += 1
+  else
+    puts 'The computer won that round!'
+    computer_score += 1
+  end
+
+
+
+
