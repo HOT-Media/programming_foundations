@@ -1,4 +1,4 @@
-VALID_CHOICES = %w(rock paper scissors lizzard spock)
+VALID_CHOICES = %w(rock paper scissors lizard spock)
 
 def prompt(message)
   Kernel.puts("=> #{message}")
@@ -28,10 +28,10 @@ loop do # continue playing the game until someone wins 5
 
   winning_combinations =
     {
-      'rock' => ["scissors", "lizzard"],
+      'rock' => ["scissors", "lizard"],
       'paper' => ["rock", "spock"],
-      'scissors' => ["paper", "lizzard"],
-      'lizzard' => ["spock", "paper"],
+      'scissors' => ["paper", "lizard"],
+      'lizard' => ["spock", "paper"],
       'spock' => ["scissors", "rock"]
     }
 
