@@ -26,14 +26,16 @@ loop do # continue playing the game until someone wins 5
   Kernel.puts("You chose: #{choice}; Computer chose: #{computer_choice}")
   puts
 
-winning_combinations =
-   {'rock'=>["scissors", "lizzard"],
-   'paper'=>["rock", "spock"],
-   'scissors'=>["paper", "lizzard"],
-   'lizzard'=>["spock", "paper"],
-   'spock'=>["scissors", "rock"]}
+  winning_combinations =
+    {
+      'rock' => ["scissors", "lizzard"],
+      'paper' => ["rock", "spock"],
+      'scissors' => ["paper", "lizzard"],
+      'lizzard' => ["spock", "paper"],
+      'spock' => ["scissors", "rock"]
+    }
 
-if choice == computer_choice
+  if choice == computer_choice
     puts "It's a tie, no point awarded for this round."
   elsif winning_combinations.fetch(choice).include?(computer_choice) == true
     puts 'You won that round!'
@@ -42,26 +44,7 @@ if choice == computer_choice
     puts 'The computer won that round!'
     computer_score += 1
   end
-  
-=begin
-  winning_combinations =
-   {:rock=>["scissors", "lizzard"],
-   :paper=>["rock", "spock"],
-   :scissors=>["paper", "lizzard"],
-   :lizzard=>["spock", "paper"],
-   :spock=>["scissors", "rock"]}
 
-  if choice == computer_choice
-    puts "It's a tie, no point awarded for this round."
-  elsif winning_combinations.fetch(choice.to_sym).include?(computer_choice) == true
-    puts 'You won that round!'
-    your_score += 1
-  else
-    puts 'The computer won that round!'
-    computer_score += 1
-  end
-
-=end
   puts "
 Your score is: #{your_score} The computer's score is: #{computer_score}"
   puts
