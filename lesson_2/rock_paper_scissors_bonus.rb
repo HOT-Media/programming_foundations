@@ -9,6 +9,7 @@ computer_score = 0
 
 loop do # continue playing the game until someone wins 5
   choice = ''
+
   loop do
     prompt("Choose one: #{VALID_CHOICES.join', '}")
     choice = Kernel.gets().chomp()
