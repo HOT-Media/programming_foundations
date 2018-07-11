@@ -102,3 +102,13 @@ end
 suffix = determine_suffix(century) 
 
 puts century.to_s + suffix
+
+
+
+
+use only the last digit of the century to determine the suffix
+and 
+combine it all into one method
+
+
+
