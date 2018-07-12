@@ -68,12 +68,32 @@ century(1127) == '12th'
 century(11201) == '113th'
 =end 
 
+
+
+
+
+
+
+
 puts "Enter a year "
 year_entered = gets.chomp
 
+ye900 = 900
+ye1989 = 1989
+ye2000 = 2000
+ye2001 = 2001
+
+yes900 = '900'
+yes1989 = '1989'
+yes2000 = '2000'
+yes2001 = '2001'
+
+
+
+
+string argument
 def determine_century(year)
- if year.inspect.end_with?('00')
-       #.end_with? "00"
+ if year.end_with?('00')
     year.to_i/100
   elsif (1..100).include? year.to_i
     1
@@ -82,33 +102,70 @@ def determine_century(year)
   end
 end
 
-century = determine_century(year_entered)
+century = determine_century(year_entered) # string argument
 
 
-def determine_suffix(cent)
-  if cent == 1
-    'st'
-  elsif cent == 2
-    'nd'
-  elsif cent == 3
-    'rd'
-  elsif (4..9).include? cent
-    'th'
-  elsif cent == 11 || cent == 12 || cent == 13
-    'th'
-  end
-end
+
+
+
+combine it all into one method
+
+
+
 
 suffix = determine_suffix(century) 
 
 puts century.to_s + suffix
 
 
+determine_suffix 1
+determine_suffix 2
+determine_suffix 3
+determine_suffix 4
+determine_suffix 5
+determine_suffix 6
+determine_suffix 7
+determine_suffix 8 
+determine_suffix 9
+determine_suffix 10
+determine_suffix 11
+determine_suffix 12
+determine_suffix 13
+determine_suffix 14
+determine_suffix 15
+determine_suffix 16
+determine_suffix 17
+determine_suffix 18
+determine_suffix 19
+determine_suffix 20
+determine_suffix 200
+determine_suffix 2000
+determine_suffix 2001
+determine_suffix 20001
+determine_suffix 2012
+determine_suffix 2011
+determine_suffix 2013
 
 
-use only the last digit of the century to determine the suffix
-and 
-combine it all into one method
+def determine_suffix(cent) #integer passed in
+  if cent.digits[0,2] == [1] ||  cent.digits[0,2] == [1,0]
+    'st'
+  elsif cent.digits[0,2] == [2]
+    'nd'
+  elsif cent.digits[0,2] == [3]
+    'rd'
+  elsif (4..9).include? cent
+    'th'
+    elsif [[4,1],[3,1],[2,1]].include?cent.digits[0,2]
+    'th'
+  elsif cent
+    'th'
+  end
+end
+
+
+
+
 
 
 
