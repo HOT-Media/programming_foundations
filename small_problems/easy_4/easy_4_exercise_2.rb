@@ -152,31 +152,9 @@ determine_suffix 2021
 determine_suffix 2020
 
 
-def determine_suffix(cent) #integer passed in
-  if cent.digits[0,2] == [1] ||  cent.digits[0,2] == [1,0] || 
-    'st'
-  elsif cent.digits[0,2] == [2]
-    'nd'
-  elsif cent.digits[0,2] == [3]
-    'rd'
-  elsif (4..9).include? cent
-    'th'
-    elsif [[4,1],[3,1],[2,1]].include?cent.digits[0,2]
-    'th'
-  elsif cent
-    'th'
-  end
-end
-
 
 determine_suffix(determine_century(2001))
 
-21st 
-22nd
-23rd
-
-  year_array = [[1,0],[1,2],[1,3],[1,4],[1,5],[1,6],[1,7],[1,8],[1,9]]
-year_array.include?cent.digits[0,2]
 
 
 def determine_suffix(cent) #integer passed in
