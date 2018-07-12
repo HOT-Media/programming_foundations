@@ -69,29 +69,8 @@ century(11201) == '113th'
 =end 
 
 
+=begin 
 
-
-
-
-
-
-puts "Enter a year "
-year_entered = gets.chomp
-
-ye900 = 900
-ye1989 = 1989
-ye2000 = 2000
-ye2001 = 2001
-
-yes900 = '900'
-yes1989 = '1989'
-yes2000 = '2000'
-yes2001 = '2001'
-
-
-
-
-string argument
 def determine_century(year)
  if year.end_with?('00')
     year.to_i/100
@@ -102,58 +81,7 @@ def determine_century(year)
   end
 end
 
-century = determine_century(year_entered) # string argument
 
-
-
-
-
-combine it all into one method
-
-
-
-
-suffix = determine_suffix(century) 
-
-puts century.to_s + suffix
-
-
-determine_suffix 1
-determine_suffix 2
-determine_suffix 3
-determine_suffix 4
-determine_suffix 5
-determine_suffix 6
-determine_suffix 7
-determine_suffix 8 
-determine_suffix 9
-determine_suffix 10
-determine_suffix 11
-determine_suffix 12
-determine_suffix 13
-determine_suffix 14
-determine_suffix 15
-determine_suffix 16
-determine_suffix 17
-determine_suffix 18
-determine_suffix 19
-determine_suffix 20
-determine_suffix 200
-determine_suffix 2000
-determine_suffix 2001
-determine_suffix 20001
-determine_suffix 2012
-determine_suffix 2011
-determine_suffix 2013
-determine_suffix 2023
-determine_suffix 2053
-determine_suffix 2032
-determine_suffix 2021
-determine_suffix 2020
-
-
-
-determine_suffix(determine_century(2001))
 
 
 
@@ -178,3 +106,64 @@ def determine_suffix(cent) #integer passed in
     'th'
   end
 end
+
+
+puts "Enter a year "
+year_entered = gets.chomp
+
+century = determine_century(year_entered)
+
+suffix = determine_suffix(century)
+
+puts century.to_s + suffix
+
+=end
+
+def century(year)
+  cent = ''
+  suffix = ''
+  year_array = [[1],[1,0],[1,2],[1,3],[1,4],[1,5],[1,6],[1,7],[1,8],[1,9]]
+  year_array2 = [[2],[2,0],[2,2],[2,3],[2,4],[2,5],[2,6],[2,7],[2,8],[2,9]]
+  year_array3 = [[3],[3,0],[3,2],[3,3],[3,4],[3,5],[3,6],[3,7],[3,8],[3,9]]
+
+  if year.digits[0,2] == [0,0]
+    cent = year/100
+  elsif (1..100).include? year
+    cent = 1
+  else
+    cent = year.to_i / 100 + 1
+  end
+
+  if year_array.include?cent.digits[0,2] 
+    suffix = 'st'
+  elsif  year_array2.include?cent.digits[0,2]     
+    suffix = 'nd'
+  elsif year_array3.include?cent.digits[0,2]
+    suffix = 'rd'
+  elsif (4..9).include? cent
+    suffix = 'th'
+    elsif [[4,1],[3,1],[2,1]].include?cent.digits[0,2]
+    suffix = 'th'
+  elsif cent
+    suffix = 'th'
+  end
+  cent.to_s + suffix
+end
+
+
+
+
+
+
+
+
+p century(2000) == '20th'
+p century(2001) == '21st'
+p century(1965) == '20th'
+p century(256) == '3rd'
+p century(5) == '1st'
+p century(10103) == '102nd'
+p century(10203) == '103rd'
+p century(1052) == '11th'
+p century(1127) == '12th'
+p century(11201) == '113th'
