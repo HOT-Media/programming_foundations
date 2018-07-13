@@ -66,59 +66,8 @@ century(10103) == '102nd'
 century(1052) == '11th'
 century(1127) == '12th'
 century(11201) == '113th'
-=end 
-
-
-=begin 
-
-def determine_century(year)
- if year.end_with?('00')
-    year.to_i/100
-  elsif (1..100).include? year.to_i
-    1
-  else
-    year.to_i / 100 + 1
-  end
-end
-
-
-
-
-
-def determine_suffix(cent) #integer passed in
-  year_array = [[1],[1,0],[1,2],[1,3],[1,4],[1,5],[1,6],[1,7],[1,8],[1,9]]
-  year_array2 = [[2],[2,2],[2,3],[2,4],[2,5],[2,6],[2,7],[2,8],[2,9]]
-  year_array3 = [[3],[3,2],[3,3],[3,4],[3,5],[3,6],[3,7],[3,8],[3,9]]
-  if #cent.digits[0,2] == [1] ||  cent.digits[0,2] == [1,0] || 
-    year_array.include?cent.digits[0,2] 
-    'st'
-  elsif #cent.digits[0,2] == [2]
-       year_array2.include?cent.digits[0,2]     
-    'nd'
-  elsif year_array3.include?cent.digits[0,2]
-    #cent.digits[0,2] == [3]
-    'rd'
-  elsif (4..9).include? cent
-    'th'
-    elsif [[4,1],[3,1],[2,1]].include?cent.digits[0,2]
-    'th'
-  elsif cent
-    'th'
-  end
-end
-
-
-puts "Enter a year "
-year_entered = gets.chomp
-
-century = determine_century(year_entered)
-
-suffix = determine_suffix(century)
-
-puts century.to_s + suffix
 
 =end
-
 def century(year)
   cent = ''
   suffix = ''
@@ -136,26 +85,19 @@ def century(year)
 
   if year_array.include?cent.digits[0,2] 
     suffix = 'st'
-  elsif  year_array2.include?cent.digits[0,2]     
+  elsif  year_array2.include?cent.digits[0,2]
     suffix = 'nd'
   elsif year_array3.include?cent.digits[0,2]
     suffix = 'rd'
   elsif (4..9).include? cent
     suffix = 'th'
-    elsif [[4,1],[3,1],[2,1]].include?cent.digits[0,2]
+  elsif [[4,1],[3,1],[2,1]].include?cent.digits[0,2]
     suffix = 'th'
   elsif cent
     suffix = 'th'
   end
   cent.to_s + suffix
 end
-
-
-
-
-
-
-
 
 p century(2000) == '20th'
 p century(2001) == '21st'
