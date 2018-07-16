@@ -1334,3 +1334,162 @@ if choice == computer_choice
 
 
 
+enter rpslv and v for the human/Vulcan known as Spock
+
+
+
+
+
+
+VALID_CHOICES = %w(rock paper scissors lizard spock)
+
+Note: If your entry is one letter, "v" is for Spock, the human/Vulcan.
+
+
+prompt("Choose one: #{VALID_CHOICES.join', '}
+  Note: If your entry is one letter,\"v\" is for Spock,
+  the human/Vulcan.")
+    choice = Kernel.gets().chomp()
+    if VALID_CHOICES.include?(choice)
+      break
+    else
+      prompt("That's not a valid choice.")
+    end
+  end
+
+Anything I can think of can be done with the Ruby language
+1. Mental model
+2. Find methods
+3. Assemble code
+
+
+choice_hash = {
+  'r' => 'rock'
+  'p' => 'paper'
+  's' => 'scissors'
+  'l' => 'lizard'
+  'v' => 'spock'
+}
+
+
+
+
+" r/rock , p/paper,"
+
+[rock, paper]
+["r/," "p/"] 
+
+prompt("Choose one: #{VALID_CHOICES.join', '}
+  Note: If your entry is one letter,\"v\" is for Spock,
+  the human/Vulcan.")
+    choice = Kernel.gets().chomp()
+    if VALID_CHOICES.include?(choice)
+      break
+    else
+      prompt("That's not a valid choice.")
+    end
+  end
+
+
+
+
+  def convert_answer(answer)
+  'rock' if answer == 'r'
+  'paper' if answer == 'p'
+  'scissors' if answer == 's'
+  'lizard' if answer == 'l'
+  'Spock' if answer == 'v'
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+VALID_CHOICES = %w(rock paper scissors lizard spock)
+
+INVALID_CHOICE = "That is not a valid choice.
+Valid choices are:
+#{VALID_CHOICES.join ', '}
+The first character of each choice is also accepted.
+Note: v is for spock, the human/Vulcan. "
+
+choice_conversion ={
+  'r' => 'rock',
+  'p' => 'paper',
+  's' => 'scissors',
+  'l' => 'lizard',
+  'v' => 'spock'
+}
+def prompt(message)
+  Kernel.puts("=> #{message}")
+end
+
+def convert_choice(str)
+choice_conversion ={
+  'r' => 'rock',
+  'p' => 'paper',
+  's' => 'scissors',
+  'l' => 'lizard',
+  'v' => 'spock'
+}
+  if choice_conversion.has_key?(str)
+    choice_conversion.fetch(str)
+  else
+    str
+  end
+end
+
+
+prompt("Choose one: #{VALID_CHOICES.join', '}")
+    choice = Kernel.gets().chomp().downcase
+    
+    if choice.length == 1
+      choice = convert_choice(choice)
+    end
+    if VALID_CHOICES.include?(choice)
+      break
+    else
+      prompt("#{INVALID_CHOICE}")
+    end
+  end
+
+if choice.length == 1
+  choice = convert_choice(choice)
+end
+
+
+
+
+def convert_choice(str)
+choice_conversion ={
+  'r' => 'rock',
+  'p' => 'paper',
+  's' => 'scissors',
+  'l' => 'lizard',
+  'v' => 'spock'
+}
+  if choice_conversion.has_key?(str)
+    choice_conversion.fetch(str)
+  else
+end
+
+a method that returns the full choice if the input is
+
+
+
+
+
+
+choice_conversion.fetch (choice)
+
+
+if winning_combinations.fetch(choice).include?(computer_choice) == true
