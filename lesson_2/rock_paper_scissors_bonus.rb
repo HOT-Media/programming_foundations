@@ -1,7 +1,3 @@
-puts 'You\'ll know you\'re doing things the right way when 
-you find yourself spending more time getting ready to 
-code than you actually spend coding'
-
 VALID_CHOICES = %w(rock paper scissors lizard spock)
 
 INVALID_CHOICE = "That is not a valid choice.
@@ -15,61 +11,46 @@ def prompt(message)
 end
 
 def convert_choice(str)
-choice_conversion ={
-  'r' => 'rock',
-  'p' => 'paper',
-  's' => 'scissors',
-  'l' => 'lizard',
-  'v' => 'spock'
-}
-  if choice_conversion.has_key?(str)
+  choice_conversion = {
+    'r' => 'rock',
+    'p' => 'paper',
+    's' => 'scissors',
+    'l' => 'lizard',
+    'v' => 'spock'
+  }
+  if choice_conversion.key?(str)
     choice_conversion.fetch(str)
   else
     str
   end
 end
 
-
-
 your_score = 0
 computer_score = 0
 
 prompt("Your choice can be one of the following:
- #{VALID_CHOICES.join', '}
-      The first character of each choice is also accepted.
-      Note: the single character for spock is v, the human/Vulcan")  
+#{VALID_CHOICES.join', '}
+The first character of each choice is also accepted.
+Note: the single character for spock is v, the human/Vulcan")
 loop do # continue playing the game until someone wins 5
   choice = ''
   loop do
-=begin 
-    prompt("Choose one: #{VALID_CHOICES.join', '}")
-    choice = Kernel.gets().chomp()
-    if VALID_CHOICES.include?(choice)
-      break
-    else
-      prompt("That's not a valid choice.")
-    end
-  end
-=end
-#prompt("Choose one: #{VALID_CHOICES.join', '}
-  #note: the single character for spock is v, the human/Vulcan")
-prompt("Enter your choice")
+    prompt("Enter your choice")
     choice = Kernel.gets().chomp().downcase
-    
+
     if choice.length == 1
       choice = convert_choice(choice)
     end
     if VALID_CHOICES.include?(choice)
       break
     else
-      prompt("#{INVALID_CHOICE}")
+      prompt INVALID_CHOICE
     end
-end
+  end
 
-
-if choice.length == 1
-  choice = convert_choice(choice)
-end
+  if choice.length == 1
+    choice = convert_choice(choice)
+  end
 
   computer_choice = VALID_CHOICES.sample
 
