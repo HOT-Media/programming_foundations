@@ -1,34 +1,38 @@
 VALID_CHOICES = %w(rock paper scissors lizard spock)
 
-INVALID_CHOICE = "That is not a valid choice.
+INVALID_CHOICE = <<~END
+That is not a valid choice.
 Valid choices are:
 #{VALID_CHOICES.join ', '}
 The first character of each choice is also accepted.
 Note: v is for spock, the human/Vulcan. "
+END
 
 WINNING_COMBINATIONS =
-    {
-      'rock' => ["scissors", "lizard"],
-      'paper' => ["rock", "spock"],
-      'scissors' => ["paper", "lizard"],
-      'lizard' => ["spock", "paper"],
-      'spock' => ["scissors", "rock"]
-    }
+  {
+    'rock' => ["scissors", "lizard"],
+    'paper' => ["rock", "spock"],
+    'scissors' => ["paper", "lizard"],
+    'lizard' => ["spock", "paper"],
+    'spock' => ["scissors", "rock"]
+  }
 
-def prompt(message)
-  Kernel.puts("=> #{message}")
-end
-
-def convert_choice(str)
-  choice_conversion = {
+CHOICE_CONVERSION =
+  {
     'r' => 'rock',
     'p' => 'paper',
     's' => 'scissors',
     'l' => 'lizard',
     'v' => 'spock'
   }
-  if choice_conversion.key?(str)
-    choice_conversion.fetch(str)
+
+def prompt(message)
+  Kernel.puts("=> #{message}")
+end
+
+def convert_choice(str)
+  if CHOICE_CONVERSION.key?(str)
+    CHOICE_CONVERSION.fetch(str)
   else
     str
   end
@@ -86,7 +90,7 @@ loop do # continue playing the game until someone wins 5
     puts 'The computer won that round!'
     computer_score += 1
   end
-  sleep 1
+  sleep 2
 
   clear_screen
 
