@@ -12,3 +12,12 @@ Thanks!
 Jeremy
 
 
+Hi, this is my finished program. 
+What do you think about the winning_combination hash?
+What other feedback do you have on the program?
+
+[Rock, Paper, Scissors, Lizard, Spock](https://github.com/HOT-Media/programming_foundations/blob/master/lesson_2/rock_paper_scissors_bonus.rb "Jeremy's version")
+
+Thanks!
+
+
