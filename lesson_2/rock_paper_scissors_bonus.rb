@@ -6,6 +6,15 @@ Valid choices are:
 The first character of each choice is also accepted.
 Note: v is for spock, the human/Vulcan. "
 
+WINNING_COMBINATIONS =
+    {
+      'rock' => ["scissors", "lizard"],
+      'paper' => ["rock", "spock"],
+      'scissors' => ["paper", "lizard"],
+      'lizard' => ["spock", "paper"],
+      'spock' => ["scissors", "rock"]
+    }
+
 def prompt(message)
   Kernel.puts("=> #{message}")
 end
@@ -33,7 +42,7 @@ your_score = 0
 computer_score = 0
 
 clear_screen
-prompt("Welcome to Rock Paper Scissors Liazrd Spock")
+prompt("Welcome to Rock Paper Scissors Liazrd Spock.")
 puts
 prompt("Your choice can be one of the following:
 #{VALID_CHOICES.join', '}
@@ -52,6 +61,7 @@ loop do # continue playing the game until someone wins 5
     if VALID_CHOICES.include?(choice)
       break
     else
+      clear_screen
       prompt INVALID_CHOICE
     end
   end
@@ -67,18 +77,9 @@ loop do # continue playing the game until someone wins 5
   Kernel.puts("You chose: #{choice}; Computer chose: #{computer_choice}")
   puts
 
-  winning_combinations =
-    {
-      'rock' => ["scissors", "lizard"],
-      'paper' => ["rock", "spock"],
-      'scissors' => ["paper", "lizard"],
-      'lizard' => ["spock", "paper"],
-      'spock' => ["scissors", "rock"]
-    }
-
   if choice == computer_choice
     puts "It's a tie, no point awarded for this round."
-  elsif winning_combinations.fetch(choice).include?(computer_choice) == true
+  elsif WINNING_COMBINATIONS.fetch(choice).include?(computer_choice) == true
     puts 'You won that round!'
     your_score += 1
   else

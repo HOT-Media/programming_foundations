@@ -1493,3 +1493,62 @@ choice_conversion.fetch (choice)
 
 
 if winning_combinations.fetch(choice).include?(computer_choice) == true
+
+
+
+
+
+
+
+
+
+
+
+
+def clear_screen
+  system('clear') || system('cls')
+end
+
+
+loop do 
+puts "before clear screen"
+puts "clear screen?"
+answer = gets.chomp
+  if answer == "y" or enter your answer 
+    clear_screen
+  else
+    puts "this is after the clear screen"
+  end
+break
+end
+
+sponcksa;dklfasdfja
+
+
+enter your choice
+computer choice 
+you won 
+computer score 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
