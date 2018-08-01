@@ -25,15 +25,23 @@ def convert_choice(str)
   end
 end
 
+def clear_screen
+  system('clear') || system('cls')
+end
+
 your_score = 0
 computer_score = 0
 
+clear_screen
+prompt("Welcome to Rock Paper Scissors Liazrd Spock")
+puts
 prompt("Your choice can be one of the following:
 #{VALID_CHOICES.join', '}
 The first character of each choice is also accepted.
 Note: the single character for spock is v, the human/Vulcan")
 loop do # continue playing the game until someone wins 5
   choice = ''
+
   loop do
     prompt("Enter your choice")
     choice = Kernel.gets().chomp().downcase
@@ -77,6 +85,9 @@ loop do # continue playing the game until someone wins 5
     puts 'The computer won that round!'
     computer_score += 1
   end
+  sleep 1
+
+  clear_screen
 
   puts "
 Your score is: #{your_score} The computer's score is: #{computer_score}"
