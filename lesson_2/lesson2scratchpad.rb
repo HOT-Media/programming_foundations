@@ -1540,6 +1540,79 @@ computer score
 
 
 
+a = 2
+
+
+b = rand(2)
+a *= b
+
+if a = 2
+  puts 'Two'
+else
+  puts 'Not Two'
+end
+
+
+
+
+quiz
+
+Given a sentence made up of several words, write a method to do the following.
+
+Iterate through the words one by one.
+  - save the first word as the starting value.
+  - starting with the next word iterate through all the remaining words in the sentence
+  - for each iteration, compare the saved value with the current word.
+  - if the word is longer or the same length as the saved value:
+    - reassign the saved value as the current word
+  - move on to the next word
+
+After iterating through the sentence, return the saved value.
+
+
+ sv ------------------------------------>
+this is a senence made up of several words
+
+save if same or longer word
+
+check next word
+
+return longest word
+
+
+
+def sentence
+  split up the sentence into an array
+  save the first word in an array named longest
+ count the letters of the word saved
+ compare the letters with the second wordi
+
+ if the second word is longer, save it, other wise skip it etc until the end
+of the sentence
+
+put the array on the last line of the method so the array returns the 
+index 0 as a string then the method returns the value of the string
+
+
+def longest_word (sentence)
+  split sentence into words
+  save first word into long_word = []
+  long_word[0].length larger than [0]
+  long word replace new word << long word
+  until the end
+    retrieve long word [0]
+  end
+  
+
+
+
+
+
+
+
+
+
+
 
 
 
