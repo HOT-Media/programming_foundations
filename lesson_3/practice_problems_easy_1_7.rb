@@ -1,9 +1,10 @@
- famous_words = "seven years ago..."
+ def add_eight(number)
+  number + 8
+end
 
- "Four score and #{famous_words}"
+number = 2
 
-"Four score and " + famous_words
+how_deep = "number"
+5.times { how_deep.gsub!("number", "add_eight(number)") }
 
-"Four score and " << famous_words
-
-famous_words.prepend("Four score and ")
+p how_deep
