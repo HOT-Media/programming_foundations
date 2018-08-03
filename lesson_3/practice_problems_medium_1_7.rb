@@ -14,5 +14,5 @@ new_answer
 
 
 
-p answer - 8 # the method does not mutate the variable answer
+p answer - 8 # the method does not mutate the variable
 # => 34
