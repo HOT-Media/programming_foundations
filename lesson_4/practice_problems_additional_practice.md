@@ -45,14 +45,60 @@ ages.values.inject(:+)
 
 ```
 
-3.
+3. correct
+```ruby
 
 
+ages = { "Herman" => 32, "Lily" => 30, "Grandpa" => 402, "Eddie" => 10 }
 
 
+ages.delete_if { |_, age| age > 100}
+#=> {"Herman"=>32, "Lily"=>30, "Eddie"=>10}
+ages
+#=> {"Herman"=>32, "Lily"=>30, "Eddie"=>10}
 
 
+ages.keep_if { |_, age| age < 100 }
+# => => {"Herman"=>32, "Lily"=>30, "Eddie"=>10}
 
+```
+
+4. correct
+```ruby
+ages = { "Herman" => 32, "Lily" => 30, "Grandpa" => 5843, "Eddie" => 10, "Marilyn" => 22, "Spot" => 237 }
+
+ages.values.min
+
+10
+```
+
+5. correct
+```ruby
+flintstones = %w(Fred Barney Wilma Betty BamBam Pebbles)
+
+flintstones = ["Fred", "Barney", "Wilma", "Betty", "BamBam", "Pebbles"]
+
+flintstones.bsearch_index {|x| x.start_with? "Be"}
+
+#=> 3
+
+flintstones.index { |name| name[0,2] == "Be"}
+
+
+#=> 3
+```
+
+6.
+```ruby
+flintstones = %w(Fred Barney Wilma Betty BamBam Pebbles)
+flintstones = ["Fred", "Barney", "Wilma", "Betty", "BamBam", "Pebbles"]
+
+flintstones.map do |idx|
+  element_length = idx.length
+  if idx.length > 3 
+    idx.slice(3..element_length)
+end
+end
 
 
 
