@@ -91,14 +91,112 @@ flintstones.index { |name| name[0,2] == "Be"}
 6.
 ```ruby
 flintstones = %w(Fred Barney Wilma Betty BamBam Pebbles)
+
 flintstones = ["Fred", "Barney", "Wilma", "Betty", "BamBam", "Pebbles"]
 
-flintstones.map do |idx|
-  element_length = idx.length
-  if idx.length > 3 
-    idx.slice(3..element_length)
+flintstones.map {|idx| idx[0,3]}
+=> ["Fre", "Bar", "Wil", "Bet", "Bam", "Peb"]
+```
+
+7 correct
+```ruby
+statement = "The Flintstones Rock"
+
+letters = statement.chars
+
+count_hash = {}
+
+loop do 
+
+  current_element = letters.pop
+
+  if letters.empty? 
+    break  
+
+  elsif count_hash.has_key?(current_element) 
+        #does count_hash have key k? true
+    count_hash[current_element] = count_hash.fetch(current_element) + 1
+    # count_hash[current_element] k add current_element value + 1 = 
+
+  elsif # if the key is not there yet then add the kv pair
+        # count_hash
+    count_hash[current_element]= 1
+  end
+
+  count_hash.delete_if{|k,v| k == " " }
+  
 end
+
+count_hash
+
+
+# launch school solution
+result = {}
+
+letters = ('A'..'Z').to_a + ('a'..'z').to_a
+
+letters.each do |letter|
+  letter_frequency = statement.scan(letter).count
+  result[letter] = letter_frequency if letter_frequency > 0
 end
+```
+8a - review
+8b - correct
+```ruby
+
+
+
+
+
+#correct
+numbers = [1, 2, 3, 4]
+numbers.each do |number|
+  p number
+  numbers.pop(1)
+end
+
+1
+[1,2,3]
+2
+[1,2]
+
+
+1
+2
+[1,2]
+```
+
+9 correct
+
+```ruby
+words = "the flintstones rock"
+
+first_gem = words.split.each {|element| element.capitalize!}.join(' ')
+=> "The Flintstones Rock"
+```
+
+10
+```ruby
+munsters = {
+  "Herman" => { "age" => 32, "gender" => "male" },
+  "Lily" => { "age" => 30, "gender" => "female" },
+  "Grandpa" => { "age" => 402, "gender" => "male" },
+  "Eddie" => { "age" => 10, "gender" => "male" },
+  "Marilyn" => { "age" => 23, "gender" => "female"}
+}
+
+kid is in the age range 0 - 17, an adult is in the range 18 - 64 and a senior is aged 65+
+
+{
+ "Herman" => { "age" => 32, "gender" => "male", "age_group" => "adult" },
+  "Lily" => {"age" => 30, "gender" => "female", "age_group" => "adult" },
+  "Grandpa" => { "age" => 402, "gender" => "male", "age_group" => "senior" },
+  "Eddie" => { "age" => 10, "gender" => "male", "age_group" => "kid" },
+  "Marilyn" => { "age" => 23, "gender" => "female", "age_group" => "adult" } 
+}
+
+
+
 
 
 
