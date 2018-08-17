@@ -175,7 +175,7 @@ first_gem = words.split.each {|element| element.capitalize!}.join(' ')
 => "The Flintstones Rock"
 ```
 
-10
+10 nope
 ```ruby
 munsters = {
   "Herman" => { "age" => 32, "gender" => "male" },
@@ -196,6 +196,52 @@ kid is in the age range 0 - 17, an adult is in the range 18 - 64 and a senior is
 }
 
 
+x = {"age"=>32, "gender"=>"male"}
+
+in m.each do key_is_name, value_is_specs |x|
+
+   x.values_at("age")
+=> [32]
+   x.fetch("age")
+=> 32
+   x.fetch("age") <= 17
+=> false
+
+
+
+
+m.each do |key_is_name, value_is_specs|
+
+  if  value_is_specs.fetch("age") <= 17
+    puts 'almost there kid'
+    m["age_group"] = "kid"
+  elsif value_is_specs.fetch("age") >= 65
+    puts 'almost there old man'
+    m["age_group"] = "senior"
+  else
+    puts 'almost there midlife crisis'
+    m["age_group"] = "adult"
+  end
+
+end
+
+
+
+
+m.each do |key_is_name, value_is_specs|
+
+  if  value_is_specs.fetch("age") <= 17
+    puts 'almost there kid'
+    m["age_group"] = "kid"
+  elsif value_is_specs.fetch("age") >= 65
+    puts 'almost there old man'
+    m["age_group"] = "senior"
+  else
+    puts 'almost there midlife crisis'
+    m["age_group"] = "adult"
+  end
+
+end
 
 
 
@@ -203,19 +249,59 @@ kid is in the age range 0 - 17, an adult is in the range 18 - 64 and a senior is
 
 
 
+m.each_pair do |key_is_name, value_is_specs|
+  kid_hash = {}
+  adult_hash = {}
+  senior_hash = {}
+
+  if  value_is_specs.fetch("age") <= 17
+    puts 'almost there kid'
+    kid_hash["age_group"] = "kid"
+  elsif value_is_specs.fetch("age") >= 65
+    puts 'almost there old man'
+    adult_hash["age_group"] = "senior"
+  else
+    puts 'almost there midlife crisis'
+    senior_hash["age_group"] = "adult"
+  end
+
+end
+
+
+munsters.each do |key_is_name, value_is_specs|
+
+  case age
+
+    when value_is_specs.fetch("age") >= 17
+    puts 'almost there kid'
+    key_is_name["age_group"] = "kid"
+    end
+
+end
+
+{
+ "Herman" => { "age" => 32, "gender" => "male", "age_group" => "adult" },
+  "Lily" => {"age" => 30, "gender" => "female", "age_group" => "adult" }
 
 
 
 
+case age
+
+    when value_is_specs.fetch("age") <= 17
+    puts 'almost there kid'
+    key_is_name["age_group"] = "kid"
+    end
 
 
 
-
-
-
-
-
-
-
-
-
+munsters.each do |name, details|
+  case details["age"]
+  when 0...18
+    details["age_group"] = "kid"
+  when 18...65
+    details["age_group"] = "adult"
+  else
+    details["age_group"] = "senior"
+  end
+end
