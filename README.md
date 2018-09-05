@@ -1,1 +1,1 @@
-This is a repository for the Launch School projects in Programming Foundations 101.
+This is a repository for the Launch School projects in Programming Foundations 101

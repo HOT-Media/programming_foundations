@@ -12,6 +12,10 @@ Thanks!
 Jeremy
 
 
+
+
+
+
 Hi, this is my finished program. 
 What do you think about the winning_combination hash?
 What other feedback do you have on the program?
