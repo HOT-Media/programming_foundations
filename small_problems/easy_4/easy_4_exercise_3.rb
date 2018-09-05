@@ -1,3 +1,4 @@
+=begin 
 In the modern era under the Gregorian Calendar, 
 leap years occur in every year that is evenly divisible by 4, 
 unless the year is also divisible by 100. If the year 
@@ -27,6 +28,7 @@ if its not divisible by 4 its not even a candidate for a leap year
 
   then there are 2 types of numbers
   1 divisible by 4, 100, and 400   and 4 and 100
+=end
 
 
 year = 100
@@ -38,11 +40,6 @@ if year % 4  == 0  && year % 100 == 0 && year % 400 == 0
 if true and true || false
 
   if
-
-
-
-
-
 
 
 when 
@@ -61,14 +58,3 @@ a = 5
    p answer
 "a is 5"
 => "a is 5"
-
-
-
-
-
-
-
-
-
-
-

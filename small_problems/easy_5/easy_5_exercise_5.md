@@ -6,9 +6,12 @@ you should only have one space in the result
 
 Examples:
 
-cleanup("---what's my +*& line?") == ' what s my line '
+```ruby
 
+cleanup("---what's my +*& line?") == ' what s my line '
 
 str.map //regex A..Z a..z // |char|
 when char != regex
   char = " "
+
+```

@@ -4,11 +4,20 @@ duplicate characters collapsed into a single character.
 You may not use String squeeze or String squeeze!.
 
 Examples:
-
+```ruby
 crunch('ddaaiillyy ddoouubbllee') == 'daily double'
 crunch('4444abcabccba') == '4abcabcba'
 crunch('ggggggggggggggg') == 'g'
 crunch('a') == 'a'
 crunch('') == ''
+```
+
+```ruby
 
 crunch.split.first then after that .uniq then join (' ')
+
+
+
+
+
+```

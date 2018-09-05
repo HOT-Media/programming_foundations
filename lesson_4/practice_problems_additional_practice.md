@@ -41,8 +41,6 @@ ages.values.inject(:+)
 # inject method which says "apply the + operator to the accumulator and object parameters
 # of inject.
 
-
-
 ```
 
 3. correct
@@ -144,10 +142,6 @@ end
 8b - correct
 ```ruby
 
-
-
-
-
 #correct
 numbers = [1, 2, 3, 4]
 numbers.each do |number|
@@ -242,10 +236,6 @@ m.each do |key_is_name, value_is_specs|
   end
 
 end
-
-
-
-
 
 
 

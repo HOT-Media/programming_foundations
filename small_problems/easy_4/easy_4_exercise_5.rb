@@ -1,18 +1,60 @@
-Write a method that searches for all multiples 
-of 3 or 5 that lie between 1 and some other number, 
-and then computes the sum of those multiples. 
-For instance, if the supplied number is 20,
- the result should be 98 (3 + 5 + 6 + 9 + 10 + 12 + 15 + 18 + 20).
 
-You may assume that the number passed in is an integer greater than 1.
+puts "Enter a number greater than 1"
+entered_number = gets.chomp.to_i
 
-multisum(3) == 3
-multisum(5) == 8
-multisum(10) == 33
-multisum(1000) == 234168
+five_collection = []
 
-3,6,9,12,15,18,21,24,27,30,33,36,39,42,45,48,51,
-54,57,60,63,66,69,72,75,78,81,84,87,90,93,96,99
+   m5 = 5
+   loop do   
+     five_collection << m5     # [5]
+     m5 += 5                    # 10  
+     if m5 == entered_number     # no
+       break       
+     elsif         
+       m5  > entered_number     # 10 +5 = 15  
+       break       
+     end         
+   end       
 
-5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100
 
+three_collection = []   
+   m3 = 3   
+   loop do   
+     three_collection << m3     # [5]
+     m3 += 3                    # 10  
+     if m3 == entered_number     # no
+       break       
+     elsif         
+       m3  > entered_number     # 10 +5 = 15  
+       break       
+     end         
+   end       
+
+puts three_collection.sum + five_collection.sum
+
+
+
+
+
+def multiple?(number, divisor)
+  number % divisor == 0
+end
+
+
+
+
+
+
+def multisum(max_value) #15
+  sum = 0
+         #   15
+  1.upto(max_value) do |number|
+
+
+    if multiple?(number, 3) || multiple?(number, 5)
+
+      sum += number
+    end
+  end
+  sum
+end
