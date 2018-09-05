@@ -78,6 +78,74 @@ array.inject enumerable
 
 ```ruby
 
+
+
+
+year = 1600
+
+def is_this_a_leap_year (entered_year)
+
+  if entered_year % 4 != 0
+    return false
+  elsif entered_year % 4 == 0 && entered_year % 100 == 0
+    return false
+    
+
+criteria_array = [4,100,400]
+
+
+criteria_array.map {|idx| year % idx}.inject {|sum,n| sum + n}
+
+
+
+
+
+
+
+
+
+
+
+year = 1600
+
+def is_this_a_leap_year (entered_year)
+
+criteria_array = [4,100,400]
+
+
+leap_year_modulus_array = criteria_array.map {|idx| entered_year % idx}.inject {|sum,n| sum + n}
+
+ leap_year_modulus_array == 0
+
+
+
+end
+
+
+
+
+
+
+
+
+
+
+
+leap_year_modulus_array.inject {|sum,n| sum + n}
+
+
+
+
+leap_year_modulus_array[0] == 0 && leap_year_modulus_array[1] != 0
+
+
+
+
+
+
+
+
+
 year = 100
 year = 16
 
