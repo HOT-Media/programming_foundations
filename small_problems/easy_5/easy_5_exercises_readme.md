@@ -9,5 +9,5 @@ Complete exercise:
 + 6, Letter Counter (Part 1) https://launchschool.com/exercises/e66bd409
 + 7, Letter Counter (Part 2) https://launchschool.com/exercises/16124e4d
 + 8, Alphabetical Numbers https://launchschool.com/exercises/c688f4e5
-+ 9, ddaaiillyy ddoouubbllee
-+ 10, Bannerizer
++ 9, ddaaiillyy ddoouubbllee https://launchschool.com/exercises/690b2900
++ 10, Bannerizer https://launchschool.com/exercises/29ffd590
