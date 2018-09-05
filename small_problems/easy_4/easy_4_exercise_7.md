@@ -1,5 +1,4 @@
-The String to_i method converts a string of numeric characters (including an optional plus or minus sign)
-to an Integer. 
+The String to_i method converts a string of numeric characters (including an optional plus or minus sign) to an Integer. 
 
 String to_i and the Integer constructor (Integer()) behave similarly. 
 

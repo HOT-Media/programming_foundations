@@ -1,8 +1,28 @@
 A continuation of the previous exercise.
 
-The British Empire adopted the Gregorian Calendar in 1752, which was a leap year. Prior to 1752, the Julian Calendar was used. Under the Julian Calendar, leap years occur in any year that is evenly divisible by 4.
+The British Empire adopted the Gregorian Calendar in 1752, which was a leap year.
+
+Prior to 1752, the Julian Calendar was used. 
+
+Under the Julian Calendar, leap years occur in any year that is evenly divisible by 4.
 
 Using this information, update the method from the previous exercise to determine leap years both before and after 1752.
+
+
+
+
+
+
+
+if the year is greater than or equal to 1752 use previous solution
+
+else year % 4 == 0 leap year
+     year % 4 != 0 not leap year
+
+
+
+
+
 
 ```ruby
 leap_year?(2016) == true

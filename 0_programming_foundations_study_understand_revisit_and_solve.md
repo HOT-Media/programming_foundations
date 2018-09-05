@@ -1,3 +1,4 @@
+
 ## Enumerable .inject
 
 Add up all of the ages from the Munster family hash:
@@ -250,6 +251,14 @@ case age
 
 ```
 
+
+
+
+
+
+
+
+
 Small Problems:
 
 Easy 4:
@@ -305,6 +314,9 @@ p century(1127) == '12th'
 p century(11201) == '113th'
 ```
 Launch School Solution:
+
+After the century is determined, the suffix can be assigned by using mod. then the evaluated result is 1,2, or 3. The case statement in the century_suffix method definition returns the appropriate suffix,1, st etc. 
+
 ```ruby
 def century(year)
   century = year / 100 + 1

@@ -1,4 +1,5 @@
-Construct
+Convert a Signed Number to a String
+
 In the previous exercise, you developed a method that converts non-negative numbers to
 strings. In this exercise, youre going to extend that method by adding the 
 ability to represent negative numbers as well.
@@ -17,4 +18,10 @@ signed_integer_to_string(-123) == '-123'
 signed_integer_to_string(0) == '0'
 ```
 
-ASCII for - 
+0,1,2,3,4,5,6,7,8,9
+if 0 then '0'
+
+if - then '-'
+
+if .start with - then "-integerstring"
+otherwise if .startwith + or nothing "+integerstring"
