@@ -75,6 +75,58 @@ array.map
 array.inject enumerable
 
 
+I need to know if the year entered is evenly divisible by 4, 100, and 400
+I need to know what the evaluated result of the year entered % 4,100, and 400
+
+year mod 4
+year mod 100
+year mod 400
+
+I need to save the evaluated results for a comparison operator later
+
+first do calculation and get an array
+
+I need to use the results in the array to determine the leap year or not
+
+year 1600
+
+[0,0,0]
+
+year 200 not leap year
+[0,0,200]
+
+arr.inject == 0 leap year
+
+arr[0] == 0 and arr[1] == 0 not leap year
+arr[0] + arr[1] > 0 not leap year
+
+
+
+if arr[0] == 0 && arr[1] + arr[2] > 0 leap year
+if arr[0] 
+
+
+
+[0,0,0] leap year
+
+[0,1,]
+
+
+
+
+%4 = 0 STOP
+
+%4 != 0 STOP
+
+
+%4 = 0  % 100 = 0 STOP
+
+%4 = 0  %100 != 0 STOP
+
+
+%4 %100 %400 = 0 STOP
+%4 %100 %400 != 0 STOP
+
 
 ```ruby
 
