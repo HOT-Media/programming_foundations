@@ -33,7 +33,103 @@ elsif
 else
 not leap year
 
-rules
++ if the year is evenly divisible by 4 or evenly divisible by 4, 100 and 400 => leap year
++ if the year is evenly divisible by 4 and 100 it is not a leap year
+
+4    0  
+
+4,100,400  000 
+
+
+4,100  001
+
+
+
+[0,0,0] 4,100,400
+
+
+
+the first condition met is that it hast to be %4 0 
+If its not %4 0 then its not a leap year at all so exit the program here with a false because 100 and 400 dont matter at all in this case
+
+
+if year %4 != 0 => false
+
+
+
+
+
+given the year is mod4 0 procede to check the other 2 conditions
+
+
+if the year is less than 100 and the year is mod4 ly
+
+if the year is between 100 and 399 
+and 
+the year cant be divisible by 100 until after 400
+
+a leap year cant be divisible by 100 until after 400
+
+
+
+
+
+
+
+
+
+
+
+year %4
+year %100
+year %400
+
+
+year = 396
+year = 100
+year = 80
+
+3 conditional statements
+
+- this covers  mod4 and excludes mod100 and mod400
+if the year is less than 100 and the year is mod4 0 leap year
+  + if the year is lees than 100 and mod_array[0] == 0 => leap year
+
+
+
+- this covers mod4 and mod100, and excludes mod400
+if the year is between 100 and 399 and the year mod4 is 0 and year mod 100 is greater than zero - leap year
+  + if the year is (100...400) and mod_array[0] == 0 and mod_array[1] > 0 =>leap year
+if the year is between 100 and 399 and the year mod4 is 0 and year mod 100 is 0 - not leap year
+  + if the year is (100...400) and mod_array[0] == 0 and mod_array[1] == 0 - not leap year
+
+
+- this covers mod4, mod100, mod400
+if the year is greater than 400 and the year mod4 is 0 and year mod 100 is greater than 0 - not leap year
+  + if the year is > 400 and mod_array[0] == 0 and mod_array[1] > 0 => not leap year
+if the year is greater than 400 and the year mod4 is 0 and the year mod 100 is 0  and the year mod 400 is 0 - leap year
+  + if mod_array.inject == 0 => leap year
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+now %4 0 leap year
+mod 100 0 not leap year 
+
+
+
+
 
 leap years can meet one of two requirements:
 + year % 4 == 0
@@ -377,6 +473,18 @@ if (a + b == c) && (g == a) || (a == 1)
 # returns    
 => "The OR operator is never evaluated because both sides 
 of the && AND operator evaluated to true"
+
+
+
+
+
+
+if year %4 != 0 => false
+
+
+
+
+
 
 
 
