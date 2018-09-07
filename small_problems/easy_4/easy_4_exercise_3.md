@@ -26,6 +26,13 @@ leap_year?(400) == true
 ```
 
 
+if 
+[0,1,1]   array[0] == 0 and array.inject > 0   leap year
+elsif
+[0,0,0]   array.inject == 0 leap year
+else
+not leap year
+
 rules
 
 leap years can meet one of two requirements:
@@ -112,20 +119,23 @@ if arr[0]
 [0,1,]
 
 
+[0,0,0] ly
+[0,1,1] ly
+[0,0,1] not ly
 
 
 %4 = 0 STOP
-
 %4 != 0 STOP
 
 
 %4 = 0  % 100 = 0 STOP
-
 %4 = 0  %100 != 0 STOP
 
 
 %4 %100 %400 = 0 STOP
 %4 %100 %400 != 0 STOP
+
+
 
 
 ```ruby
@@ -225,6 +235,155 @@ a = 5
    p answer
 "a is 5"
 => "a is 5"
+
+
+
+
+year = 1600
+
+def this_a_leap_year (entered_year)
+
+criteria_array = [4,100,400]
+
+
+leap_year_modulus_array = criteria_array.map {|idx| entered_year % idx}.inject {|sum,n| sum + n}
+
+if leap_year_modulus_array[0] == 0 && leap_year_modulus_array.inject {|sum,n| sum + n} > 0
+ leap year
+elsif leap_year_modulus_array.inject {|sum,n| sum + n} == 0
+  leap year
+else
+  not a leap year
+  end
+
+
+
+
+
+if 
+[0,1,1]   array[0] == 0 and array.inject > 0   leap year
+elsif
+[0,0,0]   array.inject == 0 leap year
+else
+not leap year
+
+
+
+
+
+
+
+year = 1600
+
+def this_a_leap_year (entered_year)
+
+criteria_array = [4,100,400]
+
+leap_year_modulus_array = criteria_array.map {|idx| entered_year % idx}
+
+if leap_year_modulus_array[0] == 0 && leap_year_modulus_array.inject {|sum,n| sum + n} > 0
+ puts 'leap year'
+elsif leap_year_modulus_array.inject {|sum,n| sum + n} == 0
+  puts 'leap year'
+else
+  puts 'not a leap year'
+  end
+
+
+
+2100 
+[0,0,1] not leap year 
+
+
+[0,1,1]   array[0] == 0 and array.inject > 0   leap year
+elsif
+[0,0,0]   array.inject == 0 leap year
+else
+not leap year
+
+rules
+
+leap years can meet one of two requirements:
++ year % 4 == 0
++ year % 4, year % 100, and year % 400 all == 0 
+
+if leap_year_modulus_array == [0,0,0] 
+  puts 'leap year'
+elsif leap_year_modulus_array == [0,1,1] 
+  puts 'leap year'
+else
+  puts 'not leap year'
+
+
+
+
+year = 1600
+
+def this_a_leap_year (entered_year)
+
+criteria_array = [4,100,400]
+
+leap_year_modulus_array = criteria_array.map {|idx| entered_year % idx}
+
+if leap_year_modulus_array == [0,0,0] 
+  puts 'leap year'
+elsif leap_year_modulus_array[1] + leap_year_modulus_array[2] > 0 && leap_year_modulus_array[0] == 0
+  puts 'leap year'
+elsif leap_year_modulus_array[0] != 0
+  puts 'not a leap year'
+    
+else
+  puts 'not leap year'
+end
+end
+
+
+
+this_a_leap_year year
+
+
+
+
+
+&&  &&  &&  && 
+
+||  ||  ||  ||  
+
+|| || 
+
+if x && y || z
+    do something
+end
+
+
+a = 1
+b = 2
+c = 3
+d = 4
+e = 5
+f = 6
+g = 1
+h = 2
+i = 3
+
+       true          true    OR is never evaluated
+                                because BOTH sides
+                                of the AND expression
+                                are TRUE
+if (a + b == c) && (g == a) || (a == 1)
+    p "The OR operator is never evaluated because both sides
+    of the && AND operator are true"
+    end
+# returns    
+=> "The OR operator is never evaluated because both sides 
+of the && AND operator evaluated to true"
+
+
+
+
+
+
+
 
 ```
 
