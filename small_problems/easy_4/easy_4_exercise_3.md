@@ -74,7 +74,8 @@ a leap year cant be divisible by 100 until after 400
 
 
 
-
++ if the year is evenly divisible by 4 or evenly divisible by 4, 100 and 400 => leap year
++ if the year is evenly divisible by 4 and 100 it is not a leap year
 
 
 
