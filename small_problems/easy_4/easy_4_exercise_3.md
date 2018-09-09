@@ -179,14 +179,56 @@ array.map
 array.inject enumerable
 
 
-I need to know if the year entered is evenly divisible by 4, 100, and 400
+
+
+evenly divisible means no remainder
+mod(arg) = 0
+
+year criteria
+
+is the year entered less than 100?  y  n
+  y: mod4 only
+  n: is the year entered between 100 and 400?  y  n 
+    y mod4 and mod100
+if the year entered is greater than 100 and greater than 400 then by default year mod4 100 400 is evaluated
+
+
+year mod eavaluation
+year < 100
+mod 4 ==0
+ y leap year
+ n not leap year
+
+year (100...400)
+year mod 4 == 0 and year mod 100 != 0
+  y: leap year
+  not leap year
+
+otherwise
+year mod 4, 100, 400 == 0
+  y leap year
+  not leap year
+
+
+
+
+
+Is the year entered mod4 == 0?   y  n 
+  y: Is the year entered mod: 4, 100, 400 == 0?   y   n
+    y:  leap year
+    n: not leap year
+
+  n: not leap year
+
+
+
+
 I need to know what the evaluated result of the year entered % 4,100, and 400
 
 year mod 4
 year mod 100
 year mod 400
 
-I need to save the evaluated results for a comparison operator later
 
 first do calculation and get an array
 
@@ -194,7 +236,15 @@ I need to use the results in the array to determine the leap year or not
 
 year 1600
 
+  mod4         mod100        mod400
+
+[  0              0             0  ]
+
 [0,0,0]
+
+
+
+
 
 year 200 not leap year
 [0,0,200]
