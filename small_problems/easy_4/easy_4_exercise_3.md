@@ -24,6 +24,25 @@ leap_year?(100) == false
 leap_year?(400) == true
 
 ```
+```ruby
+
+
+leap_year?(2016)
+leap_year?(2015)
+leap_year?(2100)
+leap_year?(2400)
+leap_year?(240000)
+leap_year?(240001)
+leap_year?(2000)
+leap_year?(1900)
+leap_year?(1752)
+leap_year?(1700)
+leap_year?(1)
+leap_year?(100)
+leap_year?(400)
+
+```
+
 
 
 if 
@@ -190,6 +209,7 @@ is the year entered less than 100?  y  n
   y: mod4 only
   n: is the year entered between 100 and 400?  y  n 
     y mod4 and mod100
+
 if the year entered is greater than 100 and greater than 400 then by default year mod4 100 400 is evaluated
 
 
@@ -531,6 +551,115 @@ of the && AND operator evaluated to true"
 
 
 if year %4 != 0 => false
+
+
+def this_is_a_leap_year (year)
+  
+  year = 1600
+
+  return true if year%4 == 0 && year < 100
+
+
+  divisible = [4,100,400]
+
+  comparison_array = divisible.map {|n| year % n}
+
+  [0,0,0]
+
+
+is the year entered less than 100?  y  n
+  y: mod4 only
+  n: is the year entered between 100 and 400?  y  n 
+    y mod4 and mod100
+    
+if the year entered is greater than 100 and greater than 400 then by default year mod4 100 400 is evaluated
+
+def this_is_a_leap_year
+     year = 16
+     return if year%4 == 0 && year < 100  
+   end  
+
+def this_is_a_leap_year
+  year = 16
+  return true if  year%4 == 0 && year < 100  
+  return true if year%4 ==0 && year%100 == 0 && year%400 == 0
+  false
+ end  
+
+
+
+def this_is_a_leap_year (year)
+  return true if  year%4 == 0 && year < 100  
+  return true if year%4 ==0 && year%100 == 0 && year%400 == 0
+  false
+ end
+
+
+
+
+
+
+
+
+       *
+      *
+  *  *
+   *
+
+def leap_year? (year)
+  return true if year%4 == 0 && year%100 != 0
+  return true if  year%4 == 0 && year < 100  
+  return true if year%4 ==0 && year%100 == 0 && year%400 == 0
+  false
+end
+
+
+
+
+
+
+leap_year?(2016)
+leap_year?(2015)
+leap_year?(2100)
+leap_year?(2400)
+leap_year?(240000)
+leap_year?(240001)
+leap_year?(2000)
+leap_year?(1900)
+leap_year?(1752)
+leap_year?(1700)
+leap_year?(1)
+leap_year?(100)
+leap_year?(400)
+
+
+
+
+leap_year?(2016) == true
+leap_year?(2015) == false
+leap_year?(2100) == false
+leap_year?(2400) == true
+leap_year?(240000) == true
+leap_year?(240001) == false
+leap_year?(2000) == true
+leap_year?(1900) == false
+leap_year?(1752) == true
+leap_year?(1700) == false
+leap_year?(1) == false
+leap_year?(100) == false
+leap_year?(400) == true
+
+
+
+
+
+def leap_year? (year)
+  return true if year%4 == 0 && year%100 != 0
+  return true if  year%4 == 0 && year < 100  
+  return true if year%4 ==0 && year%100 == 0 && year%400 == 0
+  false
+end
+
 
 
 

@@ -40,3 +40,8 @@ p top and bottom borders
 
 
 
+
+```ruby
+'dog'.center(20)
+
+=> "        dog         "
