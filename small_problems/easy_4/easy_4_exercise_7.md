@@ -46,10 +46,133 @@ hash key "1"   hash value 1
 {"1" => 1,}
 
 
-SUBPROCESS: collect all new numbers
+SUBPROCESS=> collect all new numbers
 
 
 Su
+```ruby
+string_integer = {'0'=> 0, '1'=> 1, '2'=> 2, '3'=> 3, '4'=> 4, '5'=> 5, '6'=> 6, '7'=> 7, '8'=> 8, '9'=> 9}
+
+
+string_integer.fetch_values('0','4')
+
+
+
+
+string_to_integer('4321')
+
+
+
+'4321'.split
+=> ["4321"]
+   '4321'.split('')
+=> ["4", "3", "2", "1"]
+   '4321'.split('').map do |idx|
+    string_integer.fetch_values(idx)
+  end
+
+[[4], [3], [2], [1]]
+
+
+def string_to_integer(string_input)
+string_integer = {'0'=> 0, '1'=> 1, '2'=> 2, '3'=> 3, '4'=> 4, '5'=> 5, '6'=> 6, '7'=> 7, '8'=> 8, '9'=> 9}
+  converted_integer = 0
+  new_integer_array = string_input.split('').map do |idx|
+    string_integer.fetch_values(idx)
+  end
+
+  new_integer_array.flatten.each do |idx|
+    converted_integer = 10 * converted_integer + 4 
+  end
+converted_integer
+end
+
+sum = 0
+
+sum = converted_integer * 10 + 4
+
+
+
+
+  assign new value to converted_integer
+converted integer now = converted integer, 0 * 10, 0 + 4 => 4
+converted integer now = converted integer, 4 * 10, 40, + 3 => 43
+
+converted_integer *= 10 + idx
+
+
+
+
+
+
+
+
+
+
+
+
+
+10 * 0 + 4 -> 4
+10 * 4 + 3 -> 43
+10 * 43 + 1 -> 431
+
+converted_integer = 0
+
+
+
+
+
+string_integer = {'0'=> 0, '1'=> 1, '2'=> 2, '3'=> 3, '4'=> 4, '5'=> 5, '6'=> 6, '7'=> 7, '8'=> 8, '9'=> 9}
+
+def string_to_integer(hash_input, string_input)
+  converted_to_integer = 0
+  new_integer_array = string_input.split('').map do |idx|
+   hash_input.fetch_values(idx)
+  end
+
+  new_integer_array.flatten.map do |idx|
+    converted_to_integer = 10 * converted_to_integer + idx 
+  end
+  converted_to_integer
+end
+
+string_to_integer string_integer,"4321"
+
+
+
+
+
+
+
+
+
+
+Using a constant
+
+
+STRING_INTEGER = {
+  '0' => 0, '1' => 1, '2' => 2, '3' => 3, '4' => 4,
+  '5' => 5, '6' => 6, '7' => 7, '8' => 8, '9' => 9
+}
+
+
+def string_to_integer(string_input)
+  integer_array = string_input.chars.map {|idx| idx = STRING_INTEGER[idx]}
+
+  integer_output = 0
+  integer_array.map {|idx| integer_output = 10 * integer_output + idx}
+  integer_output
+end
+
+string_to_integer '4321'
+
+
+
+
+
+
+
+
 
 
 

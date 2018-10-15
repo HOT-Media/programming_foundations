@@ -1,60 +1,38 @@
 
 puts "Enter a number greater than 1"
-entered_number = gets.chomp.to_i
+num = gets.chomp.to_i
 
-five_collection = []
+def multiple_3_calculator(entered_number)
+  number_of_multiples_of3 = entered_number / 3
 
-   m5 = 5
-   loop do   
-     five_collection << m5     # [5]
-     m5 += 5                    # 10  
-     if m5 == entered_number     # no
-       break       
-     elsif         
-       m5  > entered_number     # 10 +5 = 15  
-       break       
-     end         
-   end       
+  starting_multiple = 0
 
+  multiple_3_collection = []
 
-three_collection = []   
-   m3 = 3   
-   loop do   
-     three_collection << m3     # [5]
-     m3 += 3                    # 10  
-     if m3 == entered_number     # no
-       break       
-     elsif         
-       m3  > entered_number     # 10 +5 = 15  
-       break       
-     end         
-   end       
-
-puts three_collection.sum + five_collection.sum
-
-
-
-
-
-def multiple?(number, divisor)
-  number % divisor == 0
-end
-
-
-
-
-
-
-def multisum(max_value) #15
-  sum = 0
-         #   15
-  1.upto(max_value) do |number|
-
-
-    if multiple?(number, 3) || multiple?(number, 5)
-
-      sum += number
-    end
+  loop do
+    break if number_of_multiples_of3 <= 0
+    number_of_multiples_of3 -= 1
+    starting_multiple += 3
+    multiple_3_collection << starting_multiple
   end
-  sum
+
+  multiple_3_collection
 end
+
+def multiple_5_calculator(entered_number)
+  number_of_multiples_of5 = entered_number / 5
+
+  starting_multiple5 = 0
+  multiple_5_collection = []
+
+  loop do
+    break if number_of_multiples_of5 <= 0
+    number_of_multiples_of5 -= 1
+    starting_multiple5 += 5
+    multiple_5_collection << starting_multiple5
+  end
+
+  multiple_5_collection
+end
+
+puts multiple_3_calculator(num).concat((multiple_5_calculator num)).uniq.sum

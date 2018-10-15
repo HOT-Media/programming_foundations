@@ -16,12 +16,20 @@ Using this information, update the method from the previous exercise to determin
 
 if the year is greater than or equal to 1752 use previous solution
 
-else year % 4 == 0 leap year
-     year % 4 != 0 not leap year
+(year <= 1752) && (year % 4)
 
+```ruby
+def leap_year? (year)
+  if (year <= 1752) && (year % 4 == 0)
+    true
+  elsif (year % 400 == 0) || (year % 4 == 0 && year % 100 != 0)
+    true
+  else
+    false
+  end
+end
 
-
-
+```
 
 
 ```ruby
@@ -39,3 +47,40 @@ leap_year?(1) == false
 leap_year?(100) == true
 leap_year?(400) == true
 ```
+
+
+
+
+```ruby
+def leap_year? (year)
+  if (year <= 1752) && (year % 4 == 0)
+    true
+  elsif (year % 400 == 0) || (year % 4 == 0 && year % 100 != 0)
+    true
+  else
+    false
+  end
+end
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

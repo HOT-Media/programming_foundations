@@ -1,4 +1,7 @@
 
+
+[Code Evaluation Table](https://docs.google.com/spreadsheets/d/1size5CAb0VfwlA29Ris_lWQCuGTYKGYozI0XOT-a7jk/edit?usp=sharing)
+
 ```ruby
 
 
@@ -8,6 +11,10 @@ end
 # 1
 # 3
 # => [[1, 2], [3, 4]]
+```
+
+The object calling .each is an Array.
+The Array is comprised of an outer Array and 2 inner Array's
 
 # Nested Array
 # 1st element in index location 0                        2nd element in index location 1
@@ -35,49 +42,6 @@ end
 # [[1, 2], [3, 4]]
 .each # returns the original array
 ```
-
-Code evaluation:
-
-  + What is the type of action being performed?
-    + method call
-    + block
-    + conditional
-    + etc
-  + What is the object that action is being performed on?
-  + What is the side-effect of that action?
-    + output
-    + or
-    + destructive action
-  + What is the return value of that action?
-  + Is the return value used by whatever instigated the action?
-
-```ruby
-[[1, 2], [3, 4]].each do |arr|
-  puts arr.first
-end
-```
-
-Line   Action          Object           Side Effect        Return Value            Is Return Value Used?
-1      method call     outer array      None               The calling object      No but shown on line 6 
-        .each
-
-1-3   block
-      execution      each sub Array     None              puts / nil               no
-
-
-2    method call     each sub Array    None               Element at index        Yes, but used by puts
-     .first                                               0 of element 1 and 2    
-
-2 method call puts   element at index    output string
-                      0 of each element  representation
-                      of the outer Array  of an integer       nil                   yes, used to determine
-                                                                                    return value of block
-                                                                                                     
-
-
-
-
-
 
 
 

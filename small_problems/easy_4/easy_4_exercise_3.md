@@ -676,3 +676,139 @@ end
 ```
 
 
+
+```ruby
+def leap_year?(year)
+  if year % 400 == 0
+    true
+  elsif year % 100 == 0
+    false
+  else
+    year % 4 == 0
+  end
+end
+
+
+
+def leap_year? (year)
+  return true if year%4 == 0 && year%100 != 0 # make this an || statement and thats the whole method
+  return true if  year%4 == 0 && year < 100  
+  return true if year%4 ==0 && year%100 == 0 && year%400 == 0
+  false
+end
+
+
+```
+return true if
+year % 4           or     year % 100 is not zero
+evenly divisible by 4, unless the year is also divisible by 100. If the year is evenly divisible by 100, then it is not a leap year unless the year is evenly divisible by 400.
+
+```ruby
+def leap_year? (year)
+  (year % 400 == 0) || (year % 4 == 0 && year % 100 != 0)
+end
+
+leap_year?(2016)
+leap_year?(2015)
+leap_year?(2100)
+leap_year?(2400)
+leap_year?(240000)
+leap_year?(240001)
+leap_year?(2000)
+leap_year?(1900)
+leap_year?(1752)
+leap_year?(1700)
+leap_year?(1)
+leap_year?(100)
+leap_year?(400)
+
+```
+
+
+4 covers 4 and 400 because:
+  +  year % 400 == zero will mathmatically also be year % 4 == 0
+so year % 4 == 0 if the year is less than 400 and then if the year is greater than 400 and 
+any integer under 400 % 4 == 0 is a leap year
+any integer over 400 % 4 and 400 is a leap year and any integer % 400 is automatically %4 0 
+
+These are the criteria, not the equation, not the program
+leap years are evenly divisible by 4, unless the year is also divisible by 100. If the year is evenly divisible by 100, then it is not a leap year unless the year is evenly divisible by 400.
+
+
+Mathmatically:
+leap year is any year that is evenly divisible by 4 
+
+
+
+
+```ruby
+def leap_year?(year)
+  if year % 100 == 0
+    false
+  elsif year % 400 == 0
+    true
+  else
+    year % 4 == 0
+  end
+end
+
+```
+
+In the modern era under the Gregorian Calendar, leap years occur in every year that is evenly divisible by 4, unless the year is also divisible by 100. If the year is evenly divisible by 100, then it is not a leap year unless the year is evenly divisible by 400.
+
+```ruby
+
+
+def leap_year?(year)
+  if year % 400 == 0 # this returns true if anything above 400 %400 is zero
+    true # exit the if statement
+  elsif year % 100 == 0 # if the year is not %400 == 0 then execute year%100 and if it is 0 then return false
+    false
+  else
+    year % 4 == 0
+  end
+end
+
+leap_year?(2016) == true
+leap_year?(2015) == false
+leap_year?(2100) == false
+leap_year?(2400) == true
+
+
+1500 not 400 but 100
+1200 400 and 4
+1000 not 400 but 100 true exit with false even though 4
+
+
+```
+
+### Further Exploration
+This will fail for any year evenly divisible by 100 even though the year is evenly divisible by 4 and 400, for instance: 1200
+
+```ruby
+def leap_year?(year)
+  if year % 100 == 0
+    false
+  elsif year % 400 == 0
+    true
+  else
+    year % 4 == 0
+  end
+end
+
+leap_year?(1200)
+=> false
+
+
+```
+
+
+
+
+
+
+
+
+
+
+

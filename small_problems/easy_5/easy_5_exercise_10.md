@@ -45,3 +45,83 @@ p top and bottom borders
 'dog'.center(20)
 
 => "        dog         "
+
+count the characters in the string
+
+add a pipe and a space to both sides of the string
+
+define the top and bottom default string
+
+tb = '+-' + '-' * str.length + '--+'
+
+define the upper and lower default string 
+ul = '| ' + ' ' * str.length + ' |'
+
+prtstr = '| ' + str + ' |'
+
+
+str = 'My pup.'
+
+str.length
+=> 7
+
+
+add one - for each character length of string to the tb str
+add one space for each character length of string to the ul str
+str.prepend('| ') 
+
+
+str = "| #{str} |"
+
+def center(str)
+  puts '+-' + '-' * str.length + '-+'
+  puts '| ' + ' ' * str.length + ' |'
+  puts '| ' + str + ' |'
+  puts '| ' + ' ' * str.length + ' |'
+  puts '+-' + '-' * str.length + '-+'
+end
+
+***************************************************************
+
+def print_in_box(str)
+  puts '+-' + '-' * str.length + '-+'
+  puts '| ' + ' ' * str.length + ' |'
+  puts '| ' + str + ' |'
+  puts '| ' + ' ' * str.length + ' |'
+  puts '+-' + '-' * str.length + '-+'
+end
+
+print_in_box('To boldly go where no one has gone before.')
+
+
+BOX = '+-' + '-' * str.length + '-+'\n'| ' + ' ' * str.length + ' |'\n'| ' + str + ' |'\n'| ' + ' ' * str.length + ' |'\n'+-' + '-' * str.length + '-+'
+
+
+
+output = "This is\na string\nwith newlines"
+puts output
+
+BOX = "+-#{'-' * str.length}-+\n| #{' ' * str.length} |\n| #{str} |"
+
+def center
+
+tb = "+-#{'-' * str.length}-+"
+ul = "| #{' ' * str.length} |"
+center = "| #{str} |"
+
+def print_in_box(str)
+  tb = "+-#{'-' * str.length}-+"
+  ul = "| #{' ' * str.length} |"
+  center = "| #{str} |"
+  puts "#{tb}\n#{ul}\n#{center}\n#{ul}\n#{tb}"
+end
+
+
+
+
+
+
+
+
+
+

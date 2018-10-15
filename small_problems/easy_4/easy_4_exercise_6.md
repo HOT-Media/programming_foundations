@@ -44,3 +44,57 @@ end
 Further Exploration
 Try solving this problem using Array#each_with_object or Enumerable#inject 
 https://ruby-doc.org/core-2.5.0/Enumerable.html#method-i-each_with_object
+
+
+
+```ruby
+
+[2, 5, 13]
+
+def running_total(array)
+  sum = 0
+  array.map { |value| sum += value } # 2, 7, 20
+end
+
+```
+
+
+```ruby
+
+running_total([2, 5, 13]) == [2, 7, 20]
+
+
+evens = (1..10).each_with_object([]) { |i, kuy| kuy << i*9 }
+
+
+
+evens = [1,2,3,4,5].each_with_object([]) { |i, kuy| kuy << i*9 }
+
+
+evens = {a: 1, b: 2, c: 3, d: 4, e: 5}.each_with_object({}) { |i, kuy| kuy << i*9 }
+
+
+each_with_object([]) { |(key, value), memo_obj| value += 1 } 
+
+
+each_with_object(obj) { |(*args), memo_obj| ... } → obj click to toggle source
+
+
+
+dog = {a: 1, b: 2, c: 3, d: 4, e: 5}.each_with_object([]) { |(*args), memo_obj| memo_obj << *args  } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

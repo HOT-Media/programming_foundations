@@ -1,11 +1,11 @@
 
 
 
-Write a method that searches for all multiples 
-of 3 or 5 that lie between 1 and some other number, 
-and then computes the sum of those multiples. 
-For instance, if the supplied number is 20,
- the result should be 98 (3 + 5 + 6 + 9 + 10 + 12 + 15 + 18 + 20).
+Write a method that SEARCHES for all multiples of 3 or 5 that lie between 1 and some other number, 
+and then computes the sum of those multiples.
+
+For instance, if the supplied number is 20, the result should be:
+ 98 (3 + 5 + 6 + 9 + 10 + 12 + 15 + 18 + 20).
 
 
 3,6,9,12,15,18,21,24,27,30,33,36,39,42,45,48,51,
@@ -688,6 +688,46 @@ three_collection = []
    end       
 
 
+```
+
+Write a method that SEARCHES for all multiples of 3 or 5 that lie between 1 and some other number, and then computes the sum of those multiples. For instance, if the supplied number is 20, the result should be 98 (3 + 5 + 6 + 9 + 10 + 12 + 15 + 18 + 20).
+
+You may assume that the number passed in is an integer greater than 1.
+
+
+
+
+Get a number
+
+Search for a multiple of 3
+  + divide 
+Search for a multiple of 5
+
+
+
+
+
+number = 10
+10 
+15/3 =>  5
+
+3
+3+3
+3+3+3
+3+3+3+3
+3+3+3+3+3
+
+find out how many multiples of 3 there are in 20
+  20 divided by 3
+    5
+
+start with 3
+  add 3 to 3 once
+    add 3 to that number 
+    add 3 to that number
+
+loop through the number of multiples of 3 in 20 and add 3 each time
+```ruby
 
 
 
@@ -698,6 +738,311 @@ three_collection = []
 
 
 
+20 divided by 3 = 6
+20 divided by 5 = 4
+
+number_of_multiples_of_3 = entered_number / 3
+  20 / 3 => 6
+
+
+
+number_of_multiples_of_3 = entered_number / 3
+
+starting_multiple = 3
+multiple_3_collection = [3]
+
+
+loop do
+  number_of_multiples_of_3 -= 1 # 6,5,4,3,2,1
+  starting_multiple += 3 # 6,9,12,15,18
+  multiple_3_collection << starting_multiple
+  break if number_of_multiples_of_3 == 1
+end
+
+multiple_3_collection
+
+
+
+
+number_of_multiples_of_5 = entered_number / 
+  20 / 5 => 4
+
+
+
+
+number_of_multiples_of_5 = entered_number / 5
+
+
+starting_multiple5 = 5
+multiple_5_collection = [5]
+
+
+loop do
+  number_of_multiples_of_5 -= 1 # 4,3,2,1
+  starting_multiple5 += 5 # 10,15,
+  multiple_5_collection << starting_multiple5
+  break if number_of_multiples_of_5 == 1
+end
+
+multiple_5_collection
+
+
+multiple_3_collection.concat(multiple_5_collection).uniq.sum
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+find out how many multiples of 5 there are
+
+put them in an array
+add them together
+
+
+
+
+
+
+
+number_of_multiples_of_3 = entered_number / 3
+
+starting_multiple = 3
+multiple_3_collection = [3]
+
+
+loop do
+  number_of_multiples_of_3 -= 1 # 6,5,4,3,2,1
+  starting_multiple += 3 # 6,9,12,15,18
+  multiple_3_collection << starting_multiple
+  break if number_of_multiples_of_3 == 1
+end
+
+
+number_of_multiples_of_5 = entered_number / 5
+
+
+starting_multiple5 = 5
+multiple_5_collection = [5]
+
+
+loop do
+  number_of_multiples_of_5 -= 1 # 4,3,2,1
+  starting_multiple5 += 5 # 10,15,
+  multiple_5_collection << starting_multiple5
+  break if number_of_multiples_of_5 == 1
+end
+
+
+
+multiple_3_collection.concat(multiple_5_collection).uniq.sum
+
+
+
+
+
+
+
+
+
+
+puts "Enter a number greater than 1"
+number = gets.chomp.to_i
+
+
+def multiple_calculator (entered_number)
+
+  number_of_multiples_of_3 = entered_number / 3
+ #number_of_multiples_of_3 = 6
+
+  starting_multiple = 0
+
+  multiple_3_collection = []
+
+  loop do
+    break if number_of_multiples_of_3 <= 0
+    number_of_multiples_of_3 -= 1 # 6,5,4,3,2,1
+    starting_multiple += 3 # 6,9,12,15,18
+    multiple_3_collection << starting_multiple
+    #break if number_of_multiples_of_3 <= 0
+  end
+
+  number_of_multiples_of_5 = entered_number / 5
+#number_of_multiples_of_5 = 4
+
+  starting_multiple5 = 0
+  multiple_5_collection = []
+
+  loop do
+    break if number_of_multiples_of_5 <= 0
+    number_of_multiples_of_5 -= 1 # 4,3,2,1
+    starting_multiple5 += 5 # 10,15,
+    multiple_5_collection << starting_multiple5
+    #break if number_of_multiples_of_5 <= 0
+  end
+
+  multiple_3_collection.concat(multiple_5_collection).uniq.sum
+
+end
+
+
+
+
+
+
+
+if entered_number
+
+
+puts "Enter a number greater than 1"
+number = gets.chomp.to_i
+
+
+def multiple_calculator (entered_number)
+
+  number_of_multiples_of_3 = entered_number / 3
+ 
+
+  starting_multiple = 0
+
+  multiple_3_collection = []
+
+  loop do
+    number_of_multiples_of_3 -= 1 # 6,5,4,3,2,1
+    starting_multiple += 3 # 6,9,12,15,18
+    multiple_3_collection << starting_multiple
+    break if number_of_multiples_of_3 == 0
+  end
+
+  number_of_multiples_of_5 = entered_number / 5
+
+  starting_multiple5 = 0
+  multiple_5_collection = []
+
+  loop do
+    number_of_multiples_of_5 -= 1 # 4,3,2,1
+    starting_multiple5 += 5 # 10,15,
+    multiple_5_collection << starting_multiple5
+    break if number_of_multiples_of_5 == 0
+  end
+
+  multiple_3_collection.concat(multiple_5_collection).uniq.sum
+
+end
+
+
+
+ 1 and 2
+
+ 3
+
+ 1 2 3 4 
+
+ 5
+
+if < 3
+
+if == 3
+
+if < 5
+
+if == 5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+puts "Enter a number greater than 1"
+number = gets.chomp.to_i
+
+def multiple_3_calculator(entered_number)
+  number_of_multiples_of3 = entered_number / 3
+
+  starting_multiple = 0
+
+  multiple_3_collection = []
+
+  loop do
+    break if number_of_multiples_of3 <= 0
+    number_of_multiples_of3 -= 1
+    starting_multiple += 3
+    multiple_3_collection << starting_multiple
+  end
+
+  multiple_3_collection
+
+end
+
+
+
+def multiple_5_calculator(entered_number)
+
+  number_of_multiples_of5 = entered_number / 5
+
+  starting_multiple5 = 0
+  multiple_5_collection = []
+
+  loop do
+    break if number_of_multiples_of5 <= 0
+    number_of_multiples_of5 -= 1
+    starting_multiple5 += 5
+    multiple_5_collection << starting_multiple5
+  end
+
+  multiple_5_collection
+
+end
+
+
+puts multiple_3_calculator(number).concat(multiple_5_calculator (number)).uniq.sum
+
+
+
+
+
+
+```
+
+
+ls
+
+```ruby
+def multiple?(x, divisor)
+  x % divisor == 0
+end
+
+def multisum(max_value)
+  sum = 0
+  1.upto(max_value) do |number|
+    
+    if multiple?(number, 3) || multiple?(number, 5)
+      sum += number
+    end
+  end
+  sum
+end
+
+
+multisum(10) == 33
 
 
 
