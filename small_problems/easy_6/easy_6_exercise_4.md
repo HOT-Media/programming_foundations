@@ -73,7 +73,9 @@ end
 list.concat(accumulator)
 
 
-****************************
+**********************JMX************************
+
+
 
 def reverse!(arr)
   return if arr.empty
@@ -91,6 +93,9 @@ def reverse!(arr)
 end
 
 
+
+
+********************LS***************************
 def reverse!(array)
   left_index = 0
   right_index = -1
@@ -103,9 +108,6 @@ def reverse!(array)
 
   array
 end
-
-
-
 
 
 

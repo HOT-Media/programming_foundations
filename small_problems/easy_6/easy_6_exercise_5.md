@@ -19,7 +19,75 @@ list == [1, 2, 3]                     # => true
 new_list == [3, 2, 1]                 # => true
 
 
-new_list = []
 
-iterate
-new_list << list.pop
+def reverse(arr)
+  new_arr = []
+  arr.count.times do |idx|
+    new_arr.unshift(arr[idx])
+end
+
+
+
+
+*************************************************JMX
+
+
+def reverse(arr)
+  new_arr = []
+  arr.count.times {|idx| new_arr.unshift(arr[idx])}
+  new_arr
+end
+
+
+
+
+**************LS**********************************
+
+def reverse(array)
+  result_array = []
+  array.reverse_each { |element| result_array << element }
+  result_array
+end
+
+
+
+
+
+An even shorter solution is possible by using either inject or each_with_object. Just for fun, read about these methods in the Enumerable module documentation, and try using one in your reverse method.
+
+
+
+
+
+
+dog_arr = []
+
+arr
+=> [1, 2, 3, 4]
+
+arr.reverse_each { |idx| dog_arr << idx}
+=> [1, 2, 3, 4]
+
+dog_arr
+=> [4, 3, 2, 1]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

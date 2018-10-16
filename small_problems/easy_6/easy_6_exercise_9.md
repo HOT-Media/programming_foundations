@@ -11,12 +11,25 @@ include?([nil], nil) == true
 include?([], nil) == false
 
 
-def include? (inspect_arr, look_for)
 
-  true if inspect_arr.each do |idx|
-    idx == look_for
-  end
-
+*************************************************JMX
+def include?(arr, look_for)
+  arr.include?(look_for)
 end
+
+
+p include?([1,2,3,4,5], 3) == true
+p include?([1,2,3,4,5], 6) == false
+p include?([], 3) == false
+p include?([nil], nil) == true
+p include?([], nil) == false
+
+
+
+
+
+
+
+
 
 

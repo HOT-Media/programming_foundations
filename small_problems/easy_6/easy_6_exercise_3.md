@@ -53,6 +53,145 @@ f(n-1)+f(n-2)
 
 the 7th fib number is 8   glitch.
 
+0
+0+ 1 1
+1
+1+ 1 2
+2
+
+next_num_calculation_array = []
+
+arr =[1,1]
+
+arr.sum => 2
+
+next_num_calculation_array[0], next_num_calculation_array[1] = arr[1], arr.sum => [1,1]    5    8    13
+                                                                  [1]       2     [1,2],  2,3   3,5  5,8   8,13   
+
+
+arr[0], arr[1] = 5 , 10
+=> [5, 10]
+
+
+int_arg = 2
+
+fib_arr =[1,1]
+
+
+
+
+first fib number that has an index of 2, => 13
+if digits = int_arg break
+
+
+
+
+int_arg = 2
+fib_arr =[1,1]
+accumulator = []
+fibonaccci_number = 0
+
+
+loop do 
+  fibonaccci_number += 0
+  accumulator << fib_arr[1]
+  accumulator << fib_arr.sum
+  break if accumulator.sum.to_s.length == int_arg
+  accumulator.clear
+end
+
+fibonaccci_number
+
+
+
+
+
+accumulator << fib_arr[1]
+  accumulator << fib_arr.sum
+
+
+
+fib_arr[0], fib_arr[1]  = fib_arr[1], fib_arr[fib_arr.sum]
+break if fib_arr.sum.to_s.length == int_arg
+
+
+
+
+
+
+
+accumulator << fib_arr[1]
+=> [1]
+
+accumulator << fib_arr.sum
+=> [1, 2]
+
+break if accumulator.sum.to_s.length == int_arg
+
+
+
+loop do 
+
+
+
+add 1 to 1
+take that sum and put it in an array then add 
+
+
+
+
+
+int_arg = 2
+fib_arr =[1,1] # => 
+fibonaccci_number = 
+
+
+
+fib_arr =[0,1] 
+
+fib_arr =[0,1].sum => 1, fib 2
+
+
+fibonaccci_number = 2  1
+fibonaccci_number = 3  2
+
+
+
+
+
+
+
+index_length = 10 000
+fib_arr =[0,1]
+  fibonaccci_number = 2
+
+  loop do
+    fib_arr[0], fib_arr[1]  = fib_arr[1], fib_arr.sum
+    fibonaccci_number += 1
+    break if fib_arr.sum.to_s.length == index_length
+  end
+
+
+
+
+
+
+
+*************************************************JMX
+
+def find_fibonacci_index_by_length(index_length)
+  fib_arr =[0,1]
+  fibonaccci_number = 2
+
+  loop do
+    fib_arr[0], fib_arr[1]  = fib_arr[1], fib_arr.sum
+    fibonaccci_number += 1
+    break if fib_arr.sum.to_s.length == index_length
+  end
+
+  fib_arr.sum
+  fibonaccci_number
+end
 
 
 

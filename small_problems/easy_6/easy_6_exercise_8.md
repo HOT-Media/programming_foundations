@@ -18,3 +18,107 @@ find_dup([18,  9, 36, 96, 31, 19, 54, 75, 42, 15,
 
 arr.uniq then compare the original array to the returned uniq array
 
+
+arr.sort
+%w(arr[0])
+duplicate_arr = []
+temp_array = []
+arr.map do |idx|
+  idx 
+
+
+
+
+x.map { |idx| }
+
+
+
+
+temp_array = []
+
+put each element into an array then compare the two 
+if both elements are the same
+  dupl = temp array
+
+  dupl.flaten.pop
+
+
+arr.rindex { |x| x == x }
+
+
+arr.detect.with_index { |e, idx| idx != arr.rindex(e) }
+
+
+hash kv
+
+duplicate_hash = {}
+
+duplicate_array = []
+
+iterate throug the array
+
+
+
+if duplicate_array.include?(idx)
+  puts idx
+end
+
+
+arr.map do |idx|
+  duplicate_array << idx if comparison_array.include?(idx)  
+end  
+
+
+
+comparison_array = []
+duplicate_array = []
+
+
+
+
+*************************************************JMX
+
+
+def find_dup(arr)
+  comparison_array = []
+  duplicate_array = []
+
+  arr.map do |idx|
+    if comparison_array.include?(idx)
+      duplicate_array << idx
+    else
+      comparison_array << idx
+    end
+  end
+  duplicate_array[0]
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
