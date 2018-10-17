@@ -7,9 +7,19 @@ You may assume that the input String will always contain at least two words.
 Examples:
 ```ruby
 
-penultimate('last word') == 'last'
-penultimate('Launch School is great!') == 'is'
+
+*************************************************JMX
+
+def penultimate(str)
+  str.split(' ')[-2]
+end
 
 
-split the string into an array and access the next to last element [-2]
-str.split(' ')[-2]
+
+
+p penultimate('last word') == 'last'
+p penultimate('Launch School is great!') == 'is'
+
+
+
+
