@@ -67,17 +67,72 @@ end
 
 def halvsies(arr)
 
-  if arr.empty? 
+  if arr.empty?
     return Array.new(2, [])
-  elsif arr.count == 1 # one digit [5]
+  elsif arr.count == 1
     return [(arr), []]
   end
 
-  if arr.count % 2 == 0 # even number of elements
+  if arr.count % 2 == 0
     arr.each_slice(arr.count / 2).to_a
-  else arr.each_slice(arr.count / 2 + 1).to_a # odd number of elements
+  else arr.each_slice(arr.count / 2 + 1).to_a
   end
 end
+
+*************************************************LS
+
+
+
+def halvsies(array)
+  first_half = array.slice(0, (array.size / 2.0).ceil)
+  second_half = array.slice(first_half.size, array.size - first_half.size)
+  [first_half, second_half]
+end
+
+
+
+
+
+array = [1,2,3,4,5]
+
+  first_half = array.slice(0, (array.size / 2.0).ceil)
+  second_half = array.slice(first_half.size, array.size - first_half.size)
+  [first_half, second_half]
+end
+
+Our task is to split this array into two pieces. A first and second half. We get the size of the first by dividing the original arrays size by two. If the original array is odd in size, then a call to ceil will account for that, making the first half larger than the second by 1. The second half is created based on the size of the first half. It is made of the first element in array that is not in the first half and any remaining elements left in the original array. To create both halves, the Array.slice method is used. Finally, our halvsies array is created by specifying our two halves as the sole elements of a new array.
+
+
+puts 8/3.ceil == 2   #=> true
+puts 8/3.floor == 2  #=> true
+puts 2.67.ceil == 2  #=> false
+puts 2.67.floor == 2 #=> true
+
+
+(8.to_f / 3).ceil == 2  #=> false
+(8.to_f / 3).floor == 2 #=> true
+2.67.ceil == 2          #=> false
+2.67.floor == 2         #=> true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

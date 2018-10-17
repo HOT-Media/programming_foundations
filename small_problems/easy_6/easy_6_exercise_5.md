@@ -60,18 +60,18 @@ An even shorter solution is possible by using either inject or each_with_object.
 
 
 
-dog_arr = []
-
-arr
-=> [1, 2, 3, 4]
-
-arr.reverse_each { |idx| dog_arr << idx}
-=> [1, 2, 3, 4]
-
-dog_arr
-=> [4, 3, 2, 1]
 
 
+
+a = [ "a", "b", "c" ]
+
+new = []
+
+a.reverse_each {|x| new << x}
+=> ["a", "b", "c"]
+
+new
+=> ["c", "b", "a"]
 
 
 

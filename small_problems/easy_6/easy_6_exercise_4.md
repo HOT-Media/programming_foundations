@@ -78,7 +78,7 @@ list.concat(accumulator)
 
 
 def reverse!(arr)
-  return if arr.empty
+  return [] if arr.empty?
   arr.count # =>4 
   accumulator = []
 
@@ -108,6 +108,42 @@ def reverse!(array)
 
   array
 end
+
+
+
+
+
+
+
+
+list = [1,2,3,4]
+
+
+def reverse!(array)
+  left_index = 0
+  right_index = -1
+
+  while left_index < array.size / 2
+  while left_index, 0 is less than array.size, 4 / 2,   =>  2  
+
+    array[left_index], array[right_index] = array[right_index], array[left_index]
+    array[0]         , array[-1]                      -1                 0
+          1          ,        4                      4                   1
+    left_index += 1
+    right_index -= 1
+  end
+
+  array
+end
+
+
+
+
+
+
+
+
+
 
 
 

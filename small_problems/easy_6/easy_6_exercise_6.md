@@ -19,5 +19,21 @@ arr1.flatten.uniq
 end
 
 
+*************************************************LS
+
+def merge(array_1, array_2)
+  array_1 | array_2
+end
 
 
+
+
+
+[1, 3, 5] | [3, 6, 9]
+=> [1, 3, 5, 6, 9]
+
+
+
+
+```
+Set Union — Returns a new array by joining ary with other_ary, excluding any duplicates and preserving the order from the given arrays.

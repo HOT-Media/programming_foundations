@@ -94,16 +94,46 @@ def find_dup(arr)
 end
 
 
+*************************************************LS
+
+def find_dup(array)
+  array.find { |element| array.count(element) == 2 }
+end
+
+
+Here were using the method Enumerable.find to look through each item in our array. If that item meets some condition we return it. In this case, the condition we check is that that item occurs twice. This bit of code will allow us to find the duplicate element regardless of the size of the array.
+
+
+array = [1,2,3,4,1,5,8]
+
+array.find { |element| array.count(element) == 2 }
 
 
 
+array.find {|num| num == 1}
+=> 1
+
+array.find {|num| num == 29}
+=> nil
 
 
+                        array.count(1)
+                        => 2
+                        array.count(2)
+                        => 1
+                        array.count(29)
+                        => 0
+
+array.find { |element| array.count(element) == 2 }
+                1                     1     == 2   => true
+
+array.find { |element| array.count(element) == 2 }
+=> 1
 
 
+Passes each entry in enum to block. Returns the first for which block is not false.
 
-
-
+If no object matches, calls ifnone and returns its result when it is specified, or returns nil otherwise.
 
 
 

@@ -12,10 +12,37 @@ include?([], nil) == false
 
 
 
-*************************************************JMX
-def include?(arr, look_for)
-  arr.include?(look_for)
-end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 p include?([1,2,3,4,5], 3) == true
