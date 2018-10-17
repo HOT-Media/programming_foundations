@@ -120,6 +120,24 @@ puts 2.67.floor == 2 #=> true
 
 
 
+slice(index) → obj or nil
+```
+Element Reference — Returns the element at index
+
+```ruby
+slice(start, length) → new_ary or nil
+arr
+=> [1, 2, 3, 4]
+
+arr.slice(0,2)
+=> [1, 2]
+```
+
+Returns a subarray starting at the start index and continuing for length 
+```ruby
+slice(range) → new_ary or nil
+```
+returns a subarray specified by range of indices
 
 
 
@@ -130,8 +148,38 @@ puts 2.67.floor == 2 #=> true
 
 
 
+Element Reference — Returns the element at index
+
+Returns a subarray starting at the start index and continuing for length elements, or returns a subarray specified by range of indices.
 
 
+
+
+
+Returns the smallest Integer greater than or equal to float
+
+float to integer round up
+
+1.2.ceil      #=> 2
+=> 2
+2.0.ceil      #=> 2
+=> 2
+(-1.2).ceil   #=> -1
+=> -1
+(-2.0).ceil   #=> -2
+=> -2
+2.1.ceil
+2.9.ceil
+
+```ruby
+.ceil 
+2.5.ceil
+=> 3
+
+3.0.ceil
+=> 3
+```
+Rounds up the float to an integer
 
 
 

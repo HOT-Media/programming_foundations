@@ -11,8 +11,7 @@ swapcase('CamelCase') == 'cAMELcASE'
 swapcase('Tonight on XYZ-TV') == 'tONIGHT ON xyz-tv'
 
 
-CASE_HASH.to_h
-=> {"a"=>"A",
+CASE_HASH = {"a"=>"A",
  "b"=>"B",
  "c"=>"C",
  "d"=>"D",
@@ -35,6 +34,76 @@ CASE_HASH.to_h
  "u"=>"U",
  "v"=>"V",
  "w"=>"W",
+}
+
+works for lowercase to uppercase
+
+str.split(" ").map {|idx| CASE_HASH[idx] || CASE_HASH.fetch_value(idx)}
 
 
-str.split(" ").map {|idx| CASE_HASH[idx] || CASE_HASH.fetch_value}
+'CamelCase' == 'cAMELcASE'
+
+
+
+
+
+str = 'CamelCase'
+
+new_str = str.split(//).map do |idx|
+  if idx == idx.upcase 
+    idx.downcase
+  else
+    idx.upcase
+  end
+end
+new_str.join
+
+
+
+
+split the string by spaces then by words
+
+
+split the string into words
+
+str.split (' ')
+
+
+
+
+
+
+
+*************************************************JMX
+def swapcase(str)
+  word_array = str.split (' ') 
+  word_array.map! do |word|
+    new_str = word.split(//).map! do |chr|
+      if chr.match?(/[^a-zA-Z]/)
+        chr
+      elsif chr == chr.upcase 
+        chr.downcase
+      else
+        chr.upcase
+      end
+    end
+    new_str.join
+  end
+  word_array.join(" ")
+end
+
+
+
+p swapcase('CamelCase') == 'cAMELcASE'
+p swapcase('Tonight on XYZ-TV') == 'tONIGHT ON xyz-tv'
+
+
+
+
+
+
+
+
+
+
+

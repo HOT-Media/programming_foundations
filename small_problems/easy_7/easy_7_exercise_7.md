@@ -14,5 +14,9 @@ The result is 28361.667
 
 
 arr.count
+arr = [2, 5, 7, 11, 13, 17]
 
-arr.sum * /arr.count = %format(%000)
+arr.reduce(:*) / arr.count
+%format .000
+=> 28361
+
