@@ -81,7 +81,7 @@ def swapcase(str)
     new_str = word.split(//).map! do |chr|
       if chr.match?(/[^a-zA-Z]/)
         chr
-      elsif chr == chr.upcase 
+      elsif chr == chr.upcase
         chr.downcase
       else
         chr.upcase
@@ -99,9 +99,24 @@ p swapcase('Tonight on XYZ-TV') == 'tONIGHT ON xyz-tv'
 
 
 
+*************************************************LS 
+
+def swapcase(string)
+  characters = string.chars.map do |char|
+    if char =~ /[a-z]/
+      char.upcase
+    elsif char =~ /[A-Z]/
+      char.downcase
+    else
+      char
+    end
+  end
+  characters.join
+end
 
 
-
+elsif char =~ /[A-Z]/ instead of chr == chr.upcase
+  
 
 
 

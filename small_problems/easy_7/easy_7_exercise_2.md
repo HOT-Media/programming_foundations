@@ -128,11 +128,18 @@ p letter_case_count('123') == { lowercase: 0, uppercase: 0, neither: 3 }
 p letter_case_count('') == { lowercase: 0, uppercase: 0, neither: 0 }
 
 
+*************************************************LS 
 
 
+def letter_case_count(string)
+  counts = {}
+  characters = string.chars
+  counts[:lowercase] = characters.count { |char| char =~ /[a-z]/ }
+  counts[:uppercase] = characters.count { |char| char =~ /[A-Z]/ }
+  counts[:neither] = characters.count { |char| char =~ /[^A-Za-z]/ }
+  counts
+end
 
-
-
-
+```
 
 

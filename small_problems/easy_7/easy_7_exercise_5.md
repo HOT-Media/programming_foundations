@@ -132,7 +132,39 @@ p staggered_case('ignore 77 the 444 numbers') == 'IgNoRe 77 ThE 444 NuMbErS'
 
 
 
+*************************************************LS
 
+
+
+def staggered_case(string)
+  result = ''
+  need_upper = true
+  string.chars.each do |char|
+    if need_upper
+      result += char.upcase
+    else
+      result += char.downcase
+    end
+    need_upper = !need_upper
+  end
+  result
+end
+
+
+def staggered_case(string)
+  result = ''
+  need_upper = true  # to toggle true or false on each iteration of string
+  string.chars.each do |char|
+    if need_upper    # true here
+      result += char.upcase  # so upcase here
+    else
+      result += char.downcase
+    end
+                              # end the .each iteration
+    need_upper = !need_upper  # change the value of need_upper
+  end
+  result
+end
 
 
 

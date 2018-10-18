@@ -42,16 +42,37 @@ def interleave(arr1, arr2)
 end
 
 
-interleave([1, 2, 3], ['a', 'b', 'c']) == [1, 'a', 2, 'b', 3, 'c']
+interleave() == [1, 'a', 2, 'b', 3, 'c']
 
 
 
 
+*************************************************LS
 
 
+def interleave(array1, array2)
+  result = []
+  array1.each_with_index do |element, index|
+    result << element << array2[index]
+  end
+  result
+end
+
+=> [1, "a", 2, "b", 3, "c"]
 
 
+```
 
+each_with_index is iterating through array1
+The "element" and "index" parameters of each_with_index represent:
+  the element in the index location of array1
+The empty array result is the collection array
+on each iteration:
+  the "element" at the "index" of array1 is appened to result with <<
+and
+  the element in the "index" of array2[index] is appended to result with <<
+
+So result contains stacked values from array1 then array2
 
 
 
