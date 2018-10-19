@@ -29,6 +29,9 @@ int_fzz_bzz = integer_arr.map do |idx|
   idx
   end
   end    
+end
+
+
 
 int_fzz_bzz
 => [1,
@@ -88,20 +91,82 @@ end
 
 
 
+def fizbuzz(starting_num, ending_num)
+
+  starting_num = 1
+  ending_num = 15
+  integer_arr = Array(1..15)
+  integer_arr = Array(starting_num..ending_num)
+
+  int_fzz_bzz = integer_arr.map do |idx|
+    if idx % 3 == 0 && idx % 5 == 0
+      "Fizz Buzz"
+    elsif idx % 5 == 0 
+      "Buzz"
+    elsif idx % 3 == 0 
+     "Fizz"
+    else
+    idx
+    end
+  end    
+end
 
 
+[1,
+ 2,
+ "Fizz Buzz",
+ 4,
+ "Buzz",
+ "Fizz Buzz",
+ 7,
+ 8,
+ "Fizz Buzz",
+ "Buzz",
+ 11,
+ "Fizz Buzz",
+ 13,
+ 14,
+ "Fizz"]
 
 
+** ** *
+
+def fizzbuzz(starting_num, ending_num)
+  integer_arr = Array(starting_num..ending_num)
+
+  int_fzz_bzz = integer_arr.map do |idx|
+    if idx % 3 == 0 && idx % 5 == 0
+      "Fizz Buzz"
+    elsif idx % 5 == 0
+      "Buzz"
+    elsif idx % 3 == 0
+      "Fizz"
+    else
+    idx
+    end
+  end
+end
 
 
+[1,
+ 2,
+ "Fizz",
+ 4,
+ "Buzz",
+ "Fizz",
+ 7,
+ 8,
+ "Fizz",
+ "Buzz",
+ 11,
+ "Fizz",
+ 13,
+ 14,
+ "Fizz Buzz"]
 
-
-
-
-
-
-
-
+str = ""
+words.reverse_each { |word| str += "#{word} " }
+p str #=> "sixth fifth fourth third second first "
 
 
 
