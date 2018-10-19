@@ -350,6 +350,399 @@ Printing a much larger number with that same  format printf("'%-8.2f'", 10123456
 that same format
 
 
+the whole units of degrees will remain the same (e.g., if your figure is 121.135 degrees longitude, start with 121 degrees).
+
+Multiply the decimal portion of the figure by 60 (e.g., .135 * 60 = 8.1).
+The whole number becomes the minutes (8).
+
+Take the remaining decimal and multiply it by 60 (e.g., .1 * 60 = 6).
+The resulting number becomes the seconds (6 seconds). Seconds can remain as a decimal if needed.
+
+Take your three sets of numbers and put them together, (e.g., 12
+
+
+
+
+
+
+
+121.135 
+=> 121.135
+121.135.to_i 
+=> 121
+
+
+
+delete up to the decimal. of string
+
+=> "121.135"
+
+
+76.73.to_i
+=> 76
+
+
+
+move the float decimal 4 places to the left 
+76.73 / 0.0001
+=> 76 7300.0
+
+use the 4 characters before the decimal
+7300
+
+7300 * 60
+=> 438000
+
+
+0.8*60
+=> 48.0
+
+
+76 43 48
+
+
+767300.0
+
+
+
+
+
+
+
+
+
+dms(30) == %(30°00'00")
+dms(76.73) == %(76°43'48")
+dms(254.6) == %(254°36'00")
+dms(93.034773) == %(93°02'05")
+dms(0) == %(0°00'00")
+dms(360) == %(360°00'00") || dms(360) == %(0°00'00")
+
+
+
+
+***
+degrees
+76.73.to_i
+=> 76
+
+
+
+****
+minutes: 
+
+767300.0.divmod 100
+=> [7673, 0.0]
+767300.0.divmod 1000
+=> [767, 300.0]
+767300.0.divmod 10000
+=> [76, 7300.0]
+last_4 = 767300.0.divmod 10000
+=> [76, 7300.0]
+last_4
+=> [76, 7300.0]
+last_4[1]
+=> 7300.0
+last_4[1].ceil
+=> 7300
+
+
+last_4[1].ceil * 60
+=> 438000
+
+
+minutes = last_4[1].ceil * 60 *0.0001
+=> 43.800000000000004
+
+
+minutes.to_i
+=> 43
+
+
+****
+seconds
+
+minutes
+=> 43.800000000000004
+minutes.divmod 0.01
+=> [4380, 3.3514857555871913e-15]
+minutes.divmod 0.001
+=> [43800, 3.3514857555871913e-15]
+minutes.divmod 10
+=> [4, 3.8000000000000043]
+minutes.divmod 100
+=> [0, 43.800000000000004]
+minutes.divmod 1000
+=> [0, 43.800000000000004]
+minutes.divmod 0.1
+=> [438, 1.8318679906315083e-15]
+minutes.divmod 1
+=> [43, 0.8000000000000043]
+
+
+
+seconds_calc = minutes.divmod 1
+=> [43, 0.8000000000000043]
+seconds_calc = minutes.divmod 1
+=> [43, 0.8000000000000043]
+seconds_calc
+=> [43, 0.8000000000000043]
+seconds = seconds_calc[1]
+=> 0.8000000000000043
+seconds
+=> 0.8000000000000043
+seconds / 0.01
+=> 80.00000000000043
+seconds / 0.01
+=> 80.00000000000043
+seconds_int = seconds.to_i
+=> 0
+seconds_int = seconds / 0.01
+=> 80.00000000000043
+seconds_int
+=> 80.00000000000043
+seconds_int.to_i
+=> 80
+seconds_int_calc = seconds_int.to_i
+=> 80
+seconds_int_calc * 60
+=> 4800
+seconds_int_calc * 60 / 100
+=> 48
+
+
+
+
+
+****
+minutes: 
+
+767300.0.divmod 100
+=> [7673, 0.0]
+767300.0.divmod 1000
+=> [767, 300.0]
+767300.0.divmod 10000
+=> [76, 7300.0]
+
+last_4 = 767300.0.divmod 10000
+=> [76, 7300.0]
+last_4
+=> [76, 7300.0]
+last_4[1]
+=> 7300.0
+last_4[1].ceil
+=> 7300
+last_4[1].ceil * 60
+=> 438000
+minutes = last_4[1].ceil * 60 *0.0001
+=> 43.800000000000004
+minutes.to_i
+=> 43
+
+num = 76.73
+=> 76.73
+num
+=> 76.73
+num.to_f
+=> 76.73
+
+
+
+
+
+
+
+seconds_calc = minutes.divmod 1
+=> [43, 0.8000000000000043]
+seconds_calc = minutes.divmod 1
+=> [43, 0.8000000000000043]
+seconds_calc
+=> [43, 0.8000000000000043]
+seconds = seconds_calc[1]
+=> 0.8000000000000043
+seconds
+=> 0.8000000000000043
+seconds / 0.01
+=> 80.00000000000043
+seconds / 0.01
+=> 80.00000000000043
+seconds_int = seconds.to_i
+=> 0
+seconds_int = seconds / 0.01
+=> 80.00000000000043
+seconds_int
+=> 80.00000000000043
+seconds_int.to_i
+=> 80
+seconds_int_calc = seconds_int.to_i
+=> 80
+seconds_int_calc * 60
+=> 4800
+seconds_int_calc * 60 / 100
+=> 48
+
+
+
+
+
+
+
+
+
+** *
+num = 76.73
+
+degrees = num.to_i    => 76     ** ** ** 
+=> 76
+
+num_as_float = num.to_f    =>  76.73      ** ** **
+
+
+
+move_decimal_4_to_the_left = num / 0.0001   => 767300.0  ** ** ** 
+
+minutes_and_seconds = move_decimal_4_to_the_left.divmod 10000    => [76, 7300.0] ** ** ** 
+
+minutes = minutes_and_seconds[1].to_i => 7300  ** * # or .ceil  
+
+minutes_calculation = minutes * 60 * 0.0001  => 43.800000000000004     ** ** **
+
+minutes_integer  = minutes_calculation.to_i   => 43 ** ** ** ** ** 
+=> 43
+
+
+
+seconds = minutes_calculation.divmod 1         => [43, 0.8000000000000043] ** ** ** 
+
+seconds_2_digits = seconds[1] / 0.01           => 80.00000000000043   ** ** ** 
+
+seconds_integer = seconds_2_digits.to_i        => 80  ** ** ** 
+
+
+seconds_integer_calculation = seconds_integer * 60 / 100  => 48 ** ** ** 
+=> 48
+
+
+
+
+
+
+minutes.divmod 1
+=> [43, 0.8000000000000043]
+
+seconds = minutes.divmod 1
+=> [43, 0.8000000000000043]
+seconds_2_digits = seconds[1]
+=> 0.8000000000000043
+
+seconds_2_digits = seconds[1] / 0.01
+=> 80.00000000000043
+seconds_integer = seconds_2_digits.to_i
+=> 80
+seconds_integer_calculation = seconds_integer * 60 / 100
+=> 48
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+minutes
+=> 43.800000000000004
+minutes.divmod 0.01
+=> [4380, 3.3514857555871913e-15]
+minutes.divmod 0.001
+=> [43800, 3.3514857555871913e-15]
+minutes.divmod 10
+=> [4, 3.8000000000000043]
+minutes.divmod 1
+=> [43, 0.8000000000000043]
+seconds = minutes.divmod 1
+=> [43, 0.8000000000000043]
+seconds_2_digits = seconds[1]
+=> 0.8000000000000043
+seconds_2_digits = seconds[1] / 0.01
+=> 80.00000000000043
+seconds_integer = seconds_2_digits.to_i
+=> 80
+seconds_integer_calculation = seconds_integer * 60 / 100
+=> 48
+
+
+
+
+num = 76.73
+
+degrees = num.to_i 
+
+
+num_as_float = num.to_f 
+
+
+
+move_decimal_4_to_the_left = num / 0.0001 
+
+minutes_and_seconds = move_decimal_4_to_the_left.divmod 10000  
+
+minutes = minutes_and_seconds[1].to_i 
+
+minutes_calculation = minutes * 60 * 0.0001 
+
+minutes_integer  = minutes_calculation.to_i 
+# => 43
+
+
+
+seconds = minutes_calculation.divmod 1 
+
+seconds_2_digits = seconds[1] / 0.01 
+
+seconds_integer = seconds_2_digits.to_i  
+
+
+seconds_integer_calculation = seconds_integer * 60 / 100 
+# => 48
+
+puts degrees
+puts minutes_integer
+puts seconds_integer_calculation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
