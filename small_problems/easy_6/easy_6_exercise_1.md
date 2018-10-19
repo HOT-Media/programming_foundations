@@ -798,7 +798,7 @@ puts dms
 
  =end
 =end
-** ** *
+
 def dms(num)
   degrees = num.to_i 
   num_as_float = num.to_f 
@@ -813,9 +813,6 @@ def dms(num)
   seconds_integer_calculation = seconds_integer * 60 / 100 
   out %(#{degrees}#{DEGREE}#{minutes_integer}'#{seconds_integer_calculation}")
 end
-
-
-****
 
 
 
@@ -849,9 +846,354 @@ minutes_integer = 3
 
 
 
+*************************************************JMX
+
+
+def dms(num)
+  degrees = num.to_i
+  move_decimal_4_to_the_left = num / 0.0001
+  minutes_and_seconds = move_decimal_4_to_the_left.divmod 10000
+  minutes = minutes_and_seconds[1].to_i
+  minutes_calculation = minutes * 60 * 0.0001
+  minutes_integer = minutes_calculation.to_i
+  seconds = minutes_calculation.divmod 1
+  seconds_2_digits = seconds[1] / 0.01
+  seconds_integer = seconds_2_digits.to_i
+  seconds_integer_calculation = seconds_integer * 60 / 100
+  formatted_min = format('%02d', minutes_integer)
+  formatted_sec = format('%02d', seconds_integer_calculation)
+  out = %(#{degrees}#{DEGREE}#{formatted_min}'#{formatted_sec}")
+end
+
+
+# bad
+puts sprintf('%10s', 'hoge')
+puts '%10s' % 'hoge'
+
+# good
+puts format('%10s', 'hoge')
 
 
 
+
+
+
+
+
+
+
+
+def dms(num)
+  degrees = num.to_i
+  move_decimal_4_to_the_left = num / 0.0001
+  minutes_and_seconds = move_decimal_4_to_the_left.divmod 10000
+  minutes = minutes_and_seconds[1].to_i
+  minutes_calculation = minutes * 60 * 0.0001
+  minutes_integer = minutes_calculation.to_i
+  seconds = minutes_calculation.divmod 1
+  seconds_2_digits = seconds[1] / 0.01
+  seconds_integer = seconds_2_digits.to_i
+  seconds_integer_calculation = seconds_integer * 60 / 100
+  formatted_min = format('%02d', minutes_integer)
+  formatted_sec = format('%02d', seconds_integer_calculation)
+  %(#{degrees}#{DEGREE}#{formatted_min}'#{formatted_sec}")
+end
+
+puts dms(30)
+puts dms(76.73)
+puts dms(254.6)
+puts dms(93.034773)
+puts dms(0)
+puts dms(360)
+
+
+def deg(num)
+  num.to_i
+end
+
+
+
+move_decimal_4_to_the_left = num / 0.0001
+  minutes_and_seconds = move_decimal_4_to_the_left.divmod 10000
+  minutes = minutes_and_seconds[1].to_i
+  minutes_calculation = minutes * 60 * 0.0001
+  minutes_integer = minutes_calculation.to_i
+
+
+
+
+
+def dms(num)
+  degrees = num.to_i
+
+  move_decimal_4_to_the_left = num / 0.0001)
+  minutes_and_seconds = move_decimal_4_to_the_left.divmod 10000
+  minutes = minutes_and_seconds[1].to_i
+  minutes_calculation = minutes * 60 * 0.0001
+  minutes_integer = minutes_calculation.to_i
+  seconds = minutes_calculation.divmod 1
+  seconds_2_digits = seconds[1] / 0.01
+  seconds_integer = seconds_2_digits.to_i
+  seconds_integer_calculation = seconds_integer * 60 / 100
+  formatted_min = format('%02d', minutes_integer)
+  formatted_sec = format('%02d', seconds_integer_calculation)
+  %(#{degrees}#{DEGREE}#{formatted_min}'#{formatted_sec}")
+end
+
+
+
+
+
+
+ minutes = ((num / 0.0001).divmod 10000)[1].to_i
+
+  
+ minutes_integer = minutes * 60 * 0.0001(.to_i)
+
+
+minutes = (num / 0.0001).divmod 10000([1].to_i)* 60 * 0.0001(.to_i)
+
+
+minutes = (num / 0.0001).divmod 10000[1].to_i * 60 * 0.0001(.to_i)
+
+
+
+minutes = ((num / 0.0001).divmod 10000)[1].to_i * 60 * 0.0001(.to_i)
+
+
+minutes = (((num / 0.0001).divmod 10000)[1].to_i * 60 * 0.0001).to_i
+
+
+
+
+seconds = minutes_calculation.divmod 1
+  seconds_2_digits = seconds[1] / 0.01
+  seconds_integer = seconds_2_digits.to_i
+  seconds_integer_calculation = seconds_integer * 60 / 100
+
+
+
+minutes = (((num / 0.0001).divmod 10000)[1].to_i * 60 * 0.0001
+
+
+
+seconds = minutes_calculation.divmod 1         => [43, 0.8000000000000043] ** ** ** 
+
+seconds_2_digits = seconds[1] / 0.01           => 80.00000000000043   ** ** ** 
+
+seconds_integer = seconds_2_digits.to_i        => 80  ** ** ** 
+
+
+seconds_integer_calculation = seconds_integer * 60 / 100  => 48 ** ** ** 
+=> 48
+
+
+seconds = (((num / 0.0001).divmod 10000)[1].to_i * 60 * 0.0001).divmod 1[1] / 0.01.to_i * 60 /100
+
+
+seconds_2_digits = seconds[1] / 0.01
+  seconds_integer = seconds_2_digits.to_i
+  seconds_integer_calculation = seconds_integer * 60 / 100
+
+
+
+seconds = ((((num / 0.0001).divmod 10000)[1].to_i * 60 * 0.0001).divmod 1)[1] / 0.01.to_i * 60 /100
+
+((43.800000000000004.divmod 1)[1] / 0.01).to_i * 60 /100
+
+
+
+
+seconds = (((((num / 0.0001).divmod 10000)[1].to_i * 60 * 0.0001).divmod 1)[1] / 0.01).to_i * 60 /100
+
+
+
+
+
+
+def dms(num)
+  degrees = num.to_i
+  minutes = (((num / 0.0001).divmod 10000)[1].to_i * 60 * 0.0001).to_i
+  seconds = (((((num / 0.0001).divmod 10000)[1].to_i * 60 * 0.0001).divmod 1)[1] / 0.01).to_i * 60 /100
+  formatted_min = format('%02d', minutes)
+  formatted_sec = format('%02d', seconds)
+  %(#{degrees}#{DEGREE}#{formatted_min}'#{formatted_sec}")
+end
+
+
+*************************************************JMX
+
+
+def dms(num)
+  degrees = num.to_i
+  move_decimal_4_to_the_left = num / 0.0001
+  minutes_and_seconds = move_decimal_4_to_the_left.divmod 10000
+  minutes = minutes_and_seconds[1].to_i
+  minutes_calculation = minutes * 60 * 0.0001
+  minutes_integer = minutes_calculation.to_i
+  seconds = minutes_calculation.divmod 1
+  seconds_2_digits = seconds[1] / 0.01
+  seconds_integer = seconds_2_digits.to_i
+  seconds_integer_calculation = seconds_integer * 60 / 100
+  formatted_min = format('%02d', minutes_integer)
+  formatted_sec = format('%02d', seconds_integer_calculation)
+  %(#{degrees}#{DEGREE}#{formatted_min}'#{formatted_sec}")
+end
+
+
+then
+
+
+def dms(num)
+  degrees = num.to_i
+  minutes = (((num / 0.0001).divmod 10000)[1].to_i * 60 * 0.0001).to_i
+  seconds = (((((num / 0.0001).divmod 10000)[1].to_i * 60 * 0.0001).divmod 1)[1] / 0.01).to_i * 60 /100
+  formatted_min = format('%02d', minutes)
+  formatted_sec = format('%02d', seconds)
+  %(#{degrees}#{DEGREE}#{formatted_min}'#{formatted_sec}")
+end
+
+
+*************************************************JMX
+
+
+DEGREE = "\xC2\xB0"
+MINUTES_PER_DEGREE = 60
+SECONDS_PER_MINUTE = 60
+SECONDS_PER_DEGREE = MINUTES_PER_DEGREE * SECONDS_PER_MINUTE
+
+def dms(degrees_float)
+  total_seconds = (degrees_float * SECONDS_PER_DEGREE).round
+  degrees, remaining_seconds = total_seconds.divmod(SECONDS_PER_DEGREE)
+  minutes, seconds = remaining_seconds.divmod(SECONDS_PER_MINUTE)
+  format(%(#{degrees}#{DEGREE}%02d'%02d"), minutes, seconds)
+end
+
+
+
+formatted_min = format('%02d', minutes)
+  formatted_sec = format('%02d', seconds)
+
+
+format(%( #{degrees} #{DEGREE} %02d' %02d"), minutes, seconds)
+
+
+
+format(% minutes, seconds)
+
+
+
+
+(#{degrees}#{DEGREE}%02d'%02d")
+
+format(%( #{degrees} #{DEGREE} %02d' %02d"), minutes, minutes)
+
+
+
+
+
+
+
+first_number = 10
+=> 10
+first_number, remainder = 55.divmod(5)
+=> [11, 0]
+first_number
+=> 11
+remainder
+=> 0
+
+
+
+first_number = 11
+=> 11
+first_number, remainder = 55.divmod(first_number)
+=> [5, 0]
+first_number
+=> 5
+
+
+
+first_divmod_paramater, second_divmod_parameter = 100.divmod(any number or variable == a number)
+
+.divmod returns an array with the 
+first element being how many time the .divmod evenly divided by
+second element is the remainder
+
+the first parameter of .divmod is assigned to first element in the divmod return value array
+
+
+the second parameter of .divmod is assigned to first element in the divmod return value array
+
+
+number = 10
+
+
+
+
+
+
+
+assign_variable_to_element_zero, assign_variable_to_element_one = 101.divmod(10) 
+=> [10, 1]
+
+
+assign_variable_to_element_zero
+
+
+assign_variable_to_element_one
+
+div_mod_array = (assign_variable_to_element_zero, assign_variable_to_element_one = 101.divmod(10))
+
+div_mod_array
+
+
+
+div_mod_return_value_array = (assign_variable_to_element_zero, assign_variable_to_element_one = 101.divmod(10))
+
+=> [10, 1]
+div_mod_return_value_array
+=> [10, 1]
+assign_variable_to_element_zero
+=> 10
+assign_variable_to_element_one
+=> 1
+
+
+
+
+
+
+# Explain
+assign_variable_to_element_zero, assign_variable_to_element_one = 101.divmod(10) 
+=> [10, 1]
+assign_variable_to_element_zero
+=> 10
+assign_variable_to_element_one
+=> 1
+div_mod_array = (assign_variable_to_element_zero, assign_variable_to_element_one = 101.divmod(10))
+=> [10, 1]
+div_mod_array
+=> [10, 1]
+
+
+
+
+x = 16 dividend, cookies 
+y = 3 divisor, people
+
+   16    %   3
+dividend % divisor = 5 with a remainder of 1
+
+# What is the value of cookies_per_person?
+cookies_per_person, remaining_cookies = x.divmod(y)
+=> [5, 1]
+
+cookies_per_person
+=> 5
+remaining_cookies
+=> 1
+ 
 
 
 
