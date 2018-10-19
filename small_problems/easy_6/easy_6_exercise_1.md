@@ -682,6 +682,8 @@ seconds_integer_calculation = seconds_integer * 60 / 100
 
 num = 76.73
 
+DEGREE = "\xC2\xB0"
+
 degrees = num.to_i 
 
 
@@ -712,6 +714,10 @@ seconds_integer = seconds_2_digits.to_i
 seconds_integer_calculation = seconds_integer * 60 / 100 
 # => 48
 
+p dms = %(#{degrees}#{DEGREE}#{minutes_integer}'#{seconds_integer_calculation}")
+
+
+
 puts degrees
 puts minutes_integer
 puts seconds_integer_calculation
@@ -725,9 +731,121 @@ puts seconds_integer_calculation
 
 
 
+def dms(num)
+
+degrees = num.to_i 
+
+
+num_as_float = num.to_f 
 
 
 
+move_decimal_4_to_the_left = num / 0.0001 
+
+minutes_and_seconds = move_decimal_4_to_the_left.divmod 10000  
+
+minutes = minutes_and_seconds[1].to_i 
+
+minutes_calculation = minutes * 60 * 0.0001 
+
+minutes_integer  = minutes_calculation.to_i 
+# => 43
+
+
+
+seconds = minutes_calculation.divmod 1 
+
+seconds_2_digits = seconds[1] / 0.01 
+
+seconds_integer = seconds_2_digits.to_i  
+
+
+seconds_integer_calculation = seconds_integer * 60 / 100 
+# => 48
+
+ degree_minutes_seconds = %(#{degrees}#{DEGREE}#{minutes_integer}'#{seconds_integer_calculation}")
+end
+
+
+
+
+
+
+
+
+
+=begin
+%(76°43'48")
+
+DEGREE = "\xC2\xB0"
+
+
+%(#{degrees}#{DEGREE}#{minutes_integer}'#{seconds_integer_calculation}")
+
+DEGREE = "\xC2\xB0"
+=> "°"
+%(#{degrees}DEGREE#{minutes_integer}'#{seconds_integer_calculation}")
+=> "76DEGREE43'48\""
+%(#{degrees}#{DEGREE}#{minutes_integer}'#{seconds_integer_calculation}")
+=> "76°43'48\""
+
+degree_minutes_secondsms = %(#{degrees}#{DEGREE}#{minutes_integer}'#{seconds_integer_calculation}")
+=> "76°43'48\""
+puts dms
+76°43'48"
+=> nil
+ =end
+
+ =end
+=end
+** ** *
+def dms(num)
+  degrees = num.to_i 
+  num_as_float = num.to_f 
+  move_decimal_4_to_the_left = num / 0.0001 
+  minutes_and_seconds = move_decimal_4_to_the_left.divmod 10000  
+  minutes = minutes_and_seconds[1].to_i 
+  minutes_calculation = minutes * 60 * 0.0001 
+  minutes_integer  = minutes_calculation.to_i 
+  seconds = minutes_calculation.divmod 1 
+  seconds_2_digits = seconds[1] / 0.01 
+  seconds_integer = seconds_2_digits.to_i  
+  seconds_integer_calculation = seconds_integer * 60 / 100 
+  out %(#{degrees}#{DEGREE}#{minutes_integer}'#{seconds_integer_calculation}")
+end
+
+
+****
+
+
+
+
+def dms(num)
+  degrees = num.to_i 
+  num_as_float = num.to_f 
+  move_decimal_4_to_the_left = num / 0.0001 
+  minutes_and_seconds = move_decimal_4_to_the_left.divmod 10000  
+  minutes = minutes_and_seconds[1].to_i 
+  minutes_calculation = minutes * 60 * 0.0001 
+  minutes_integer  = minutes_calculation.to_i 
+  seconds = minutes_calculation.divmod 1 
+  seconds_2_digits = seconds[1] / 0.01 
+  seconds_integer = seconds_2_digits.to_i  
+  seconds_integer_calculation = seconds_integer * 60 / 100
+  formatted_min =  "%02d" % minutes_integer
+  formatted_sec =  "%02d" % seconds_integer_calculation
+
+  out = %(#{degrees}#{DEGREE}#{formatted_min}'#{formatted_sec}")
+end
+
+
+
+
+
+minutes_integer = 3
+=> 3
+"%02d" % minutes_integer
+=> "03"
 
 
 
