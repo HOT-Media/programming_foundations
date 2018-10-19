@@ -9,6 +9,37 @@ Enter a verb: walk
 Enter an adjective: blue
 Enter an adverb: quickly
 
-Do you walk your blue dog quickly? That's hilarious!
+Do you walk your blue dog quickly? Thats hilarious!
+
+
+
+
+
+Enter a noun: dog
+noun = gets.chomp
+
+Enter a verb: walk
+Enter an adjective: blue
+Enter an adverb: quickly
+
+puts "Do you #{verb} your #{adjective} #{noun} #{adverb}? Thats hilarious!"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

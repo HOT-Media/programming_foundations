@@ -1,32 +1,43 @@
-Write a method that takes an Array of numbers and then returns the sum of the sums of each leading subsequence for that Array. You may assume that the Array always contains at least one number.
+Write a method that takes a non-empty string argument, and returns the middle character or characters of the argument. If the argument has an odd length, you should return exactly one character. If the argument has an even length, you should return exactly two characters.
 
 Examples:
 ```ruby
-
-sum_of_sums([3, 5, 2]) == (3) + (3 + 5) + (3 + 5 + 2) # -> (21)
-sum_of_sums([1, 5, 7, 3]) == (1) + (1 + 5) + (1 + 5 + 7) + (1 + 5 + 7 + 3) # -> (36)
-sum_of_sums([4]) == 4
-sum_of_sums([1, 2, 3, 4, 5]) == 35
-
-
-[3, 5, 2]) == (3) + (3 + 5) + (3 + 5 + 2)
-
-put the first index into an Array
-put that array into another array
-put the first 2 indexes into an array then put into other array
-put all 3 indexes into an arry then into other array then flatten then sum
+center_of('I love ruby') == 'e'
+center_of('Launch School') == ' '
+center_of('Launch') == 'un'
+center_of('Launchschool') == 'hs'
+center_of('x') == 'x'
 
 
-[[3], [3, 5],[3, 5, 2]]
+arr = str.partition(str.length)
 
 
-[[3], [3, 5],[3, 5, 2]].flatten
-=> [3, 3, 5, 3, 5, 2]
-[[3], [3, 5],[3, 5, 2]].flatten.sum
-=> 21
-
-arr.each with object ( |idx| collection_arr, idx)
-
-collection arr << idx  
+str = "my happy pooch"
+=> "my happy pooch"
+a.clear
+=> []
+a << str.slice!(str.length / 2..-1)
+=> ["y pooch"]
+a
+=> ["y pooch"]
+b = []
+=> []
+b << str
+=> ["my happ"]
+a
+=> ["y pooch"]
+b
+=> ["my happ"]
+a.lenth == b.length
+NoMethodError: undefined method `lenth' for ["y pooch"]:Array
+Did you mean?  length
+from (pry):857:in `__pry__'
+a.length == b.length
+=> true
+center_character_string = a[0.first] + b[0.last]
+NoMethodError: undefined method `first' for 0:Integer
+from (pry):859:in `__pry__'
+center_character_string = a[0][0] + b[0][-1]
+=> "yp"
 
 

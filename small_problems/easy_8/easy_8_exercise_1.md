@@ -39,3 +39,12 @@ result = []
   end
 result
 
+
+0 
+0 and 1
+0 and 1 and 2
+
+
+
+
+
