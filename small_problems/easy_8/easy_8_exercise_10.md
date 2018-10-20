@@ -9,7 +9,115 @@ center_of('Launchschool') == 'hs'
 center_of('x') == 'x'
 
 
+
+
+
+is the string longer than 1 character
+
+  str.length <= 1
+    str
+
+  str.length.odd? true
+    str[(str.length / 2).ceil]
+
+
+if the string is even, 
+ str[(str.length / 2)-1..(str.length / 2)]
+
+
+
+
+
+
+
+
+
+
+
 arr = str.partition(str.length)
+
+
+
+string.slice!(3..6)     #=> " is "
+
+
+123 456
+
+/2 = 3
+
+1234 5678 / 2  4
+
+str[(str.length / 2)-1..(str.length / 2)]
+
+
+
+
+is the string longer than 1 character
+
+str = "jere"
+
+  if str.length <= 1
+    str
+  elsif str.length.odd?
+    str[(str.length / 2).ceil]
+  else 
+    str[(str.length / 2)-1..(str.length / 2)]
+  end
+
+
+
+*************************************************JMX
+
+def center_of(str)
+
+  if str.length <= 1
+    str
+  elsif str.length.odd?
+    str[(str.length / 2).ceil]
+  else
+    str[(str.length / 2)-1..(str.length / 2)]
+  end
+end
+
+p center_of('I love ruby') == 'e'
+p center_of('Launch School') == ' '
+p center_of('Launch') == 'un'
+p center_of('Launchschool') == 'hs'
+p center_of('x') == 'x'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 str = "my happy pooch"

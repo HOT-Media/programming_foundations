@@ -12,5 +12,26 @@ repeater('') == ''
 
 str.chars.map{ |idx| idx + idx}.join
 
-str.chars.map{ |idx| idx + idx}.join
-=> "mmyy  hhaappppyy  ppoooocchh"
+
+*************************************************JMX
+def repeater(str)
+  str.chars.map{ |idx| idx + idx}.join
+end
+
+
+p repeater('Hello') == "HHeelllloo"
+p repeater("Good job!") == "GGoooodd  jjoobb!!"
+p repeater('') == ''
+
+
+
+*************************************************LS
+
+def repeater(string)
+  result = ''
+  string.each_char do |char|
+    result << char << char
+  end
+  result
+end
+

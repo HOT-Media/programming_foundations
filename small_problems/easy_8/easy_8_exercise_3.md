@@ -23,3 +23,39 @@ str.split.each_with_index |element, index|
 0..2
 
 
+def substrings_at_start(arr)
+  substrings = []
+
+  arr.length.times {|idx| substrings << arr[0 .. idx] }
+
+  substrings 
+end
+
+substrings_at_start('abc') == ['a', 'ab', 'abc']
+=> true
+substrings_at_start('a') == ['a']
+=> true
+substrings_at_start('xyzzy') == ['x', 'xy', 'xyz', 'xyzz', 'xyzzy']
+=> true
+
+
+
+
+*************************************************JMX
+
+def substrings_at_start(str)
+  substrings = []
+  str.length.times {|idx| substrings << str[0 .. idx] }
+  substrings 
+end
+
+p substrings_at_start('abc') == ['a', 'ab', 'abc']
+p substrings_at_start('a') == ['a']
+p substrings_at_start('xyzzy') == ['x', 'xy', 'xyz', 'xyzz', 'xyzzy']
+
+
+
+
+
+
+

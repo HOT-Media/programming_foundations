@@ -129,12 +129,13 @@ end
  "Fizz"]
 
 
-** ** *
+*************************************************JMX
 
 def fizzbuzz(starting_num, ending_num)
   integer_arr = Array(starting_num..ending_num)
 
   int_fzz_bzz = integer_arr.map do |idx|
+
     if idx % 3 == 0 && idx % 5 == 0
       "Fizz Buzz"
     elsif idx % 5 == 0
@@ -142,31 +143,75 @@ def fizzbuzz(starting_num, ending_num)
     elsif idx % 3 == 0
       "Fizz"
     else
-    idx
+      idx
     end
+
+  end
+  int_fzz_bzz.join(" ,")
+end
+
+fizzbuzz(1, 15) 
+
+# -> 1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz
+
+*************************************************LS
+
+
+def fizzbuzz(starting_number, ending_number)
+  result = []
+  starting_number.upto(ending_number) do |number|
+    result << fizzbuzz_value(number)
+  end
+  puts result.join(', ')
+end
+
+def fizzbuzz_value(number)
+  case
+  when number % 3 == 0 && number % 5 == 0
+    'FizzBuzz'
+  when number % 5 == 0
+    'Buzz'
+  when number % 3 == 0
+    'Fizz'
+  else
+    number
   end
 end
 
 
-[1,
- 2,
- "Fizz",
- 4,
- "Buzz",
- "Fizz",
- 7,
- 8,
- "Fizz",
- "Buzz",
- 11,
- "Fizz",
- 13,
- 14,
- "Fizz Buzz"]
 
-str = ""
-words.reverse_each { |word| str += "#{word} " }
-p str #=> "sixth fifth fourth third second first "
+number = 3
+case
+  when number % 3 == 0 && number % 5 == 0
+    'FizzBuzz'
+  when number % 5 == 0
+    'Buzz'
+  when number % 3 == 0
+    'Fizz'
+  else
+    number
+  end
+
+
+
+
+
+case number
+  when  % 4 == 0 &&  % 5 == 0
+    'FizzBuzz'
+  when  % 5 == 0
+    'Buzz'
+  when  % 3 == 0
+    'Fizz'
+  else
+    number
+  end
+
+
+
+
+
+
 
 
 

@@ -68,18 +68,111 @@ doubled_cons_arr.join
 => "mmyy  hhappppyy  ppoooocchh"
 
 
+\S
+
+def contains_vowel(str)
+  str =~ /[aeiou]/
+end
+contains_vowel("tes t") # returns 1
+contains_vowel("sky")  # returns nil
+
+char =~ /\s/ 
+=> 0
 
 
 
 
 
+char =~ /[a-z]/ : This checks if the character is a lowercase letter between a and z. char =~ /[A-Z]/ : This checks if the character is an uppercase letter between A and Z. char =~ /[^A-Za-z]/ : This checks if the character is neither an uppercase letter nor a lowercase letter.
 
 
 
 
 
+char =~ /[a-z]/
+char =~ /[A-Z]/
+char =~ /[^A-Za-z]/
 
 
+
+
+
+char =~ /[A-Za-z]/  letters only 
+
+
+
+
+double it if its a letter unless its a vowel
+str + str
+
+
+
+if str =~ /[aeiou]/ || str =~ /^[A-Za-z]/
+  str
+else
+
+
+
+if  =~ /[A-Za-z]/ 
+str + str
+
+
+
+
+doubled_cons_arr = str.chars.map do |idx|
+
+  if idx  =~ /[^A-Za-z]/
+    idx
+  elsif idx =~ /[aeiou]/ 
+    idx
+  else
+    idx + idx 
+  end
+end
+
+doubled_cons_arr.join
+
+
+=> ["M", "y", "  ", "P", "o", "o", "c", "h", "  ", "11"]
+doubled_cons_arr.join
+=> "My  Pooch  11"
+
+
+
+3 if not_letter =~ /[^A-Za-z]/
+=> 3
+
+
+
+double_consonants('String') == "SSttrrinngg"
+double_consonants("Hello-World!") == "HHellllo-WWorrlldd!"
+double_consonants("July 4th") == "JJullyy 4tthh"
+double_consonants('') == ""
+
+
+
+*************************************************JMX
+def double_consonants(str)
+  doubled_cons_arr = str.chars.map do |idx|
+
+    if idx  =~ /[^A-Za-z]/
+      idx
+    elsif idx =~ /[aeiou]/ 
+      idx
+    else
+      idx + idx 
+    end
+  end
+  doubled_cons_arr.join
+end
+
+p double_consonants('String') == "SSttrrinngg"
+
+p double_consonants("Hello-World!") == "HHellllo-WWorrlldd!"
+
+p double_consonants("July 4th") == "JJullyy 4tthh"
+
+p double_consonants('') == ""
 
 
 
