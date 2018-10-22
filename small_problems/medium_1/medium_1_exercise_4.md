@@ -1,4 +1,14 @@
-You have a bank of switches before you, numbered from 1 to n. Each switch is connected to exactly one light that is initially off. You walk down the row of switches and toggle every one of them. You go back to the beginning, and on this second pass, you toggle switches 2, 4, 6, and so on. On the third pass, you go back again to the beginning and toggle switches 3, 6, 9, and so on. You repeat this process and keep going until you have been through n repetitions.
+You have a bank of switches before you, numbered from 1 to n. 
+
+Each switch is connected to exactly one light that is initially off. 
+
+You walk down the row of switches and toggle every one of them. 
+
+You go back to the beginning, and on this second pass, you toggle switches 2, 4, 6,...
+
+On the third pass, you go back again to the beginning and toggle switches 3, 6, 9,..
+
+You repeat this process and keep going until you have been through n repetitions.
 
 Write a method that takes one argument, the total number of switches, and returns an Array that identifies which lights are on after n repetitions.
 
@@ -232,10 +242,24 @@ light4
 
 
 
+light_state 
+{light1: 1, light2: 1, light3: 1, light4: 1, light5: 1,}
 
+turn on and off lights on 5 walks
 
+light_state key value to light number left on
 
+final_walk_lights_on = []
 
+light_state.each do |key,value|
+ final_walk_lights_on << key if value == 1 on
+end
+
+final_walk_lights_on
+=> [:light2, :light3, :light4]
+
+final_walk_lights_on.map {|idx| idx.to_s}
+=> ["light2", "light3", "light4"]
 
 
 

@@ -237,9 +237,8 @@ arr_to_method = arr.pop(rotate_last_digits_of_arr 5) => ["3", "5", "2", "9", "1"
 num = 735291
 arr = num.to_s.split(//)
 arr = ["7", "3", "5", "2", "9", "1"]
+digits_to_rotate = (arr.length) -1
 
-first rotation, rotations = 4
-                digits_to_rotate = 5
 loop do 
 arr_to_def = arr.pop(digits_to_rotate) #  5  => ["3", "5", "2", "9", "1"]
 #arr is ["7"]
@@ -255,8 +254,182 @@ arr_to_def = arr.pop(digits_to_rotate) #  5  => ["3", "5", "2", "9", "1"]
   break if digits_to_rotate == 1 
 end
 
+def rotate_array(arr)
+ rotated = []
+ rotated << arr[1..-1] << arr[0]
+ rotated.flatten
+end
+
+735291
+arr = num.to_s.split(//)
+=> ["7", "3", "5", "2", "9", "1"]
+digits_to_rotate = (arr.length) -1
+=> 5
+arr_to_def = arr.pop(digits_to_rotate)
+=> ["3", "5", "2", "9", "1"]
+arr << rotate_array(arr_to_def)
+=> ["7", ["5", "2", "9", "1", "3"]]
+digits_to_rotate -1
+=> 4
+arr.flatten
+=> ["7", "5", "2", "9", "1", "3"]
+
+735291 rotate 6 elements
+352917 
+
+3 52917 rotate 5 elements 52917
+ 3              29175
+
+ 32 9175
+ 32 1759
+
+ 321 759
+ 321 597
+
+ 3215 97
+ 3215 79
 
 
+ 321579
+
+735291
+
+
+
+35291
+arr = num.to_s.split(//)
+=> ["7", "3", "5", "2", "9", "1"]
+digits_to_rotate = (arr.length) # 6
+# => 5
+arr_to_def = arr.pop(digits_to_rotate)
+# => ["7", "3", "5", "2", "9", "1"]
+arr << rotate_array(arr_to_def)
+
+digits_to_rotate -1 # 5
+
+arr.flatten
+=> ["7", "5", "2", "9", "1", "3"]
+
+735291 rotate 6 elements
+352917 
+
+3 52917 rotate 5 elements 52917
+ 3              29175
+
+ 32 9175    32 9175
+ 32 1759
+
+ 321 759
+ 321 597
+
+ 3215 97
+ 3215 79
+
+
+ 321579
+
+735291
+
+num = 735291
+=> 735291
+
+arr = num.to_s.split(//)
+=> ["7", "3", "5", "2", "9", "1"]
+digits_to_rotate = (arr.length)
+=> 6
+arr_to_def = arr.pop(digits_to_rotate)
+=> ["7", "3", "5", "2", "9", "1"]
+arr << rotate_array(arr_to_def)
+=> [["3", "5", "2", "9", "1", "7"]]
+digits_to_rotate -1
+=> 5
+arr.flatten
+=> ["3", "5", "2", "9", "1", "7"]
+arr_to_def = arr.pop(digits_to_rotate)
+=> [["3", "5", "2", "9", "1", "7"]]
+arr_to_def
+=> [["3", "5", "2", "9", "1", "7"]]
+arr
+=> []
+arr = ["3", "5", "2", "9", "1", "7"]
+=> ["3", "5", "2", "9", "1", "7"]
+digits_to_rotate
+=> 6
+digits_to_rotate -= 1
+=> 5
+digits_to_rotate
+=> 5
+arr_to_def = arr.pop(digits_to_rotate)
+=> ["5", "2", "9", "1", "7"]
+arr << rotate_array(arr_to_def)
+=> ["3", ["2", "9", "1", "7", "5"]]
+arr.flatten
+=> ["3", "2", "9", "1", "7", "5"]
+arr.flatten.join.to_i
+=> 329175
+
+
+
+
+35291
+arr = num.to_s.split(//)
+=> ["7", "3", "5", "2", "9", "1"]
+digits_to_rotate = (arr.length) # 6
+# => 5
+arr_to_def = arr.pop(digits_to_rotate)
+# => ["7", "3", "5", "2", "9", "1"]
+arr << rotate_array(arr_to_def)
+
+digits_to_rotate -1 # 5
+
+arr.flatten
+=> ["7", "5", "2", "9", "1", "3"]
+
+
+
+def max_rotation(int)
+num = 735291
+arr = num.to_s.split(//)
+digits_to_rotate = (arr.length)
+
+  loop do
+    arr_to_def = arr.pop(digits_to_rotate)
+    arr << rotate_array(arr_to_def)
+    arr.flatten!
+    digits_to_rotate -= 1
+    break if digits_to_rotate == 1
+  end
+
+  arr.flatten.join.to_i
+
+end
+
+["7", "3", "5", "2", "9", "1"].pop 6 off append 6 in <<
+arr_to_def = arr.pop(digits_to_rotate)
+["7", "3", "5", "2", "9", "1"]
+  arr << rotate_array(arr_to_def)
+
+
+rotate_array(arr_to_def)
+=> ["3", "5", "2", "9", "1", "7"]
+
+** ** *
+
+def max_rotation(num)
+  # num = 735291
+  arr = num.to_s.split(//)
+  return num if arr.length == 1
+  digits_to_rotate = (arr.length)
+
+  loop do
+    arr_to_def = arr.pop(digits_to_rotate)
+    arr << rotate_array(arr_to_def)
+    arr.flatten!
+    digits_to_rotate -= 1
+    break if digits_to_rotate == 1
+  end
+  arr.flatten.join.to_i
+end
 
 
 def rotate_array(arr)
@@ -266,6 +439,36 @@ def rotate_array(arr)
 end
 
 
+
+*************************************************JMX
+
+
+def max_rotation(num)
+  arr = num.to_s.split(//)
+  return num if arr.length == 1
+  digits_to_rotate = (arr.length)
+
+  loop do
+    arr_to_def = arr.pop(digits_to_rotate)
+    arr << rotate_array(arr_to_def)
+    arr.flatten!
+    digits_to_rotate -= 1
+    break if digits_to_rotate == 1
+  end
+  arr.flatten.join.to_i
+end
+
+def rotate_array(arr)
+ rotated = []
+ rotated << arr[1..-1] << arr[0]
+ rotated.flatten
+end
+
+p max_rotation(735291) == 321579
+p max_rotation(3) == 3
+p max_rotation(35) == 53
+p max_rotation(105) == 15 # the leading zero gets dropped
+p max_rotation(8_703_529_146) == 7_321_609_845
 
 
 
