@@ -17,10 +17,19 @@ def sequence(num)
 end
 
 
+p sequence(5) == [1, 2, 3, 4, 5]
+p sequence(3) == [1, 2, 3]
+p sequence(1) == [1]
 
-p negative(5) == -5
-p negative(-3) == -3
-p negative(0) == 0 
+
+*************************************************LS 
+
+def sequence(number)
+  (1..number).to_a
+end
+
+
+
 
 
 

@@ -34,10 +34,27 @@ join the name into one name with spaces and no commas
 
 => "Jeremy R Mariani! It is awesome to have a Senior Software engineer around"
 
+puts <<~HELLOSTR
+"Hello, #{arr_str.join(" ")}!It is awesome to have a
+#{hsh_details.fetch(:title)}
+#{hsh_details.fetch(:occupation)}
+around.
+ 
+  HELLOSTR
+%W[
+  It's a nice day 
+  for a walk!
+].join(' ')
 
 
+def greetings(arr_str, hsh_details)
+  puts  <<~HELLOSTR
+  "Hello, #{arr_str.join(" ")}! It is awesome 
+  to have a #{hsh_details.fetch(:title)} #{hsh_details.fetch(:occupation)} around."
+  HELLOSTR
+end
 
-*************************************************JMX
+
 
 def greetings(arr_str, hsh_details)
   "Hello, #{arr_str.join(" ")}! It is awesome to have a #{hsh_details.fetch(:title)} #{hsh_details.fetch(:occupation)} around."
@@ -48,7 +65,21 @@ greetings(['Jeremy', 'R', 'Mariani'], { title: 'Senior', occupation: 'Software e
 
 
 
+*************************************************JMX
 
+def greetings(arr_str, hsh_details)
+  puts  <<~HELLOSTR
+  "Hello, #{arr_str.join(' ')}! It is awesome 
+  to have a #{hsh_details.fetch(:title)} #{hsh_details.fetch(:occupation)} around."
+  HELLOSTR
+end
+
+greetings([
+            'Jeremy', 'R', 'Mariani'
+          ],
+          {
+            title: 'Senior', occupation: 'Software engineer'
+          })
 
 
 

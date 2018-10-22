@@ -47,11 +47,10 @@ end
 *************************************************JMX
 
 def word_lengths(str)
-  (str.split (" ")).map do |idx|
-  idx + " #{idx.length}"
+  str.split(" ").map do |idx|
+    idx + " #{idx.length}"
   end
 end
-
 
 p word_lengths("cow sheep chicken") == ["cow 3", "sheep 5", "chicken 7"]
 
@@ -64,7 +63,6 @@ p word_lengths("Supercalifragilisticexpialidocious") ==
   ["Supercalifragilisticexpialidocious 34"]
 
 p word_lengths("") == []
-
 
 
 

@@ -131,7 +131,11 @@ p sequence(0, 1000000) == []
 
 
 
+*************************************************LS 
 
+def sequence(count, first)
+  (1..count).map { |idx| idx * first }
+end
 
 
 

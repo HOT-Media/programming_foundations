@@ -196,9 +196,19 @@ end
 buy_fruit([["apples", 3], ["orange", 1], ["bananas", 2]]) ==
   ["apples", "apples", "apples", "orange", "bananas","bananas"]
 
+*************************************************LS 
 
+def buy_fruit(list)
+  list.map { |fruit, quantity| [fruit] * quantity }.flatten
+end
 
+We have two values in each of the inner arrays. The first is the type of fruit. The second is the quantity we need. The first thing to realize is that we can partially achieve what we want by multiplying the first half by the second:
 
+fruit * quantity => "applesapplesapples"
+We need this in separate arrays though:
+
+[fruit] * quantity => ["apples", "apples", "apples"]
+If we use Array map to apply this to each element in the array, all we need is Array flatten to reduce it down to a single large array.
 
 
 

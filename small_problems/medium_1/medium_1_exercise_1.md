@@ -15,14 +15,39 @@ x == [1, 2, 3, 4]                 # => true
 
 
 
-arrary = [7, 3, 5, 2, 9, 1]
+arr = [7, 3, 5, 2, 9, 1]
 
 array.each do |idx|
   idx + 1
 
 
-*************************************************
+
+def rotate_array(arr)
  rotated = []
  rotated << arr[1..-1] << arr[0]
  rotated.flatten
- 
+end
+
+rotate_array([7, 3, 5, 2, 9, 1]) == [3, 5, 2, 9, 1, 7]
+rotate_array(['a', 'b', 'c']) == ['b', 'c', 'a']
+rotate_array(['a']) == ['a']
+
+
+*************************************************
+
+
+def rotate_array(arr)
+ rotated = []
+ rotated << arr[1..-1] << arr[0]
+ rotated.flatten
+end
+
+p rotate_array([7, 3, 5, 2, 9, 1]) == [3, 5, 2, 9, 1, 7]
+p rotate_array(['a', 'b', 'c']) == ['b', 'c', 'a']
+p rotate_array(['a']) == ['a']
+
+
+
+
+
+
