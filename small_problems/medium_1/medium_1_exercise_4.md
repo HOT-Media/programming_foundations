@@ -1416,12 +1416,93 @@ end
 
 lights 
 
+
+walk = 5
+multiple = walk # 3
+loop do
+  if lights[multiple] == 1 # lights[3,6,9]
+    lights[multiple] = 0  
+  else  
+    lights[multiple] = 1  
+  end
+    # multiple 3 6 9
+  multiple += walk 
+  break if multiple >= num
+end
+
+lights 
+
+
+def right(num)
 num = 10
 lights = Array.new(num, 1)
 lights.unshift("light number sync")
 
+
+
 walk = 2
 multiple = walk
+loop do
+  if lights[multiple] == 1
+    lights[multiple] = 0  
+  else  
+    lights[multiple] = 1  
+  end
+  break if multiple == num # 2,4,6.8.10
+  multiple += walk
+  break if multiple > num 
+end
+
+lights
+=> ["light number sync", 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+
+
+
+walk = 3
+multiple = walk
+loop do
+  if lights[multiple] == 1
+    lights[multiple] = 0  
+  else  
+    lights[multiple] = 1  
+  end
+  break if multiple == num # 2,4,6.8.10
+  multiple += walk
+  break if multiple > num 
+end
+
+lights
+=> ["light number sync", 1, 0, 0, 0, 1, 1, 1, 0, 0, 0]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+num = 3
+lights = Array.new(num, 1)
+lights.unshift("light number sync")
+
+walk = 2
+multiple = 2
 
 loop do
 
