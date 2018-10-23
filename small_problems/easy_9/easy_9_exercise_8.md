@@ -138,8 +138,14 @@ def sequence(count, first)
 end
 
 
+# What is the return value, or does the range (1..elements) raise an exception
+# because it's not an Array or Hash
+elements = 5
 
+first_number = 1
 
+(1..elements).map { |idx| idx * first_number }
+=> [1, 2, 3, 4, 5]
 
 
 

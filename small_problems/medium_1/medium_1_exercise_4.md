@@ -860,6 +860,14 @@ light_number_and_state = lights_to_hash.to_h
 
 
 
+5 walks
+5 toggles
+12345
+24
+135
+24
+135
+
 
 togle lights
 rules at the top
@@ -878,6 +886,570 @@ end
 
 output_array
 => [1, 3, 5]
+
+
+array of integers output
+array of integers ouptut 
+the output is an array of integers
+the ouptut is an array of integers
+the output is an array of integers
+the output is an array of integers
+the output is an array of integers
+
+
+
+
+populate an array with the lights on with (n) 1
+
+lights = Array.new(num, 1)
+
+lights
+=> [1, 1, 1, 1, 1]
+
+ON = ().abs
+OFF= -light_number
+
+
+
+
+
+
+When I toggle the light, it will be in one of 2 states
+on or off
+
+when I toggle it
+  if it is on, greater than 0, ? OFF : ON   => OFF 
+
+
+lights[1] > 0 ? OFF : ON
+
+
+
+
+
+populate the array with the lights on
+lights = Array.new(num, 1)
+=> [1, 1, 1, 1, 1]
+
+lights.unshift("light number sync")
+=> ["light number sync", 1, 1, 1, 1, 1]
+
+
+["light number sync", 1, 0, 1, 0, 1]
+
+
+lights[1] > 0 ? OFF : ON
+
+
+even walk, multiple of 2
+odd walk multiple of 3
+
+
+
+even walk, 2,4
+  use the multiple of 2 .each
+
+toggle multiple of 2
+  update the multiple of 2 index values
+  lights.each do |idx|
+    if idx % 2 = 0 
+    if idx is a multiple of 2
+    toggle the idx
+    else
+    idx
+  end
+
+
+
+round 1: every light is turned on
+
+2nd walk, even, multiple of 2
+2,4,
+round 2: lights 2 and 4 are now off; 1, 3, 5 are on
+["light number sync", 1, 0, 1, 0, 1]
+
+
+3rd walk, odd multiple of 3,6,9
+3
+round 3: lights 2, 3, and 4 are now off; 1 and 5 are on
+["light number sync", 1, 0, 0, 0, 1]
+
+4th walk, even
+4,8 Multiple of 4?
+round 4: lights 2 and 3 are now off; 1, 4, and 5 are on
+["light number sync", 1, 0, 0, 1, 1]
+
+
+5th walk, multiples of 5
+5,10
+round 5: lights 2, 3, and 5 are now off; 1 and 4 are on
+["light number sync", 1, 0, 0, 1, 0]
+
+
+
+
+num is the number of lights and walks
+num populates the Array.new lights array with num lights on, [1,1,1,1...
+num walks determines the multiple to 
+
+walk 2    2,4,6,8,10
+          3,6,9
+          4,8
+          5,10
+
+
+
+
+
+populate the array with the lights on
+
+num = 10
+walks = num
+walks = 10
+walks start at 2
+
+lights = Array.new(num, 1)
+=> [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+lights
+=> [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+lights.unshift("light number sync")
+=> ["light number sync", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+["light number sync", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+walk loop, 
+lights.map!  toggle multiple of walk number 2
+lights.map!  toggle multiple of walk number 3
+
+walk = 2
+loop do 
+                  index locations 2,4,6 toggle
+                  get index location and % 2
+                  get index value and toggle or not
+
+  lights.map! do |index_location|
+    if idx_location % walk    index 2 % 2 == 0 toggle value at location
+      "toggle"
+    else
+      idx  do not update value at index location 
+    end
+    break if walk > num
+    walk += 1
+  end
+
+
+
+
+iterate through the array
+use the walk number as the multiple variable
+2nd walk is multiple 2
+
+loop through each walk
+add 1 after each walk
+use the updated walk value in lights.each
+toggle the lights 
+  if idx % 2 == 0 
+    toggle
+  else
+    idx
+  end
+
+
+walks start at 2 because walk one has already been done and all the lights are on by 
+default
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+the numbers in the array are either 1 or 0.
+the index number of the lights array will determine the light number
+
+the light number will be used by .each to toggle the multiples
+index number 2 4 6 8 10 will be toggled to 0 on the first walk
+
+after the last walk, the index locations that have the value 1 will be used 
+in an array to output the lights that are on
+
+index has value? 1 
+put that index number in an array
+
+
+and for the return array
+and
+
+
+
+
+
+populate the array with the lights on
+
+num = 10
+walks = num
+walks = 10
+walks start at 2
+
+lights = Array.new(num, 1)
+=> [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+lights
+=> [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+lights.unshift("light number sync")
+=> ["light number sync", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+["light number sync", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+walk loop, 
+lights.map!  toggle the values in the index locations that are multiples of 2
+
+.values_at(1, 3, 5)          # => ["b", "d", "f"]
+
+
+
+walk = 2
+loop do 
+                  index locations 2,4,6 toggle
+ .map 
+  lights.map! do |index_location|
+    if idx_location % walk    index 2 % 2 == 0 toggle value at location
+      "toggle"
+    else
+      idx  do not update value at index location 
+    end
+    break if walk > num
+    walk += 1
+  end
+
+
+
+
+iterate through the array
+use the walk number as the multiple variable
+2nd walk is multiple 2
+
+loop through each walk
+add 1 after each walk
+use the updated walk value in lights.each
+toggle the lights 
+  if idx % 2 == 0 
+    toggle
+  else
+    idx
+  end
+
+
+walks start at 2 because walk one has already been done and all the lights are on by 
+default
+
+
+
+a multiple is 
+2 + 2 + 2+ 2+ 2
+
+2,4,6,8,10
+
+walk = 2
+
+multiple = walk
+
+walk = 2
+walk 3
+walk 4
+walk 5
+walk 6
+walk 7 
+walk 8
+walk 9
+walk 10
+
+outer loop to increment the walk number      2 .. 10  walk += 1
+  walk = 2
+
+
+  multiple = walk  # 2
+  inner loop for the index number to update
+  # multiple is 2
+  # if lights[] 
+  if lights[multiple] is 1 then 0
+  if lights[multiple] is 0 then 1
+  multiple += walk # 4,6,8,10
+  break if multiple > walk
+
+  multiple logic
+      walk = 2
+      => 2
+      multiple = walk
+      => 2
+      multiple += walk
+      => 4
+      multiple += walk
+      => 6
+      multiple += walk
+      => 8
+      multiple += walk
+      => 10
+    end
+    
+    break if walk == 10
+    walk += 1 # 3
+
+  end
+
+
+**
+
+populate the array with the lights on
+
+num = 10
+walks = num
+walks = 10
+walks start at 2
+
+lights = Array.new(num, 1)
+
+lights
+=> [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+lights.unshift("light number sync")
+=> ["light number sync", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+**
+
+
+
+
+a multiple is 
+2 + 2 + 2+ 2+ 2
+
+2,4,6,8,10
+
+walk = 2
+
+multiple = walk
+
+walk = 2
+walk 3
+walk 4
+walk 5
+walk 6
+walk 7 
+walk 8
+walk 9
+walk 10
+
+outer loop to increment the walk number      2 .. 10  walk += 1
+
+  walk = 2 # second walk
+  multiple = walk # 2 to access index 2 of lights[2]
+
+  loop do # increment walk by 1 each loop
+
+
+  # inner loop for the index number to update
+  # multiple is 2
+  # if lights[] 
+  loop do 
+
+    if lights[multiple] is 1 then 0
+    if lights[multiple] is 0 then 1
+
+  multiple += walk # 4,6,8,10
+  break if multiple > walk
+
+  multiple logic
+      walk = 2
+      => 2
+      multiple = walk
+      => 2
+      multiple += walk
+      => 4
+      multiple += walk
+      => 6
+      multiple += walk
+      => 8
+      multiple += walk
+      => 10
+    end
+    
+    break if walk == 10
+    walk += 1 # 3
+
+  end
+
+
+
+toggle logic
+
+lights
+=> ["light number sync", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+if lights[2] == 1
+  lights[2] = 0
+else  
+  lights[2] = 1
+end  
+=> 0
+lights
+=> ["light number sync", 1, 0, 1, 1, 1, 1, 1, 1, 1, 1]
+
+
+lights
+=> ["light number sync", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+walk = 2
+=> 2
+multiple = walk
+=> 2
+if lights[multiple] == 1
+  lights[multiple] = 0  
+else  
+  lights[multiple] = 1  
+end  
+=> 0
+lights
+=> ["light number sync", 1, 0, 1, 1, 1, 1, 1, 1, 1, 1]
+
+
+
+
+
+
+
+
+num = 10
+lights = Array.new(num, 1)
+
+lights
+=> [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+lights.unshift("light number sync")
+=> ["light number sync", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+num = 10
+lights = Array.new(num, 1)
+lights.unshift("light number sync")
+
+
+
+walk = 2
+multiple = walk
+loop do
+  if lights[multiple] == 1
+    lights[multiple] = 0  
+  else  
+    lights[multiple] = 1  
+  end
+  break if multiple == num # 2,4,6.8.10
+  multiple += walk
+  break if multiple > num 
+end
+
+lights # after walk 2, multiple of 2 walk
+# => ["light number sync", 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+
+
+
+walk = 3
+multiple = walk # 3
+loop do
+  if lights[multiple] == 1 # lights[3,6,9]
+    lights[multiple] = 0  
+  else  
+    lights[multiple] = 1  
+  end
+    # multiple 3 6 9
+  multiple += walk 
+  break if multiple >= num
+end
+
+lights 
+
+
+walk = 4
+multiple = walk # 3
+loop do
+  if lights[multiple] == 1 # lights[3,6,9]
+    lights[multiple] = 0  
+  else  
+    lights[multiple] = 1  
+  end
+    # multiple 3 6 9
+  multiple += walk 
+  break if multiple >= num
+end
+
+lights 
+
+num = 10
+lights = Array.new(num, 1)
+lights.unshift("light number sync")
+
+walk = 2
+multiple = walk
+
+loop do
+
+  loop do
+    if lights[multiple] == 1
+      lights[multiple] = 0  
+    else  
+      lights[multiple] = 1  
+    end
+    break if multiple == num # 2,4,6.8.10
+    multiple += walk
+    break if multiple > num 
+  end
+
+break if walk = num
+  walk += 1 
+          break if walk = num
+end
+
+lights 
+
+
+
+
+
+
+
+
 
 
 

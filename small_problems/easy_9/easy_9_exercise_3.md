@@ -48,6 +48,22 @@ num.abs == num
 => true
 
 
+# How do you make x negative?
+x = 3
+-x
+=> -3
+-number.abs
+
+In this statement, -3 is returned because 3 is greater than 0 
+
+# What does the ternary operator mean?
+
+  ?  if true  :  if false
+
+number = 3
+number > 0 ?      -number : number
+  3    > 0 true      -3
+
 
 if the number is positive make it negative
   otherwise return the original number

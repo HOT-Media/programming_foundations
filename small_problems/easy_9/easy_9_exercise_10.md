@@ -210,15 +210,27 @@ We need this in separate arrays though:
 [fruit] * quantity => ["apples", "apples", "apples"]
 If we use Array map to apply this to each element in the array, all we need is Array flatten to reduce it down to a single large array.
 
+# .map can have more than one variable in the block.
+
+# Fill in the block to achieve the return value by multiplying the string "fruit" * iteger
+
+# ["apples", 3]
+
+[["apples", 3], ["orange", 1], ["bananas", 2]].map { |fruit, quantity| [fruit] * quantity }.flatten
+
+=> ["apples", "apples", "apples", "orange", "bananas", "bananas"]
 
 
+# When using .map to iterate through an array and accessing multiple elements simultaneously
+# Why does the following statement raise an exception?
 
+[2,4,6].map{|x,y,z| x + y + z}
+TypeError: nil cant be coerced into Integer
+from (pry):3530:in '+'
 
-
-
-
-
-
+#The array calling .map is not nested
+[[2,4,6]].map{|x,y,z| x + y + z}
+=> [12]
 
 
 
