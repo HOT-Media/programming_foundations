@@ -82,11 +82,13 @@ num.times do |x|
 end
 
 
-light_state = {}
+light_state = []
 switch_and_state_arr = []
 num.times do |x|
-  switch_and_state_arr <<  "light" << x 
-  light_state << switch_and_state_arr.to_h
+  x += 1
+  switch_and_state_arr <<  ("light" << x.to_s).to_sym 
+  switch_and_state_arr << x
+  light_state << switch_and_state_arr
 end
 
 
@@ -240,6 +242,54 @@ light4
 => [nil, nil, nil, nil, nil, nil]
 
 
+light_state = []
+=> []
+
+switch_and_state_arr = []
+=> []
+
+num.times do |x|
+  x += 1    
+  switch_and_state_arr <<  ("light" << x.to_s).to_sym     
+  switch_and_state_arr << 1    
+  light_state << switch_and_state_arr   
+  switch_and_state_arr.clear   
+end    
+=> 5
+light_state
+=> [[], [], [], [], []]
+
+
+
+
+"light1 1".to_a
+
+=> 5
+
+light_state
+=> [[:light1, 1, :light2, 2, :light3, 3, :light4, 4, :light5, 5],
+
+
+ [:light1, 1, :light2, 2, :light3, 3, :light4, 4, :light5, 5],
+ [:light1, 1, :light2, 2, :light3, 3, :light4, 4, :light5, 5],
+ [:light1, 1, :light2, 2, :light3, 3, :light4, 4, :light5, 5],
+ [:light1, 1, :light2, 2, :light3, 3, :light4, 4, :light5, 5]]
+
+
+
+
+
+
+
+populate the hash
+
+
+
+
+
+
+
+
 
 
 light_state 
@@ -260,6 +310,422 @@ final_walk_lights_on
 
 final_walk_lights_on.map {|idx| idx.to_s}
 => ["light2", "light3", "light4"]
+
+
+
+
+
+string light 1 
+to array
+
+nest that array in array to hash
+
+
+
+
+"light" + idx.to_s 
+
+"light" + idx.to_s + 1.to_s
+
+
+
+
+
+"light_num 1".gsub(/_num/) { |char| char = idx }
+
+sub_arr = "light_num 1".gsub(/_num/) { |char| char = idx }
+=> "light1 1"
+
+to_hash_array = []
+=> []
+to_hash_array << sub_arr.split(' ')
+
+
+num.times do |x|
+  x += 1    
+  switch_and_state_arr <<  ("light" << x.to_s).to_sym     
+  switch_and_state_arr << 1    
+  light_state << switch_and_state_arr   
+  switch_and_state_arr.clear   
+end    
+=> 5
+light_state
+=> [[], [], [], [], []]
+
+
+
+
+
+how many lights / walks == num
+
+num = 5
+
+each light is represented by a kv pair 
+  light number and light state
+  light1            0 for off 1 for on
+
+
+the light_number_and_state hash will be automatically populated using num.times
+
+begin with an empty hash
+
+light_number_and_state = {}
+
+the String "light_num 1" will be used for each kv pair:
+
+num = 5
+5 lights
+
+on each iteration, the string "light_num 1" will be gsubd with num
+add 1 to num then gsub 2
+
+the string will be split which will make it an array
+
+on each iteration, put that array into an array to convert to a Hash
+
+walks/lights = 5
+
+
+
+
+num = 5
+
+assign_num = 0
+
+lights_to_hash = []
+
+loop do 
+
+assign_num += 1
+ p assign_num
+  sub_arr = ("light_num 1".gsub(/_num/) { |char| char = assign_num }).split(' ')
+  #=> ["light1", "1"]
+ lights_to_hash << sub_arr
+ break if assign_num == num
+
+end
+
+lights_to_hash
+
+
+
+
+
+
+
+
+
+
+
+
+assign_num
+=> 5
+sub_arr = ("light_num 1".gsub(/_num/) { |char| char = assign_num }).split(' ')
+=> ["light5", "1"]
+
+
+
+
+
+
+
+sub_array
+=> ["light1", "1"]
+lights_to_hash = []
+=> []
+lights_to_hash << sub_array
+=> [["light1", "1"]]
+
+
+
+
+assign_num
+=> 5
+sub_arr = ("light_num 1".gsub(/_num/) { |char| char = assign_num }).split(' ')
+=> ["light5", "1"]
+
+
+
+** ** *
+populate hash 
+
+
+
+
+num = 5
+
+assign_num = 0
+
+lights_to_hash = []
+
+loop do 
+
+assign_num += 1
+ p assign_num
+  sub_arr = ("light_num 1".gsub(/_num/) { |char| char = assign_num }).split(' ')
+  #=> ["light1", "1"]
+ lights_to_hash << sub_arr
+ break if assign_num == num
+
+end
+
+lights_to_hash
+
+** ** ** ** *
+
+
+num = 5
+
+assign_num = 0
+lights_to_hash = []
+
+loop do 
+  assign_num += 1
+  p assign_num
+  sub_arr = ("light_num 1".gsub(/_num/) { |char| char = assign_num }).split(' ')
+  #=> ["light1", "1"]
+  lights_to_hash << sub_arr
+  break if assign_num == num
+end
+
+lights_to_hash
+
+lights_to_hash.to_h
+
+light_number_and_state = lights_to_hash.to_h 
+=> {"light1"=>"1", "light2"=>"1", "light3"=>"1", "light4"=>"1", "light5"=>"1"}
+
+
+
+
+
+
+
+
+num = 5
+
+assign_num = 0
+lights_to_hash = []
+
+loop do 
+  assign_num += 1
+  p assign_num
+  sub_arr = "light_num 1".gsub(/_num/) do |char|
+    char = assign_num 
+  end
+    #=> ["light1", "1"]
+  lights_to_hash << (sub_arr.split(' '))
+  break if assign_num == num
+end
+
+lights_to_hash
+
+lights_to_hash.to_h
+
+light_number_and_state = lights_to_hash.to_h 
+=> {"light1"=>"1", "light2"=>"1", "light3"=>"1", "light4"=>"1", "light5"=>"1"}
+
+
+
+
+
+
+
+num = 5
+
+assign_num = 0
+lights_to_hash = []
+
+loop do
+  assign_num += 1
+
+  sub_arr = "light_num 1".gsub(/_num/) do |char|
+    char = assign_num
+  end
+
+  lights_to_hash << ((sub_arr.split(' ')).map do |idx|
+    if idx.to_i.to_s == idx.to_i.to_sym
+    else
+      idx.to_sym
+    end
+  end
+  break if assign_num == num
+end
+
+light_number_and_state = lights_to_hash.to_h
+
+
+
+
+
+
+=> {"light1"=>"1", "light2"=>"1", "light3"=>"1", "light4"=>"1", "light5"=>"1"}
+
+symbol_array = (sub_arr.split(' '))
+
+
+
+
+
+
+
+
+
+light_state 
+{light1: 1, light2: 1, light3: 1, light4: 1, light5: 1,}
+
+turn on and off lights on 5 walks
+
+light_state key value to light number left on
+
+final_walk_lights_on = []
+
+light_state.each do |key,value|
+ final_walk_lights_on << key if value == 1 on
+end
+
+final_walk_lights_on
+=> [:light2, :light3, :light4]
+
+final_walk_lights_on.map {|idx| idx.to_s}
+=> ["light2", "light3", "light4"]
+
+
+
+
+light_number_and_state = {"light1"=>"1", "light2"=>"0", "light3"=>"1", "light4"=>"0", "light5"=>"1"}
+
+
+first walk - default 1 walk, turn all the lights on
+values
+
+[1,2,3,4,5].select { |num|  num.even?  }   #=> [2, 4]
+
+
+{ foo: 1, bar: 2 }.find_all { |key, value| value.even? }
+# => [[:bar, 2]]
+
+light_number_and_state .find_all { |key, value| value == "1" }
+# => [[:bar, 2]]
+
+
+light_number_and_state = {"light1"=>"1", "light2"=>"0", "light3"=>"1", "light4"=>"0", "light5"=>"1"}
+=> {"light1"=>"1", "light2"=>"0", "light3"=>"1", "light4"=>"0", "light5"=>"1"}
+
+light_number_and_state .find_all { |key, value| value == "1" }
+=> [["light1", "1"], ["light3", "1"], ["light5", "1"]]
+
+
+light_number_and_state
+
+
+light_number_and_state.each do |key,value|
+  output_str << (key + ", ") if value == '1'
+end
+
+
+
+
+
+
+
+
+
+light_number_and_state =
+{"light1"=>"1", "light2"=>"1", "light3"=>"1", "light4"=>"1", "light5"=>"1"}
+
+light_number_and_state
+=> {1=>1, 2=>1, 3=>1, 4=>1, 5=>1}
+
+
+light_number_and_state
+
+second walk turn off 2,4
+num = 5
+
+walks = 1  # all the lights are on so the first walk is done
+loop do
+  walks += 1
+  if walks == 2
+    light_number_and_state
+
+
+
+
+
+
+toggle kv v 2,4,
+
+
+
+
+
+
+
+
+
+
+populate hash ** ** * refactor for symbols
+
+light_number_and_state
+=> {1=>1, 2=>1, 3=>1, 4=>1, 5=>1}
+
+num = 5
+
+assign_num = 0
+lights_to_hash = []
+
+loop do 
+  assign_num += 1
+  p assign_num
+  sub_arr = ("light_num 1".gsub(/_num/) { |char| char = assign_num }).split(' ')
+  #=> ["light1", "1"]
+  lights_to_hash << sub_arr
+  break if assign_num == num
+end
+
+lights_to_hash
+
+lights_to_hash.to_h
+
+light_number_and_state = lights_to_hash.to_h 
+=> {"light1"=>"1", "light2"=>"1", "light3"=>"1", "light4"=>"1", "light5"=>"1"}
+
+
+
+ 
+ turn off lights
+
+
+
+
+
+output string from hash values ** ** ** ** ** 
+output_str = ''
+
+light_number_and_state.each do |key,value|
+  output_str << (key + ", ") if value == '1'  
+end  
+=> {"light1"=>"1", "light2"=>"0", "light3"=>"1", "light4"=>"0", "light5"=>"1"}
+
+output_str
+=> "light1, light3, light5, "
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
