@@ -701,10 +701,36 @@ light_number_and_state = lights_to_hash.to_h
 
 
 output string from hash values ** ** ** ** ** 
+
+light_number_and_state
+=> {1=>1, 2=>0, 3=>1, 4=>0, 5=>1}
+
+
 output_str = ''
 
 light_number_and_state.each do |key,value|
-  output_str << (key + ", ") if value == '1'  
+  output_str << ("light #{key.to_s}, ") if value == 1
+end 
+
+output_str
+=> "light 1, light 3, light 5, "
+
+
+
+With 10 lights, 3 lights are left on: lights 1, 4, and 9. The return value is [1, 4, 9]
+
+
+
+
+
+
+
+
+
+output_str = ''
+
+light_number_and_state.each do |key,value|
+  output_str << (key + ", ") if value == '1'  ***modify to (key.to_s) + ', '
 end  
 => {"light1"=>"1", "light2"=>"0", "light3"=>"1", "light4"=>"0", "light5"=>"1"}
 
@@ -713,6 +739,71 @@ output_str
 
 
 
+***modify to (key.to_s) + ', '
+("light #{key.to_s}, ")
+
+
+
+
+
+light_number_and_state
+=> {1=>1, 2=>0, 3=>1, 4=>0, 5=>1}
+
+
+output_str = ''
+
+light_number_and_state.each do |key,value|
+  output_str << ("light #{key.to_s}, ") if value == 1
+end 
+
+
+
+
+
+
+
+light_number_and_state = {1=>1, 2=>0, 3=>1, 4=>0, 5=>1}
+=> {1=>1, 2=>0, 3=>1, 4=>0, 5=>1}
+
+output_str = ''
+=> ""
+
+light_number_and_state.each do |key,value|
+  output_str << ("light #{key.to_s}, ") if value == 1  
+end   
+=> {1=>1, 2=>0, 3=>1, 4=>0, 5=>1}
+output_str
+=> "light 1, light 3, light 5, "
+
+
+
+
+
+
+
+light_number_and_state
+=> {1=>1, 2=>1, 3=>1, 4=>1, 5=>1}
+
+num = 5
+
+assign_num = 0
+lights_to_hash = []
+
+loop do 
+  assign_num += 1
+  p assign_num
+  sub_arr = ("light_num 1".gsub(/_num/) { |char| char = assign_num }).split(' ')
+  #=> ["light1", "1"]
+  lights_to_hash << sub_arr
+  break if assign_num == num
+end
+
+lights_to_hash
+
+lights_to_hash.to_h
+
+light_number_and_state = lights_to_hash.to_h 
+=> {"light1"=>"1", "light2"=>"1", "light3"=>"1", "light4"=>"1", "light5"=>"1"}
 
 
 
@@ -729,6 +820,64 @@ output_str
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+populate hash ** ** * refactor for symbols
+
+light_number_and_state
+=> {1=>1, 2=>1, 3=>1, 4=>1, 5=>1}
+
+num = 5
+
+assign_num = 0
+lights_to_hash = []
+
+loop do 
+  assign_num += 1
+  p assign_num
+  sub_arr = ("light_num 1".gsub(/_num/) { |char| char = assign_num }).split(' ')
+  #=> ["light1", "1"]
+  lights_to_hash << sub_arr
+  break if assign_num == num
+end
+
+lights_to_hash
+
+lights_to_hash.to_h
+
+light_number_and_state = lights_to_hash.to_h 
+=> {"light1"=>"1", "light2"=>"1", "light3"=>"1", "light4"=>"1", "light5"=>"1"}
+
+
+
+
+togle lights
+rules at the top
+
+
+
+
+oiutput *******************************
+light_number_and_state = {1=>1, 2=>0, 3=>1, 4=>0, 5=>1}
+
+output_array = []
+
+light_number_and_state.each do |key,value|
+  output_array << key if value == 1  
+end   
+
+output_array
+=> [1, 3, 5]
 
 
 
