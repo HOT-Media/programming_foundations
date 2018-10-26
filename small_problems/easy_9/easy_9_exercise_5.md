@@ -103,6 +103,82 @@ true
 
 
 
+def all_uppercase?(str)
+ return true  if str =~ /[A-Z]/ || str.empty?
+ false
+end
+
+p all_uppercase?('t') == false
+true
+=> true
+p all_uppercase?('T') == true
+true
+=> true
+p all_uppercase?('Four Score') == false    true with capitalized 
+false
+=> false
+p all_uppercase?('FOUR SCORE') == true
+true
+=> true
+p all_uppercase?('4SCORE!') == true
+true
+=> true
+p all_uppercase?('') == true
+true
+=> true
+
+
+
+def all_uppercase?(str)
+ return true  if str =~ /[A-Z]/ || str.empty?
+ false
+end
+
+
+
+check each character 
+is it uppercase or a space
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+142 wasted lines because I did not think
+
+str = "Think"
+
+str == str.upcase  
+=> false 
+
+
+
+# Write a method that takes a string argument, and returns
+# true if all of the alphabetic characters inside the string are uppercase
+# false otherwise 
+
+# Characters that are not alphabetic should be ignored.
+
+def uppercase?(str)
+  str == str.upcase
+end
+
+
+
+
+
+
+
+
 
 
 

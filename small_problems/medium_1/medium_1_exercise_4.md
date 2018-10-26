@@ -1522,9 +1522,156 @@ break if walk = num
           break if walk = num
 end
 
+
+
+
+
+
+
+
+
+
 lights 
 
+can this be done recursively
 
+
+one method to perform the swithch logic
+  return lights if walk is equal to 10
+
+
+def recusion_walk(walks_down_the_hall)
+  return lights if walks is == 1
+
+
+walkd down the hall again  recursion_walk(walks_down_the_hall - 1)
+
+
+
+
+
+
+    walks_down_the_hall - recursion_walk(walks_down_the_hall)
+
+
+
+
+recursion is a reverse loop so starting with 10
+on the 10th walk turn all the lights on
+
+def recurrsion_walk(number_of_walks_and_lights)
+  if walk == number_of_lights_walks return
+    return lights if number_of_walkd
+
+
+
+
+
+on the first walk, all the lighs are on
+return the lights array
+
+["light number sync", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+
+
+
+
+def my_recur (stn)
+    puts stn # 5
+    if stn < 10
+    my_recur (stn * 2)
+    end
+end
+
+def my_recur (walks)
+    puts stn if stn < 10
+    return lights if walks == 1 
+    if walks is not == 1
+    my_recur
+    my_recur (stn * 2)
+    end
+end
+
+
+
+["light number sync", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+lights
+
+=> [['walk number',1], 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+def my_recur (walks)
+    puts stn if stn < 10
+    rreturn lights if lights[0][1] == 1
+    lights[0][1] += 1
+    
+    my_recur (stn * 2)
+    end
+end
+
+
+lights[0][1] += 1
+=> 2
+lights
+=> [["walk number", 2], 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+
+second walk toggle on walk number
+2,4,6
+3,6,9
+4,8,
+5,10
+6
+7
+8
+9
+10
+
+
+
+
+
+# Define a method to populate the light array 
+                                             ****JMX
+
+def populate_light_array(num)
+  num = 10
+  lights = Array.new(num, 1)
+  lights.unshift("light number sync")
+end
+
+
+populate_light_array 10
+=> ["light number sync", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+
+
+
+lights 
+
+can this be done recursively
+
+
+one method to perform the swithch logic
+  return lights if walk is equal to 10
+
+
+def recusion_walk(walks_down_the_hall)
+  return lights if walks is == 1
+    walks_down_the_hall - recursion_walk(walks_down_the_hall)
+
+
+
+
+
+# Extract index location where light value is 1 into an array
+
+def lights_on (lights)
+  on = []
+  lights.map do |idx| 
+    on << (index location number: 2,4,..) if idx == 1 
+  end
+  on
+end
 
 
 
