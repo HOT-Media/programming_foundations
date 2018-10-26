@@ -371,6 +371,7 @@ fib_integer.sum
 
 
 def fibonacci(fib_num)
+  return 1 if fib_num < 2
   fib_integer = [0,1]
   count = 1
   
@@ -384,7 +385,8 @@ end
 
 p fibonacci(20) == 6765
 p fibonacci(100) == 354224848179261915075
-
+p fibonacci(1) == 1
+p fibonacci(2) == 1
 
 
 
