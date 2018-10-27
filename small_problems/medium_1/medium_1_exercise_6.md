@@ -832,24 +832,92 @@ def minilang(input_string)
   end
 end
 
+p 'PRINT'
+minilang('PRINT')
+p
+p '5 PUSH 3 MULT PRINT'
+minilang('5 PUSH 3 MULT PRINT')
+p
+p '5 PRINT PUSH 3 PRINT ADD PRINT'
+minilang('5 PRINT PUSH 3 PRINT ADD PRINT')
+p
+p '5 PUSH POP PRINT'
+minilang('5 PUSH POP PRINT')
+p
+p '3 PUSH 4 PUSH 5 PUSH PRINT ADD PRINT POP PRINT ADD PRINT'
+minilang('3 PUSH 4 PUSH 5 PUSH PRINT ADD PRINT POP PRINT ADD PRINT')
+p
+p '3 PUSH PUSH 7 DIV MULT PRINT '
+minilang('3 PUSH PUSH 7 DIV MULT PRINT ')
+p
+p '4 PUSH PUSH 7 MOD MULT PRINT '
+minilang('4 PUSH PUSH 7 MOD MULT PRINT ')
+p
+p '-3 PUSH 5 SUB PRINT'
+minilang('-3 PUSH 5 SUB PRINT')
+p
+p '6 PUSH'
+minilang('6 PUSH')
+p
 
 
+
+minilang('PRINT')
+0
+=> nil
+# 0
+
+minilang('5 PUSH 3 MULT PRINT')
+15
+=> nil
+# 15
 
 minilang('5 PRINT PUSH 3 PRINT ADD PRINT')
+5
+3
+8
+=> nil
 # 5
 # 3
 # 8
 
+minilang('5 PUSH POP PRINT')
+5
+=> nil
+# 5
 
-assign any itneger to register
-update register
+minilang('3 PUSH 4 PUSH 5 PUSH PRINT ADD PRINT POP PRINT ADD PRINT')
+5
+10
+4
+7
+=> nil
+# 5
+# 10
+# 4
+# 7
+
+minilang('3 PUSH PUSH 7 DIV MULT PRINT ')
+6
+=> nil
+# 6
+
+minilang('4 PUSH PUSH 7 MOD MULT PRINT ')
+12
+=> nil
+# 12
+
+minilang('-3 PUSH 5 SUB PRINT')
+8
+=> nil
+# 8
+
+minilang('6 PUSH')
+=> nil
+# (nothing printed; no PRINT commands)
 
 
-
-
-
-
-
+*************************************************
 
 
 
