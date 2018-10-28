@@ -283,6 +283,20 @@ arr.flatten.join.to_i
 
 end
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 *************************************************JMX
 
 def rotate_rightmost_digits(num, digits)
@@ -301,6 +315,69 @@ p rotate_rightmost_digits(735291, 3) == 735912
 p rotate_rightmost_digits(735291, 4) == 732915
 p rotate_rightmost_digits(735291, 5) == 752913
 p rotate_rightmost_digits(735291, 6) == 352917
+
+*************************************************JMX Refactored
+# Write a method that can rotate the last n digits of a number. For example:
+
+rotate_rightmost_digits(735291, 2) == 735219
+
+access the last 2 digits of the array
+rotate the digits 
+put them back on 
+
+
+# helper method and array plus array
+
+def rotate_array(arr)
+  arr[1..-1] + [arr[0]]
+end
+
+
+def rotate_rightmost_digits(num, digits)
+  num = num.to_s.split(//)
+  arr = num[0..(-(digits)-1)] + (rotate_array(num[-(digits)..-1]))
+  arr.flatten.join.to_i
+end
+
+*************************************************JMX Final
+# helper method and reassign the last elements of the num array
+
+def rotate_array(arr)
+  arr[1..-1] + [arr[0]]
+end
+
+def rotate_rightmost_digits(num, digits)
+  num = num.to_s.split(//)
+  num[-digits..-1] = rotate_array(num[-digits..-1])
+  num.flatten.join.to_i
+end
+
+
+p rotate_rightmost_digits(735291, 1) == 735291
+p rotate_rightmost_digits(735291, 2) == 735219
+p rotate_rightmost_digits(735291, 3) == 735912
+p rotate_rightmost_digits(735291, 4) == 732915
+p rotate_rightmost_digits(735291, 5) == 752913
+p rotate_rightmost_digits(735291, 6) == 352917
+
+
+
+
+
+*************************************************LS 
+
+
+def rotate_array(array)
+  array[1..-1] + [array[0]]
+end
+
+
+def rotate_rightmost_digits(number, n)
+  all_digits = number.to_s.chars
+  all_digits[-n..-1] = rotate_array(all_digits[-n..-1])
+  all_digits.join.to_i
+end
+
 
 
 

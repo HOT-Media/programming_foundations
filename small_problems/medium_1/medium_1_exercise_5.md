@@ -302,20 +302,121 @@ end
 def draw_star(num)
   star = '*'
   if num == 1
-    puts star 
+    puts star
     return
   else
     loop do
       puts star.center(num)
       star << '**'
-      break if star.length == num 
+      break if star.length == num
     end
     puts star
-    loop do 
+    loop do
       star.slice!(0..1)
       puts star.center(num)
       break if star.length == 1
     end
+  end
+end
+
+draw_star(3)
+puts
+
+draw_star(5)
+puts
+
+draw_star(7)
+puts
+
+draw_star(11)
+puts
+*************************************************JMX Refactored
+
+
+
+
+def draw_star(num)
+  star = '*'
+  if num == 1
+    puts star
+    return
+  else
+    loop do
+      puts star.center(num)
+      star << '**'
+      break if star.length == num
+    end
+    puts star
+    loop do
+      star.slice!(0..1)
+      puts star.center(num)
+      break if star.length == 1
+    end
+  end
+end
+
+draw_star(3)
+puts
+
+draw_star(5)
+puts
+
+draw_star(7)
+puts
+
+draw_star(11)
+puts
+
+
+
+extract the star number logic
+
+top strings
+middle strings
+lower strings
+
+1st iteration string = 
+
+
+5
+stars 1
+2
+3
+4
+5
+
+loop one = str1
+
+str1
+str2
+str3
+str2
+str1
+
+def star_logic(string,number)
+  loop do
+    puts string.center(number)
+    string << '**'
+    break if string.length == number
+  end
+  puts string
+  loop do
+    string.slice!(0..1)
+    puts string.center(number)
+    break if string.length == 1
+  end
+end
+
+star_logic("*",5)
+
+
+def draw_star(num)
+  star = '*'
+  if num == 1
+    puts star
+    return
+  else
+    star_logic(star,num)
   end
 end
 
@@ -324,8 +425,93 @@ end
 
 
 
+def draw_star(num)
+  star = '*'
+  return puts star if num == 1 
+  star_logic(star,num)
+end
 
 
+
+
+
+
+*************************************************JMX Final
+
+
+def grid_logic(string, number)
+  loop do
+    puts string.center(number)
+    string << '**'
+    break if string.length == number
+  end
+  puts string
+  loop do
+    string.slice!(0..1)
+    puts string.center(number)
+    break if string.length == 1
+  end
+end
+
+def diamond(num)
+  star = '*'
+  return puts star if num == 1
+  grid_logic(star, num)
+end
+
+diamond(3)
+puts
+
+diamond(5)
+puts
+
+diamond(7)
+puts
+
+diamond(11)
+puts
+
+*** could be refactored with :
+string.length.downto(0)
+string.length.upto(number)
+
+
+
+*************************************************LS 
+
+
+def print_row(grid_size, distance_from_center)
+  number_of_stars = grid_size - 2 * distance_from_center
+  stars = '*' * number_of_stars
+  puts stars.center(grid_size)
+end
+
+def diamond(grid_size)
+  max_distance = (grid_size - 1) / 2
+  max_distance.downto(0) { |distance| print_row(grid_size, distance) }
+  1.upto(max_distance)   { |distance| print_row(grid_size, distance) }
+end
+
+
+
+
+
+                 5                 
+def print_row(grid_size, distance_from_center)
+                       5     - 2 *     2
+  number_of_stars = grid_size - 2 * distance_from_center
+  stars = '*' * number_of_stars
+  puts stars.center(grid_size)
+end
+
+               5
+def diamond(grid_size)
+                      5    -1   4 / 2 => 2
+  max_distance = (grid_size - 1) / 2   => 2
+        2,1,0                2,1,0                5          2
+  max_distance.downto(0) { |distance| print_row(grid_size, distance) }
+  1.upto(max_distance)   { |distance| print_row(grid_size, distance) }
+end
 
 
 

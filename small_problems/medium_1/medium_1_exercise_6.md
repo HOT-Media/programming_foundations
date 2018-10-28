@@ -809,7 +809,6 @@ update register
 
 *************************************************JMX
 
-
 def minilang(input_string)
   register = 0
   stack = []
@@ -817,14 +816,14 @@ def minilang(input_string)
 
   loop do
     operation = command.shift
-    register = operation.to_i if operation == operation.to_i.to_s 
-    case operation 
-    when 'PUSH' then stack << register 
-    when 'ADD' then register = register + (stack.pop)
-    when 'SUB' then register = register - (stack.pop)
-    when 'MULT' then register = register * (stack.pop)
-    when 'DIV' then register = register / (stack.pop)
-    when 'MOD' then register = register % (stack.pop)
+    register = operation.to_i if operation == operation.to_i.to_s
+    case operation
+    when 'PUSH' then stack << register
+    when 'ADD' then register += stack.pop
+    when 'SUB' then register -= stack.pop
+    when 'MULT' then register *= stack.pop
+    when 'DIV' then register /= stack.pop
+    when 'MOD' then register %= stack.pop
     when 'POP' then register = stack.pop
     when 'PRINT' then puts register
     when nil then break
@@ -917,10 +916,26 @@ minilang('6 PUSH')
 # (nothing printed; no PRINT commands)
 
 
-*************************************************
+*************************************************LS 
 
 
-
+def minilang(program)
+  stack = []
+  register = 0
+  program.split.each do |token|
+    case token
+    when 'ADD'   then register += stack.pop
+    when 'DIV'   then register /= stack.pop
+    when 'MULT'  then register *= stack.pop
+    when 'MOD'   then register %= stack.pop
+    when 'SUB'   then register -= stack.pop
+    when 'PUSH'  then stack.push(register)
+    when 'POP'   then register = stack.pop
+    when 'PRINT' then puts register
+    else              register = token.to_i
+    end
+  end
+end
 
 
 
