@@ -79,7 +79,137 @@ false
 word regex match true or false
 
 
+"hello".include? "lo"   #=> true
+"hello".include? "ol"   #=> false
 
+
+'BATCH'.inlclude "#{block_arr[0]}"
+
+
+
+blocks = "B:O   X:K   D:Q   C:P   N:A
+G:T   R:E   F:S   J:W   H:U
+V:I   L:Y   Z:M"
+
+
+letter_blocks =
+{"B"=>"O",
+ "X"=>"K",
+ "D"=>"Q",
+ "C"=>"P",
+ "N"=>"A",
+ "G"=>"T",
+ "R"=>"E",
+ "F"=>"S",
+ "J"=>"W",
+ "H"=>"U",
+ "V"=>"I",
+ "L"=>"Y",
+ "Z"=>"M"}
+
+
+letter_blocks["B"]
+=> "O"
+
+'BATCH'.include? "#{letter_blocks["B"]}"
+=> false
+
+h.each {|key, value| puts "#{key} is #{value}" }
+
+h = { "a" => 100, "b" => 200 }
+
+h.each {|key, value| puts "#{key} is #{value}" }
+produces:
+
+a is 100
+b is 200
+
+letter_blocks =
+{"B"=>"O",
+ "X"=>"K",
+ "D"=>"Q",
+ "C"=>"P",
+ "N"=>"A",
+ "G"=>"T",
+ "R"=>"E",
+ "F"=>"S",
+ "J"=>"W",
+ "H"=>"U",
+ "V"=>"I",
+ "L"=>"Y",
+ "Z"=>"M"}
+
+letter_blocks.each {|key, value| puts "#{key} is #{value}" }
+
+
+"BATCH".include
+
+
+letter_blocks.each do |key, value| 
+if "BATCH".include?("#{key}") && "BATCH".include?("#{value}")
+  puts 'include'
+else
+  puts 'not'
+end
+
+
+
+
+
+block_word?('BATCH') == true
+block_word?('BUTCH') == false
+block_word?('jest') == true
+
+
+
+LETTER_BLOCKS =
+{"B"=>"O",
+ "X"=>"K",
+ "D"=>"Q",
+ "C"=>"P",
+ "N"=>"A",
+ "G"=>"T",
+ "R"=>"E",
+ "F"=>"S",
+ "J"=>"W",
+ "H"=>"U",
+ "V"=>"I",
+ "L"=>"Y",
+ "Z"=>"M"}
+
+
+
+def block_word?(str)
+  LETTER_BLOCKS.each do |key, value| 
+  if "str".include?("#{key}") && "str".include?("#{value}")
+    puts 'include'
+  else
+    puts 'not'
+  end
+end
+
+
+
+
+str
+=> "BATCH"
+str.include?(LETTER_BLOCKS["B"])
+=> false
+str.include?(LETTER_BLOCKS.key("O"))
+=> true
+
+
+
+
+
+
+
+
+def block_word?(str)
+  LETTER_BLOCKS.each do |key, value| 
+    return false if "str".include?("#{key}") && "str".include?("#{value}")
+  end
+end
 
 
 
