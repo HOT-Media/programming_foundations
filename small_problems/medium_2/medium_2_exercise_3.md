@@ -307,8 +307,12 @@ str
 count str
 => {:uppercase=>3, :lowercase=>3, :neither=>2}
 
+
+
 percentage = count(str)
 => {:uppercase=>3, :lowercase=>3, :neither=>2}
+
+
 
 percentage[:uppercase] = (percentage[:uppercase].to_f/str.length.to_f) * 100
 => 37.5
@@ -326,6 +330,155 @@ percentage
 => {:uppercase=>37.5, :lowercase=>37.5, :neither=>25.0}
 
 
+percentage[:uppercase] = updated value
+
+
+array instead
+
+[:uppercase, 0]
+
+
+str
+=> "AbCd +Ef"
+strflt = str.length.to_f
+=> 8.0
+
+
+counts = [[:uppercase, 0], [:lowercase, 0], [:neither, 0]]
+
+counts[0][1] = strarr.count { |char| char =~ /[^a-zA-Z]/ }
+=> 1
+counts
+=> [[:uppercase, 1], [:lowercase, 0], [:neither, 0]]
+
+counts.map! do |idx|
+  ((idx[1]).to_f / strflt) * 100
+end
+
+
+
+str
+=> "AbCd +Ef"
+strflt = str.length.to_f
+=> 8.0
+
+
+counts = [[:uppercase, 0], [:lowercase, 0], [:neither, 0]]
+
+def count_array(str)
+strarr = str.chars
+strflt = str.length.to_f
+counts = [[:uppercase, 0], [:lowercase, 0], [:neither, 0]]
+counts[0][1] = strarr.count { |char| char =~ /[A-Z]/ }
+counts[1][1] = strarr.count { |char| char =~ /[a-z]/ }
+counts[2][1] = strarr.count { |char| char =~ /[^a-zA-Z]/ }
+counts
+end
+
+
+
+=> 1
+counts
+=> [[:uppercase, 1], [:lowercase, 0], [:neither, 0]]
+
+
+
+
+
+
+
+def calculate_percent(arr)
+counts.map! do |idx|
+  ((idx[1]).to_f / strflt) * 100
+end
+
+
+
+def calculate_percent(arr,string_length_as_float)
+  arr.map! do |idx|
+    ((idx[1]).to_f / string_length_as_float) * 100
+  end
+end
+
+
+
+def calculate_percent(arr,string_length_as_float)
+  arr.map! do |idx|  
+    ((idx[1]).to_f / string_length_as_float) * 100    
+  end    
+end  
+=> :calculate_percent
+calculate_percent(arr,8.0)
+=> [37.5, 37.5, 25.0]
+
+
+def calculate_percent(arr,string_length_as_float)
+  arr.map do |idx|  
+   idx[1] = 4  
+  end    
+end  
+
+
+[:uppercase, 1]
+
+
+
+
+
+
+
+
+
+def count_array(str)
+strarr = str.chars
+strflt = str.length.to_f
+counts = [[:uppercase, 0], [:lowercase, 0], [:neither, 0]]
+counts[0][1] = strarr.count { |char| char =~ /[A-Z]/ }
+counts[1][1] = strarr.count { |char| char =~ /[a-z]/ }
+counts[2][1] = strarr.count { |char| char =~ /[^a-zA-Z]/ }
+counts
+end
+
+
+
+
+
+
+((counts[0][1]).to_f / string_length_as_float) * 100  
+
+
+((counts[0][1]).to_f / string_length_as_float) * 100  
+=> 37.5
+
+
+counts
+=> [[:uppercase, 3], [:lowercase, 3], [:neither, 2]
+
+
+
+
+
+def count_array(str)
+strarr = str.chars
+strflt = str.length.to_f
+counts = [[:uppercase, 0], [:lowercase, 0], [:neither, 0]]
+counts[0][1] = strarr.count { |char| char =~ /[A-Z]/ }
+counts[1][1] = strarr.count { |char| char =~ /[a-z]/ }
+counts[2][1] = strarr.count { |char| char =~ /[^a-zA-Z]/ }
+counts
+end
+
+
+
+
+def count(str)
+  strarr = str.chars
+  percentage = {uppercase: 0, lowercase: 0, neither: 0}
+  percentage[:uppercase] = strarr.count { |char| char =~ /[A-Z]/ }
+  percentage[:lowercase] = strarr.count { |char| char =~ /[a-z]/ }
+  percentage[:neither] = strarr.count { |char| char =~ /[^a-zA-Z]/ }
+  percentage
+end
 
 
 
@@ -347,23 +500,45 @@ percentage
 
 
 
+def count(str)
+  strarr = str.chars    
+  percentage = {uppercase: 0, lowercase: 0, neither: 0}    
+  percentage[:uppercase] = strarr.count { |char| char =~ /[A-Z]/ }    
+  percentage[:lowercase] = strarr.count { |char| char =~ /[a-z]/ }    
+  percentage[:neither] = strarr.count { |char| char =~ /[^a-zA-Z]/ }    
+  percentage    
+end    
+=> :count
+def count_array(str)
+  strarr = str.chars
+  strflt = str.length.to_f
+  counts = [[:uppercase, 0], [:lowercase, 0], [:neither, 0]]
+  counts[0][1] = strarr.count { |char| char =~ /[A-Z]/ }
+  counts[1][1] = strarr.count { |char| char =~ /[a-z]/ }
+  counts[2][1] = strarr.count { |char| char =~ /[^a-zA-Z]/ }
+  counts
+end  
+=> :count_array
+count str
+=> {:uppercase=>3, :lowercase=>3, :neither=>2}
+count_array str
+=> [[:uppercase, 3], [:lowercase, 3], [:neither, 2]]
 
 
+percentage[:uppercase] = (percentage[:uppercase].to_f/str.length.to_f) * 100
+=> 37.5
 
+percentage
+=> {:uppercase=>37.5, :lowercase=>3, :neither=>2}
 
+percentage[:lowercase] = (percentage[:lowercase].to_f/str.length.to_f) * 100
+=> 37.5
 
+percentage[:neither] = (percentage[:neither].to_f/str.length.to_f) * 100
+=> 25.0
 
-
-
-
-
-
-
-
-
-
-
-
+percentage
+=> {:uppercase=>37.5, :lowercase=>37.5, :neither=>25.0}
 
 
 
