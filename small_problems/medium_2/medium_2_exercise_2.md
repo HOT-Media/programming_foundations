@@ -213,10 +213,106 @@ end
 
 
 
+block_word?('BATCH') == true
+block_word?('BUTCH') == false
+block_word?('jest') == true
+
+
+
+input_type = gets =~ /hello/i ? "greeting" : "other"
+hello
+=> "greeting"
+
+
+"BATCH" =~ /O/i ? "greeting" : "other"
+
+"BATCH" =~ /B/i ? "greeting" : "other"
+
+
+
+BLK =
+{"B"=>"O",
+ "X"=>"K",
+ "D"=>"Q",
+ "C"=>"P",
+ "N"=>"A",
+ "G"=>"T",
+ "R"=>"E",
+ "F"=>"S",
+ "J"=>"W",
+ "H"=>"U",
+ "V"=>"I",
+ "L"=>"Y",
+ "Z"=>"M"}
+
+does the string contain both the key and the value
+  yes - false
+  no  - true  
+
+
+"BATCH" =~ /#{BLK['B']}/i   &&  "BATCH" =~ /#{BLK.key('B')}/i ? true : false 
+
+"BATCH" =~ /#{BLK['B']}/i   &&  "BATCH" =~ /#{BLK.key('B')}/i ? true : false 
+=> false
+
+
+
+def block_word?(str)
+  BLK.each do |key, value| 
+    #return false if "str".include?("#{key}") && "str".include?("#{value}")
+    return "str" =~ /#{key}/i   &&  "str" =~ /#{value}/i ? true : false 
+  end
+end
+
+block_word? "BATCH"
 
 
 
 
+
+
+def block_word?
+  BLK.each do |key, value| 
+    #return false if "str".include?("#{key}") && "str".include?("#{value}")
+    return false if  "BATCH" =~ /#{key}/i   &&  "BATCH" =~ /#{value}/i ?  true : false 
+  end
+  true
+end
+
+block_word? "BATCH"
+
+
+
+
+
+def block_word?
+  BLK.each do |key, value| 
+    #return false if "str".include?("#{key}") && "str".include?("#{value}")
+    return false if  "BUTCH" =~ /#{key}/i   &&  "BUTCH" =~ /#{value}/i ?  true : false 
+  end
+  true
+end
+
+block_word?
+
+
+
+
+
+
+
+*************************************************JMX
+
+def block_word?(str)
+  BLK.each do |key, value|
+    return false if  str =~ /#{key}/i   &&  str =~ /#{value}/i ?  true : false
+  end
+  true
+end
+
+p block_word?('BATCH') == true
+p block_word?('BUTCH') == false
+p block_word?('jest') == true
 
 
 
