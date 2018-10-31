@@ -127,6 +127,385 @@ array = %w(Sue Pete Alice Tyler Rachel Kim Bonnie)
 bubble_sort!(array)
 array == %w(Alice Bonnie Kim Pete Rachel Sue Tyler)
 
+the algorithm sorts in pairs of 2
+
+first two
+next element
+sort two
+next element
+sort two
+next element
+
+bubble sorting always starts with the first two
+
+collection type is an Array 
+
+
+array = [5, 3]
+
+access array[0]
+access array[1]
+
+01
+ 12
+  34
+   45
+
+
+iteration one
+
+array.map! do |element| 
+  if the element is less than 
+
+access element 1, then 2
+
+is 0 less than 1
+next
+is 1 less than 2
+
+
+array.length.times |element|
+
+array.map do |x,y|
+  x = y
+  y = x
+end
+
+accsess both element 0 and 1 and iterate
+
+
+array[n]
+arrayn[n+1]
+
+
+
+array.
+
+sort it permanenetly in place 
+.map!
+
+array = [3,5]
+
+iterate through and sort two
+sort two
+sort two 
+unitl the end
+how will i know when im at the end
+  array.length stop at
+
+
+
+arr = [5,4,3,2,1]
+
+array.length 
+=> 5
+
+buble sort facts:
+sort logic
+first two elements
+      0,1
+        1,2
+          2,3
+            3,4
+
+a bubble sort will use a comparison operation to evaluate the values of the elements
+
+a bubble sort will have array.length - 1 comparison operations
+
+  so for an array with 5 elements, array.length => 5, there will be 4 comparison operations
+
+
+array
+arr
+=> [5, 4, 3, 2, 1]
+
+arr.length
+=> 5
+
+comparison operations = arr.length - 1
+=> 4
+
+4.times do 
+
+
+4.times {|index| puts index}
+0
+1
+2
+3
+=> 4
+
+
+4.times do |idx|
+  arr[idx] arr[(idx+1)]
+
+
+ a, b = 1, 2 # unpack into separate variables
+=> [1, 2]
+
+
+
+if arr[(idx -1)] > arr[idx]
+  arr[idx] = arr[(idx-1)] && arr[(idx-1)] = arr[idx]
+end
+
+
+arr = [5, 4, 3, 2, 1]
+=> [5, 4, 3, 2, 1]
+arr[1], arr[0], = arr[0], arr[1]
+=> [5, 4]
+arr
+=> [4, 5, 3, 2, 1]
+
+
+
+if arr[(idx -1)] > arr[idx]
+  arr[idx], arr[(idx - 1)], = arr[(idx - 1)], arr[idx]
+end
+
+
+
+arr[1], arr[0], = arr[0], arr[1]
+
+
+
+
+
+
+
+
+
+arr = [5, 4, 3, 2, 1]
+=> [5, 4, 3, 2, 1]
+arr[1], arr[0], = arr[0], arr[1]
+=> [5, 4]
+arr
+=> [4, 5, 3, 2, 1]
+
+
+(arr.length-1).times do |idx|
+ 
+  if arr[(idx -1)] > arr[idx]
+    arr[idx], arr[(idx - 1)], = arr[(idx - 1)], arr[idx]
+  end
+end
+
+
+
+
+arr[1], arr[0], = arr[0], arr[1]
+
+
+
+arr = [5, 4, 3, 2, 1]
+
+
+(arr.length-1).times do |idx|
+ 
+  if arr[idx] > arr[(idx+1)]
+    arr[(idx+1)], arr[idx], = arr[idx], arr[(idx+1)]
+  end
+end
+
+
+
+
+
+
+
+arr = [5, 4, 3, 2, 1]
+
+loop do 
+
+(arr.length-1).times do |idx|
+ 
+  if arr[idx] > arr[(idx+1)]
+    arr[(idx+1)], arr[idx], = arr[idx], arr[(idx+1)]
+  end
+end
+
+
+if arr
+
+how many loops
+
+loop until 
+arr
+
+how many 
+
+  arr[idx] < arr[(idx+1)]
+
+  break if arr is the same after as before
+
+
+
+
+
+
+
+arr = [5, 4, 3, 2, 1]
+
+sorts = 0
+loop do 
+
+  (arr.length-1).times do |idx|
+    if arr[idx] > arr[(idx+1)]
+      arr[(idx+1)], arr[idx], = arr[idx], arr[(idx+1)]
+    end
+  end
+
+  sorts += 1
+  break if sorts == arr.length
+end
+
+
+if arr
+
+how many loops
+
+loop until 
+arr
+
+how many 
+
+  arr[idx] < arr[(idx+1)]
+
+  break if arr is the same after as before
+
+
+
+
+
+
+arr = [5, 4, 3, 2, 1]
+
+
+loop do 
+
+
+
+  (arr.length-1).times do |idx|
+    if arr[idx] > arr[(idx+1)]
+      arr[(idx+1)], arr[idx], = arr[idx], arr[(idx+1)]
+    end
+  end
+
+
+end
+
+
+elseif arr[idx] < arr[(idx+1)]
+
+
+
+
+how do I know how the 
+
+
+
+
+
+
+
+
+
+updated_arr = 
+arr = 
+
+arr_before = 
+
+arr_after
+brea
+
+break if arr_before == arr_after
+
+
+
+until all the way through or until all sorted
+
+
+
+
+
+
+arr = [5, 4, 3, 2, 1]
+
+
+
+sorts = 0
+loop do 
+  swapped_this_iteration = false
+
+  (arr.length-1).times do |idx|
+    if arr[idx] > arr[(idx+1)]
+      arr[(idx+1)], arr[idx], = arr[idx], arr[(idx+1)]
+      swapped_this_iteration = true
+    end
+  end
+  sorts += 1
+  break if  swapped_this_iteration == false
+end
+
+swapped_this_iteration
+arr 
+
+
+
+
+
+
+
+
+if out of order then swap
+
+elsif in order sorted = 'yes'
+
+
+
+
+
+
+def bubble_sort!(arr)
+
+# arr = [5, 4, 3, 2, 1]
+  loop do 
+    swapped_this_iteration = false
+
+    (arr.length-1).times do |idx|
+
+      if arr[idx] > arr[(idx+1)]
+        arr[(idx+1)], arr[idx], = arr[idx], arr[(idx+1)]
+        swapped_this_iteration = true
+      end
+
+    end
+
+  break if  swapped_this_iteration == false
+  end
+  arr
+end
+
+
+*************************************************JMX
+
+
+def bubble_sort!(arr)
+  loop do
+    swapped_this_iteration = false
+
+    (arr.length-1).times do |idx|
+
+      if arr[idx] > arr[(idx+1)]
+        arr[(idx+1)], arr[idx], = arr[idx], arr[(idx+1)]
+        swapped_this_iteration = true
+      end
+    end
+  break if  swapped_this_iteration == false
+  end
+  arr
+end
+
 
 
 

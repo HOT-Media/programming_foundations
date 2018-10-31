@@ -46,33 +46,193 @@ next multiple of 7 past n
 
 find the next multiple of 7 after n 
 
-find the gcm and lcm??
 
 featured(12) == 21
 featured(20) == 21
 featured(21) == 35
-
-look for the built in method that takes 2 arguments to calculate multiple and a recuring number
 
 there are only 10 digits so it cant be any larger than 10 digits
 
 1_234_567_890
  
 
+A featured number is an odd number that is a multiple of 7,whose digits occur exactly once each. 
+
+calculate the next multiple
+is that multiple even or odd
+  odd
+    do the digits occurr only once
+      yes numbers occurr once => number to string to array to uniq == number to string to array
+      10 digits, no duplicates 
+    no there are duplicate numbers
+    calculate the next multiple
+    same thing until the number is odd with no repeating digits
 
 
-calculate a table of the multiples of 7 all the way up to 9_999_999_999
 
-put them in a collection
+12, find the next featured number 
+
+find the previous multiple of 7
+
+start calculation with 12 - 1 % 7 == 0 true or false
+                       12 - 2 10
+                       12 - 3
+                       12 - 4
+                       12 - 5 => 7 % 7 = 0
+ 
+count = 7
+loop 
+n - 1
+12 - 1 % 7 == 0
 
 
-delete the even ones
-delete the ones with duplicate numbers
 
-sort the numbers
+*******************************Previous
 
-find the number in the array that is less than or == n
-then return the next featured number
+n = 12
+find_previous_multiple_of_seven = n
+loop do
+  n -= 1 # 11,10,9,8,7
+ break if  n%7 == 0
+end
+
+
+
+n = 12
+=> 12
+loop do
+  n -= 1 # 11,10,9,8,7  
+  break if  n%7 == 0 
+end  
+=> nil
+n
+=> 7
+
+
+
+find the next multple of 7
+
+n = 7
+
+loop do
+  n += 7
+ break if n.odd? && n.to_s.chars.uniq == n.to_s.chars
+end
+
+
+
+
+
+numbers occurr once => number to string to array to uniq == number to string to array
+
+
+n.to_s.chars.uniq == n.to_s.chars
+
+
+
+
+
+
+
+
+n = 12
+=> 12
+loop do
+  n -= 1 # 11,10,9,8,7  
+  break if  n%7 == 0 
+end  
+=> nil
+n
+=> 7
+
+
+
+find the next multple of 7
+
+n = 7
+
+loop do
+  n += 7
+ break if n.odd? && n.to_s.chars.uniq == n.to_s.chars
+end
+
+
+
+
+
+
+
+featured(12) == 21
+featured(20) == 21
+featured(21) == 35
+featured(997) == 1029
+featured(1029) == 1043
+featured(999_999) == 1_023_547
+featured(999_999_987) == 1_023_456_987
+
+
+
+
+
+def featured(num)
+  loop do
+    num -= 1 # 11,10,9,8,7  
+    break if  num%7 == 0 
+  end  
+
+  loop do
+    num += 7
+   break if num.odd? && num.to_s.chars.uniq == num.to_s.chars
+  end
+  num
+end
+
+
+if the num is already a multiple of 7 then calculate the next featured number
+
+
+
+*************************************************JMX
+
+def featured(num)
+  if num % 7 == 0
+    num
+  else
+    loop do
+      num -= 1
+    break if  num%7 == 0 
+    end
+  end
+
+  loop do
+    num += 7
+   break if num.odd? && num.to_s.chars.uniq == num.to_s.chars
+  end
+  num
+end
+
+p featured(12) == 21
+p featured(20) == 21
+p featured(21) == 35
+p featured(997) == 1029
+p featured(1029) == 1043
+p featured(999_999) == 1_023_547
+p featured(999_999_987) == 1_023_456_987
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
