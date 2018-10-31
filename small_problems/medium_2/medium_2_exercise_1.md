@@ -199,10 +199,10 @@ strarr.map! {|element| element.split(' ')}
 
 
 def most_words(str)
-  strarr = str.split(/[!?.](?=\s+\p{Lu})/)  
-  strarr.map! {|element| element.split(' ')}  
-  (strarr.sort{|x,y| x.length <=> y.length}).last.join(' ')  
-end  
+  strarr = str.split(/[!?.](?=\s+\p{Lu})/)
+  strarr.map! {|element| element.split(' ')}
+  (strarr.sort{|x,y| x.length <=> y.length}).last.join(' ')
+end
 => :most_words
 
 

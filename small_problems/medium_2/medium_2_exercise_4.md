@@ -285,6 +285,7 @@ end
 
 check_balance
 => "()"
+
 false if (
   check_balance.chars.first == ")" ||                  
   check_balance.chars.last == "("                 
@@ -293,6 +294,19 @@ false if (
 check_balance.count("(") == check_balance.count(")")
 => true
 
+def para_syntax_validation(str) #check_balance)
+return false if (
+                str.chars.first == ")" ||
+                str.chars.last == "("
+                )
+  str.count("(") == str.count(")")
+end
+
+
+def para_syntax_validation(str) #check_balance)
+  return false if str[0] == ")" || str[-1] == "("
+  str.count("(") == str.count(")")
+end
 
 
 
@@ -306,6 +320,132 @@ check_balance.count("(") == check_balance.count(")")
 
 
 
+
+
+str = "What (is) this?"
+
+paren_str = ''
+
+str.chars.each do |char|
+  paren_str << char if char == "(" || char == ")"    
+end 
+
+=> ["W", "h", "a", "t", " ", "(", "i", "s", ")", " ", "t", "h", "i", "s", "?"]
+
+check_balance
+=> "()"
+
+
+
+
+def paren_syntax_validation(str) #check_balance)
+  return false if str[0] == ")" || str[-1] == "("
+  str.count("(") == str.count(")")
+end
+
+
+
+
+
+def balanced(str)
+
+str = "What (is) this?"
+
+paren_str = ''
+
+  str.chars.each do |char|
+    paren_str << char if char == "(" || char == ")"    
+  end 
+   
+=> ["W", "h", "a", "t", " ", "(", "i", "s", ")", " ", "t", "h", "i", "s", "?"]
+
+check_balance
+=> "()"
+ paren_syntax_validation(paren_str)
+end
+
+
+
+
+def paren_syntax_validation(str) #check_balance)
+  return false if str[0] == ")" || str[-1] == "("
+  str.count("(") == str.count(")")
+end
+
+
+balanced?('What (is) this?') == true
+balanced?('What is) this?') == false
+balanced?('What (is this?') == false
+balanced?('((What) (is this))?') == true
+balanced?('((What)) (is this))?') == false
+balanced?('Hey!') == true
+balanced?(')Hey!(') == false
+balanced?('What ((is))) up(') == false
+
+
+
+
+def balanced?(str)
+
+  # str = "What (is) this?"
+
+  paren_str = ''
+  str.chars.each do |char|
+    paren_str << char if char == "(" || char == ")"    
+  end 
+   
+  #=> ["W", "h", "a", "t", " ", "(", "i", "s", ")", " ", "t", "h", "i", "s", "?"]
+
+  # paren_str
+  # => "()"
+ paren_syntax_validation(paren_str)
+end
+
+
+
+
+def paren_syntax_validation(str) #check_balance
+  return false if str[0] == ")" || str[-1] == "("
+  str.count("(") == str.count(")")
+end
+
+
+balanced?('What (is) this?') == true
+balanced?('What is) this?') == false
+balanced?('What (is this?') == false
+balanced?('((What) (is this))?') == true
+balanced?('((What)) (is this))?') == false
+balanced?('Hey!') == true
+balanced?(')Hey!(') == false
+balanced?('What ((is))) up(') == false
+
+
+
+
+*************************************************JMX
+
+def balanced?(str)
+  paren_str = ''
+  str.chars.each do |char|
+    paren_str << char if char == "(" || char == ")"
+  end
+ paren_syntax_validation(paren_str)
+end
+
+def paren_syntax_validation(str)
+  return false if str[0] == ")" || str[-1] == "("
+  str.count("(") == str.count(")")
+end
+
+
+p balanced?('What (is) this?') == true
+p balanced?('What is) this?') == false
+p balanced?('What (is this?') == false
+p balanced?('((What) (is this))?') == true
+p balanced?('((What)) (is this))?') == false
+p balanced?('Hey!') == true
+p balanced?(')Hey!(') == false
+p balanced?('What ((is))) up(') == false
 
 
 
