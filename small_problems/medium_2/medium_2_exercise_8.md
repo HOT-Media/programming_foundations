@@ -193,20 +193,23 @@ if the num is already a multiple of 7 then calculate the next featured number
 
 
 *************************************************JMX
+ERROR_MESSAGE = 'There is no possible number that fulfills those requirements.'
 
 def featured(num)
-  if num % 7 == 0
+  if num > 9_876_543_210
+    ERROR_MESSAGE
+  elsif num % 7 == 0
     num
   else
     loop do
       num -= 1
-    break if  num%7 == 0 
+      break if num % 7 == 0
     end
   end
 
   loop do
     num += 7
-   break if num.odd? && num.to_s.chars.uniq == num.to_s.chars
+    break if num.odd? && num.to_s.chars.uniq == num.to_s.chars
   end
   num
 end

@@ -332,6 +332,18 @@ triangle(50, 50, 50) == :invalid
 
 
 
+def triangle(x, y, z)
+  side_length = [x, y, z].sort
+  if side_length[0..1].sum < side_length.last || side_length.include?(0)
+    :invalid
+  elsif side_length.uniq.length == 1
+    :equilateral
+  elsif side_length.uniq.length == 2
+    :isosceles
+  else
+    :scalene
+  end
+end
 
 
 *************************************************JMX

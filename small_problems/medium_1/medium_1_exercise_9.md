@@ -415,3 +415,24 @@ This solution is extremely fast; it will compute the 100,001st Fibonacci number 
 
 
 
+
+```ruby
+def paralell_calculation_and_assignment(10th_number_in_the_given_series)
+  first, last = [1, 1]
+  3.upto(10) do
+    first, last = [last, first + last]
+  end
+
+  last
+end
+
+A paralell assignment will:
+  create an Array 
+    the array will be populated with the values assign values to variables, and create an Array at the same time.
+
+
+
+
+
+
+

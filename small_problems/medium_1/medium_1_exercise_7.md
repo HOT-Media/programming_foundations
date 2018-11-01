@@ -245,26 +245,8 @@ end
 
 p word_to_digit('Please call me at five five five one two three four. Thanks.') 
 
-
-
-
-
-
-
-
-
-
-
-
-def word_to_digit(words)
-  DIGIT_HASH.keys.each do |word|
-    words.gsub!(/\b#{word}\b/, DIGIT_HASH[word])
-  end
-  words
-end
-
-
-
+"Please call me at 5 5 5 1 2 3 4. Thanks."
+=> "Please call me at 5 5 5 1 2 3 4. Thanks."
 
 
 

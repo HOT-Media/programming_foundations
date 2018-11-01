@@ -73,7 +73,7 @@ str.split(/[!?.](?=\s+\p{Lu})/)
 str.split(/[!?.](?=\s+\p{Lu})/)
 
 
-str = "Four score and seven years ago our fathers brought forth
+text = "Four score and seven years ago our fathers brought forth
 on this continent a new nation, conceived in liberty, and
 dedicated to the proposition that all men are created
 equal.
@@ -108,7 +108,7 @@ earth."
 
 str.split(/[!?.](?=\s+\p{Lu})/)
 => ["Four score and seven years ago our fathers brought forth\non this continent a new nation, conceived in liberty, and\ndedicated to the proposition that all men are created\nequal",
- "\n\nNow we are engaged in a great civil war, testing whether\nthat nation, or any nation so conceived and so dedicated,\ncan long endure",
+ "\n\nNow we are engaged in   great civil war, testing whether\nthat nation, or any nation so conceived and so dedicated,\ncan long endure",
  " We are met on a great battlefield of that\nwar",
  " We have come to dedicate a portion of that field, as\na final resting place for those who here gave their lives\nthat that nation might live",
  " It is altogether fitting and\nproper that we should do this",
@@ -195,29 +195,49 @@ strarr.map! {|element| element.split(' ')}
 
 
 
+** ** ** *
+
+
+text = File.read('text_for_medium_2_exercise1.txt')
+strarr = text.split(/[!?.](?=\s+\p{Lu})/)
+strarr.map! {|element| element.split(' ')}
+largest_sentence = (strarr.sort{|x,y| x.length <=> y.length}).last.join(' ')
+puts 
+puts "The longest sentence is : #{largest_sentence}"
+puts "Containing #{largest_sentence.split(' ').length} words."
+puts 
+
+
+
+
+
+
+sort_by(&:length)
+sort { |x, y| x.length <=> y.length }
+
+
+
 *************************************************JMX
 
+text = File.read('text_for_medium_2_exercise1.txt')
+strarr = text.split(/[!?.](?=\s+\p{Lu})/)
+strarr.map! { |element| element.split(' ') }
+largest_sentence = (strarr.sort_by(&:length)).last.join(' ')
+puts
+puts "The longest sentence is : #{largest_sentence}"
+puts "This sentence contains #{largest_sentence.split(' ').length} words."
+puts
 
-def most_words(str)
-  strarr = str.split(/[!?.](?=\s+\p{Lu})/)
-  strarr.map! {|element| element.split(' ')}
-  (strarr.sort{|x,y| x.length <=> y.length}).last.join(' ')
-end
-=> :most_words
+*************************************************LS 
 
+text = File.read('sample_text.txt')
+sentences = text.split(/\.|\?|!/)
+largest_sentence = sentences.max_by { |sentence| sentence.split.size }
+largest_sentence = largest_sentence.strip
+number_of_words = largest_sentence.split.size
 
-
-most_words(str)
-=> "It is rather for us to be here dedicated to the great task remaining before us -- that from these honored dead we take increased devotion to that cause for which they gave the last full measure of devotion -- that we here highly resolve that these dead shall not have died in vain -- that this nation, under God, shall have a new birth of freedom -- and that government of the people, by the people, for the people, shall not perish from the earth."
-
-
-
-
-
-
-
-
-
+puts "#{largest_sentence}"
+puts "Containing #{number_of_words} words"
 
 
 

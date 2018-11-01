@@ -36,6 +36,25 @@ p fibonacci_last(100_001)   # -> 1
 
 
  
+*************************************************JMX Refactored
+
+# use the method from lesson 9 inside the last method 
+# and convert it to a string then access the last character
+# [-1] then .to_i
+
+def fib_paralell(fib_num)
+  first, last = [1,1]
+  3.upto(fib_num) do
+    first, last = [last, first + last]
+  end
+  last
+end
+
+def last(fn)
+  fib_paralell(fn).to_s[-1].to_i
+end
+
+
 
 
 
@@ -63,6 +82,34 @@ However, what happens when you get into really large numbers? It probably took s
 Fortunately, you don't need any fancy mathematics knowledge, and you have enough Ruby experience already to solve this problem. All you have to do is reduce the problem down to its basics.
 
 To compute the last digit of the nth Fibonacci number, you only need the last digit of the nth - 1 and nth -2 numbers. As a result, you only ever need the last digit of any intermediate result, which eliminates all of the computing effort needed to compute the massive numbers involved. Our second solution does exactly this: it only computes and uses the last digit in each intermediate result, and computes the last digit of the 123,456,789th Fibonacci number in less than a minute.
+
+
+
+
+def fibonacci(nth)
+  first, last = [1, 1]
+  3.upto(nth) do
+    first, last = [last, first + last]
+  end
+
+  last
+end
+
+
+def fibonacci_last(nth)
+  fibonacci(nth).to_s[-1].to_i
+end
+
+
+
+
+
+
+
+
+
+
+
 
 
 

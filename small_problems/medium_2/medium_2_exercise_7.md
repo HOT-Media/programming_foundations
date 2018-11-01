@@ -86,26 +86,28 @@ Pete Winkler pointed out that the 13th is in fact more likely to be a Friday tha
 
 
 
+research and understand the patterns already identified by the calendar experts
+
+use that data to create conditionals
 
 
 
 
 
 
+Whenever a common year begins on a Thursday, the months of February, March, and November will have a Friday the 13th
+A common year is a standard Gregorian calendar year with 365 days divided into 12 months, and only 28 days in February.
+
+ the February-March-November pattern repeats in a 28-year cycle
 
 
+ when does the 28 year cycle begin 
 
 
+There can be as many as three Friday the 13ths in a single calendar year; either in February, March and November in a common year starting on Thursday (such as 2009, 2015 or 2026) (D), or January, April and July in a leap year starting on Sunday (such as 2012) (AG)
 
 
-
-
-
-
-
-
-
-
+Three Friday the 13ths can occur in a leap year as well. If January 1 of a leap year falls on a Sunday, the months of January, April, and July will each have a Friday the 13th.
 
 
 

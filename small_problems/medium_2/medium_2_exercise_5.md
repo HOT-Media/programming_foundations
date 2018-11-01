@@ -134,7 +134,7 @@ triangle(3, 3, 3) == :equilateral
 
 
 *************************************************JMX
-def invalid_triangle?(arr)#side_length
+def invalid_triangle?(arr)
   arr.sort!
   case
   when arr[0..1].sum < arr.last then true
@@ -143,8 +143,8 @@ def invalid_triangle?(arr)#side_length
 end
 
 def triangle(x,y,z)
-  side_length = [x,y,z]
-  if invalid_triangle?(side_length)
+  side_length = [x,y,z].sort
+  if side_length[0..1].sum < side_length.last || side_length.include?(0) 
     :invalid
   elsif side_length.uniq.length == 1
     :equilateral
@@ -162,9 +162,21 @@ p triangle(0, 3, 3) == :invalid
 p triangle(3, 1, 1) == :invalid
 
 
+def invalid_triangle?(arr)
+  arr.sort!
+  if arr[0..1].sum < arr.last 
+    true
+  elsif  arr.include?(0) 
+    true
+  else
+    false
+  end
+end
 
-
-
+def invalid_triangle?(arr)
+  arr.sort!
+  true if arr[0..1].sum < arr.last || arr.include?(0) 
+end
 
 
 
@@ -178,9 +190,37 @@ p triangle(3, 1, 1) == :invalid
  :scalene, scalene All 3 sides are of different length
  :invalid one side == 0, or none of the above
 
+*************************************************JMX
+
+def triangle(x, y, z)
+  side_length = [x, y, z].sort
+  if side_length[0..1].sum < side_length.last || side_length.include?(0)
+    :invalid
+  elsif side_length.uniq.length == 1
+    :equilateral
+  elsif side_length.uniq.length == 2
+    :isosceles
+  else
+    :scalene
+  end
+end
 
 
-
+p triangle(3, 3, 3) == :equilateral
+true
+=> true
+p triangle(3, 3, 1.5) == :isosceles
+true
+=> true
+p triangle(3, 4, 5) == :scalene
+true
+=> true
+p triangle(0, 3, 3) == :invalid
+true
+=> true
+p triangle(3, 1, 1) == :invalid
+true
+=> true
 
 
 
