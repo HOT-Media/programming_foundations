@@ -2528,6 +2528,140 @@ def make_toggle_array(walk_num,total_walks)
   toggle_array
 end
 
+def light_logic(light_array,lights_to_toggle_array)
+  lights_to_toggle_array.each do |idx|
+    if light_array[idx] == 0
+      light_array[idx] = 1
+    else
+      light_array[idx] == 1
+      light_array[idx] = 0
+    end
+  end
+  light_array
+end
+
+def lights_left_on(arr)
+  on = []
+  arr.each_with_index do |item, index|
+    on << index if item == 1
+  end
+  on
+end
+
+def switches(num)
+  light_state = nil
+  lights = populate_light_array(num)
+  2.upto(num) do |walk_num|
+    toggle_array = make_toggle_array(walk_num, num)
+    light_state = light_logic(lights,toggle_array)
+  end
+  lights_left_on(light_state)
+end
+
+switches 10
+=> ["light number sync", 1, 0, 0, 1, 0, 0, 0, 0, 1, 0]
+
+
+*****************************************************EXTRACT LIGHTS ON
+
+
+
+
+
+lights.each_with_index { |item, index|
+  index if item == 1
+}
+
+lights_on
+
+
+
+
+extract the lights that are on
+
+    lights_on(lights)
+def lights_on(light_array)
+
+what index locations in the lights array have the value of 1
+
+lights.map do |idx|
+  
+
+
+a = [ "a", "b", "c" ]
+a.each_index {|x| print x }
+
+lights.each_index do |idx|
+# light_state_1 = []
+# light_state_1 << idx if idx == 1
+puts idx
+end
+
+
+lights.each_index do |idx|
+# light_state_1 = []
+# light_state_1 << idx if idx == 1
+puts idx if idx 
+end
+
+evens = (1..10).each_with_object([]) { |i, a| a << i*2 }
+#=> [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+
+hash = Hash.new
+%w(cat dog wombat).each_with_index { |item, index|
+  hash[item] = index
+}
+hash   #=> {"cat"=>0, "dog"=>1, "wombat"=>2}
+
+
+lights_on = []
+
+lights.each_with_index { |item, index|
+  lights_on << index if item == 1
+}
+
+lights_on
+
+                  (lights)
+def lights_left_on(arr)
+  on = []
+  arr.each_with_index do |item, index|
+    on << index if item == 1
+  end
+  on
+end
+
+******************************
+
+
+
+
+
+
+
+
+
+** ** ** *JMX
+
+
+def populate_light_array(num)
+ #light_array = Array.new(num, 1)
+ #light_array.unshift("light number sync")
+ #replace with 
+  Array.new(num, 1).unshift("light number sync")
+end
+
+def make_toggle_array(walk_num,total_walks)
+  toggle_array = []
+  multiple = walk_num
+  loop do
+    toggle_array << multiple
+    #break if multiple + walk_num > 10
+    break if multiple + walk_num > total_walks
+    multiple += walk_num
+  end
+  toggle_array
+end
 
 def light_logic(light_array,lights_to_toggle_array)
   lights_to_toggle_array.each do |idx|
@@ -2541,8 +2675,13 @@ def light_logic(light_array,lights_to_toggle_array)
   light_array
 end
 
-
-
+def lights_left_on(arr)
+  on = []
+  arr.each_with_index do |item, index|
+    on << index if item == 1
+  end
+  on
+end
 
 def switches(num)
   light_state = nil
@@ -2551,10 +2690,94 @@ def switches(num)
     toggle_array = make_toggle_array(walk_num, num)
     light_state = light_logic(lights,toggle_array)
   end
-  light_state
+  lights_left_on(light_state)
 end
 
-switches 10
+*************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*************************************************JMX
+
+def populate_light_array(num)
+  Array.new(num, 1).unshift("light number sync")
+end
+
+def make_toggle_array(walk_num,total_walks)
+  toggle_array = []
+  multiple = walk_num
+  loop do
+    toggle_array << multiple
+    break if multiple + walk_num > total_walks
+    multiple += walk_num
+  end
+  toggle_array
+end
+
+def light_logic(light_array,lights_to_toggle_array)
+  lights_to_toggle_array.each do |idx|
+    if light_array[idx] == 0
+      light_array[idx] = 1
+    else
+      light_array[idx] == 1
+      light_array[idx] = 0
+    end
+  end
+  light_array
+end
+
+def lights_left_on(arr)
+  on = []
+  arr.each_with_index do |item, index|
+    on << index if item == 1
+  end
+  on
+end
+
+def switches(num)
+  light_state = nil
+  lights = populate_light_array(num)
+  2.upto(num) do |walk_num|
+    toggle_array = make_toggle_array(walk_num, num)
+    light_state = light_logic(lights,toggle_array)
+  end
+  lights_left_on(light_state)
+end
+
+*************************************************
+
+validate by stepping through with walk arguments starting with 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
