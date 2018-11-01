@@ -1901,6 +1901,23 @@ def increment_walk_number(num)
 => ["light number sync", 1, 0, 0, 1, 0, 0, 0, 0, 1, 0]
 
 
+def make_toggle_array(walk_num,total_walks)
+  toggle_array = []
+  multiple = walk_num
+  loop do
+    toggle_array << multiple
+    break if multiple + walk_num > 10
+   multiple += walk_num
+ end
+ toggle_array
+end
+
+
+
+
+break if multiple + walk_number > 10
+
+break if multiple + walk_number > 10
 
 
 
@@ -1918,26 +1935,38 @@ end
 
 populate_light_array(10)
 => ["light number sync", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-****************
 
+                                            ****JMX
+
+# method definition to take a walk number and total walks argument
+# that returns an array containing the lights to toggle
 
 
 *LIGHTS TO TOGGLE 
 
-def make_toggle_array(walk_number,total_walks)
+
+def make_toggle_array(walk_num,total_walks)
   toggle_array = []
-  multiple = walk_number
+  multiple = walk_num
   loop do
     toggle_array << multiple
-    break if multiple >= total_walks
-   multiple += walk_number
+    break if multiple + walk_num > 10
+   multiple += walk_num
  end
  toggle_array
 end
 
-
-make_toggle_array(2,10)
+make_toggle_array 2,10
 => [2, 4, 6, 8, 10]
+make_toggle_array 3,10
+=> [3, 6, 9]
+make_toggle_array 6,10
+=> [6]
+make_toggle_array 9,10
+=> [9]
+make_toggle_array 10,10
+=> [10]
+
 
 
 ***TOGGLE LIGHTS
@@ -1959,10 +1988,6 @@ light_logic(lights,[10])
 => ["light number sync", 1, 0, 0, 1, 0, 0, 0, 0, 1, 0]
 
 ***************
-
-
-
-
 
 
 # Extract index location where light value is 1 into an array
@@ -1988,6 +2013,332 @@ make_toggle_array(3,10)
 
 how do I return an array with multiples up to 10
   of 2,3,4,5,6,7,8,9,10
+
+
+
+
+
+
+
+
+
+***METHOD ASSEMBLY
+n = 10
+10 walks
+
+def populate_light_array(num)
+  num = 10
+  lights = Array.new(num, 1)
+  lights.unshift("light number sync")
+end
+
+
+*********populate_light_array(10)
+**************=> ["light number sync", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+
+# upto loop 
+  # each iteration
+   # make a toggle array
+    # toggle the lights array
+
+# starting with walk 2
+# upto n
+
+2.upto(10){|walk_num| walk_num}
+                        # 2
+                        # 3
+                        # 4          n
+  def make_toggle_array(walk_num,total_walks)
+    toggle_array = []
+    multiple = walk_num
+    loop do
+      toggle_array << multiple
+      break if multiple + walk_num > 10
+     multiple += walk_num
+   end
+   toggle_array
+  end
+
+**********make_toggle_array(2,10)
+**************=> [2, 4, 6, 8, 10]
+
+
+                               #[2,4,6,8,10]    
+  def light_logic(light_array,toggle_array)
+    toggle_array.each do |idx|
+      if light_array[idx] == 0
+        light_array[idx] = 1
+      else
+        light_array[idx] == 1
+        light_array[idx] = 0
+      end
+    end
+    light_array
+  end
+
+end.2.upto(10)
+
+
+light_logic(lights, [2, 4, 6, 8, 10])
+=> ["light number sync", 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+
+
+
+
+
+
+
+
+***METHOD ASSEMBLY
+n = 10
+10 walks
+
+def populate_light_array(num)
+  num = 10
+  lights = Array.new(num, 1)
+  lights.unshift("light number sync")
+end
+
+
+*********populate_light_array(10)
+**************=> ["light number sync", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+
+# upto loop 
+  # each iteration
+   # make a toggle array
+    # toggle the lights array
+
+# starting with walk 2
+# upto n
+       #10
+2.upto(num){|walk_num| walk_num}
+                        # 2
+                        # 3
+                        # 4          num
+  def make_toggle_array(walk_num,total_walks)
+    toggle_array = []
+    multiple = walk_num
+    loop do
+      toggle_array << multiple
+      break if multiple + walk_num > 10
+     multiple += walk_num
+   end
+   toggle_array
+  end
+
+**********make_toggle_array(2,10)
+**************=> [2, 4, 6, 8, 10]
+
+
+                 # lights     #[2,4,6,8,10]    
+  def light_logic(light_array,toggle_array)
+    toggle_array.each do |idx|
+      if light_array[idx] == 0
+        light_array[idx] = 1
+      else
+        light_array[idx] == 1
+        light_array[idx] = 0
+      end
+    end
+    light_array
+  end
+
+********light_logic(lights, [2, 4, 6, 8, 10])
+***************=> ["light number sync", 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+
+
+
+
+end.2.upto(10)
+
+
+
+
+
+
+
+
+
+
+
+***METHOD ASSEMBLY
+
+             10
+def switches(num)
+num = 10
+
+
+
+def populate_light_array(num)
+ num = 10
+ light_array = Array.new(num, 1)
+ light_array.unshift("light number sync")
+ #replace with 
+ # Array.new(num, 1).unshift("light number sync")
+end
+
+                                                                               10
+************************************************lights = populate_light_array(num)
+
+
+
+=> ["light number sync", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+lights
+=> ["light number sync", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+
+# upto loop 
+  # each iteration
+   # make a toggle array
+    # toggle the lights array
+
+# starting with walk 2
+# upto n
+       #10
+2.upto(num){|walk_num| walk_num}
+                                    # 2
+                                    # 3
+                                    # 4          num
+    toggle_array = make_toggle_array(walk_num, num)
+
+                        
+  def make_toggle_array(walk_num,total_walks)
+    toggle_array = []
+    multiple = walk_num
+    loop do
+      toggle_array << multiple
+      break if multiple + walk_num > 10
+     multiple += walk_num
+   end
+   toggle_array
+  end
+
+                                                                     2        10
+***********************************toggle_array = make_toggle_array(walk_num, num)
+
+=> [2, 4, 6, 8, 10]
+toggle_array
+=> [2, 4, 6, 8, 10]
+
+
+    light_state = light_logic(lights,toggle_array)
+
+
+                 # lights     #[2,4,6,8,10]    
+  def light_logic(light_array,lights_to_toggle_array)
+    lights_to_toggle_array.each do |idx|
+      if light_array[idx] == 0
+        light_array[idx] = 1
+      else
+        light_array[idx] == 1
+        light_array[idx] = 0
+      end
+    end
+    light_array
+  end
+
+************************************light_state = light_logic(lights,toggle_array)
+
+=> ["light number sync", 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+lights
+=> ["light number sync", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+
+
+end# .2.upto(10)
+
+light_state => ["light number sync", 1, 0, 0, 4, 0, 0, 0, 0, 1, 0]
+
+With 10 lights, 3 lights are left on: lights 1, 4, and 9. The return value is [1, 4, 9].
+
+***********************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+***METHOD ASSEMBLY
+
+             10
+def switches(num)
+num = 10
+                            # 10
+lights = populate_light_array(num)
+
+# lights => ["light number sync", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+2.upto(num){|walk_num| walk_num}
+
+    toggle_array = make_toggle_array(walk_num, num)
+
+ 
+# toggle_array => [2, 4, 6, 8, 10]
+
+
+    light_state = light_logic(lights,toggle_array)
+
+
+ # light_state => ["light number sync", 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+
+
+
+
+end
+light_state
+end
+
+
+light_state => ["light number sync", 1, 0, 0, 4, 0, 0, 0, 0, 1, 0]
+
+With 10 lights, 3 lights are left on: lights 1, 4, and 9. The return value is [1, 4, 9].
+
+***********************************
+
+
+
+
+
+
+
+
 
 
 

@@ -509,6 +509,27 @@ end
 
 
 
+array = [5, 3]
+=> [5, 3]
+bubble_sort!(array)
+=> [3, 5]
+array == [3, 5]
+=> true
+array = [6, 2, 7, 1, 4]
+=> [6, 2, 7, 1, 4]
+bubble_sort!(array)
+=> [1, 2, 4, 6, 7]
+array == [1, 2, 4, 6, 7]
+=> true
+array = %w(Sue Pete Alice Tyler Rachel Kim Bonnie)
+=> ["Sue", "Pete", "Alice", "Tyler", "Rachel", "Kim", "Bonnie"]
+bubble_sort!(array)
+=> ["Alice", "Bonnie", "Kim", "Pete", "Rachel", "Sue", "Tyler"]
+array == %w(Alice Bonnie Kim Pete Rachel Sue Tyler)
+=> true
+
+
+
 
 
 
