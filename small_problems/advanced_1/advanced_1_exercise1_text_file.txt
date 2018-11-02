@@ -1,0 +1,6 @@
+The #{adjective}cold #{nown}rain #{adjective}quickly cleaned the sandy shoes.
+The hot sun heated the sand on the beach and made the water bright blue.
+
+['the dog ran']
+
+" #{verb}"
