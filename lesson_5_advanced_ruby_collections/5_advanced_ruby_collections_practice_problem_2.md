@@ -28,7 +28,13 @@ end
  {:title=>"One Hundred Years of Solitude",:author=>"Gabriel Garcia Marquez",
   :published=>"1967"}]
 
+*************************************************Refactor
+.to_i is not neccessary because the :published values are all 4 characters
+that are string representations of integers
 
+books.sort_by do |hsh|
+  hsh[:published]
+end
 
 
 

@@ -25,8 +25,8 @@ age = 0
 => 0
 
 munsters.each_value do |v|
-  age += v['age'].to_i if v['gender'] == 'male'   
-end  
+  age += v['age'] if v['gender'] == 'male'
+end
 
 
 age

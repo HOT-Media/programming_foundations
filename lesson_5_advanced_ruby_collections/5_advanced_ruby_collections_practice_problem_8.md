@@ -19,37 +19,45 @@ end
  :third=>["jumped"],
  :fourth=>["over", "the", "lazy", "dog"]}
 
-vowels
-=> ["t",
- "h",
- "e",
- "q",
- "u",
- "i",
- "c",
- "k",
- "b",
- "r",
- "o",
- "w",
- "n",
- "f",
- "o",
- "x",
- "j",
- "u",
- "m",
- "p",
- "e",
- "d",
- "o",
- "v",
- "e",
- "r",
- "t",
- "h",
- "e",
-fix the regex
+a hash containing 5 kv pairs, 
+th keys are symbols
+the values are arrays
+
+the arrays have elements that are strings
+
+the strings need to be split into characters
+
+the characters need to be regex for vowel
+if it is a vowel put it in an arrays
+
+
+
+
+*************************************************JMX 
+hsh = {first: ['the', 'quick'], second: ['brown', 'fox'], third: ['jumped'], fourth: ['over', 'the', 'lazy', 'dog']}
+
+
+arr = []
+hsh.each do |key, value|
+  value.join.chars.each {|chr| arr << chr if chr =~ /[aeiou]/}
+end
+
+arr
+=> ["e", "u", "i", "o", "o", "u", "e", "o", "e", "e", "a", "o"]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
