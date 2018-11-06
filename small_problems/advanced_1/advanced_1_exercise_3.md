@@ -36,3 +36,57 @@ new_matrix = transpose(matrix)
 p new_matrix == [[1, 4, 3], [5, 7, 9], [8, 2, 6]]
 p matrix == [[1, 5, 8], [4, 7, 2], [3, 9, 6]]
 This program should print "true" twice.
+
+
+
+matrix = [
+
+
+
+each transposition is the array pair reversed
+                               00,01,02 = 00,10,20
+[0][0, 1, 2]      [0][0],[0][1], [0][2] = [0][0], [1][0], [2][0]
+   [1, 5, 8],
+
+[1][0, 1, 2]      [1][0],[1][1], [1][2] = [0][1], [1][1], [2][1]
+   [4, 7, 2],
+
+[2][0, 1, 2]      [2][0],[2][1], [2][2] = [0][2], [1][2], [2][2]
+   [3, 9, 6]
+]
+
+
+
+matrix[0][0], matrix[0][1], matrix[0][2] = matrix[0][0], matrix[1][0], matrix[2][0]
+
+=> [1, 4, 3]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+matrix.map do |subarray|
+  subarray[0][0],[0][1], [0][2] = [0][0], [1][0], [2][0]
+  subarray.map do |element|
+
+
+
+
+
+
+
+
+
+
+
+
