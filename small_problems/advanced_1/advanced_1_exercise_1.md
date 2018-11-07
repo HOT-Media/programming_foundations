@@ -117,3 +117,24 @@ The hot sun heated the sand on the beach and made the water bright blue.
 remove the escapes for
 
 
+
+research the english terms
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

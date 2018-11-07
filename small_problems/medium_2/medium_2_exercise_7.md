@@ -93,9 +93,11 @@ use that data to create conditionals
 
 
 
-
+how many friday the 13ths were in 1752
+ calculate 1 cycle of friday the 13ths to make sure the logic works out before going any further
 
 Whenever a common year begins on a Thursday, the months of February, March, and November will have a Friday the 13th
+
 A common year is a standard Gregorian calendar year with 365 days divided into 12 months, and only 28 days in February.
 
  the February-March-November pattern repeats in a 28-year cycle
@@ -108,6 +110,72 @@ There can be as many as three Friday the 13ths in a single calendar year; either
 
 
 Three Friday the 13ths can occur in a leap year as well. If January 1 of a leap year falls on a Sunday, the months of January, April, and July will each have a Friday the 13th.
+
+
+if leap year and january 1 is a Sunday  
+  3 friday the 13ths
+
+if not leap year && January 1 is a Thursday
+  3 friday the 13ths
+
+
+months have 28,29, 30, 31 days
+
+if a month having 30 days has a friday the 13th and starts on a Thursday
+
+the month has to start on a Sunday to have a friday the 13th
+
+365 4 times
+
+a hash of months and days for a common year
+a hash of months and days for a leap year
+
+
+
+
+https://launchschool.com/exercises/a7fce257
+
+
+
+Rubys Date class may be helpful here.
+Look at how to initialize a Date object
+Look at the friday? method
+
+Solution
+
+
+
+First, we must require the Date class, since that class isnt part of the core library. 
+
+This problem asks us to find all Friday the 13ths in a given year. 
+
+To do this is, we step through each month of the year and look at the 13th of the month; 
+if its a Friday, we increment unlucky_count.
+*************************************************LS 
+
+require 'date'
+
+def friday_13th(year)
+  unlucky_count = 0
+  thirteenth = Date.new(year, 1, 13)
+  12.times do
+    unlucky_count += 1 if thirteenth.friday?
+    thirteenth = thirteenth.next_month
+  end
+  unlucky_count
+end
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
