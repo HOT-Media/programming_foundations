@@ -2612,12 +2612,17 @@ fulfilled_orders = customer_orders.map do |customer|
 *************************
 fulfilled_orders = nil
 
+
+
+
 fulfilled_orders = customer_orders.map do |customer|
   {    
     customer_id: customer[:customer_id],        
     customer_name: customer[:customer_name]        
   }        
 end    
+
+
 
 
 custorder_value = customer_orders.each_with_index do |hsh,index|
@@ -2630,18 +2635,139 @@ custorder_value = customer_orders.each_with_index do |hsh,index|
   fulfilled_orders[index][:order_value] = order_value
 end
 
+
+                                    hash   element 0
+customer_orders.each_with_index do |data, index|
+                                              0    first elemnt then second { order_fulfilled: true, order_value: 135.99 }
+  order_value = data[:orders].reduce(0) do |total, order|
+    total + order[:order_value] if order[:order_fulfilled]
+  end
+
+  fulfilled_orders[index][:order_value] = order_value
+end
+
+
+
+customer_orders = [
+  {
+    customer_id: 12,
+    customer_name: 'Emma Lopez',
+    orders: [
+      { order_fulfilled: true, order_value: 135.99 },
+      { order_fulfilled: true, order_value: 289.49 },
+      { order_fulfilled: false, order_value: 58.00 }
+    ]
+  },
+  {
+    customer_id: 32,
+    customer_name: 'Michael Richards',
+    orders: [
+      { order_fulfilled: true, order_value: 120.00 },
+      { order_fulfilled: false, order_value: 85.65 }
+    ]
+  },
+]
+
+
+
+fulfilled_orders =[
+  {customer_id: 12, customer_name: 'Emma Lopez', order_value: 425.48},
+  {customer_id: 32, customer_name: 'Michael Richards', order_value: 120.00},
+]
+
+
+
+
+
+
+***no**fulfilled_orders = customer_orders.map do |customer|
+
+
+ order_value = data[:orders].reduce(0) do |total, order|
+ total + order[:order_value] if order[:order_fulfilled]
+ fulfilled_orders[index][:order_value] = order_value
+
+
+
+
+
+[
+      { order_fulfilled: false, order_value: 135.99 },
+      { order_fulfilled: true, order_value: 289.49 },
+      { order_fulfilled: true, order_value: 58.00 }
+    ].reduce(0) do |total, order|
+    total + order[:order_value] if order[:order_fulfilled]
+  end
+
+NoMethodError: undefined method  for nil:NilClass
+from (pry):10897:in block in __pry__
+
+
+[{ order_fulfilled: false, order_value: 135.99 },{ order_fulfilled: true, order_value: 135.99 }].reduce(0) do |total, order|
+    total + order[:order_value] if order[:order_fulfilled]
+  end
+
+
+[{ order_fulfilled: false, order_value: 135.99 }].reduce(0) do |total, order|
+    total + order[:order_value] if order[:order_fulfilled]
+  end
+
+              element 1 
+[{ order_fulfilled: false, order_value: 135.99 }].reduce(0) do |total, order|
+  total + order[:order_value] if order[:order_fulfilled]    
+end    
+=> nil
+  
+
+[{ order_fulfilled: false, order_value: 135.99 },
+{ order_fulfilled: true, order_value: 135.99 }].map do |hisdfsd,dhkld|
+  dhkld if hisdfsd[:order_fulfilled]  
+  end 
+
+
+(1..3).reduce(0) { |sum,p| (p==1) ? sum+1 : sum }
+
+
+In reduce, the value of the code in the block is assigned to the accumulator. In your case you override the first assignment to sum with later nils.
+
+You can fix this by:
+
+(1..3).reduce(0) {|sum, p| sum += 1 if p == 1; sum}
+or
+
+(1..3).reduce(0) {|sum, p| sum += p == 1 ? 1 : 0}
+For your second example, sum is assigned nil on the first iteration, and you are trying to add 1 to nil on the second.
+
+Please keep in mind that reduce/inject is probably not the best instrument for counting - try
+
+(1..3).count(1)
+
+
+[
+      { order_fulfilled: true, order_value: 135.99 },
+      { order_fulfilled: true, order_value: 289.49 },
+      { order_fulfilled: false, order_value: 58.00 }
+    ].reduce(0) do |total, order|
+    order[:order_fulfilled] ? total + order[:order_value] : total
+  end
+
+
+fulfilled_orders = customer_orders.map do |customer|
+  {
+    customer_id: customer[:customer_id],
+    customer_name: customer[:customer_name]
+  }
+end
+
+customer_orders.each_with_index do |data, index|
+  order_value = data[:orders].reduce(0) do |total, order|
+    order[:order_fulfilled] ? total + order[:order_value] : total
+  end
+
+  fulfilled_orders[index][:order_value] = order_value
+end
+
 fulfilled_orders
-
-
-
-
-
-=> [{:customer_id=>12, :customer_name=>"Emma Lopez", :order_value=>425.48},
- {:customer_id=>32, :customer_name=>"Michael Richards"}]
-
-
-
-
 
 
 
@@ -2654,23 +2780,18 @@ end
 
 customer_orders.each_with_index do |data, index|
   order_value = data[:orders].reduce(0) do |total, order|
-    total + order[:order_value] if order[:order_fulfilled]
+    # total + order[:order_value] if order[:order_fulfilled]
+    order[:order_fulfilled] ? total + order[:order_value] : total
   end
 
   fulfilled_orders[index][:order_value] = order_value
 end
 
 
-fulfilled_orders = customer_orders.map do |customer|
- order_value = data[:orders].reduce(0) do |total, order|
- total + order[:order_value] if order[:order_fulfilled]
- fulfilled_orders[index][:order_value] = order_value
+total + order[:order_value] if order[:order_fulfilled]
+total + order[:order_value] if order[:order_fulfilled]
 
-
-
-
-
-
+order[:order_fulfilled] ? total + order[:order_value] : total
 
 
 
