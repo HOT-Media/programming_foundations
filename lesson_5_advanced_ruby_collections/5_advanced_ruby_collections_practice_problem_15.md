@@ -170,18 +170,48 @@ arr.map do |hsh|
   hsh if hsh.values.flatten.all?{|num| !num.odd?}
 end
 
+*************************************************JMX
 
-
+arr = [
+       {a: [1, 2, 3]},      
+       {b: [2, 4, 6], c: [3, 6], d: [4]},      
+       {e: [8], f: [6, 10]}      
+      ]        
 
 arr.select do |hshval|
-  hshval if hshval.values.flatten.all?{|num| !num.odd?}
-end  
-=> [nil, nil, {:e=>[8], :f=>[6, 10]}]
+  hshval if hshval.values.flatten.all?{|num| !num.odd?}  
+end    
+=> [{:e=>[8], :f=>[6, 10]}] 
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+return an array which 
+
+contains only the hashes 
+
+where all the integers are even.
+
+even_hash_array = []
+
+arr.select do |hsh|
+  even_hash_array << hsh if hsh.values.flatten.all?{|num| !num.odd?}
+end
 
 
 
