@@ -2,25 +2,9 @@ Let's build another program using madlibs. We made a program like this in the ea
 
 Make a madlibs program that
 
-reads in
-
-some text
-
-from a text file
-
-that you have created, and then
-
-plugs in
-
-a selection
-
-of randomized nouns, verbs, adjectives, and adverbs
-
-into
-
-that text and 
-
-prints it. 
+reads in some text from a text file that you have created, and then
+plugs in a selection of randomized nouns, verbs, adjectives, and adverbs
+into that text and prints it. 
 
 You can build your lists of nouns, verbs, adjectives, and adverbs directly into your program.
 
@@ -30,15 +14,7 @@ Your program should read this text,
 
 and for each line,
 
-it should place
-
-random
-
-words of the appropriate types
-
-into the text,
-
-and print the result.
+it should place random words of the appropriate types into the text,and print the result.
 
 The challenge of this program isn't about writing your program; it's about choosing how to represent your data. Choose the right way to structure your data, and this problem becomes a whole lot easier.
 
@@ -118,17 +94,17 @@ remove the escapes for
 
 
 
-research the english terms
+
+nown = ["Chicago", "Munchen", "Michael Dell", "Erwin Schrödinger"].sample 
+
+adjective = ["hot", "cold", "red", "shiny", "smart"].sample
+
+verb = ["wrote", "ran", "slept", "talked"].sample
+
+adverb = ["abruptly", "boldly", "carefully", "deliberately"].sample 
 
 
-
-
-
-
-
-
-
-
+"The #{adjective} #{nown} #{adverb} #{verb}.
 
 
 
