@@ -52,6 +52,7 @@ arr3 = [['abc'], ['def'], {third: ['ghi']}]
 arr3[2][:third][0].chars.first
 => "g"
 
+***LS  =>  arr3[2][:third][0][0] # => "g"
 
 
 
