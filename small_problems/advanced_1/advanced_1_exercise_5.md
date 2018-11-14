@@ -1,5 +1,5 @@
 As we saw in the previous exercises, a matrix can be represented in ruby by an Array of Arrays. For example:
-
+```ruby
 1  5  8
 4  7  2
 3  9  6
