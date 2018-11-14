@@ -12,4 +12,3 @@ elsif answer == 2
 else
   puts 'invalid'
 end
-

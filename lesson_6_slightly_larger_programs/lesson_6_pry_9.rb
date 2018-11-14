@@ -1,12 +1,13 @@
 # Given an array, write a method that returns a new array with only the odd numbers
 # that are less than or equal to 15 or multiples of 3
 require 'pry'
+require 'pry-byebug'
 
 def select_numbers(arr)
   new_arr = []
   arr.each do |num|
     binding.pry
-    new_arr << num if num.odd? && (num <= 15 || num % 3 == 0)
+    new_arr << num if num.odd? && num <= 15 || num % 3 == 0
   end
   new_arr
 end
@@ -14,4 +15,3 @@ end
 p select_numbers([1,2,5,6,9,12,15,17,19,21]) == [1,5,9,15,21] # false when it should be true
 p select_numbers([6,12,18]) == []                             # false when it should be true
 p select_numbers([3,5,7,11,15,21]) == [3,5,7,11,15,21]        # true - correct
-exit
