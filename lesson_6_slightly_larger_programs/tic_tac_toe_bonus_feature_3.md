@@ -1599,7 +1599,21 @@ WINNING_LINES.select do |line|
  end  
 => [[1, 2, 3], [7, 8, 9], [2, 5, 8]]
 
+*************************************************Offensive 
 
+ is 5 available
+ 
+brd[5] = "0" if brd[5] == " "
 
+two open_sqares = WINNING_LINES.select do |line|
+  board.values_at(line[0], line[1], line[2]).count(" ") == 2
+ end
 
+square = two_open_squares.flatten.find{|sq| board[sq] == " "  
+
+three open_sqares = WINNING_LINES.select do |line|
+  board.values_at(line[0], line[1], line[2]).count(" ") == 3
+ end  
+
+square = two_open_squares.flatten.find{|sq| board[sq] == " "
 
