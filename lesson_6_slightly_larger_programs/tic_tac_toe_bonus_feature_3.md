@@ -1436,7 +1436,7 @@ loop do # play again y or n loop
   computer_wins = 0
   loop do # first to 5 loop
   #binding.pry
-    board = initialize_board
+    board = initialize_board 
     loop do
       display_board(board,player_wins,computer_wins)
       player_places_piece!(board)
@@ -1566,7 +1566,7 @@ brd[square] = "O"
 
 ************************************************
 
-extract the lines that only have 1 or less X
+extract the lines/arrays that only have 1 or less X
  
 require 'pry'
 require 'pry-byebug'
@@ -1602,7 +1602,7 @@ WINNING_LINES.select do |line|
 *************************************************Offensive 
 
  is 5 available
- 
+
 brd[5] = "0" if brd[5] == " "
 
 two open_sqares = WINNING_LINES.select do |line|
