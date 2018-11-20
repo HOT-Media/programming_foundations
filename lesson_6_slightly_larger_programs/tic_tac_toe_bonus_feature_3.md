@@ -1599,11 +1599,15 @@ WINNING_LINES.select do |line|
  end  
 => [[1, 2, 3], [7, 8, 9], [2, 5, 8]]
 
-*************************************************Offensive 
+*******************************************************************************************************************************Offensive 
+is a win available
+  see flowchart
 
- is 5 available
+is 5 available
 
 brd[5] = "0" if brd[5] == " "
+
+
 
 two open_sqares = WINNING_LINES.select do |line|
   board.values_at(line[0], line[1], line[2]).count(" ") == 2
@@ -1615,5 +1619,665 @@ three open_sqares = WINNING_LINES.select do |line|
   board.values_at(line[0], line[1], line[2]).count(" ") == 3
  end  
 
-square = two_open_squares.flatten.find{|sq| board[sq] == " "
+square = three_open_squares.flatten.find{|sq| board[sq] == " "
+
+
+
+
+********************
+
+
+def set_playing_sequence
+  who_begins == "h" ? [PLAYER_MARKER, PC_MARKER] : [PC_MARKER, PLAYER_MARKER]
+end
+
+ef choose_first_player
+  human = nil
+  computer = nil
+  loop do
+    prompt("Who should go first? Type 'c' for computer and 'h' for human.")
+    input = gets.chomp.downcase
+    if input == 'c' && input.size == 1
+      computer, human = MARKERS
+      break
+    elsif input == 'h' && input.size == 1
+      human, computer = MARKERS
+      break
+    end
+    prompt("Not a valid response. Please try again.")
+  end
+  [human, computer]
+end
+
+
+INITIAL_PLAYER = 'choose' # choose, player, or computer
+
+PLAYER_ONE_MARKER = 'X'
+PLAYER_TWO_MARKER = 'O'
+MARKERS = [PLAYER_ONE_MARKER, PLAYER_TWO_MARKER]
+
+
+def choose_first_player
+  human = nil
+  computer = nil
+  loop do
+    prompt("Who should go first? Type 'c' for computer and 'h' for human.")
+    input = gets.chomp.downcase
+    if input == 'c' && input.size == 1
+      computer, human = MARKERS
+      break
+    elsif input == 'h' && input.size == 1
+      human, computer = MARKERS
+      break
+    end
+    prompt("Not a valid response. Please try again.")
+  end
+  [human, computer]
+end
+
+def plays_first
+  human = nil
+  computer = nil
+  if INITIAL_PLAYER == 'player'
+    human, computer = MARKERS
+  elsif INITIAL_PLAYER == 'computer'
+    computer, human = MARKERS
+  else
+    human, computer = choose_first_player
+  end
+  [human, computer]
+end
+
+
+c = nil
+=> nil
+h = nil
+=> nil
+IP = 'player'
+=> "player"
+
+PLAYER_ONE_MARKER = 'X'
+=> "X"
+PLAYER_TWO_MARKER = 'O'
+=> "O"
+MARKERS = [PLAYER_ONE_MARKER, PLAYER_TWO_MARKER]
+=> ["X", "O"]
+h, c = MARKERS
+=> ["X", "O"]
+c
+=> "O"
+h
+=> "X"
+c,h = MARKERS
+=> ["X", "O"]
+c
+=> "X"
+h
+=> "O"
+
+based on this code it looks like x always goes first and the player is 
+assigned to the variable x
+x does always go first
+
+YOU 
+COMPUTER 
+
+if i go first, i use x
+if you go first you use x
+
+make the order of x o a constant
+["X", "O"]
+
+who is x
+
+who goes first
+who wants to be x
+assign who to X and who to O
+
+player is not prompted to choose who goes first, the constant is 
+hard coded 
+
+
+
+
+
+
+state =
+  { name: player_name,
+    first_turn: FIRST_TURN == 'choose' ? determine_first_turn : FIRST_TURN,
+    current_turn: '',
+    player: 0,
+    ai: 0 }
+
+puts ""
+prompt "Welcome to Tic-Tac-Toe!"
+prompt" First player to win #{WIN_LIMIT} rounds, gets a trophy!"
+prompt "Press Enter to start the game."
+gets
+
+loop do # game loop
+  board = init_board
+  state[:current_turn] = state[:first_turn]
+
+
+
+
+
+loop do
+  display_board(board)
+
+  player_places_piece!(board)
+  break if someone_won?(board) || board_full?(board)
+
+  computer_places_piece!(board)
+  break if someone_won?(board) || board_full?(board)
+end
+
+
+
+loop do
+  display_board(board)
+  place_piece!(board, current_player)
+  current_player = alternate_player(current_player)
+  break if someone_won?(board) || board_full?(board)
+end
+
+
+
+
+loop do
+  display_board(board,player_wins,computer_wins)
+  player_places_piece!(board)
+  break if someone_won?(board) || board_full?(board)
+  computer_places_piece!(board)
+  break if someone_won?(board) || board_full?(board)
+ end
+
+
+
+
+
+alternate player
+
+
+
+loop do
+  display_board(board)
+  current_player = user
+                      prompt user to go 
+  place_piece!(board, current_player)
+
+  current_player = alternate_player(current_player)
+  break if someone_won?(board) || board_full?(board)
+end
+
+
+
+current_player = alternate_player(current_player)
+
+
+def place_piece!(board, current_player)
+  player_places_piece
+  computer_places_piece
+end
+
+
+alternate_player (current_player)
+
+
+loop do
+  display_board(board)
+  current_player = user
+                      
+  place_piece!(board, current_player)
+
+  current_player = alternate_player(current_player)
+
+  break if someone_won?(board) || board_full?(board)
+end
+
+
+
+
+user is player_one 
+computer is player_two 
+
+
+start with 
+
+
+
+
+loop do
+  display_board(board)
+
+
+  place_piece!(board, current_player)
+
+
+  current_player = alternate_player(current_player)
+
+
+  break if someone_won?(board) || board_full?(board)
+end
+
+
+
+
+def place_piece!(brd, current_player)
+  current_player # 
+
+
+
+
+current_user = true
+
+def alternate player
+  !player  
+end
+
+current_user = alternate current_user
+=> false
+current_user = alternate current_user
+=> true
+    
+player one places piece if true
+player two places piece if false
+
+
+
+
+current_player = true
+current_player ?  player_one : player_two 
+
+
+
+
+
+
+
+
+
+
+
+current_player = true
+current_player ?  1 : 2
+
+
+
+current_player
+=> true
+alternate current_player
+=> false
+current_player = alternate current_player
+=> false
+current_player = alternate current_player
+=> true
+current_player = alternate current_player
+=> false
+current_player = alternate current_player
+=> true
+
+
+def alternate player
+  !player  
+end
+
+
+current_player = true
+
+current_player = alternate current_player
+=> false
+current_player = alternate current_player
+=> true
+
+
+current_player ? player_one : player_two
+=> player_one  
+
+
+current_player ? player_one : player_two
+=> player_one  
+
+
+loop do
+  display_board(board)
+
+                      player_places_piece!
+  place_piece!(board, current_player)
+
+
+  current_player = alternate_player(current_player)
+
+
+  break if someone_won?(board) || board_full?(board)
+end
+
+
+
+*************************************************
+
+drop 
+INITIAL_MARKER = ' '
+PLAYER_MARKER = 'X'
+COMPUTER_MARKER = 'O'
+
+initialize 
+
+PLAYER_ORDER = "player"
+PLAYER_ORDER = "computer"
+PLAYER_ORDER = "choose"
+
+PLAYER_ORDER = "player"
+PLAYER_ORDER = "computer"
+PLAYER_ORDER = "choose"
+
+
+PLAYER_ORDER == "computer" ? (computer, player = ["X", "O"]) : (player, computer = ["X", "O"])
+
+
+def set_player_order ()
+  loop do # validate input
+  puts "Who is first, player or computer?"
+    answer = gets.chomp
+    break if answer == "player" || "computer"
+    "Please enter (player) or (computer)."
+  end
+  answer == "computer" ? (computer, player = ["X", "O"]) : (player, computer = ["X", "O"])
+end
+
+
+
+
+
+
+
+
+PLAYER_ORDER = "player"
+PLAYER_ORDER = "computer"
+PLAYER_ORDER = "choose"
+
+
+PLAYER_ORDER == "computer" ? (computer, player = ["X", "O"]) : (player, computer = ["X", "O"])
+
+
+def set_player_order 
+  answer = ""
+  loop do # validate input
+  puts "Who is first, player or computer?"
+    answer = gets.chomp
+    break if answer == "player" || "computer"
+    "Please enter (player) or (computer)."
+  end
+  answer == "player" ? (player, computer = ["X", "O"]) : (computer, player = ["X", "O"])
+end
+
+
+
+
+
+
+def set_player_order 
+  answer = ""
+  loop do # validate input
+  puts "Who is first, player or computer?"
+    answer = gets.chomp
+    break if answer == "player" # || "computer"
+    puts "Please enter (player) or (computer)."
+  end
+return answer == "player" ? (player, computer = ["X", "O"]) : (computer, player = ["X", "O"])
+end
+
+
+players = [player_marker, computer_marker ]
+
+def set_player_order, (players_waiting_for_order_assignment) 
+  answer = ""
+  loop do # validate input
+  puts "Who is first, player or computer?"
+    answer = gets.chomp
+    break if answer == "player" # || "computer"
+    puts "Please enter (player) or (computer)."
+  end
+ answer == "player" ? (players_waiting_for_marker_assignment[0], players_waiting_for_marker_assignment[1] = ["X", "O"]) : (players_waiting_for_marker_assignment[1], players_waiting_for_marker_assignment[0] = ["X", "O"])
+ players_waiting_for_marker_assignment
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PLAYER_ORDER = "player"
+PLAYER_ORDER = "computer"
+PLAYER_ORDER = "choose"
+
+
+PLAYER_ORDER == "computer" ? (computer, player = ["X", "O"]) : (player, computer = ["X", "O"])
+set_player_order == "computer" ? (computer, player = ["X", "O"]) : (player, computer = ["X", "O"]) if PLAYER_ORDER == "choose"
+
+def set_player_order 
+  answer = ""
+  loop do # validate input
+  puts "Who is first, player or computer?"
+    answer = gets.chomp
+    break if answer == "player" || answer == "computer"
+    "Please enter (player) or (computer)."
+  end
+  answer
+end
+
+
+
+PLAYER_ORDER = "choose"
+(pry):78: warning: already initialized constant PLAYER_ORDER
+(pry):40: warning: previous definition of PLAYER_ORDER was here
+=> "choose"
+
+set_player_order == "computer" ? (computer, player = ["X", "O"]) : (player, computer = ["X", "O"]) if PLAYER_ORDER == "choose"
+Who is first, player or computer?
+computer
+=> ["X", "O"]
+computer
+=> "X"
+player
+=> "O"
+
+
+**************************************************************************************************************************assign X or O to player
+
+PLAYER_ORDER = "player"
+PLAYER_ORDER = "computer"
+PLAYER_ORDER = "choose"
+
+
+
+def set_player_order 
+  answer = ""
+  loop do # validate input
+  puts "Who is first, player or computer?"
+    answer = gets.chomp
+    break if answer == "player" || answer == "computer"
+    "Please enter (player) or (computer)."
+  end
+  answer
+end
+
+
+
+PLAYER_ORDER == "computer" ? (computer, player = ["X", "O"]) : (player, computer = ["X", "O"])
+set_player_order == "computer" ? (computer, player = ["X", "O"]) : (player, computer = ["X", "O"]) if PLAYER_ORDER == "choose"
+
+
+
+PLAYER_ORDER = "player"
+PLAYER_ORDER == "computer" ? (computer, player = ["X", "O"]) : (player, computer = ["X", "O"])
+=> ["X", "O"]
+player
+=> "X"
+computer
+=> "O"
+
+
+PLAYER_ORDER = "computer"
+PLAYER_ORDER == "computer" ? (computer, player = ["X", "O"]) : (player, computer = ["X", "O"])
+=> ["X", "O"]
+player
+=> "O"
+computer
+=> "X"
+
+
+
+PLAYER_ORDER = "choose"
+set_player_order == "computer" ? (computer, player = ["X", "O"]) : (player, computer = ["X", "O"]) if PLAYER_ORDER == "choose"
+
+Who is first, player or computer?
+player
+=> ["X", "O"]
+player
+=> "X"
+computer
+=> "O"
+
+Who is first, player or computer?
+computer
+=> ["X", "O"]
+computer
+=> "X"
+player
+=> "O"
+
+change
+computer, player = ["X", "O"]
+to 
+computer_marker, player_marker
+
+player_marker
+=> "X"
+computer_marker
+=> "O"
+
+
+
+**************************************************************************************************************************assign X or O to player TEST : Passed
+
+player_marker is initialized above and represents the player
+computer_marker is initialized above and represents the computer
+
+the computer counts the number of player_markers and determines a winner when 3
+
+so far I can assign a marker to both players or they can choose themselves
+
+
+def detect_winner(brd)
+  WINNING_LINES.each do |line|
+    if brd.values_at(line[0], line[1], line[2]).count(player_marker) == 3
+      return "Player"
+    elsif brd.values_at(line[0], line[1], line[2]).count(computer_marker) == 3
+      return "Computer"
+    end
+  end
+  nil
+end
+
+
+
+def player_places_piece!(brd)
+  square = ''
+  loop do
+    prompt "Choose a position to place a piece: #{joinor(empty_squares(brd))}"
+    square = gets.chomp.to_i
+    break if empty_squares(brd).include?(square)
+    prompt "Sorry that is not a valid choice"
+  end
+  brd[square] = player_marker
+end
+
+def computer_places_piece!(brd)
+  square = empty_squares(brd).sample
+
+  brd[square] = computer_marker
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
