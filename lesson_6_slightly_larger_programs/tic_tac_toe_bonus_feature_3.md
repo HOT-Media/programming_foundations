@@ -2338,6 +2338,28 @@ end
 
 
 
+computer ai logic
+**********************
+board = {1=>"X", 2=>"X", 3=>" ", 4=>"X", 5=>" ", 6=>" ", 7=>"X", 8=>"X", 9=>" "}
+
+board is passed in to parameter brd so anywhere brd is inside a method it is referencing board
+brd is the parameter
+board is the Hash 
+
+
+
+def winning_move(brd)
+  Extract Arrays with two "O"s and 1 empty square
+  winning_sqare_arrays = WINNING_LINES.select do |line|
+    brd.values_at(line[0], line[1], line[2]).count("O") == 2
+    &&
+    brd.values_at(line[0], line[1], line[2]).count(" ") == 1
+  end
+  # find first sqare of the first array extracted
+  square = winning_squares_array.flatten.find{|sq| board[sq] == " " 
+  square
+end 
+#=> returns an integer representing the square to pass into computer marks square
 
 
 
@@ -2347,6 +2369,317 @@ end
 
 
 
+the board will have 2 squares marked by the player in a potentially winning combination
+  return an array of all the subarrays that contain X, X in a row from WINNING LINES
+          return an array of all the subarrays that do not have an O from the array above
+            computer adds an O to the first array in the returned array from above
+
+
+
+Iterate through WINNING_LINES and extract the subarrays representing lines that have 2 Xs
+
+def return_all_arrays_with_2_x(brd)
+  
+  WINNING_LINES.select do |line|
+    binding.pry     
+    brd.values_at(line[0], line[1], line[2]).count("X") == 2
+  end  
+end  
+
+=> [[1, 2, 3], [7, 8, 9], [2, 5, 8]]
+
+
+
+
+iterate through sub arrays of arrays with 2 Xs and extract the subarrays that do not have an "O"
+
+two_x = WINNING_LINES.select do |line|
+  board.values_at(line[0], line[1], line[2]).count("X") == 2
+ end  
+
+two_x
+
+block_this_square = two_x.select do |subarr|
+  board.values_at(subarr[0], subarr[1], subarr[2]).count("O") == 0
+end
+
+block_this_square
+=> [[7, 8, 9], [2, 5, 8]]
+  
+
+
+What is the first availabe square in the block_this_square sub arrays?
+
+square = block_this_square.flatten.find{|sq| board[sq] == " "}
+=> 9
+
+brd[sqare] = "O"
+
+
+
+
+
+def return_all_arrays_with_2_x(brd)
+  
+  WINNING_LINES.select do |line|
+    binding.pry     
+    brd.values_at(line[0], line[1], line[2]).count("X") == 2
+  end  
+end  
+=> [[1, 2, 3], [7, 8, 9], [2, 5, 8]]
+
+
+
+
+two_x = WINNING_LINES.select do |line|
+  board.values_at(line[0], line[1], line[2]).count("X") == 2
+ end  
+
+two_x
+
+block_this_square = two_x.select do |subarr|
+  board.values_at(subarr[0], subarr[1], subarr[2]).count("O") == 0
+end
+
+block_this_square
+=> [[7, 8, 9], [2, 5, 8]]
+  
+
+
+What is the first availabe square in the block_this_square sub arrays?
+
+square = block_this_square.flatten.find{|sq| board[sq] == " "}
+=> 9
+
+brd[sqare] = "O"
+
+
+
+
+
+
+def block_players_winning_move(brd)
+
+  two_x = WINNING_LINES.select do |line|
+    brd.values_at(line[0], line[1], line[2]).count("X") == 2
+  end
+
+  block_this_square = two_x.select do |subarr|
+    brd.values_at(subarr[0], subarr[1], subarr[2]).count("O") == 0
+  end
+
+  # block_this_square
+  # => [[7, 8, 9], [2, 5, 8]]
+  # What is the first availabe square in the block_this_square sub arrays?
+
+ square = block_this_square.flatten.find{|sq| board[sq] == " "}
+ square
+end
+# integer
+# or 
+# nil 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def computer_places_piece!(brd)
+  
+  # go for the winning square
+  winning_move(brd)
+  => integer 
+  => []
+  square = winning_move(board) if (winning_move(board)).class == Integer 
+
+
+
+
+
+  square = empty_squares(brd).sample
+  *******new computer ai logic*********
+
+  brd[square] = computer_and_assigned_marker
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# computer makes winning movew
+def winning_move(brd)
+  Extract Arrays with two "O"s and 1 empty square
+  winning_sqare_arrays = WINNING_LINES.select do |line|
+    brd.values_at(line[0], line[1], line[2]).count("O") == 2
+    &&
+    brd.values_at(line[0], line[1], line[2]).count(" ") == 1
+  end
+  # find first sqare of the first array extracted
+  square = winning_squares_array.flatten.find{|sq| board[sq] == " " 
+  square
+end 
+#=> returns an integer representing the square to pass into computer marks square
+
+
+
+
+def block_players_winning_move(brd)
+  two_x = WINNING_LINES.select do |line|
+    brd.values_at(line[0], line[1], line[2]).count("X") == 2
+  end
+
+  block_this_square = two_x.select do |subarr|
+    brd.values_at(subarr[0], subarr[1], subarr[2]).count("O") == 0
+  end
+
+  # block_this_square
+  # => [[7, 8, 9], [2, 5, 8]]
+  # What is the first availabe square in the block_this_square sub arrays?
+
+ square = block_this_square.flatten.find{|sq| board[sq] == " "}
+ square
+end
+# integer
+# or 
+# nil 
+
+
+def find_3_open_squares(brd)
+  three open_sqares = WINNING_LINES.select do |line|
+    board.values_at(line[0], line[1], line[2]).count(" ") == 3
+  end
+  square = three_open_squares.flatten.find{|sq| board[sq] == " " 
+  square  
+end 
+
+
+def find_two_open_squares(brd)
+  two_open_sqares_and_one_o = WINNING_LINES.select do |line|
+    brd.values_at(line[0], line[1], line[2]).count("O") == 1
+      &&
+    brd.values_at(line[0], line[1], line[2]).count(" ") == 2
+  end
+  square = two_open_squares_and_one_o.flatten.find{|sq| board[sq] == " " 
+  square
+end 
+
+
+
+
+
+
+def computer_places_piece!(brd)
+
+  square = winning_move(brd) if (winning_move(brd)).class == Integer 
+
+  square = block_players_winning_move(brd) if (block_players_winning_move(brd)).class == Integer
+
+  square = brd[5]  if brd[5] == " "
+
+  square = find_3_open_squares(brd) if (find_3_open_squares(brd)).class == Integer
+
+  square = find_two_open_squares(brd) if (find_two_open_squares(brd)).class == Integer
+
+  brd[square] = computer_and_assigned_marker
+
+end
+
+
+
+** ** ** * clean up 
+
+# begin computer ai logic
+
+def winning_move(brd)
+  Extract Arrays with two "O"s and 1 empty square
+  winning_sqare_arrays = WINNING_LINES.select do |line|
+    brd.values_at(line[0], line[1], line[2]).count("O") == 2
+    &&
+    brd.values_at(line[0], line[1], line[2]).count(" ") == 1
+  end
+  square = winning_squares_array.flatten.find{|sq| board[sq] == " " 
+  square
+end 
+
+def block_players_winning_move(brd)
+  two_x = WINNING_LINES.select do |line|
+    brd.values_at(line[0], line[1], line[2]).count("X") == 2
+  end
+
+  block_this_square = two_x.select do |subarr|
+    brd.values_at(subarr[0], subarr[1], subarr[2]).count("O") == 0
+  end
+
+ square = block_this_square.flatten.find{|sq| board[sq] == " "}
+ square
+end
+
+def find_3_open_squares(brd)
+  three open_sqares = WINNING_LINES.select do |line|
+    board.values_at(line[0], line[1], line[2]).count(" ") == 3
+  end
+  square = three_open_squares.flatten.find{|sq| board[sq] == " " 
+  square  
+end 
+
+def find_two_open_squares(brd)
+  two_open_sqares_and_one_o = WINNING_LINES.select do |line|
+    brd.values_at(line[0], line[1], line[2]).count("O") == 1
+      &&
+    brd.values_at(line[0], line[1], line[2]).count(" ") == 2
+  end
+  square = two_open_squares_and_one_o.flatten.find{|sq| board[sq] == " " 
+  square
+end 
+
+# end computer ai logic
+
+
+def computer_places_piece!(brd)
+
+  square = winning_move(brd) if (winning_move(brd)).class == Integer 
+
+  square = block_players_winning_move(brd) if (block_players_winning_move(brd)).class == Integer
+
+  square = brd[5]  if brd[5] == " "
+
+  square = find_3_open_squares(brd) if (find_3_open_squares(brd)).class == Integer
+
+  square = find_two_open_squares(brd) if (find_two_open_squares(brd)).class == Integer
+
+  brd[square] = computer_and_assigned_marker
+
+end
 
 
 
