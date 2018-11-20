@@ -2138,7 +2138,7 @@ computer
 
 
 PLAYER_ORDER = "choose"
-set_player_order == "computer" ? (computer, player = ["X", "O"]) : (player, computer = ["X", "O"]) if PLAYER_ORDER == "choose"
+set_player_order == "computer" ? (computer_and_assgned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker, computer_and_assgned_marker = ["X", "O"]) if PLAYER_ORDER == "choose"
 
 Who is first, player or computer?
 player
@@ -2170,19 +2170,101 @@ computer_marker
 
 **************************************************************************************************************************assign X or O to player TEST : Passed
 
-player_marker is initialized above and represents the player
-computer_marker is initialized above and represents the computer
 
-the computer counts the number of player_markers and determines a winner when 3
 
-so far I can assign a marker to both players or they can choose themselves
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PLAYER_ORDER = "player"
+PLAYER_ORDER = "computer"
+PLAYER_ORDER = "choose"
+
+
+
+def set_player_order 
+  answer = ""
+  loop do # validate input
+  puts "Who is first, player or computer?"
+    answer = gets.chomp
+    break if answer == "player" || answer == "computer"
+    "Please enter (player) or (computer)."
+  end
+  answer
+end
+
+
+PLAYER_ORDER == "computer" ? (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker, computer_and_assigned_marker = ["X", "O"])
+set_player_order == "computer" ? (computer_and_assigned_marker, player = ["X", "O"]) : (player, computer_and_assigned_marker = ["X", "O"]) if PLAYER_ORDER == "choose"
+
+
+
+PLAYER_ORDER = "player"
+PLAYER_ORDER == "computer" ? (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker, computer_and_assigned_marker = ["X", "O"])
+=> ["X", "O"]
+player_and_assigned_marker
+=> "X"
+computer_and_assigned_marker
+=> "O"
+
+
+
+PLAYER_ORDER = "computer"
+PLAYER_ORDER == "computer" ? (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker,computer_and_assigned_marker = ["X", "O"])
+=> ["X", "O"]
+player_and_assigned_marker
+=> "O"
+computer_and_assigned_marker
+=> "X"
+
+
+
+
+PLAYER_ORDER = "choose"
+set_player_order == "computer" ? (computer_and_assgned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker, computer_and_assgned_marker = ["X", "O"]) if PLAYER_ORDER == "choose"
+
+Who is first, player or computer?
+player
+=> ["X", "O"]
+
+Who is first, player or computer?
+computer
+=> ["X", "O"]
+computer
+=> "X"
+
+
+
+
+
+
+
+
+
+
+
+player_and_assigned_marker, computer_and_assgned_marker are initialized above and represent the player and computer 
+
+the computer counts the number of player_and_assigned_markers and computer_and_assigned_markers and determines a winner when 3
 
 
 def detect_winner(brd)
   WINNING_LINES.each do |line|
-    if brd.values_at(line[0], line[1], line[2]).count(player_marker) == 3
+    if brd.values_at(line[0], line[1], line[2]).count(player_and_assigned_marker) == 3
       return "Player"
-    elsif brd.values_at(line[0], line[1], line[2]).count(computer_marker) == 3
+    elsif brd.values_at(line[0], line[1], line[2]).count(computer_and_assigned_marker) == 3
       return "Computer"
     end
   end
@@ -2199,56 +2281,55 @@ def player_places_piece!(brd)
     break if empty_squares(brd).include?(square)
     prompt "Sorry that is not a valid choice"
   end
-  brd[square] = player_marker
+  brd[square] = player_and_assigned_marker
 end
+
+
 
 def computer_places_piece!(brd)
   square = empty_squares(brd).sample
+  *******new computer ai logic*********
 
-  brd[square] = computer_marker
+  brd[square] = computer_and_assigned_marker
 end
 
 
 
 
+set current_player
+
+player_and assigned_marker = current_player if player_and_assigned_marker == "X"
+computer_and_assigned_marker = current_player if computer_and_assigned_marker == "X"
+
+
+def place_piece! (brd, current_player)
+  player_places_piece!(brd) if player_and_assigned_marker
+  computer_places_piece!(brd) if computer_and_assigned_marker
+end
+
+
+def alternate player_or_computer
+  !player_or_computer 
+end
 
 
 
+toggle the current player 
+
+current_player = alternate_player(current_player)
+
+def alternate player_or_computer
+  !player_or_computer 
+end
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+loop do
+  display_board(board)
+  place_piece!(board, current_player)
+  current_player = alternate_player(current_player)
+  break if someone_won?(board) || board_full?(board)
+end
 
 
 
