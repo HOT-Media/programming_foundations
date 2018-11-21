@@ -2615,8 +2615,8 @@ def computer_places_piece!(brd)
 end
 
 
-
-** ** ** * clean up 
+************************************************************************
+************************************************************************Final AI logic
 
 # begin computer ai logic
 
@@ -2680,6 +2680,294 @@ def computer_places_piece!(brd)
   brd[square] = computer_and_assigned_marker
 
 end
+************************************************************************
+************************************************************************
+
+PLAYER_ORDER = "player"
+PLAYER_ORDER == "computer" ? (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker, computer_and_assigned_marker = ["X", "O"])
+=> ["X", "O"]
+player_and_assigned_marker
+=> "X"
+computer_and_assigned_marker
+=> "O"
+
+
+
+PLAYER_ORDER = "computer"
+PLAYER_ORDER == "computer" ? (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker,computer_and_assigned_marker = ["X", "O"])
+=> ["X", "O"]
+player_and_assigned_marker
+=> "O"
+computer_and_assigned_marker
+=> "X"
+
+
+
+
+PLAYER_ORDER = "choose"
+set_player_order == "computer" ? (computer_and_assgned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker, computer_and_assgned_marker = ["X", "O"]) if PLAYER_ORDER == "choose"
+
+Who is first, player or computer?
+player
+=> ["X", "O"]
+
+Who is first, player or computer?
+computer
+=> ["X", "O"]
+computer
+=> "X"
+
+
+player_and assigned_marker = current_player if player_and_assigned_marker == "X"
+computer_and_assigned_marker = current_player if computer_and_assigned_marker == "X"
+
+toggle the current player 
+
+current_player = alternate_player(current_player)
+
+***********************************
+***********************************
+# new game loop
+
+loop do
+  display_board(board)
+  place_piece!(board, current_player)
+  current_player = alternate_player(current_player)
+  break if someone_won?(board) || board_full?(board)
+end
+
+
+***********************************
+***********************************
+
+
+
+
+
+loop do # play again y or n loop
+  player_wins = 0
+  computer_wins = 0
+  loop do # first to 5 loop
+  #binding.pry
+    board = initialize_board
+    loop do
+      display_board(board,player_wins,computer_wins)
+      player_places_piece!(board)
+      break if someone_won?(board) || board_full?(board)
+      computer_places_piece!(board)
+      break if someone_won?(board) || board_full?(board)
+    end
+    display_board(board,player_wins,computer_wins)
+
+    if someone_won?(board)
+      prompt "#{detect_winner(board)} won that round!"
+    else
+      prompt "It's a tie!"
+    end
+    
+    sleep 1.5
+     
+    player_wins += 1 if detect_winner(board) == "Player"
+    computer_wins += 1 if detect_winner(board) == "Computer"
+    #binding.pry 
+    break if computer_wins == 5 || player_wins == 5
+  end
+  
+  prompt "Player won the game!" if player_wins == 5
+  prompt "Computer won the game!" if computer_wins == 5
+
+  prompt "Play again? (y or n)"
+  answer = gets.chomp
+  break unless answer.downcase.start_with?("y")
+end
+
+prompt "Thanks for playing Tic Tac Toe. Good bye!"
+
+
+
+
+
+PLAYER_ORDER = "player"
+# PLAYER_ORDER = "computer"
+# PLAYER_ORDER = "choose"
+
+
+
+def set_player_order 
+  answer = ""
+  loop do # validate input
+  puts "Who is first, player or computer?"
+    answer = gets.chomp
+    break if answer == "player" || answer == "computer"
+    "Please enter (player) or (computer)."
+  end
+  answer
+end
+
+
+PLAYER_ORDER = "player"
+PLAYER_ORDER == "computer" ? (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker, computer_and_assigned_marker = ["X", "O"])
+=> ["X", "O"]
+player_and_assigned_marker
+=> "X"
+computer_and_assigned_marker
+=> "O"
+
+player_and assigned_marker = current_player if player_and_assigned_marker == "X"
+computer_and_assigned_marker = current_player if computer_and_assigned_marker == "X"
+
+# toggle the current player 
+
+# current_player = alternate_player(current_player)
+
+
+PLAYER_ORDER = "player"
+PLAYER_ORDER == "computer" ? (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker, computer_and_assigned_marker = ["X", "O"])
+# player_and_assigned_marker
+# => "X"
+player_and assigned_marker = current_player if player_and_assigned_marker == "X"
+
+
+loop do
+  display_board(brd)
+  place_piece!(brd, current_player)
+  current_player = alternate_player(current_player)
+  break if someone_won?(brd) || board_full?(brd)
+end
+
+
+
+*************************************************Updated gameplay loop
+
+
+
+def place_piece!(brd, current_player)
+  player_places_piece!(brd) if player_and_assigned_marker
+  computer_places_piece!(brd) if computer_and_assigned_marker
+end
+
+
+
+
+
+
+loop do # play again y or n loop
+  player_wins = 0
+  computer_wins = 0
+  loop do # first to 5 loop
+  #binding.pry
+    board = initialize_board
+    loop do # win this round loop
+      display_board(board,player_wins,computer_wins)
+      place_piece!(brd, current_player)
+      current_player = alternate_player(current_player)
+      break if someone_won?(brd) || board_full?(brd)
+    end
+
+    display_board(board,player_wins,computer_wins)
+
+    if someone_won?(board)
+      prompt "#{detect_winner(board)} won that round!"
+    else
+      prompt "It's a tie!"
+    end
+    
+    sleep 1.5
+     
+    player_wins += 1 if detect_winner(board) == "Player"
+    computer_wins += 1 if detect_winner(board) == "Computer"
+    #binding.pry 
+    break if computer_wins == 5 || player_wins == 5
+  end
+  
+  prompt "Player won the game!" if player_wins == 5
+  prompt "Computer won the game!" if computer_wins == 5
+
+  prompt "Play again? (y or n)"
+  answer = gets.chomp
+  break unless answer.downcase.start_with?("y")
+end
+
+prompt "Thanks for playing Tic Tac Toe. Good bye!"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

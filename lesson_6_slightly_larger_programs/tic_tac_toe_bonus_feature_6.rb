@@ -18,9 +18,9 @@ end
 
 
 # rubocop:disable Metrics/AbcSize
-def display_board(brd,player_score,computer_score)
+def display_board(brd,player,computer,player_score, computer_score)
   system 'clear'
-  puts "You are #{PLAYER_MARKER}, the computer is #{COMPUTER_MARKER}"
+  puts "You are #{player}, the computer is #{computer}"
   puts "Your score: #{player_score}"
   puts "Computer score: #{computer_score}"
   puts ""
@@ -72,6 +72,25 @@ def set_player_order
 end
 
 
+
+
+
+def set_player_order 
+  answer = ""
+  loop do # validate input
+  puts "Who is first, player or computer?"
+    answer = gets.chomp
+    break if answer == "player" || answer == "computer"
+    "Please enter (player) or (computer)."
+  end
+  answer
+end
+
+
+
+
+
+
 def player_places_piece!(brd)
   square = ''
   loop do
@@ -84,35 +103,91 @@ def player_places_piece!(brd)
 end
 
 
-# original
 
-# def player_places_piece!(brd)
-#   square = ''
-#   loop do
-#     prompt "Choose a position to place a piece: #{joinor(empty_squares(brd))}"
-#     square = gets.chomp.to_i
-#     break if empty_squares(brd).include?(square)
-#     prompt "Sorry that is not a valid choice"
-#   end
-#   brd[square] = PLAYER_MARKER
-# end
 
-# end original 
+
+
+
+# begin computer ai logic
+
+def winning_move(brd)
+  winning_sqare_arrays = WINNING_LINES.select do |line|
+    brd.values_at(line[0], line[1], line[2]).count("O") == 2  && brd.values_at(line[0], line[1], line[2]).count(" ") == 1
+  end
+  square = winning_squares_array.flatten.find{|sq| board[sq]} == " " 
+  square
+end 
+
+
+
+
+def block_players_winning_move(brd)
+  two_x = WINNING_LINES.select do |line|
+    brd.values_at(line[0], line[1], line[2]).count("X") == 2
+  end
+
+  block_this_square = two_x.select do |subarr|
+    brd.values_at(subarr[0], subarr[1], subarr[2]).count("O") == 0
+  end
+
+ square = block_this_square.flatten.find{|sq| board[sq] == " "}
+ square
+end
+
+
+
+
+
+
+def find_3_open_squares(brd)
+  three open_sqares = WINNING_LINES.select do |line|
+    board.values_at(line[0], line[1], line[2]).count(" ") == 3
+  end
+  square = three_open_squares.flatten.find{|sq| board[sq]} == " " 
+  square  
+end 
+
+
+
+
+def find_two_open_squares(brd)
+  two_open_sqares_and_one_o = WINNING_LINES.select do |line|
+    brd.values_at(line[0], line[1], line[2]).count("O") == 1 && brd.values_at(line[0], line[1], line[2]).count(" ") == 2
+  end
+  square = two_open_squares_and_one_o.flatten.find{|sq| board[sq]} == " " 
+  square
+end 
+
+# end computer ai logic
+
+
+
 
 
 
 def computer_places_piece!(brd)
-  square = empty_squares(brd).sample
-  *******new computer ai logic*********
-
+  square = winning_move(brd) if (winning_move(brd)).class == Integer 
+  square = block_players_winning_move(brd) if (block_players_winning_move(brd)).class == Integer
+  square = brd[5]  if brd[5] == " "
+  square = find_3_open_squares(brd) if (find_3_open_squares(brd)).class == Integer
+  square = find_two_open_squares(brd) if (find_two_open_squares(brd)).class == Integer
   brd[square] = computer_and_assigned_marker
 end
 
 
+
+
+
+
 def place_piece! (brd, current_player)
-  player_places_piece!(brd) if player_and_assigned_marker
-  computer_places_piece!(brd) if computer_and_assigned_marker
+  player_places_piece!(brd) if current_player == "X"
+  computer_places_piece!(brd) if current_player == "O"
 end
+
+
+
+
+
 
 def alternate player_or_computer
   !player_or_computer 
@@ -120,23 +195,17 @@ end
 
 
 
-# original 
+def board_full?(brd)
+  empty_squares(brd).empty?
+end
 
-# def computer_places_piece!(brd)
-#   square = empty_squares(brd).sample
 
-#   brd[square] = COMPUTER_MARKER
-# end
 
-# def board_full?(brd)
-#   empty_squares(brd).empty?
-# end
+def someone_won?(brd)
+  !!detect_winner(brd)
+end
 
-# def someone_won?(brd)
-#   !!detect_winner(brd)
-# end
 
-# end original
 
 def detect_winner(brd)
   WINNING_LINES.each do |line|
@@ -149,83 +218,20 @@ def detect_winner(brd)
   nil
 end
 
+# begin game play
 
-# original
-
-# def detect_winner(brd)
-#   WINNING_LINES.each do |line|
-#     if brd.values_at(line[0], line[1], line[2]).count(PLAYER_MARKER) == 3
-#       return "Player"
-#     elsif brd.values_at(line[0], line[1], line[2]).count(COMPUTER_MARKER) == 3
-#       return "Computer"
-#     end
-#   end
-#   nil
-# end
-
-# end original
-
-****place inside gameplay loop ********
-
-PLAYER_ORDER = "player"
+# PLAYER_ORDER = "player"
 PLAYER_ORDER == "computer" ? (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker, computer_and_assigned_marker = ["X", "O"])
-=> ["X", "O"]
-player_and_assigned_marker
-=> "X"
-computer_and_assigned_marker
-=> "O"
+
+# PLAYER_ORDER = "computer"
+# PLAYER_ORDER == "computer" ? (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker,computer_and_assigned_marker = ["X", "O"])
+
+# PLAYER_ORDER = "choose"
+# set_player_order == "computer" ? (computer_and_assgned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker, computer_and_assgned_marker = ["X", "O"]) if PLAYER_ORDER == "choose"
 
 
-
-PLAYER_ORDER = "computer"
-PLAYER_ORDER == "computer" ? (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker,computer_and_assigned_marker = ["X", "O"])
-=> ["X", "O"]
-player_and_assigned_marker
-=> "O"
-computer_and_assigned_marker
-=> "X"
-
-
-
-
-PLAYER_ORDER = "choose"
-set_player_order == "computer" ? (computer_and_assgned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker, computer_and_assgned_marker = ["X", "O"]) if PLAYER_ORDER == "choose"
-
-Who is first, player or computer?
-player
-=> ["X", "O"]
-
-Who is first, player or computer?
-computer
-=> ["X", "O"]
-computer
-=> "X"
-
-
-player_and assigned_marker = current_player if player_and_assigned_marker == "X"
-computer_and_assigned_marker = current_player if computer_and_assigned_marker == "X"
-
-toggle the current player 
-
-current_player = alternate_player(current_player)
-
-***********************************
-***********************************
-# new game loop
-
-loop do
-  display_board(board)
-  place_piece!(board, current_player)
-  current_player = alternate_player(current_player)
-  break if someone_won?(board) || board_full?(board)
-end
-
-
-***********************************
-***********************************
-
-
-
+current_player = player_and_assigned_marker if player_and_assigned_marker == "X"
+current_player = computer_and_assigned_marker if computer_and_assigned_marker == "X"
 
 
 loop do # play again y or n loop
@@ -234,14 +240,16 @@ loop do # play again y or n loop
   loop do # first to 5 loop
   #binding.pry
     board = initialize_board
-    loop do
-      display_board(board,player_wins,computer_wins)
-      player_places_piece!(board)
+    binding.pry
+    loop do # win this round loop
+      display_board(board,player_and_assigned_marker,computer_and_assigned_marker, player_wins,computer_wins)
+      binding.pry
+      place_piece!(board, current_player)
+      current_player = alternate_player(current_player)
       break if someone_won?(board) || board_full?(board)
-      computer_places_piece!(board)
-      break if someone_won?(board) || board_full?(board)
-    end
-    display_board(board,player_wins,computer_wins)
+    end # end win this round loop
+
+    display_board(board,player_and_assigned_marker,computer_and_assigned_marker, player_wins,computer_wins)
 
     if someone_won?(board)
       prompt "#{detect_winner(board)} won that round!"
@@ -255,7 +263,7 @@ loop do # play again y or n loop
     computer_wins += 1 if detect_winner(board) == "Computer"
     #binding.pry 
     break if computer_wins == 5 || player_wins == 5
-  end
+  end # end first to 5 loop 
   
   prompt "Player won the game!" if player_wins == 5
   prompt "Computer won the game!" if computer_wins == 5
@@ -266,3 +274,4 @@ loop do # play again y or n loop
 end
 
 prompt "Thanks for playing Tic Tac Toe. Good bye!"
+
