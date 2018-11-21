@@ -2904,6 +2904,22 @@ prompt "Thanks for playing Tic Tac Toe. Good bye!"
 
 
 
+current_user = true
+
+def alternate_player(player)
+  next_player_to_mark_a_square = "X" if player == "O"
+  next_player_to_mark_a_square = "O" if player == "X"
+  next_player_to_mark_a_square
+end  
+
+
+current_user = alternate_player current_user
+=> false
+current_user = alternate_player current_user
+=> true
+    
+
+def alternate_player(player, computer)
 
 
 
@@ -2914,14 +2930,35 @@ prompt "Thanks for playing Tic Tac Toe. Good bye!"
 
 
 
+def someone_won?(brd, player_evaluated_for_winning_placement)
+  !!detect_winner(brd,player_evaluated_for_winning_placement)
+end  
+=> :someone_won?
+
+
+def detect_winner(brd, current_player)
+  WINNING_LINES.each do |line|
+    if brd.values_at(line[0], line[1], line[2]).count(current_player) == 3    
+      return "Player"
+    elsif brd.values_at(line[0], line[1], line[2]).count(current_player) == 3      
+      return "Computer"      
+    end      
+  end    
+  nil  
+end  
 
 
 
 
 
 
+[1] pry(main)> brd
+=> {1=>" ", 2=>" ", 3=>"X", 4=>" ", 5=>" ", 6=>" ", 7=>" ", 8=>" ", 9=>" "}
 
 
+
+
+brd[5] = mark_sqare_with_assigned_letter if brd[5] == " "
 
 
 
