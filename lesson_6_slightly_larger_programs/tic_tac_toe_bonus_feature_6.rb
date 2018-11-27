@@ -3,7 +3,7 @@ require 'pry-byebug'
 
 INITIAL_MARKER = ' '
 PLAYER_ORDER = "player"
-# PLAYER_ORDER = "computer"
+#PLAYER_ORDER = "computer"
 # PLAYER_ORDER = "choose"
 
 
@@ -14,8 +14,6 @@ WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] +
 def prompt(msg)
   puts "=>#{msg}"
 end
-
-
 
 # rubocop:disable Metrics/AbcSize
 def display_board(brd,player,computer,player_score, computer_score)
@@ -71,8 +69,6 @@ def set_player_order
   answer
 end
 
-
-
 def player_places_piece!(brd, current_player)
   square = ''
   loop do
@@ -84,14 +80,7 @@ def player_places_piece!(brd, current_player)
   brd[square] = current_player
 end
 
-
-
-
-
-
-
 # begin computer ai logic
-
 def winning_move(brd)
   winning_square_arrays = WINNING_LINES.select do |line|
     brd.values_at(line[0], line[1], line[2]).count("O") == 2  && brd.values_at(line[0], line[1], line[2]).count(" ") == 1
@@ -99,9 +88,6 @@ def winning_move(brd)
   square = winning_square_arrays.flatten.find{|sq| brd[sq] == " " }
   square
 end 
-
-
-
 
 def block_players_winning_move(brd)
   two_x = WINNING_LINES.select do |line|
@@ -112,15 +98,9 @@ def block_players_winning_move(brd)
     brd.values_at(subarr[0], subarr[1], subarr[2]).count("O") == 0
   end
 
-
  square = block_this_square.flatten.find{|sq| brd[sq] == " "}
  square
 end
-
-
-
-
-
 
 def find_3_open_squares(brd)
   three_open_squares = WINNING_LINES.select do |line|
@@ -130,9 +110,6 @@ def find_3_open_squares(brd)
   square  
 end 
 
-
-
-
 def find_two_open_squares(brd)
   two_open_squares_and_one_o = WINNING_LINES.select do |line|
     brd.values_at(line[0], line[1], line[2]).count("O") == 1 && brd.values_at(line[0], line[1], line[2]).count(" ") == 2
@@ -140,13 +117,7 @@ def find_two_open_squares(brd)
   square = two_open_squares_and_one_o.flatten.find{|sq| brd[sq] == " " }
   square
 end 
-
 # end computer ai logic
-
-
-
-
-
 
 def computer_places_piece!(brd,mark_sqare_with_assigned_letter)
   if (winning_move(brd)).class == Integer 
@@ -163,59 +134,26 @@ def computer_places_piece!(brd,mark_sqare_with_assigned_letter)
   brd
 end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-# #     Old computer places piece
-# def computer_places_piece!(brd,mark_sqare_with_assigned_letter)
-#   square = winning_move(brd) if (winning_move(brd)).class == Integer 
-#   square = block_players_winning_move(brd) if (block_players_winning_move(brd)).class == Integer
-#   square = brd[5]  if brd[5] == " "
-#   square = find_3_open_squares(brd) if (find_3_open_squares(brd)).class == Integer
-#   square = find_two_open_squares(brd) if (find_two_open_squares(brd)).class == Integer
-#   brd[square] = mark_sqare_with_assigned_letter
-# end
-# # end old com places piece
-
-
-
-
-
+# if the current player is x player places piece method is called
+# if the current player is O the complacesPiece is called
+# all this is doing is calling the method to place a piece, it doesnt have anything to do with order
+# the statements could be swapped top to bottom and it woulnt matter because
+# its a conditional
 def place_piece! (brd, current_player)
   player_places_piece!(brd,current_player) if current_player == "X"
   computer_places_piece!(brd,current_player) if current_player == "O"
 end
 
-
-
-
-
-
+# this alternates the players turns from com to player but player always goes first, why?
 def alternate_player(player)
   next_player_to_mark_a_square = "X" if player == "O"
   next_player_to_mark_a_square = "O" if player == "X"
   next_player_to_mark_a_square
 end 
 
-
-
 def board_full?(brd)
   empty_squares(brd).empty?
 end
-
-
-
-
 
                       # this is current_player 
 def someone_won?(brd, player_evaluated_for_winning_placement)
@@ -224,12 +162,6 @@ def someone_won?(brd, player_evaluated_for_winning_placement)
   !!detect_winner(brd,player_evaluated_for_winning_placement)
 end  
 
-
-
-
-
-
-#                          X
 def detect_winner(brd, current_player)
   WINNING_LINES.each do |line|
      # if there are 3 sqares in a row marked with the player that just marked a sqare's assigned marker, "X" and the current player is X and player went first then the player is X
@@ -243,80 +175,21 @@ def detect_winner(brd, current_player)
   nil  
 end  
 
-
-
-
-
-# old detect_winner
-# def detect_winner(brd, current_player)
-#   WINNING_LINES.each do |line|
-#     if brd.values_at(line[0], line[1], line[2]).count(current_player) == 3
-#       return "Player"
-#     elsif brd.values_at(line[0], line[1], line[2]).count(current_player) == 3      
-#       return "Computer"      
-#     end      
-#   end    
-#   nil  
-# end  
-# end old detect_winner
-
-
-
-
-
-
-
-
-
-
-
-
-# def someone_won?(brd)
-#   !!detect_winner(brd)
-# end
-
-
-
-# def detect_winner(brd)
-#   WINNING_LINES.each do |line|
-#     if brd.values_at(line[0], line[1], line[2]).count(player_and_assigned_marker) == 3
-#       return "Player"
-#     elsif brd.values_at(line[0], line[1], line[2]).count(computer_and_assigned_marker) == 3
-#       return "Computer"
-#     end
-#   end
-#   nil
-# end
-
-
-
-
-
-
-
-
-
-
-
-# begin game play
-
 # PLAYER_ORDER = "player"
                 # false
 PLAYER_ORDER == "computer" ? (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker, computer_and_assigned_marker = ["X", "O"])
 
-# PLAYER_ORDER = "computer"
-# PLAYER_ORDER == "computer" ? (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker,computer_and_assigned_marker = ["X", "O"])
+#PLAYER_ORDER = "computer"
+                  # true
+#PLAYER_ORDER == "computer" ? (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker,computer_and_assigned_marker = ["X", "O"])
 
 # PLAYER_ORDER = "choose"
 # set_player_order == "computer" ? (computer_and_assgned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker, computer_and_assgned_marker = ["X", "O"]) if PLAYER_ORDER == "choose"
 
-
 current_player = player_and_assigned_marker if player_and_assigned_marker == "X"
 current_player = computer_and_assigned_marker if computer_and_assigned_marker == "X"
 
-
 loop do # play again y or n loop
-
 
   player_wins = 0
   computer_wins = 0
@@ -372,7 +245,6 @@ loop do # play again y or n loop
   
   prompt "Player won the game!" if player_wins == 2
   prompt "Computer won the game!" if computer_wins == 2
-
   prompt "Play again? (y or n)"
   answer = gets.chomp
   break unless answer.downcase.start_with?("y")
