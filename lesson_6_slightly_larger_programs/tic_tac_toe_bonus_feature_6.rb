@@ -319,8 +319,10 @@ loop do # play again y or n loop
 
     if someone_won?(board,current_player)
       prompt "#{detect_winner(board,current_player)} won that round!"
+      #break
     elsif board_full?(board)
       prompt "It's a tie!"
+      #break
     end
 
     current_player = alternate_player(current_player)
