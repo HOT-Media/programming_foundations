@@ -6,7 +6,6 @@ INITIAL_MARKER = ' '
 #PLAYER_ORDER = "computer"
 PLAYER_ORDER = "choose"
 
-
 WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] +
                 [[1, 4, 7], [2, 5, 8], [3, 6, 9]] +
                 [[1, 5, 9], [7, 5, 3]]
@@ -65,7 +64,6 @@ def set_player_order
   prompt "Who is first, player or computer?"
     answer = gets.chomp
     if answer == "player" || answer == "computer"
-      binding.pry
       break
     else
     prompt "Please enter (player) or (computer)."
@@ -150,7 +148,7 @@ def computer_places_piece!(brd,xoro)
 end
 
 def place_piece! (brd, current_player,order_set_by_player)
-  binding.pry
+  #binding.pry
   if PLAYER_ORDER == "player" || order_set_by_player == "player"
     player_places_piece!(brd,current_player) if current_player == "X"
     computer_places_piece!(brd,current_player) if current_player == "O"
@@ -185,25 +183,20 @@ def detect_winner(brd, current_player)
   nil  
 end  
 
-# # PLAYER_ORDER = "player"
-#                 # false
-#PLAYER_ORDER == "computer" ? (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker, computer_and_assigned_marker = ["X", "O"])
+if PLAYER_ORDER == "computer"
+  (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"])
+elsif PLAYER_ORDER == "player"
+  (player_and_assigned_marker, computer_and_assigned_marker = ["X", "O"])
+elsif PLAYER_ORDER == "choose"
+  chosen_player = set_player_order
+end
 
-# #PLAYER_ORDER = "computer"
-#                   # true
-# PLAYER_ORDER == "computer" ? (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker,computer_and_assigned_marker = ["X", "O"])
+if chosen_player == "computer"
+  (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) 
+elsif chosen_player == "player"
+ (player_and_assigned_marker, computer_and_assigned_marker = ["X", "O"]) 
+end
 
-# # PLAYER_ORDER = "choose"
-# # set_player_order == "computer" ? (computer_and_assgned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker, computer_and_assgned_marker = ["X", "O"]) if PLAYER_ORDER == "choose"
-
-
-chosen_player = set_player_order if PLAYER_ORDER == "choose"
-
-
-chosen_player == "computer" ? (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker, computer_and_assigned_marker = ["X", "O"]) 
-
-
-binding.pry
 current_player = player_and_assigned_marker if player_and_assigned_marker == "X"
 current_player = computer_and_assigned_marker if computer_and_assigned_marker == "X"
 
@@ -219,34 +212,31 @@ loop do
       display_board(board,player_and_assigned_marker,computer_and_assigned_marker, player_wins,computer_wins)
       place_piece!(board, current_player,chosen_player)
       display_board(board,player_and_assigned_marker,computer_and_assigned_marker, player_wins,computer_wins)
-
-    if someone_won?(board,current_player)
-      prompt "#{detect_winner(board,current_player)} won that round!"
-      sleep 1.5
-      player_wins += 1 if detect_winner(board,current_player) == "Player"
-      computer_wins += 1 if detect_winner(board,current_player) == "Computer"
-      display_board(board,player_and_assigned_marker,computer_and_assigned_marker, player_wins,computer_wins)
-      current_player = player_and_assigned_marker if player_and_assigned_marker == "X"
-      current_player = computer_and_assigned_marker if computer_and_assigned_marker == "X"
-      break
-    elsif board_full?(board)
-      prompt "It's a tie!"
-      # reset the player order
-      current_player = player_and_assigned_marker if player_and_assigned_marker == "X"
-      current_player = computer_and_assigned_marker if computer_and_assigned_marker == "X"
-      break
+      if someone_won?(board,current_player)
+        prompt "#{detect_winner(board,current_player)} won that round!"
+        sleep 1.5
+        player_wins += 1 if detect_winner(board,current_player) == "Player"
+        computer_wins += 1 if detect_winner(board,current_player) == "Computer"
+        display_board(board,player_and_assigned_marker,computer_and_assigned_marker, player_wins,computer_wins)
+        current_player = player_and_assigned_marker if player_and_assigned_marker == "X"
+        current_player = computer_and_assigned_marker if computer_and_assigned_marker == "X"
+        break
+      elsif board_full?(board)
+        prompt "It's a tie!"
+        sleep 1.5
+        # reset the player order
+        current_player = player_and_assigned_marker if player_and_assigned_marker == "X"
+        current_player = computer_and_assigned_marker if computer_and_assigned_marker == "X"
+        break
+      end
+      current_player = alternate_player(current_player)
     end
 
-    current_player = alternate_player(current_player)
-
-    end
-
-    break if computer_wins == 1 || player_wins == 5
+    break if computer_wins == 2 || player_wins == 5
   end
   
   prompt "Player won the game!" if player_wins == 5
-  prompt "Computer won the game!" if computer_wins == 1
-
+  prompt "Computer won the game!" if computer_wins == 2
   answer = nil
   loop do
     prompt "Play again? (yes or no)"
@@ -259,13 +249,4 @@ loop do
   end
   break if answer.downcase == "no"
 end
-
 prompt "Thanks for playing Tic Tac Toe. Good bye!"
-
-
-
-
-
-
-
-

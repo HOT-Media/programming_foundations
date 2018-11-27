@@ -3870,7 +3870,22 @@ end
 
 
 
+PLAYER_ORDER == "computer" ? (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker, computer_and_assigned_marker = ["X", "O"])
 
+
+chosen_player = set_player_order if PLAYER_ORDER == "choose"
+chosen_player == "computer" ? (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker, computer_and_assigned_marker = ["X", "O"]) 
+
+
+if PLAYER_ORDER == "computer"
+  (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"])
+elsif PLAYER_ORDER == "player"
+  (player_and_assigned_marker, computer_and_assigned_marker = ["X", "O"])
+elsif PLAYER_ORDER == "choose"
+  chosen_player = set_player_order
+end
+
+chosen_player == "computer" ? (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker, computer_and_assigned_marker = ["X", "O"]) 
 
 
 
