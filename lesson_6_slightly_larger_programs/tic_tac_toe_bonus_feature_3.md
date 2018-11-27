@@ -3602,6 +3602,9 @@ end
 
 
 
+
+
+
 def place_piece! (brd, current_player)
   if PLAYER_ORDER == "player"
     player_places_piece!(brd,current_player) if current_player == "X"
@@ -3610,6 +3613,256 @@ def place_piece! (brd, current_player)
     computer_places_piece!(brd,current_player) if current_player == "X"
     player_places_piece!(brd,current_player) if current_player == "O"
 end
+
+
+
+
+find tie sqare find one square
+
+def computer_places_piece!(brd,mark_sqare_with_assigned_letter)
+  if (winning_move(brd)).class == Integer 
+    brd[winning_move(brd)] = mark_sqare_with_assigned_letter
+  elsif (block_players_winning_move(brd)).class == Integer 
+    brd[block_players_winning_move(brd)]= mark_sqare_with_assigned_letter
+  elsif brd[5] == " "
+    brd[5] = mark_sqare_with_assigned_letter
+  elsif (find_3_open_squares(brd)).class == Integer
+    brd[find_3_open_squares(brd)] = mark_sqare_with_assigned_letter
+  elsif (find_two_open_squares(brd)).class == Integer
+    brd[find_two_open_squares(brd)] = mark_sqare_with_assigned_letter
+  elsif (mark_tie_square(brd)).class == Integer
+    brd[mark_tie_square(brd)] = mark_sqare_with_assigned_letter
+  end
+  brd
+end
+
+
+
+
+def mark_tie_square(brd)
+  tie_square = WINNING_LINES.select do |line|
+    brd.values_at(line[0], line[1], line[2]).count(" ") == 1
+  end
+  square = tie_square.flatten.find{|sq| brd[sq] == " " }
+  square
+end 
+
+
+when the computer goes first the com should look first for the winins square    2 X and one " "
+then look for a blocking square 2 O and one " "
+then look for a line with 1 X and 2 empty squares
+
+then 
+
+
+def computer_places_piece!(brd,mark_sqare_with_assigned_letter)
+  if (winning_move(brd, xoro)).class == Integer 
+    brd[winning_move(brd)] = mark_sqare_with_assigned_letter
+  elsif (block_players_winning_move(brd)).class == Integer 
+    brd[block_players_winning_move(brd)]= mark_sqare_with_assigned_letter
+  elsif brd[5] == " "
+    brd[5] = mark_sqare_with_assigned_letter
+
+  elsif (find_3_open_squares(brd)).class == Integer && mark_sqare_with_assigned_letter == "X"
+    brd[find_3_open_squares(brd)] = mark_sqare_with_assigned_letter
+  elsif (find_two_open_squares(brd)).class == Integer
+    brd[find_two_open_squares(brd)] = mark_sqare_with_assigned_letter
+  elsif (mark_tie_square(brd)).class == Integer
+    brd[mark_tie_square(brd)] = mark_sqare_with_assigned_letter
+  end
+  brd
+end
+
+change winning move to have a parameter for marker then pass in mark_sqare_with_assigned_letter
+
+
+def winning_move(brd, xoro)
+  winning_square_arrays = WINNING_LINES.select do |line|
+    brd.values_at(line[0], line[1], line[2]).count(xoro) == 2  && brd.values_at(line[0], line[1], line[2]).count(" ") == 1
+  end
+  square = winning_square_arrays.flatten.find{|sq| brd[sq] == " " }
+  square
+end 
+
+
+
+
+
+
+
+
+
+
+
+
+def winning_move(brd, xoro)
+  winning_square_arrays = WINNING_LINES.select do |line|
+    brd.values_at(line[0], line[1], line[2]).count(xoro) == 2  && brd.values_at(line[0], line[1], line[2]).count(" ") == 1
+  end
+  square = winning_square_arrays.flatten.find{|sq| brd[sq] == " " }
+  square
+end 
+
+
+
+
+
+
+
+
+
+
+# def winning_move(brd)
+#   winning_square_arrays = WINNING_LINES.select do |line|
+#     brd.values_at(line[0], line[1], line[2]).count("O") == 2  && brd.values_at(line[0], line[1], line[2]).count(" ") == 1
+#   end
+#   square = winning_square_arrays.flatten.find{|sq| brd[sq] == " " }
+#   square
+# end 
+
+
+not " " and not oxo
+
+def block_players_winning_move(brd, xoro)
+  two_x = WINNING_LINES.select do |line|
+    brd.values_at(line[0], line[1], line[2]).count do |element|
+  element != ' ' && element != xoro
+  end  
+end
+
+  block_this_square = two_x.select do |subarr|
+    brd.values_at(subarr[0], subarr[1], subarr[2]).count(xoro) == 0
+  end
+
+ square = block_this_square.flatten.find{|sq| brd[sq] == " "}
+ square
+end
+
+
+arr.count do |element|
+  element != ' ' && element != oxo
+end  
+=> 2
+
+
+
+
+
+
+def find_3_open_squares(brd)
+  three_open_squares = WINNING_LINES.select do |line|
+    brd.values_at(line[0], line[1], line[2]).count(" ") == 3
+  end
+  square = three_open_squares.flatten.find{|sq| brd[sq] == " " }
+  square  
+end 
+
+def find_two_open_squares(brd,xoro)
+  two_open_squares_and_one_o = WINNING_LINES.select do |line|
+    brd.values_at(line[0], line[1], line[2]).count("O") == 1 && brd.values_at(line[0], line[1], line[2]).count(" ") == 2
+  end
+  square = two_open_squares_and_one_o.flatten.find{|sq| brd[sq] == " " }
+  square
+end 
+
+def mark_tie_square(brd)
+  tie_square = WINNING_LINES.select do |line|
+    brd.values_at(line[0], line[1], line[2]).count(" ") == 1
+  end
+  square = tie_square.flatten.find{|sq| brd[sq] == " " }
+  square
+end 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def computer_places_piece!(brd,xoro)
+  if (winning_move(brd,xoro)).class == Integer 
+    brd[winning_move(brd,xoro)] = xoro
+
+  elsif (block_players_winning_move(brd,xoro)).class == Integer  
+    brd[block_players_winning_move(brd,xoro)]= xoro
+
+  elsif brd[5] == " "
+    brd[5] = xoro
+
+  elsif (find_3_open_squares(brd,xoro)).class == Integer  && xoro == "X"
+    brd[find_3_open_squares(brd,xoro)] = xoro
+
+  elsif (find_two_open_squares(brd,xoro)).class == Integer 
+    brd[find_two_open_squares(brd,xoro)] = xoro
+
+  elsif (mark_tie_square(brd,xoro)).class == Integer 
+    brd[mark_tie_square(brd,xoro)] = xoro
+
+  end
+  brd
+end
+
+
+
+def block_players_winning_move(brd, xoro)
+  xoro == "O" ?   opponent = "X" : opponent = "O"
+  two_x = WINNING_LINES.select do |line|
+    brd.values_at(line[0], line[1], line[2]).count(opponent) == 2
+  end
+
+  block_this_square = two_x.select do |subarr|
+    brd.values_at(subarr[0], subarr[1], subarr[2]).count(xoro) == 0
+  end
+
+ square = block_this_square.flatten.find{|sq| brd[sq] == " "}
+ square
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
