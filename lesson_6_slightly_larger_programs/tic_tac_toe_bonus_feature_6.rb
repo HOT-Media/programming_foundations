@@ -2,8 +2,8 @@ require 'pry'
 require 'pry-byebug'
 
 INITIAL_MARKER = ' '
-PLAYER_ORDER = "player"
-#PLAYER_ORDER = "computer"
+# PLAYER_ORDER = "player"
+PLAYER_ORDER = "computer"
 # PLAYER_ORDER = "choose"
 
 
@@ -134,15 +134,66 @@ def computer_places_piece!(brd,mark_sqare_with_assigned_letter)
   brd
 end
 
-# if the current player is x player places piece method is called
-# if the current player is O the complacesPiece is called
-# all this is doing is calling the method to place a piece, it doesnt have anything to do with order
-# the statements could be swapped top to bottom and it woulnt matter because
-# its a conditional
+
+
+
+
+
+
+
+
+
+
+
+
 def place_piece! (brd, current_player)
-  player_places_piece!(brd,current_player) if current_player == "X"
-  computer_places_piece!(brd,current_player) if current_player == "O"
+  if PLAYER_ORDER == "player"
+    player_places_piece!(brd,current_player) if current_player == "X"
+    computer_places_piece!(brd,current_player) if current_player == "O"
+  elsif PLAYER_ORDER == "computer"
+    computer_places_piece!(brd,current_player) if current_player == "X"
+    player_places_piece!(brd,current_player) if current_player == "O"
+  end
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# # if the current player is x player places piece method is called
+# # if the current player is O the complacesPiece is called
+# # all this is doing is calling the method to place a piece, it doesnt have anything to do with order
+# # the statements could be swapped top to bottom and it woulnt matter because
+# # its a conditional
+# begin old placepiece
+# def place_piece! (brd, current_player)
+#   player_places_piece!(brd,current_player) if current_player == "X"
+#   computer_places_piece!(brd,current_player) if current_player == "O"
+# end
+# end old placepiece
+
+
+
+
+
+
+
+
+
+
+
 
 # this alternates the players turns from com to player but player always goes first, why?
 def alternate_player(player)
@@ -177,11 +228,11 @@ end
 
 # PLAYER_ORDER = "player"
                 # false
-PLAYER_ORDER == "computer" ? (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker, computer_and_assigned_marker = ["X", "O"])
+#PLAYER_ORDER == "computer" ? (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker, computer_and_assigned_marker = ["X", "O"])
 
 #PLAYER_ORDER = "computer"
                   # true
-#PLAYER_ORDER == "computer" ? (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker,computer_and_assigned_marker = ["X", "O"])
+PLAYER_ORDER == "computer" ? (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker,computer_and_assigned_marker = ["X", "O"])
 
 # PLAYER_ORDER = "choose"
 # set_player_order == "computer" ? (computer_and_assgned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker, computer_and_assgned_marker = ["X", "O"]) if PLAYER_ORDER == "choose"
