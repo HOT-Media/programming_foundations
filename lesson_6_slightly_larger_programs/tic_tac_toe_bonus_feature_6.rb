@@ -232,7 +232,6 @@ end
 #                          X
 def detect_winner(brd, current_player)
   WINNING_LINES.each do |line|
-
      # if there are 3 sqares in a row marked with the player that just marked a sqare's assigned marker, "X" and the current player is X and player went first then the player is X
     if brd.values_at(line[0], line[1], line[2]).count(current_player) == 3 && current_player == "X" && PLAYER_ORDER == "player"
       return "Player"
@@ -326,21 +325,24 @@ loop do # play again y or n loop
   #binding.pry
 
     board = initialize_board
-    binding.pry
+    #binding.pry
     loop do # win this round loop
 
       display_board(board,player_and_assigned_marker,computer_and_assigned_marker, player_wins,computer_wins)
-      binding.pry
+      #binding.pry
       place_piece!(board, current_player)
 
       # current_player = alternate_player(current_player) # swap with previous line
       # break if someone_won?(board,current_player) || board_full?(board) # swap with next line
 
       # break if someone_won?(board,current_player) || board_full?(board)
+      display_board(board,player_and_assigned_marker,computer_and_assigned_marker, player_wins,computer_wins)
 
     if someone_won?(board,current_player)
       prompt "#{detect_winner(board,current_player)} won that round!"
-      # reset the player order
+      sleep 1.5
+      player_wins += 1 if detect_winner(board,current_player) == "Player"
+      computer_wins += 1 if detect_winner(board,current_player) == "Computer"
       current_player = player_and_assigned_marker if player_and_assigned_marker == "X"
       current_player = computer_and_assigned_marker if computer_and_assigned_marker == "X"
       break
@@ -355,22 +357,21 @@ loop do # play again y or n loop
     current_player = alternate_player(current_player)
 
     end # end win this round loop
+    sleep 1.75
+    #display_board(board,player_and_assigned_marker,computer_and_assigned_marker, player_wins,computer_wins)
 
-    display_board(board,player_and_assigned_marker,computer_and_assigned_marker, player_wins,computer_wins)
-
+    #sleep 1.5
     
-    sleep 1.5
-     
-    player_wins += 1 if detect_winner(board,current_player) == "Player"
-    computer_wins += 1 if detect_winner(board,current_player) == "Computer"
+    # player_wins += 1 if detect_winner(board,current_player) == "Player"
+    # computer_wins += 1 if detect_winner(board,current_player) == "Computer"
     #binding.pry 
     #break if computer_wins == 5 || player_wins == 5
     break if computer_wins == 2 || player_wins == 2
 
   end # end first to 5 loop 
   
-  prompt "Player won the game!" if player_wins == 5
-  prompt "Computer won the game!" if computer_wins == 5
+  prompt "Player won the game!" if player_wins == 2
+  prompt "Computer won the game!" if computer_wins == 2
 
   prompt "Play again? (y or n)"
   answer = gets.chomp
