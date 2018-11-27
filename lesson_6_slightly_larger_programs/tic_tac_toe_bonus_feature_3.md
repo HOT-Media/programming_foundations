@@ -3129,6 +3129,59 @@ w = [
 
 
 
+def detect_winner(brd, current_player)
+  WINNING_LINES.each do |line|
+    if brd.values_at(line[0], line[1], line[2]).count(current_player) == 3
+      return "Player"
+    elsif brd.values_at(line[0], line[1], line[2]).count(current_player) == 3      
+      return "Computer"      
+    end      
+  end    
+  nil  
+end  
+
+
+
+
+#                          X
+def detect_winner(brd, current_player)
+  WINNING_LINES.each do |line|
+
+     # if there are 3 sqares in a row marked with the player that just marked a sqare's assigned marker, "X" and the current player is X and player went first then the player is X
+    if brd.values_at(line[0], line[1], line[2]).count(current_player) == 3 && current_player == "X" && PLAYER_ORDER == "player"
+      return "Player"
+
+    elsif brd.values_at(line[0], line[1], line[2]).count(current_player) == 3      
+      return "Computer"      
+    end      
+  end    
+  nil  
+end  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
