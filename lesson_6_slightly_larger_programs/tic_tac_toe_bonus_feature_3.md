@@ -1,5 +1,5 @@
 
-The computer currently picks a square at random. That's not very interesting. 
+The comput er currently picks a square at random. That's not very interesting. 
 
 Let's make the computer defensive minded, so that if there's an immediate threat, then it will defend the 3rd square. 
 
@@ -2962,6 +2962,25 @@ brd[5] = mark_sqare_with_assigned_letter if brd[5] == " "
 
 
 
+#                          X
+def detect_winner(brd, current_player)
+  WINNING_LINES.each do |line|
+    if brd.values_at(line[0], line[1], line[2]).count(current_player) == 3
+     # if there are 3 sqares in a row marked with the player that just marked a sqare's assigned marker, "X" and the current player is X and player went first then the player is X
+    if brd.values_at(line[0], line[1], line[2]).count(current_player) == 3 && current_player == "X" && PLAYER_ORDER == "player"
+      return "Player"
+    # return "Player"
+    # elsif brd.values_at(line[0], line[1], line[2]).count(current_player) == 3
+    # return "Computer"
+    # the current player is passed in as an X or an O, 
+    # return the current player asssociated with X or O    
+      return "Player"
+    elsif brd.values_at(line[0], line[1], line[2]).count(current_player) == 3      
+      return "Computer"      
+    end      
+  end    
+  nil  
+end  
 
 
 
@@ -2975,6 +2994,27 @@ brd[5] = mark_sqare_with_assigned_letter if brd[5] == " "
 
 
 
+[22] pry(main)> brd[5] = mark_sqare_with_assigned_letter if brd[5] == " "
+=> "O"
+[23] pry(main)> brd
+=> {1=>"X", 2=>" ", 3=>" ", 4=>" ", 5=>"O", 6=>" ", 7=>" ", 8=>" ", 9=>" "}
+[24] pry(main)> 
+
+
+brd[5] = mark_sqare_with_assigned_letter if brd[5] == " "
+
+
+                                  # "O"
+def computer_places_piece!(brd,mark_sqare_with_assigned_letter)
+  square = winning_move(brd) if (winning_move(brd)).class == Integer 
+  square = block_players_winning_move(brd) if (block_players_winning_move(brd)).class == Integer
+  brd[5] = mark_sqare_with_assigned_letter if brd[5] == " "
+  # return here
+  # square = brd[5]  if brd[5] == " "
+  square = find_3_open_squares(brd) if (find_3_open_squares(brd)).class == Integer
+  square = find_two_open_squares(brd) if (find_two_open_squares(brd)).class == Integer
+  brd[square] = mark_sqare_with_assigned_letter
+end
 
 
 
@@ -2983,6 +3023,77 @@ brd[5] = mark_sqare_with_assigned_letter if brd[5] == " "
 
 
 
+case 
+when integer mark square
+
+  ternary
+
+brd[winning_move(brd)] = mark_sqare_with_assigned_letter if (winning_move(brd)).class == Integer
+
+
+
+def computer_places_piece!(brd,mark_sqare_with_assigned_letter)
+
+  brd[5] = mark_sqare_with_assigned_letter if brd[5] == " "
+end
+
+
+
+
+
+def computer_places_piece!(brd,mark_sqare_with_assigned_letter)
+  square = winning_move(brd) if (winning_move(brd)).class == Integer 
+  square = block_players_winning_move(brd) if (block_players_winning_move(brd)).class == Integer
+  brd[5] = mark_sqare_with_assigned_letter if brd[5] == " "
+  # return here
+  # square = brd[5]  if brd[5] == " "
+  square = find_3_open_squares(brd) if (find_3_open_squares(brd)).class == Integer
+  square = find_two_open_squares(brd) if (find_two_open_squares(brd)).class == Integer
+  brd[square] = mark_sqare_with_assigned_letter
+end
+
+
+def computer_places_piece!(brd,mark_sqare_with_assigned_letter)
+  if (winning_move(brd)).class == Integer 
+    brd[winning_move(brd)] = mark_sqare_with_assigned_letter
+  elsif (block_players_winning_move(brd)).class == Integer 
+    brd[block_players_winning_move(brd)]= mark_sqare_with_assigned_letter
+  elsif brd[5] == " "
+    brd[5] = mark_sqare_with_assigned_letter
+  elsif (find_3_open_squares(brd)).class == Integer
+    brd[find_3_open_squares(brd)] = mark_sqare_with_assigned_letter
+  elsif (find_two_open_squares(brd)).class == Integer
+    brd[find_two_open_squares(brd)] = mark_sqare_with_assigned_letter
+  end
+  brd
+end
+
+
+COMPUTER_LOGIC = [
+                  winning_move(brd),
+                  block_players_winning_move(brd),
+                  brd[5] == " ",
+                  find_3_open_squares(brd),
+                  find_two_open_squares(brd)
+                 ]
+
+
+
+
+  #brd[5] = mark_sqare_with_assigned_letter if brd[5] == " "
+  # return here
+  # square = brd[5]  if brd[5] == " "
+  square = find_3_open_squares(brd) if (find_3_open_squares(brd)).class == Integer
+  square = find_two_open_squares(brd) if (find_two_open_squares(brd)).class == Integer
+  brd[square] = mark_sqare_with_assigned_letter
+end
+
+
+
+
+w = [find_3_open_squares(brd), 1]
+=> [7, 1]
+[].deleteif nil brd = the first integer after nil is removed
 
 
 
@@ -2990,14 +3101,28 @@ brd[5] = mark_sqare_with_assigned_letter if brd[5] == " "
 
 
 
+COMPUTER_LOGIC = [
+                  winning_move(brd),
+                  block_players_winning_move(brd),
+                  brd[5] == " ",
+                  find_3_open_squares(brd),
+                  find_two_open_squares(brd)
+                 ]
+
+
+brd[COMPUTER_LOGIC.first] = mark_sqare_with_assigned_letter
 
 
 
 
 
-
-
-
+w = [
+                  winning_move(brd),
+                  block_players_winning_move(brd),
+                  brd[5] == " ",
+                  find_3_open_squares(brd),
+                  find_two_open_squares(brd)
+                 ]
 
 
 

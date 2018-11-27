@@ -73,24 +73,6 @@ end
 
 
 
-
-
-def set_player_order 
-  answer = ""
-  loop do # validate input
-  puts "Who is first, player or computer?"
-    answer = gets.chomp
-    break if answer == "player" || answer == "computer"
-    "Please enter (player) or (computer)."
-  end
-  answer
-end
-
-
-
-
-
-
 def player_places_piece!(brd, current_player)
   square = ''
   loop do
@@ -130,7 +112,8 @@ def block_players_winning_move(brd)
     brd.values_at(subarr[0], subarr[1], subarr[2]).count("O") == 0
   end
 
- square = block_this_square.flatten.find{|sq| board[sq] == " "}
+
+ square = block_this_square.flatten.find{|sq| brd[sq] == " "}
  square
 end
 
@@ -140,10 +123,10 @@ end
 
 
 def find_3_open_squares(brd)
-  three open_sqares = WINNING_LINES.select do |line|
-    board.values_at(line[0], line[1], line[2]).count(" ") == 3
+  three_open_squares = WINNING_LINES.select do |line|
+    brd.values_at(line[0], line[1], line[2]).count(" ") == 3
   end
-  square = three_open_squares.flatten.find{|sq| board[sq] == " " }
+  square = three_open_squares.flatten.find{|sq| brd[sq] == " " }
   square  
 end 
 
@@ -151,10 +134,10 @@ end
 
 
 def find_two_open_squares(brd)
-  two_open_sqares_and_one_o = WINNING_LINES.select do |line|
+  two_open_squares_and_one_o = WINNING_LINES.select do |line|
     brd.values_at(line[0], line[1], line[2]).count("O") == 1 && brd.values_at(line[0], line[1], line[2]).count(" ") == 2
   end
-  square = two_open_squares_and_one_o.flatten.find{|sq| board[sq] == " " }
+  square = two_open_squares_and_one_o.flatten.find{|sq| brd[sq] == " " }
   square
 end 
 
@@ -166,14 +149,43 @@ end
 
 
 def computer_places_piece!(brd,mark_sqare_with_assigned_letter)
-  square = winning_move(brd) if (winning_move(brd)).class == Integer 
-  square = block_players_winning_move(brd) if (block_players_winning_move(brd)).class == Integer
-  square = brd[5]  if brd[5] == " "
-  square = find_3_open_squares(brd) if (find_3_open_squares(brd)).class == Integer
-  square = find_two_open_squares(brd) if (find_two_open_squares(brd)).class == Integer
-  brd[square] = mark_sqare_with_assigned_letter
+  if (winning_move(brd)).class == Integer 
+    brd[winning_move(brd)] = mark_sqare_with_assigned_letter
+  elsif (block_players_winning_move(brd)).class == Integer 
+    brd[block_players_winning_move(brd)]= mark_sqare_with_assigned_letter
+  elsif brd[5] == " "
+    brd[5] = mark_sqare_with_assigned_letter
+  elsif (find_3_open_squares(brd)).class == Integer
+    brd[find_3_open_squares(brd)] = mark_sqare_with_assigned_letter
+  elsif (find_two_open_squares(brd)).class == Integer
+    brd[find_two_open_squares(brd)] = mark_sqare_with_assigned_letter
+  end
+  brd
 end
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+# #     Old computer places piece
+# def computer_places_piece!(brd,mark_sqare_with_assigned_letter)
+#   square = winning_move(brd) if (winning_move(brd)).class == Integer 
+#   square = block_players_winning_move(brd) if (block_players_winning_move(brd)).class == Integer
+#   square = brd[5]  if brd[5] == " "
+#   square = find_3_open_squares(brd) if (find_3_open_squares(brd)).class == Integer
+#   square = find_two_open_squares(brd) if (find_two_open_squares(brd)).class == Integer
+#   brd[square] = mark_sqare_with_assigned_letter
+# end
+# # end old com places piece
 
 
 
@@ -205,15 +217,21 @@ end
 
 
 
-
+                      # this is current_player 
 def someone_won?(brd, player_evaluated_for_winning_placement)
+
+                      # this is current_player
   !!detect_winner(brd,player_evaluated_for_winning_placement)
 end  
 
 
+
+
+
+
 def detect_winner(brd, current_player)
   WINNING_LINES.each do |line|
-    if brd.values_at(line[0], line[1], line[2]).count(current_player) == 3    
+    if brd.values_at(line[0], line[1], line[2]).count(current_player) == 3
       return "Player"
     elsif brd.values_at(line[0], line[1], line[2]).count(current_player) == 3      
       return "Computer"      
@@ -251,9 +269,20 @@ end
 #   nil
 # end
 
+
+
+
+
+
+
+
+
+
+
 # begin game play
 
 # PLAYER_ORDER = "player"
+                # false
 PLAYER_ORDER == "computer" ? (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker, computer_and_assigned_marker = ["X", "O"])
 
 # PLAYER_ORDER = "computer"
@@ -268,34 +297,47 @@ current_player = computer_and_assigned_marker if computer_and_assigned_marker ==
 
 
 loop do # play again y or n loop
+
   player_wins = 0
   computer_wins = 0
+
   loop do # first to 5 loop
   #binding.pry
+
     board = initialize_board
     binding.pry
     loop do # win this round loop
+
       display_board(board,player_and_assigned_marker,computer_and_assigned_marker, player_wins,computer_wins)
       binding.pry
       place_piece!(board, current_player)
-      current_player = alternate_player(current_player)
+
+      # current_player = alternate_player(current_player) # swap with previous line
+      # break if someone_won?(board,current_player) || board_full?(board) # swap with next line
+
       break if someone_won?(board,current_player) || board_full?(board)
+
+    if someone_won?(board,current_player)
+      prompt "#{detect_winner(board,current_player)} won that round!"
+    elsif board_full?(board)
+      prompt "It's a tie!"
+    end
+
+    current_player = alternate_player(current_player)
+
     end # end win this round loop
 
     display_board(board,player_and_assigned_marker,computer_and_assigned_marker, player_wins,computer_wins)
 
-    if someone_won?(board,current_player)
-      prompt "#{detect_winner(board,current_player)} won that round!"
-    else
-      prompt "It's a tie!"
-    end
     
     sleep 1.5
      
     player_wins += 1 if detect_winner(board,current_player) == "Player"
     computer_wins += 1 if detect_winner(board,current_player) == "Computer"
     #binding.pry 
-    break if computer_wins == 5 || player_wins == 5
+    #break if computer_wins == 5 || player_wins == 5
+    break if computer_wins == 2 || player_wins == 2
+
   end # end first to 5 loop 
   
   prompt "Player won the game!" if player_wins == 5
