@@ -2,9 +2,9 @@ require 'pry'
 require 'pry-byebug'
 
 INITIAL_MARKER = ' '
-PLAYER_ORDER = "player"
+#PLAYER_ORDER = "player"
 #PLAYER_ORDER = "computer"
-# PLAYER_ORDER = "choose"
+PLAYER_ORDER = "choose"
 
 
 WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] +
@@ -60,11 +60,16 @@ end
 
 def set_player_order 
   answer = ""
+
   loop do # validate input
-  puts "Who is first, player or computer?"
+  prompt "Who is first, player or computer?"
     answer = gets.chomp
-    break if answer == "player" || answer == "computer"
-    "Please enter (player) or (computer)."
+    if answer == "player" || answer == "computer"
+      binding.pry
+      break
+    else
+    prompt "Please enter (player) or (computer)."
+    end
   end
   answer
 end
@@ -144,11 +149,12 @@ def computer_places_piece!(brd,xoro)
   brd
 end
 
-def place_piece! (brd, current_player)
-  if PLAYER_ORDER == "player"
+def place_piece! (brd, current_player,order_set_by_player)
+  binding.pry
+  if PLAYER_ORDER == "player" || order_set_by_player == "player"
     player_places_piece!(brd,current_player) if current_player == "X"
     computer_places_piece!(brd,current_player) if current_player == "O"
-  elsif PLAYER_ORDER == "computer"
+  elsif PLAYER_ORDER == "computer" || order_set_by_player == "computer"
     computer_places_piece!(brd,current_player) if current_player == "X"
     player_places_piece!(brd,current_player) if current_player == "O"
   end
@@ -179,38 +185,41 @@ def detect_winner(brd, current_player)
   nil  
 end  
 
-# PLAYER_ORDER = "player"
-                # false
+# # PLAYER_ORDER = "player"
+#                 # false
 #PLAYER_ORDER == "computer" ? (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker, computer_and_assigned_marker = ["X", "O"])
 
-#PLAYER_ORDER = "computer"
-                  # true
-PLAYER_ORDER == "computer" ? (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker,computer_and_assigned_marker = ["X", "O"])
+# #PLAYER_ORDER = "computer"
+#                   # true
+# PLAYER_ORDER == "computer" ? (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker,computer_and_assigned_marker = ["X", "O"])
 
-# PLAYER_ORDER = "choose"
-# set_player_order == "computer" ? (computer_and_assgned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker, computer_and_assgned_marker = ["X", "O"]) if PLAYER_ORDER == "choose"
+# # PLAYER_ORDER = "choose"
+# # set_player_order == "computer" ? (computer_and_assgned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker, computer_and_assgned_marker = ["X", "O"]) if PLAYER_ORDER == "choose"
 
+
+chosen_player = set_player_order if PLAYER_ORDER == "choose"
+
+
+chosen_player == "computer" ? (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker, computer_and_assigned_marker = ["X", "O"]) 
+
+
+binding.pry
 current_player = player_and_assigned_marker if player_and_assigned_marker == "X"
 current_player = computer_and_assigned_marker if computer_and_assigned_marker == "X"
 
-loop do # play again y or n loop
+loop do
 
   player_wins = 0
   computer_wins = 0
 
-  loop do # first to 5 loop
-  #binding.pry
+  loop do
 
     board = initialize_board
-    #binding.pry
-    loop do # win this round loop
-
+    loop do
       display_board(board,player_and_assigned_marker,computer_and_assigned_marker, player_wins,computer_wins)
-      #binding.pry
-      place_piece!(board, current_player)
-
+      place_piece!(board, current_player,chosen_player)
       display_board(board,player_and_assigned_marker,computer_and_assigned_marker, player_wins,computer_wins)
-#binding.pry
+
     if someone_won?(board,current_player)
       prompt "#{detect_winner(board,current_player)} won that round!"
       sleep 1.5
@@ -230,18 +239,33 @@ loop do # play again y or n loop
 
     current_player = alternate_player(current_player)
 
-    end # end win this round loop
-    sleep 1.75
-    break if computer_wins == 5 || player_wins == 5
+    end
 
-  end # end first to 5 loop 
+    break if computer_wins == 1 || player_wins == 5
+  end
   
   prompt "Player won the game!" if player_wins == 5
-  prompt "Computer won the game!" if computer_wins == 5
-  prompt "Play again? (y or n)"
-  answer = gets.chomp
-  break unless answer.downcase.start_with?("y")
+  prompt "Computer won the game!" if computer_wins == 1
+
+  answer = nil
+  loop do
+    prompt "Play again? (yes or no)"
+    answer = gets.chomp
+    if answer.downcase == "yes" || answer.downcase == "no"
+      break
+    else
+      prompt "Valid answers are yes or no"
+    end
+  end
+  break if answer.downcase == "no"
 end
 
 prompt "Thanks for playing Tic Tac Toe. Good bye!"
+
+
+
+
+
+
+
 

@@ -3846,10 +3846,27 @@ end
 
 
 
+PLAYER_ORDER = "choose"
+
+if PLAYER_ORDER == "choose"
+  set_player_order == "computer" ? (computer_and_assgned_marker, player_and_assigned_marker = ["X", "O"]) : (player_and_assigned_marker, computer_and_assgned_marker = ["X", "O"]) 
+end
+
+current_player = player_and_assigned_marker if player_and_assigned_marker == "X"
+current_player = computer_and_assigned_marker if computer_and_assigned_marker == "X"
 
 
 
-
+def set_player_order 
+  answer = ""
+  loop do # validate input
+  prompt "Who is first, player or computer?"
+    answer = gets.chomp
+    break if answer == "player" || answer == "computer"
+    "Please enter (player) or (computer)."
+  end
+  answer
+end
 
 
 
