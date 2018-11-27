@@ -318,6 +318,7 @@ current_player = computer_and_assigned_marker if computer_and_assigned_marker ==
 
 loop do # play again y or n loop
 
+
   player_wins = 0
   computer_wins = 0
 
@@ -339,9 +340,15 @@ loop do # play again y or n loop
 
     if someone_won?(board,current_player)
       prompt "#{detect_winner(board,current_player)} won that round!"
+      # reset the player order
+      current_player = player_and_assigned_marker if player_and_assigned_marker == "X"
+      current_player = computer_and_assigned_marker if computer_and_assigned_marker == "X"
       break
     elsif board_full?(board)
       prompt "It's a tie!"
+      # reset the player order
+      current_player = player_and_assigned_marker if player_and_assigned_marker == "X"
+      current_player = computer_and_assigned_marker if computer_and_assigned_marker == "X"
       break
     end
 
