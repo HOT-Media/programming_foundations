@@ -183,21 +183,21 @@ def detect_winner(brd, current_player)
 end
 
 if PLAYER_ORDER == "computer"
-  (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"])
+  (c_marker, p_marker = ["X", "O"])
 elsif PLAYER_ORDER == "player"
-  (player_and_assigned_marker, computer_and_assigned_marker = ["X", "O"])
+  (p_marker, c_marker = ["X", "O"])
 elsif PLAYER_ORDER == "choose"
   chosen_player = set_player_order
 end
 
 if chosen_player == "computer"
-  (computer_and_assigned_marker, player_and_assigned_marker = ["X", "O"])
+  (c_marker, p_marker = ["X", "O"])
 elsif chosen_player == "player"
- (player_and_assigned_marker, computer_and_assigned_marker = ["X", "O"])
+ (p_marker, c_marker = ["X", "O"])
 end
 
-current_player = player_and_assigned_marker if player_and_assigned_marker == "X"
-current_player = computer_and_assigned_marker if computer_and_assigned_marker == "X"
+current_player = p_marker if p_marker == "X"
+current_player = c_marker if c_marker == "X"
 
 loop do
   player_wins = 0
@@ -206,24 +206,24 @@ loop do
   loop do
     board = initialize_board
     loop do
-      display_board(board, player_and_assigned_marker, computer_and_assigned_marker, player_wins, computer_wins)
+      display_board(board, p_marker, c_marker, player_wins, computer_wins)
       place_piece!(board, current_player, chosen_player)
-      display_board(board, player_and_assigned_marker, computer_and_assigned_marker, player_wins, computer_wins)
+      display_board(board, p_marker, c_marker, player_wins, computer_wins)
       if someone_won?(board, current_player)
         prompt "#{detect_winner(board, current_player)} won that round!"
         sleep 1.5
         player_wins += 1 if detect_winner(board, current_player) == "Player"
         computer_wins += 1 if detect_winner(board, current_player) == "Computer"
-        display_board(board, player_and_assigned_marker, computer_and_assigned_marker, player_wins, computer_wins)
-        current_player = player_and_assigned_marker if player_and_assigned_marker == "X"
-        current_player = computer_and_assigned_marker if computer_and_assigned_marker == "X"
+        display_board(board, p_marker, c_marker, player_wins, computer_wins)
+        current_player = p_marker if p_marker == "X"
+        current_player = c_marker if c_marker == "X"
         break
       elsif board_full?(board)
         prompt "It's a tie!"
         sleep 1.5
         # reset the player order
-        current_player = player_and_assigned_marker if player_and_assigned_marker == "X"
-        current_player = computer_and_assigned_marker if computer_and_assigned_marker == "X"
+        current_player = p_marker if p_marker == "X"
+        current_player = c_marker if c_marker == "X"
         break
       end
       current_player = alternate_player(current_player)
