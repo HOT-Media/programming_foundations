@@ -193,7 +193,7 @@ elsif PLAYER_ORDER == "player"
   c_marker = "O"
 end
 
-# if PLAYER_ORDER == "computer"
+#  if PLAYER_ORDER == "computer"
 #   (c_marker, p_marker = ["X", "O"])
 # elsif PLAYER_ORDER == "player"
 #   (p_marker, c_marker = ["X", "O"])
