@@ -3891,6 +3891,209 @@ chosen_player == "computer" ? (computer_and_assigned_marker, player_and_assigned
 
 
 
+def detect_winner(brd, current_player)
+  binding.pry
+  WINNING_LINES.each do |line|
+    if brd.values_at(line[0], line[1], line[2]).count(current_player) == 3 && current_player == "X" && PLAYER_ORDER == "player"
+      return "Player"
+    elsif brd.values_at(line[0], line[1], line[2]).count(current_player) == 3 && current_player == "O" && PLAYER_ORDER == "player"
+      return "Computer"
+    end
+  end
+  nil
+end
+
+
+this works for PLAYER_ORDER com and player
+                            current player is player and player went first then player is x and com is o 
+def detect_winner(brd, current_player)
+  binding.pry
+  WINNING_LINES.each do |line|
+    if brd.values_at(line[0], line[1], line[2]).count(current_player) == 3 && current_player == "X"
+      return "Player"
+    elsif brd.values_at(line[0], line[1], line[2]).count(current_player) == 3
+      return "Computer"
+    end
+  end
+  nil
+end
+
+
+
+
+
+
+elsif chosen_player == "player"
+ (p_marker, c_marker = ["X", "O"])
+end
+
+current_player = p_marker if p_marker == "X"
+
+                           PLAYER_ORDER == "choose"
+                              player x
+                            x
+def detect_winner(brd, current_player)
+  WINNING_LINES.each do |line|
+    # if the winner is x then who is x
+    if brd.values_at(line[0], line[1], line[2]).count(current_player) == 3 && current_player == "X"
+      return "Player" if PLAYER_ORDER == "player"|| PLAYER_ORDER == "choose"
+      return "Computer" if PLAYER_ORDER == "computer" || PLAYER_ORDER == "choose"
+
+    # if the winner is O then who is O
+    elsif brd.values_at(line[0], line[1], line[2]).count(current_player) == 3 && current_player == "O"
+      return "player" if PLAYER_ORDER == "choose"
+      return "Player" if PLAYER_ORDER == "computer" || PLAYER_ORDER == "choose"
+      return "Computer" if PLAYER_ORDER == "player" || PLAYER_ORDER == "choose"
+
+    end
+  end
+  nil
+end
+
+
+
+
+
+
+def detect_winner(brd, current_player)
+  WINNING_LINES.each do |line|
+    # if the winner is x then who is x
+    if brd.values_at(line[0], line[1], line[2]).count(current_player) == 3 && current_player == "X"
+
+     if PLAYER_ORDER == "player"
+       return "player"
+     elsif PLAYER_ORDER == "computer"
+       return "computer"
+
+     elsif PLAYER_ORDER == "choose"
+       if chosen_player == "player"
+         return "player"
+       elsif chosen_player = "computer"
+         return "computer"
+       end
+
+    elsif brd.values_at(line[0], line[1], line[2]).count(current_player) == 3 && current_player == "O"
+      if PLAYER_ORDER == "player"
+        return "computer"
+      elsif PLAYER_ORDER == "computer"
+        return "player"
+      elsif PLAYER_ORDER = "choose"
+        if chosen_player == "player"
+          return "Computer"
+        elsif chosen_player == "computer"
+          return "player" 
+        end
+      end
+    end
+  end
+end
+
+
+
+
+
+PLAYER_ORDER = "choose"
+
+WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] +
+                [[1, 4, 7], [2, 5, 8], [3, 6, 9]] +
+                [[1, 5, 9], [7, 5, 3]]
+
+brd = {1=>"X", 2=>"X", 3=>"X", 4=>" ", 5=>" ", 6=>" ", 7=>" ", 8=>" ", 9=>" "}
+
+current_player = "O"
+chosen_player = "player"
+
+def wt(brd, current_player,chplr)
+WINNING_LINES.each do |line|
+  # if the winner is x then who is x
+  if brd.values_at(line[0], line[1], line[2]).count(current_player) == 3 && current_player == "X"
+
+   if PLAYER_ORDER == "player"
+     return "player"
+   elsif PLAYER_ORDER == "computer"
+     return "computer"
+
+   elsif PLAYER_ORDER == "choose"
+     if chplr == "player"
+       return "player"
+     elsif chplr == "computer"
+       return "computer"
+     end
+
+  elsif brd.values_at(line[0], line[1], line[2]).count(current_player) == 3 && current_player == "O"
+    if PLAYER_ORDER == "player"
+      return "computer"
+    elsif PLAYER_ORDER == "computer"
+      return "player"
+
+    elsif PLAYER_ORDER == "choose"
+      if chplr == "player"
+        return "Computer"
+      elsif chplr == "computer"
+        return "player" 
+      end
+    end
+  end
+end
+end
+
+
+
+wt(brd, current_player,chosen_player)
+
+
+PLAYER_ORDER == "player" this makes player X and first
+PLAYER_ORDER == "computer" this makes computer x and first
+PLAYER_ORDER == "choose"
+
+
+def detect_winner(brd, current_player)
+
+  winning array = WINNING_LINES.each do |line|
+
+    if winning array.first == x
+
+
+  WINNING_LINES.each do |line|
+    if brd.values_at(line[0], line[1], line[2]).count(current_player) == 3 && current_player == "X"
+      return "Player" if PLAYER_ORDER == "player"
+      return "Computer" if PLAYER_ORDER == "computer"
+    elsif brd.values_at(line[0], line[1], line[2]).count(current_player) == 3 && current_player == "O"
+      return "Player" if PLAYER_ORDER == "computer"
+      return "Computer" if PLAYER_ORDER == "player"
+
+    end
+  end
+  nil
+end
+
+
+
+def detect_winner(brd, current_player)
+
+  WINNING_LINES.each do |line|
+    if brd.values_at(line[0], line[1], line[2]).count(current_player) == 3 && current_player == "X"
+      return "Player" if PLAYER_ORDER == "player"
+      return "Computer" if PLAYER_ORDER == "computer"
+    elsif brd.values_at(line[0], line[1], line[2]).count(current_player) == 3 && current_player == "O"
+      return "Player" if PLAYER_ORDER == "computer"
+      return "Computer" if PLAYER_ORDER == "player"
+    end
+  end
+  nil
+end
+
+winner_when_player_order_is_chosen(brd,current_player) if PLAYER_ORDER == "choose"
+
+
+
+
+
+
+
+
+
+
 
 
 
