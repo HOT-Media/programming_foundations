@@ -5,7 +5,6 @@ INITIAL_MARKER = ' '
 P_ONE_MARKER = "X"
 P_TWO_MARKER = "O"
 
-
 WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] +
                 [[1, 4, 7], [2, 5, 8], [3, 6, 9]] +
                 [[1, 5, 9], [7, 5, 3]]
@@ -15,11 +14,9 @@ def prompt(msg)
 end
 
 # rubocop:disable Metrics/AbcSize
-def display_board(brd, player, computer, player_score, computer_score)
+def display_board(brd, player_score, computer_score)
   system 'clear'
-  puts "You are #{player}, the computer is #{computer}"
-  puts "Your score: #{player_score}"
-  puts "Computer score: #{computer_score}"
+  puts "Your score: #{player_score}   Computer score: #{computer_score}"
   puts ""
   puts "     |     |"
   puts "  #{brd[1]}  |  #{brd[2]}  |  #{brd[3]}"
@@ -57,7 +54,6 @@ def empty_squares(brd)
   brd.keys.select { |num| brd[num] == INITIAL_MARKER }
 end
 
-
 def set_player_order
   answer = ""
 
@@ -93,15 +89,22 @@ def winning_move(brd, xoro)
   square
 end
 
-def block_players_winning_move(brd, xoro)
-  xoro == "O" ? opponent = "X" : opponent = "O"
-  two_x = WINNING_LINES.select do |line|
+def players_potential_winning_squares(brd, xoro)
+  if xoro == "O"
+    opponent = "X"
+  elsif xoro == "X"
+    opponent = "O"
+  end
+  WINNING_LINES.select do |line|
     brd.values_at(line[0], line[1], line[2]).count(opponent) == 2
   end
-  block_this_square = two_x.select do |subarr|
+end
+
+def block_win_with_this_square(brd, xoro)
+  block_square = players_potential_winning_squares(brd, xoro).select do |subarr|
     brd.values_at(subarr[0], subarr[1], subarr[2]).count(xoro) == 0
   end
-  square = block_this_square.flatten.find { |sq| brd[sq] == " " }
+  square = block_square.flatten.find { |sq| brd[sq] == " " }
   square
 end
 
@@ -133,8 +136,8 @@ end
 def computer_places_piece!(brd, xoro)
   if winning_move(brd, xoro).class == Integer
     brd[winning_move(brd, xoro)] = xoro
-  elsif block_players_winning_move(brd, xoro).class == Integer
-    brd[block_players_winning_move(brd, xoro)] = xoro
+  elsif block_win_with_this_square(brd, xoro).class == Integer
+    brd[block_win_with_this_square(brd, xoro)] = xoro
   elsif brd[5] == " "
     brd[5] = xoro
   elsif find_3_open_squares(brd, xoro).class == Integer && xoro == "O"
@@ -148,17 +151,16 @@ def computer_places_piece!(brd, xoro)
 end
 
 def place_piece!(brd, current_player, player_order)
-  if current_player == "X" and player_order == "player"
+  if current_player == "X" && player_order == "player"
     player_places_piece!(brd, current_player)
-  elsif current_player == "X" and player_order == "computer"
+  elsif current_player == "X" && player_order == "computer"
     computer_places_piece!(brd, current_player)
-  elsif current_player == "O" and player_order == "player"
+  elsif current_player == "O" && player_order == "player"
     computer_places_piece!(brd, current_player)
-  elsif current_player == "O" and player_order == "computer"
+  elsif current_player == "O" && player_order == "computer"
     player_places_piece!(brd, current_player)
   end
 end
-
 
 def alternate_player(player)
   next_player_to_mark_a_square = "X" if player == "O"
@@ -170,99 +172,84 @@ def board_full?(brd)
   empty_squares(brd).empty?
 end
 
-
-
-
-
-
-def someone_won?(brd, current_player,player_order)
-  won_or_not_and_who_did_win_array = []
-  won_or_not_and_who_did_win_array << !!detect_winner(brd, current_player,player_order)
-  won_or_not_and_who_did_win_array << detect_winner(brd, current_player,player_order)
-  won_or_not_and_who_did_win_array
-end 
-
-
-
-
-
-
-
-
-# def someone_won?(brd, current_player,player_order)
-#   !!detect_winner(brd, current_player,player_order)
-# end
+def someone_won?(brd, current_player, player_order)
+  win_and_who_won = []
+  win_and_who_won << !!detect_winner(brd, current_player, player_order)
+  win_and_who_won << detect_winner(brd, current_player, player_order)
+  win_and_who_won
+end
 
 def detect_winner(brd, current_player, player_order)
   the_winning_line = WINNING_LINES.select do |line|
     brd.values_at(line[0], line[1], line[2]).count(current_player) == 3
-  end 
-
+  end
   if the_winning_line.empty?
     return
-  else
-    if player_order == "player" && current_player == P_ONE_MARKER #(X)
-      return "Player"
-    elsif player_order == "computer" && current_player == P_TWO_MARKER #(X) 
-      return "Player"
-    end
+  elsif player_order == "player" && current_player == P_ONE_MARKER
+    return "Player"
+  elsif player_order == "computer" && current_player == P_TWO_MARKER
+    return "Player"
   end
-  #binding.pry
   "Computer"
 end
 
+system 'clear'
+prompt <<-WELCOME
+Welcome to TTT.
 
+Your opponent is technically the Ruby source code for
+this game; however, your opponent will be referred to
+as "Computer"
 
-prompt "Who is first? player or computer"
-# player 
-player_order = gets.chomp
-player, computer = P_ONE_MARKER, P_TWO_MARKER if player_order == "player"
-computer, player = P_ONE_MARKER, P_TWO_MARKER if player_order == "computer"
+WELCOME
 
+prompt "Please choose the player who will go first. Player or Computer?"
+player_order = gets.chomp.downcase
+if player_order == "player"
+  player = P_ONE_MARKER
+  computer = P_TWO_MARKER
+elsif player_order == "computer"
+  computer = P_ONE_MARKER
+  player = P_TWO_MARKER
+end
 player == "X" ? current_player = player : current_player = computer
+prompt "You are #{player}, the computer is #{computer}"
 
-#binding.pry 
+sleep 1.75
 loop do
   player_wins = 0
   computer_wins = 0
 
   loop do
     board = initialize_board
-    loop do
-      #binding.pry
-      display_board(board, player, computer, player_wins, computer_wins)
-      #binding.pry
-      place_piece!(board, current_player,player_order)
-      display_board(board, player, computer, player_wins, computer_wins)
-      #binding.pry # player won, what is player order and what is someone won
-      #if someone_won?(board, current_player, player_order)
-      if someone_won?(board, current_player, player_order)[0] == true
-        #prompt "#{detect_winner(board, current_player,player)} won that round!"
-        prompt "#{someone_won?(board, current_player, player_order)[1]} won that round!"
-        sleep 1.5
-        player_wins += 1 if detect_winner(board, current_player,player_order) == "Player"
-        computer_wins += 1 if detect_winner(board, current_player,player_order) == "Computer"
-        display_board(board, player, computer, player_wins, computer_wins)
 
-        # current player is X, player is X  here because X won and current player has not alternated
-        # no reset necessary
-        # current player is O computer is O - here because O won and current player has not alternated
-        # reset required 
-             #                                X
+    loop do
+      display_board(board, player_wins, computer_wins)
+      place_piece!(board, current_player, player_order)
+      display_board(board, player_wins, computer_wins)
+      if someone_won?(board, current_player, player_order)[0] == true
+        prompt <<-WIN
+"#{someone_won?(board, current_player, player_order)[1]} won that round!"
+WIN
+        sleep 1.5
+        if detect_winner(board, current_player, player_order) == "Player"
+          player_wins += 1
+        elsif detect_winner(board, current_player, player_order) == "Computer"
+          computer_wins += 1
+        end
+        display_board(board, player_wins, computer_wins)
         current_player = player if player == "X"
         current_player = computer if computer == "X"
         break
       elsif board_full?(board)
         prompt "It's a tie!"
         sleep 1.5
-        # reset the player order
         current_player = player if player == "X"
         current_player = computer if computer == "X"
         break
       end
       current_player = alternate_player(current_player)
     end
-
     break if computer_wins == 5 || player_wins == 5
   end
 

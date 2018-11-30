@@ -1,6 +1,6 @@
 require 'pry'
 require 'pry-byebug'
-# unbeatable version somehow
+
 INITIAL_MARKER = ' '
 P_ONE_MARKER = "X"
 P_TWO_MARKER = "O"
@@ -91,8 +91,6 @@ end
 
 def block_players_winning_move(brd, xoro)
   opponent = "X" if xoro == "O"
-  # oponnent = "O" if xoro == "X"
-  # xoro == "O" ? opponent = "X" : opponent = "O"
   two_x = WINNING_LINES.select do |line|
     brd.values_at(line[0], line[1], line[2]).count(opponent) == 2
   end
