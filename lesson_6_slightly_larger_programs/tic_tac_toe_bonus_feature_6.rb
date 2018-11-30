@@ -2,15 +2,16 @@ require 'pry'
 require 'pry-byebug'
 
 INITIAL_MARKER = ' '
-#PLAYER_ORDER = "player"
-PLAYER_ORDER = "computer"
+P_ONE_MARKER = "X"
+P_TWO_MARKER = "O"
+
 
 WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] +
                 [[1, 4, 7], [2, 5, 8], [3, 6, 9]] +
                 [[1, 5, 9], [7, 5, 3]]
 
 def prompt(msg)
-  puts "=>#{msg}"
+  puts "=> #{msg}"
 end
 
 # rubocop:disable Metrics/AbcSize
@@ -56,6 +57,23 @@ def empty_squares(brd)
   brd.keys.select { |num| brd[num] == INITIAL_MARKER }
 end
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def set_player_order
   answer = ""
 
@@ -79,7 +97,7 @@ def player_places_piece!(brd, current_player)
     break if empty_squares(brd).include?(square)
     prompt "Sorry that is not a valid choice"
   end
-  brd[square] = current_player
+  brd[square] = current_player # X or O
 end
 
 def winning_move(brd, xoro)
@@ -145,15 +163,18 @@ def computer_places_piece!(brd, xoro)
   brd
 end
 
-def place_piece!(brd, current_player)
-  if PLAYER_ORDER == "player"
-    player_places_piece!(brd, current_player) if current_player == "X"
-    computer_places_piece!(brd, current_player) if current_player == "O"
-  elsif PLAYER_ORDER == "computer"
-    computer_places_piece!(brd, current_player) if current_player == "X"
-    player_places_piece!(brd, current_player) if current_player == "O"
+def place_piece!(brd, current_player, player_order)
+  if current_player == "X" and player_order == "player"
+    player_places_piece!(brd, current_player)
+  elsif current_player == "X" and player_order == "computer"
+    computer_places_piece!(brd, current_player)
+  elsif current_player == "O" and player_order == "player"
+    computer_places_piece!(brd, current_player)
+  elsif current_player == "O" and player_order == "computer"
+    computer_places_piece!(brd, current_player)
   end
 end
+
 
 def alternate_player(player)
   next_player_to_mark_a_square = "X" if player == "O"
@@ -165,42 +186,57 @@ def board_full?(brd)
   empty_squares(brd).empty?
 end
 
-def someone_won?(brd, player_evaluated_for_winning_placement)
-  !!detect_winner(brd, player_evaluated_for_winning_placement)
-end
 
-def detect_winner(brd, current_player)
-  WINNING_LINES.each do |line|
-    if brd.values_at(line[0], line[1], line[2]).count(current_player) == 3 &&
-       current_player == "X"
-      return "Player" if PLAYER_ORDER == "player"
-      return "Computer" if PLAYER_ORDER == "computer"
-    elsif brd.values_at(line[0], line[1], line[2]).count(current_player) == 3 &&
-          current_player == "O"
-      return "Player" if PLAYER_ORDER == "computer"
-      return "Computer" if PLAYER_ORDER == "player"
 
-    end
-  end
-  nil
-end
 
-if PLAYER_ORDER == "computer"
-  c_marker = "X"
-  p_marker = "O"
-elsif PLAYER_ORDER == "player"
-  p_marker = "X"
-  c_marker = "O"
-end
 
-#  if PLAYER_ORDER == "computer"
-#   (c_marker, p_marker = ["X", "O"])
-# elsif PLAYER_ORDER == "player"
-#   (p_marker, c_marker = ["X", "O"])
+
+def someone_won?(brd, current_player,player_order)
+  won_or_not_and_who_did_win_array = []
+  won_or_not_and_who_did_win_array << !!detect_winner(brd, current_player,player_order)
+  won_or_not_and_who_did_win_array << detect_winner(brd, current_player,player_order)
+  won_or_not_and_who_did_win_array
+end 
+
+
+
+
+
+
+
+
+# def someone_won?(brd, current_player,player_order)
+#   !!detect_winner(brd, current_player,player_order)
 # end
 
-current_player = p_marker if p_marker == "X"
-current_player = c_marker if c_marker == "X"
+def detect_winner(brd, current_player, player_order)
+  the_winning_line = WINNING_LINES.select do |line|
+    brd.values_at(line[0], line[1], line[2]).count(current_player) == 3
+  end 
+
+  if the_winning_line.empty?
+    return
+  else
+    if player_order == "player" && current_player == P_ONE_MARKER #(X)
+      return "Player"
+    elsif player_order == "computer" && current_player == P_TWO_MARKER #(X) 
+      return "Player"
+    end
+  end
+  #binding.pry
+  "Computer"
+end
+
+
+
+prompt "Who is first? player or computer"
+# player 
+player_order = gets.chomp
+player, computer = P_ONE_MARKER, P_TWO_MARKER if player_order == "player"
+computer, player = P_ONE_MARKER, P_TWO_MARKER if player_order == "computer"
+
+player == "X" ? current_player = player : current_player = computer
+
 
 loop do
   player_wins = 0
@@ -209,24 +245,34 @@ loop do
   loop do
     board = initialize_board
     loop do
-      display_board(board, p_marker, c_marker, player_wins, computer_wins)
-      place_piece!(board, current_player)
-      display_board(board, p_marker, c_marker, player_wins, computer_wins)
-      if someone_won?(board, current_player)
-        prompt "#{detect_winner(board, current_player)} won that round!"
+      #binding.pry
+      display_board(board, player, computer, player_wins, computer_wins)
+      place_piece!(board, current_player,player_order)
+      display_board(board, player, computer, player_wins, computer_wins)
+      #binding.pry # player won, what is player order and what is someone won
+      #if someone_won?(board, current_player, player_order)
+      if someone_won?(board, current_player, player_order)[0] == true
+        #prompt "#{detect_winner(board, current_player,player)} won that round!"
+        prompt "#{someone_won?(board, current_player, player_order)[1]} won that round!"
         sleep 1.5
-        player_wins += 1 if detect_winner(board, current_player) == "Player"
-        computer_wins += 1 if detect_winner(board, current_player) == "Computer"
-        display_board(board, p_marker, c_marker, player_wins, computer_wins)
-        current_player = p_marker if p_marker == "X"
-        current_player = c_marker if c_marker == "X"
+        player_wins += 1 if detect_winner(board, current_player,player_order) == "Player"
+        computer_wins += 1 if detect_winner(board, current_player,player_order) == "Computer"
+        display_board(board, player, computer, player_wins, computer_wins)
+
+        # current player is X, player is X  here because X won and current player has not alternated
+        # no reset necessary
+        # current player is O computer is O - here because O won and current player has not alternated
+        # reset required 
+             #                                X
+        current_player = player if player == "X"
+        current_player = computer if computer == "X"
         break
       elsif board_full?(board)
         prompt "It's a tie!"
         sleep 1.5
         # reset the player order
-        current_player = p_marker if p_marker == "X"
-        current_player = c_marker if c_marker == "X"
+        current_player = player if player == "X"
+        current_player = computer if computer == "X"
         break
       end
       current_player = alternate_player(current_player)
