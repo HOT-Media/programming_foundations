@@ -133,8 +133,6 @@ def mark_tie_square(brd)
   square
 end
 
-
-
 def computer_offense_defense!(brd, xoro)
   if winning_move(brd, xoro).class == Integer
     brd[winning_move(brd, xoro)] = xoro
@@ -156,17 +154,13 @@ def computer_ai_logic!(brd, xoro)
   brd
 end
 
-
-
 def computer_places_piece!(brd, xoro)
   if computer_offense_defense!(brd, xoro).class == Integer
-     computer_offense_defense!(brd, xoro)
-     return
+    computer_offense_defense!(brd, xoro)
+    return
   end
   computer_ai_logic!(brd, xoro)
 end
-
-
 
 def place_piece!(brd, current_player, player_order)
   if player_order == "player" && current_player == P_ONE_MARKER
@@ -178,24 +172,6 @@ def place_piece!(brd, current_player, player_order)
   end
   computer_places_piece!(brd, current_player)
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # def place_piece!(brd, current_player, player_order)
 #   if current_player == "X" && player_order == "player"
@@ -271,7 +247,6 @@ loop do
     board = initialize_board
     loop do
       display_board(board, player_wins, computer_wins)
-      binding.pry
       place_piece!(board, current_player, player_order)
       display_board(board, player_wins, computer_wins)
       if someone_won?(board, current_player, player_order)[0] == true
