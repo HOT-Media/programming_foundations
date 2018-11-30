@@ -58,22 +58,6 @@ def empty_squares(brd)
 end
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def set_player_order
   answer = ""
 
@@ -171,7 +155,7 @@ def place_piece!(brd, current_player, player_order)
   elsif current_player == "O" and player_order == "player"
     computer_places_piece!(brd, current_player)
   elsif current_player == "O" and player_order == "computer"
-    computer_places_piece!(brd, current_player)
+    player_places_piece!(brd, current_player)
   end
 end
 
@@ -237,7 +221,7 @@ computer, player = P_ONE_MARKER, P_TWO_MARKER if player_order == "computer"
 
 player == "X" ? current_player = player : current_player = computer
 
-
+#binding.pry 
 loop do
   player_wins = 0
   computer_wins = 0
@@ -247,6 +231,7 @@ loop do
     loop do
       #binding.pry
       display_board(board, player, computer, player_wins, computer_wins)
+      #binding.pry
       place_piece!(board, current_player,player_order)
       display_board(board, player, computer, player_wins, computer_wins)
       #binding.pry # player won, what is player order and what is someone won
