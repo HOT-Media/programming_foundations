@@ -5280,14 +5280,65 @@ WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] +
                 [[1, 4, 7], [2, 5, 8], [3, 6, 9]] +
                 [[1, 5, 9], [7, 5, 3]]
 
+def win(brd,xoro)
+square = WINNING_LINES.select { |arr|arr.include?(p_one_squares(brd)) }
 
-WINNING_LINES.select do |array|
-  array.include? (player_one_squares(brd))
+
+
+
+
+def winning_move(brd, xoro)
+  winning_square_arrays = WINNING_LINES.select do |line|
+    (brd.values_at(line[0], line[1], line[2]).count(xoro) == 2 &&
+     brd.values_at(line[0], line[1], line[2]).count(" ") == 1)
+  end
+  square = winning_square_arrays.flatten.find { |sq| brd[sq] == " " }
+  square
 end
 
-    mark square array
-  block =player_two_squares(brd)
-  3_2_or_1 = empty_squares(brd)
+
+
+
+
+
+                                            x
+def players_potential_winning_squares(brd, xoro)
+              x 
+  if xoro == "O"
+    opponent = "X"
+  end            x    
+  elsif xoro == "X"
+    oponent = "O"
+  end
+  WINNING_LINES.select do |line|
+    brd.values_at(line[0], line[1], line[2]).count(opponent) == 2
+  end
+end
+
+
+
+it can come in as x or o,
+
+
+
+
+
+def players_potential_winning_squares(brd, xoro)
+  if xoro == "O"
+    opponent = "X"
+  end
+  elsif xoro == "X"
+    oponent = "O"
+  end
+  WINNING_LINES.select do |line|
+    brd.values_at(line[0], line[1], line[2]).count(opponent) == 2
+  end
+end
+
+
+
+P_ONE_MARKER = "X"
+P_TWO_MARKER = "O"
 
 
 
@@ -5299,6 +5350,395 @@ end
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+diagnostics_with_pry.rb:136:1: C: Metrics/AbcSize: Assignment Branch Condition size for computer_places_piece! is too high. [24.78/18]  (http://c2.com/cgi/wiki?AbcMetric)
+def computer_places_piece!(brd, xoro)
+^^^
+
+1. Add one to the assignment count for each occurrence of an assignment operator, excluding constant declarations:
+= *= /= %= += <<= >>= &= |= ^= >>>=
+
+2. Add one to the assignment count for each occurrence of an increment or decrement operator (prefix or postfix):
+ ++ --
+
+3. Add one to the branch count for each function call or class method call.
+
+4. Add one to the branch count for each occurrence of the new operator.
+
+5. Add one to the condition count for each use of a conditional operator:
+ == != <= >= < >
+
+6. Add one to the condition count for each use of the following keywords:
+ else case default try catch ?
+
+7. Add one to the condition count for each unary conditional expression.
+! before true !true
+- before 5   -5
+
+Figure 4 – ABC Counting Rules for Java 
+
+
+
+Assignment -- an explicit transfer of data into a variable,
+= *= /= %= += <<= >>= &= |= ^= >>>= ++ --
+
+Branch 
+-- an explicit forward program branch out of scope 
+-- a function call, class method call, or new operator
+
+Condition 
+-- a logical/Boolean test == != <= >= < > else case default try catch ? and unary conditionals.
+
+
+A scalar ABC size value (or "aggregate magnitude") is computed as:
+       |ABC| = sqrt((A*A)+(B*B)+(C*C))
+
+
+
+Metrics/AbcSize:
+  Description: >-
+                 A calculated magnitude based on number of assignments,
+                 branches, and conditions.
+Max: 18
+
+def computer_places_piece!(brd, xoro)
+  if winning_move(brd, xoro).class == Integer                              # 1 method definition  1 condition
+    brd[winning_move(brd, xoro)] = xoro                                    # 1 assignment
+  elsif block_win_with_this_square(brd, xoro).class == Integer             # 1 method definition  1 condition
+    brd[block_win_with_this_square(brd, xoro)] = xoro                      # 1 method definition  1 assignment
+  elsif brd[5] == " "                                                      # 1 condition
+    brd[5] = xoro                                                          # 1 assignment
+  elsif find_3_open_squares(brd, xoro).class == Integer && xoro == "O"     # 1 method definition  2 conditions
+    brd[find_3_open_squares(brd, xoro)] = xoro                             # 1 method definition  1 assignment
+  elsif find_two_open_squares(brd, xoro).class == Integer                  # 1 method definition  1 condition
+    brd[find_two_open_squares(brd, xoro)] = xoro                           # 1 method definition  1 assignment
+  elsif mark_tie_square(brd).class == Integer                              # 1 method definition  1 condition
+    brd[mark_tie_square(brd)] = xoro                                       # 1 method definition  1 assignment
+  end                                                                      # 12                    10
+  brd                                                    # total occurrences              22
+end                                                      # Rubocop max                    18
+
+
+
+
+
+split into offense/defense and ai logic
+
+
+look for a win
+  take it if found
+look for a block
+  block if found
+nil
+
+this will update the values in the brd hash / marks a square brd[] = "X"
+
+def computer_offense_defense!(brd, xoro)
+  if winning_move(brd, xoro).class == Integer                              # 1 method definition  1 condition
+    brd[winning_move(brd, xoro)] = xoro                                    # 1 assignment
+  elsif block_win_with_this_square(brd, xoro).class == Integer             # 1 method definition  1 condition
+    brd[block_win_with_this_square(brd, xoro)] = xoro                      # 1 method definition  1 assignment
+  end                                                                      # 4                    3
+end                                                     # total occuuences              7
+
+
+brd = {1=>"X", 2=>"X", 3=>" ", 4=>" ", 5=>" ", 6=>" ", 7=>" ", 8=>" ", 9=>" "}
+
+
+
+look for 3 open squares
+  take the first square of the line if found
+look for 2 open squares
+  take the next square after the first one if found
+mark the tie square 
+
+this will update the values in the brd hash / marks a square brd[] = "X"
+
+def computer_ai_logic! (brd, xoro)
+  elsif brd[5] == " "                                                      # 1 condition
+    brd[5] = xoro                                                          # 1 assignment
+  elsif find_3_open_squares(brd, xoro).class == Integer && xoro == "O"     # 1 method definition  2 conditions
+    brd[find_3_open_squares(brd, xoro)] = xoro                             # 1 method definition  1 assignment
+  elsif find_two_open_squares(brd, xoro).class == Integer                  # 1 method definition  1 condition
+    brd[find_two_open_squares(brd, xoro)] = xoro                           # 1 method definition  1 assignment
+  elsif mark_tie_square(brd).class == Integer                              # 1 method definition  1 condition
+    brd[mark_tie_square(brd)] = xoro                                       # 1 method definition  1 assignment
+  end                                                                      # 8                    7
+  brd                                                    # total occurrences              15
+end
+
+is the return value used or is the hash updated to the appropriate value then the method exits?
+
+return value is not used
+
+
+def computer_places_piece!(brd, xoro)
+  computer_offense_defense!(brd, xoro) # will this just run and return nil if the hash doesnot update?
+                                       # 
+  computer_ai_logic! (brd, xoro)
+end
+
+
+
+
+
+
+
+def computer_offense_defense!(brd, xoro)
+  if winning_move(brd, xoro).class == Integer
+    brd[winning_move(brd, xoro)] = xoro
+  elsif block_win_with_this_square(brd, xoro).class == Integer
+    brd[block_win_with_this_square(brd, xoro)] = xoro
+  end
+end
+
+def computer_ai_logic! (brd, xoro)
+  elsif brd[5] == " "
+    brd[5] = xoro
+  elsif find_3_open_squares(brd, xoro).class == Integer && xoro == "O"
+    brd[find_3_open_squares(brd, xoro)] = xoro
+  elsif find_two_open_squares(brd, xoro).class == Integer
+    brd[find_two_open_squares(brd, xoro)] = xoro
+  elsif mark_tie_square(brd).class == Integer
+    brd[mark_tie_square(brd)] = xoro
+  end
+  brd
+end
+
+def computer_places_piece!(brd, xoro)
+  computer_offense_defense!(brd, xoro)
+  computer_ai_logic! (brd, xoro)
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+diagnostics_with_pry.rb:136:1: C: Metrics/CyclomaticComplexity: Cyclomatic complexity for computer_places_piece! is too high. [8/6] 
+
+The cyclomatic complexity is the number of linearly independent paths through a method. 
+6
+
+
+
+
+
+
+diagnostics_with_pry.rb:136:1: C: Metrics/PerceivedComplexity: Perceived complexity for computer_places_piece! is too high. [9/7] 
+def computer_places_piece!(brd, xoro)
+^^^
+This cop tries to produce a complexity score thats a measure of the complexity the reader experiences when looking at a method. For that reason it considers when nodes as
+something that doesnt add as much complexity as an if or a &&. Except if its one of those special case/when constructs where theres no expression after case. Then the cop
+treats it as an if/elsif/elsif... and lets all the when nodes count. In contrast to the CyclomaticComplexity cop, this cop considers else nodes as adding complexity.
+
+def my_method                   # 1
+  if cond                       # 1
+    case var                    # 2 (0.8 + 4 * 0.2, rounded)
+    when 1 then func_one
+    when 2 then func_two
+    when 3 then func_three
+    when 4..10 then func_other
+    end
+  else                          # 1
+    do_something until a && b   # 2
+  end                           # ===
+end                             # 7 complexity points
+
+Max 7 Integer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Size is computed by counting the number of assignments, branches and conditions for a section of code. 
+
+Assignment -- an explicit transfer of data into a variable, e.g. = *= /= %= += <<= >>= &= |= ^= >>>= ++ --
+Branch -- an explicit forward program branch out of scope -- a function call, class method call, or new operator
+Condition -- a logical/Boolean test, == != <= >= < > else case default try catch ? and unary conditionals.
+
+
+
+def computer_places_piece!(brd, xoro)
+  if winning_move(brd, xoro).class == Integer
+    brd[winning_move(brd, xoro)] = xoro
+  elsif block_win_with_this_square(brd, xoro).class == Integer
+    brd[block_win_with_this_square(brd, xoro)] = xoro
+  elsif brd[5] == " "
+    brd[5] = xoro
+  elsif find_3_open_squares(brd, xoro).class == Integer && xoro == "O"
+    brd[find_3_open_squares(brd, xoro)] = xoro
+  elsif find_two_open_squares(brd, xoro).class == Integer
+    brd[find_two_open_squares(brd, xoro)] = xoro
+  elsif mark_tie_square(brd).class == Integer
+    brd[mark_tie_square(brd)] = xoro
+  end
+  brd
+end
+
+
+
+
+
+
+
+
+diagnostics_with_pry.rb:153:1: C: Metrics/CyclomaticComplexity: Cyclomatic complexity for place_piece! is too high. [9/6] 
+def place_piece!(brd, current_player, player_order)
+^^^
+diagnostics_with_pry.rb:153:1: C: Metrics/PerceivedComplexity: Perceived complexity for place_piece! is too high. [10/7] 
+def place_piece!(brd, current_player, player_order)
+
+
+
+def place_piece!(brd, current_player, player_order)
+  if current_player == "X" && player_order == "player"
+    player_places_piece!(brd, current_player)
+  elsif current_player == "X" && player_order == "computer"
+    computer_places_piece!(brd, current_player)
+  elsif current_player == "O" && player_order == "player"
+    computer_places_piece!(brd, current_player)
+  elsif current_player == "O" && player_order == "computer"
+    player_places_piece!(brd, current_player)
+  end
+end
+
+
+
+
+
+diagnostics_with_pry.rb:136:1: C: Metrics/PerceivedComplexity: Perceived complexity for computer_places_piece! is too high. [9/7] 
+def computer_places_piece!(brd, xoro)
+^^^
+This cop tries to produce a complexity score thats a measure of the complexity the reader experiences when looking at a method. For that reason it considers when nodes as
+something that doesnt add as much complexity as an if or a &&. Except if its one of those special case/when constructs where theres no expression after case. Then the cop
+treats it as an if/elsif/elsif... and lets all the when nodes count. In contrast to the CyclomaticComplexity cop, this cop considers else nodes as adding complexity.
+
+
+def my_method                   # 1
+  if cond                       # 1
+    case var                    # 2 (0.8 + 4 * 0.2, rounded)
+    when 1 then func_one
+    when 2 then func_two
+    when 3 then func_three
+    when 4..10 then func_other
+    end
+  else                          # 1
+    do_something until a && b   # 2
+  end                           # ===
+end                             # 7 complexity points
+
+Max 7 Integer
+
+
+
+
+
+
+
+
+def place_piece!(brd, current_player, player_order)          # 1
+  if current_player == "X" && player_order == "player"       # 3
+    player_places_piece!(brd, current_player)                # 1
+  elsif current_player == "X" && player_order == "computer"  # 4
+    computer_places_piece!(brd, current_player)              # 1
+  elsif current_player == "O" && player_order == "player"    # 4
+    computer_places_piece!(brd, current_player)              # 1
+  elsif current_player == "O" && player_order == "computer"  # 4
+    player_places_piece!(brd, current_player)
+  end                                                       # 19
+end
+
+
+
+def place_piece!(brd, current_player, player_order)
+  if current_player == "X" && player_order == "player"
+    player_places_piece!(brd, current_player)
+  elsif current_player == "X" && player_order == "computer"
+    computer_places_piece!(brd, current_player)
+  elsif current_player == "O" && player_order == "player"
+    computer_places_piece!(brd, current_player)
+  elsif current_player == "O" && player_order == "computer"
+    player_places_piece!(brd, current_player)
+  end
+end
+
+player_order_logic = { 
+                      player_places_piece!(brd, current_player) if current_player == "X" && player_order == "player" 
+                      computer_places_piece!(brd, current_player) if current_player == "X" && player_order == "computer"
+                      computer_places_piece!(brd, current_player) if current_player == "O" && player_order == "player"
+                      player_places_piece!(brd, current_player) if current_player == "O" && player_order == "computer"
+
+  end}
+
+
+
+4 possible outcomes of the player order
+
+
+
+CAR_TYPES = {
+  foo_type: ['honda', 'acura', 'mercedes'],
+  bar_type: ['toyota', 'lexus']
+  # More...
+}
+@type_for_name = {}
+CAR_TYPES.each { |type, names| names.each { |name| @type_for_name[type] = name } }
+
+case @type_for_name[car]
+when :foo_type
+  # do foo things
+when :bar_type
+  # do bar things
+end
 
 
 

@@ -133,12 +133,16 @@ def mark_tie_square(brd)
   square
 end
 
-def computer_places_piece!(brd, xoro)
+def computer_offense_defense!(brd, xoro)
   if winning_move(brd, xoro).class == Integer
     brd[winning_move(brd, xoro)] = xoro
   elsif block_win_with_this_square(brd, xoro).class == Integer
     brd[block_win_with_this_square(brd, xoro)] = xoro
-  elsif brd[5] == " "
+  end
+end
+
+def computer_ai_logic!(brd, xoro)
+  if brd[5] == " "
     brd[5] = xoro
   elsif find_3_open_squares(brd, xoro).class == Integer && xoro == "O"
     brd[find_3_open_squares(brd, xoro)] = xoro
@@ -148,6 +152,11 @@ def computer_places_piece!(brd, xoro)
     brd[mark_tie_square(brd)] = xoro
   end
   brd
+end
+
+def computer_places_piece!(brd, xoro)
+  computer_offense_defense!(brd, xoro)
+  computer_ai_logic!(brd, xoro)
 end
 
 def place_piece!(brd, current_player, player_order)
@@ -222,7 +231,6 @@ loop do
 
   loop do
     board = initialize_board
-
     loop do
       display_board(board, player_wins, computer_wins)
       place_piece!(board, current_player, player_order)
