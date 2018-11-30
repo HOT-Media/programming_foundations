@@ -1,6 +1,6 @@
 require 'pry'
 require 'pry-byebug'
-
+# unbeatable version somehow
 INITIAL_MARKER = ' '
 P_ONE_MARKER = "X"
 P_TWO_MARKER = "O"
