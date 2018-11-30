@@ -14,11 +14,9 @@ def prompt(msg)
 end
 
 # rubocop:disable Metrics/AbcSize
-def display_board(brd, player, computer, player_score, computer_score)
+def display_board(brd, player_score, computer_score)
   system 'clear'
-  puts "You are #{player}, the computer is #{computer}"
-  puts "Your score: #{player_score}"
-  puts "Computer score: #{computer_score}"
+  puts "Your score: #{player_score}   Computer score: #{computer_score}"
   puts ""
   puts "     |     |"
   puts "  #{brd[1]}  |  #{brd[2]}  |  #{brd[3]}"
@@ -92,7 +90,9 @@ def winning_move(brd, xoro)
 end
 
 def block_players_winning_move(brd, xoro)
-  xoro == "O" ? opponent = "X" : opponent = "O"
+  opponent = "X" if xoro == "O"
+  # oponnent = "O" if xoro == "X"
+  # xoro == "O" ? opponent = "X" : opponent = "O"
   two_x = WINNING_LINES.select do |line|
     brd.values_at(line[0], line[1], line[2]).count(opponent) == 2
   end
@@ -188,12 +188,29 @@ def detect_winner(brd, current_player, player_order)
   "Computer"
 end
 
-prompt "Who is first? player or computer"
-player_order = gets.chomp
-player, computer = P_ONE_MARKER, P_TWO_MARKER if player_order == "player"
-computer, player = P_ONE_MARKER, P_TWO_MARKER if player_order == "computer"
-player == "X" ? current_player = player : current_player = computer
+system 'clear'
+prompt <<-WELCOME
+Welcome to TTT.
 
+Your opponent is technically the Ruby source code for
+this game; however, your opponent will be referred to
+as "Computer"
+
+WELCOME
+
+prompt "Please choose the player who will go first. Player or Computer?"
+player_order = gets.chomp.downcase
+if player_order == "player"
+  player = P_ONE_MARKER
+  computer = P_TWO_MARKER
+elsif player_order == "computer"
+  computer = P_ONE_MARKER
+  player = P_TWO_MARKER
+end
+player == "X" ? current_player = player : current_player = computer
+prompt "You are #{player}, the computer is #{computer}"
+
+sleep 1.75
 loop do
   player_wins = 0
   computer_wins = 0
@@ -202,15 +219,20 @@ loop do
     board = initialize_board
 
     loop do
-      display_board(board, player, computer, player_wins, computer_wins)
+      display_board(board, player_wins, computer_wins)
       place_piece!(board, current_player, player_order)
-      display_board(board, player, computer, player_wins, computer_wins)
+      display_board(board, player_wins, computer_wins)
       if someone_won?(board, current_player, player_order)[0] == true
-        prompt "#{someone_won?(board, current_player, player_order)[1]} won that round!"
+        prompt <<-WIN
+"#{someone_won?(board, current_player, player_order)[1]} won that round!"
+WIN
         sleep 1.5
-        player_wins += 1 if detect_winner(board, current_player, player_order) == "Player"
-        computer_wins += 1 if detect_winner(board, current_player, player_order) == "Computer"
-        display_board(board, player, computer, player_wins, computer_wins)
+        if detect_winner(board, current_player, player_order) == "Player"
+          player_wins += 1
+        elsif detect_winner(board, current_player, player_order) == "Computer"
+          computer_wins += 1
+        end
+        display_board(board, player_wins, computer_wins)
         current_player = player if player == "X"
         current_player = computer if computer == "X"
         break

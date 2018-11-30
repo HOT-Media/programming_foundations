@@ -4708,6 +4708,17 @@ end
 
 
 
+prompt "Please choose the player who will go first. Player or Computer?"
+player_order = gets.chomp.downcase
+if player_order == "player"
+  player = P_ONE_MARKER
+  computer =  P_TWO_MARKER
+elsif player_order == "computer"
+  computer = P_ONE_MARKER
+  player = P_TWO_MARKER
+end
+player == "X" ? current_player = player : current_player = computer
+prompt "You are #{player}, the computer is #{computer}"
 
 
 
@@ -4720,22 +4731,32 @@ end
 
 
 
+prompt <<-WIN 
+"#{someone_won?(board, current_player, player_order)[1]} won that round!"
+WIN
+
+
+prompt <<-WELCOME
+Welcome to TTT.
+
+Your opponent is technically the Ruby source code for
+this game; however, your opponent will be referred to
+as "Computer"
+
+WELCOME
 
 
 
 
+player_wins += 1 if detect_winner(board, current_player, player_order) == "Player"
+        computer_wins += 1 if detect_winner(board, current_player, player_order) == "Computer"
 
 
-
-
-
-
-
-
-
-
-
-
+if detect_winner(board, current_player, player_order) == "Player"
+  player_wins += 1
+elsif detect_winner(board, current_player, player_order) == "Computer"
+  computer_wins += 1
+end
 
 
 
