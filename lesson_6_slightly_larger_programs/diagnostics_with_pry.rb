@@ -133,6 +133,8 @@ def mark_tie_square(brd)
   square
 end
 
+
+
 def computer_offense_defense!(brd, xoro)
   if winning_move(brd, xoro).class == Integer
     brd[winning_move(brd, xoro)] = xoro
@@ -154,22 +156,58 @@ def computer_ai_logic!(brd, xoro)
   brd
 end
 
+
+
 def computer_places_piece!(brd, xoro)
-  computer_offense_defense!(brd, xoro)
+  if computer_offense_defense!(brd, xoro).class == Integer
+     computer_offense_defense!(brd, xoro)
+     return
+  end
   computer_ai_logic!(brd, xoro)
 end
 
+
+
 def place_piece!(brd, current_player, player_order)
-  if current_player == "X" && player_order == "player"
+  if player_order == "player" && current_player == P_ONE_MARKER
     player_places_piece!(brd, current_player)
-  elsif current_player == "X" && player_order == "computer"
-    computer_places_piece!(brd, current_player)
-  elsif current_player == "O" && player_order == "player"
-    computer_places_piece!(brd, current_player)
-  elsif current_player == "O" && player_order == "computer"
+    return
+  elsif player_order == "computer" && current_player == P_TWO_MARKER
     player_places_piece!(brd, current_player)
+    return
   end
+  computer_places_piece!(brd, current_player)
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def place_piece!(brd, current_player, player_order)
+#   if current_player == "X" && player_order == "player"
+#     player_places_piece!(brd, current_player)
+#   elsif current_player == "X" && player_order == "computer"
+#     computer_places_piece!(brd, current_player)
+#   elsif current_player == "O" && player_order == "player"
+#     computer_places_piece!(brd, current_player)
+#   elsif current_player == "O" && player_order == "computer"
+#     player_places_piece!(brd, current_player)
+#   end
+# end
 
 def alternate_player(player)
   next_player_to_mark_a_square = "X" if player == "O"
@@ -233,6 +271,7 @@ loop do
     board = initialize_board
     loop do
       display_board(board, player_wins, computer_wins)
+      binding.pry
       place_piece!(board, current_player, player_order)
       display_board(board, player_wins, computer_wins)
       if someone_won?(board, current_player, player_order)[0] == true

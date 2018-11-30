@@ -5720,8 +5720,113 @@ player_order_logic = {
   end}
 
 
+player_order_logic = { 
+                      players_turn => [current_player == "X" && player_order == "player"]
+                      computers_turn => [ current_player == "X" && player_order == "computer"
+                       if current_player == "O" && player_order == "player"
+                       if current_player == "O" && player_order == "computer"
+
+  end}
 
 4 possible outcomes of the player order
+
+
+
+players_turn_logic 
+
+
+
+elsif player_order == "player" && current_player == P_ONE_MARKER
+    return "Player"
+  elsif player_order == "computer" && current_player == P_TWO_MARKER
+    return "Player"
+
+
+
+
+
+case 
+when players_turn
+  player_places_piece!(brd, current_player)
+when computers_turn
+  computer_places_piece!(brd, current_player)
+end
+
+
+
+
+ if the_winning_line.empty?
+    return
+  elsif player_order == "player" && current_player == P_ONE_MARKER
+    return "Player"
+  elsif player_order == "computer" && current_player == P_TWO_MARKER
+    return "Player"
+  end
+  "Computer"
+end
+
+
+
+
+
+
+
+
+                          x    o         player 
+def place_piece!(brd, current_player, player_order)
+  if current_player == "X" && player_order == "player"
+    player_places_piece!(brd, current_player)
+  elsif current_player == "X" && player_order == "computer"
+    computer_places_piece!(brd, current_player)
+  elsif current_player == "O" && player_order == "player"
+    computer_places_piece!(brd, current_player)
+  elsif current_player == "O" && player_order == "computer"
+    player_places_piece!(brd, current_player)
+  end
+end
+
+
+
+
+                            O           computer   
+def place_piece!(brd, current_player, player_order)
+  if player_order == "player" && current_player == P_ONE_MARKER # X
+    player_places_piece!(brd, current_player)
+    return
+  elsif player_order == "computer" && current_player == P_TWO_MARKER
+    player_places_piece!(brd, current_player)
+    return
+  end
+  computer_places_piece!(brd, current_player)
+end
+
+
+
+
+
+
+
+
+
+current_player == "X" && player_order
+
+
+                     x or o        player or computer
+place_piece!(brd, current_player, player_order)
+
+        "X" or "O"
+case player_order
+when "player"
+  how do I know whos turn it is
+
+
+13579 thats the same as player order 
+2468
+player order to actually determine the order
+
+player order and thecurrent player and outputs a value?
+
+
 
 
 
