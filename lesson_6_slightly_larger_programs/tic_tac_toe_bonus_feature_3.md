@@ -5957,23 +5957,16 @@ separate the marking of thesquare from the conditionsl check
 
 
 def computer_offense_defense!(brd, xoro)
+  # return the square to mark
   if winning_move(brd, xoro).class == Integer
     return winning_move(brd, xoro)
   elsif block_win_with_this_square(brd, xoro).class == Integer
     return block_win_with_this_square(brd, xoro)
-    #{1=>"O", 2=>"O", 3=>"X", 4=>" ", 5=>"X", 6=>" ", 7=>" ", 8=>" ", 9=>"X"}
-    #brd[block_win_with_this_square(brd, xoro)] = xoro
-    # {1=>"O", 2=>"O", 3=>"X", 4=>" ", 5=>"X", 6=>"O", 7=>" ", 8=>" ", 9=>"X"}
-    #binding.pry
   end
-end
-
-=> square to block 
+end # => square to block 
 
 def computer_ai_logic!(brd, xoro)
-  # binding.pry
-  # is the program entering into computer_ai_logic
-  # what is brd
+  # return the square to mark
   if brd[5] == " "
     return 5
   elsif find_3_open_squares(brd, xoro).class == Integer && xoro == "O"
@@ -5984,27 +5977,28 @@ def computer_ai_logic!(brd, xoro)
     return mark_tie_square(brd)
   end
   brd
-end
-=> square to mark 
+end # => square to mark 
 
 
 def computer_places_piece!(brd, xoro)
   binding.pry
   if computer_offense_defense!(brd, xoro).class == Integer # square 6 is already marked here
+    # mark square then return
     brd[computer_offense_defense(brd, xoro)] = xoro
     binding.pry # is square 6 marked here?
     # {1=>"O", 2=>"O", 3=>"X", 4=>" ", 5=>"X", 6=>"O", 7=>" ", 8=>" ", 9=>"X"}
-    # if square 6 is marked here then next line maybe?
-    return #if computer_offense_defense!(brd, xoro).class == Integer
-    # why is this not returning ? because the if statement executed BEFORE square 6 was marked?
-    # so line 159 returns false?
-    #return
+    # if square 6 is marked here then next line should return
+    return 
   elsif
-  #binding.pry
-  # the computer is entering this methd because its the last line of the computerplaces piece!?
-  # why is computeroffense not causing computer_places_piece to exit?
-  computer_ai_logic!(brd, xoro)
+    # this should only execute if the first conditional is not met
+    computer_ai_logic!(brd, xoro).class == Integer
+    brd[computer_ai_logic!(brd, xoro)] = xoro
+  end
+  brd
 end
+
+
+
 
 brd[block_win_with_this_square(brd, xoro)] = xoro
 

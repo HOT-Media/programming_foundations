@@ -57,7 +57,7 @@ end
 def set_player_order
   answer = ""
 
-  loop do # validate input
+  loop do
     prompt "Who is first, player or computer?"
     answer = gets.chomp
     if answer == "player" || answer == "computer"
@@ -104,8 +104,9 @@ def block_win_with_this_square(brd, xoro)
   block_square = players_potential_winning_squares(brd, xoro).select do |subarr|
     brd.values_at(subarr[0], subarr[1], subarr[2]).count(xoro) == 0
   end
-  #refactor to :
-  # block_square.flatten.find { |sq| brd[sq] == " " } => should return the same thing, squre is an unecssary var
+  # refactor to :
+  # block_square.flatten.find { |sq| brd[sq] == " " }
+  # => should return the same thing, squre is an unecssary var
   square = block_square.flatten.find { |sq| brd[sq] == " " }
   square
 end
@@ -136,52 +137,43 @@ def mark_tie_square(brd)
 end
 
 def computer_offense_defense!(brd, xoro)
+  # return the square to mark
   if winning_move(brd, xoro).class == Integer
-    brd[winning_move(brd, xoro)] = xoro
+    return winning_move(brd, xoro)
   elsif block_win_with_this_square(brd, xoro).class == Integer
-    #{1=>"O", 2=>"O", 3=>"X", 4=>" ", 5=>"X", 6=>" ", 7=>" ", 8=>" ", 9=>"X"}
-    brd[block_win_with_this_square(brd, xoro)] = xoro
-    # {1=>"O", 2=>"O", 3=>"X", 4=>" ", 5=>"X", 6=>"O", 7=>" ", 8=>" ", 9=>"X"}
-    #binding.pry
+    return block_win_with_this_square(brd, xoro)
   end
-end
+end # => square to block 
 
 def computer_ai_logic!(brd, xoro)
-  # binding.pry
-  # is the program entering into computer_ai_logic
-  # what is brd
+  # return the square to mark
   if brd[5] == " "
-    brd[5] = xoro
+    return 5
   elsif find_3_open_squares(brd, xoro).class == Integer && xoro == "O"
-    brd[find_3_open_squares(brd, xoro)] = xoro
+    return find_3_open_squares(brd, xoro)
   elsif find_two_open_squares(brd, xoro).class == Integer
-    brd[find_two_open_squares(brd, xoro)] = xoro
+    return find_two_open_squares(brd, xoro)
   elsif mark_tie_square(brd).class == Integer
-    brd[mark_tie_square(brd)] = xoro
+    return mark_tie_square(brd)
   end
   brd
-end
+end # => square to mark 
 
 def computer_places_piece!(brd, xoro)
   #binding.pry
   if computer_offense_defense!(brd, xoro).class == Integer # square 6 is already marked here
+    # mark square then return
+    brd[computer_offense_defense!(brd, xoro)] = xoro
     #binding.pry # is square 6 marked here?
-    computer_offense_defense!(brd, xoro)
-    #binding.pry # is square 6 marked here? => yes
     # {1=>"O", 2=>"O", 3=>"X", 4=>" ", 5=>"X", 6=>"O", 7=>" ", 8=>" ", 9=>"X"}
-    # if square 6 is marked here then next line maybe?
-    #return if computer_offense_defense!(brd, xoro).class == Integer
-    # why is this not returning ? because the if statement executed BEFORE square 6 was marked?
-    # so line 159 returns false?
-    #return
-  #end
-  # binding.pry
-  # the computer is entering this methd because its the last line of the computerplaces piece!?
-  # why is computeroffense not causing computer_places_piece to exit?
-  else
-  binding.pry  # computer_offense_defense!(brd, xoro).class == Integer 
-    computer_ai_logic!(brd, xoro)
+    # if square 6 is marked here then next line should return
+    return 
+  elsif
+    # this should only execute if the first conditional is not met
+    computer_ai_logic!(brd, xoro).class == Integer
+    brd[computer_ai_logic!(brd, xoro)] = xoro
   end
+  brd
 end
 
 def place_piece!(brd, current_player, player_order)
@@ -194,18 +186,6 @@ def place_piece!(brd, current_player, player_order)
   end
   computer_places_piece!(brd, current_player)
 end
-
-# def place_piece!(brd, current_player, player_order)
-#   if current_player == "X" && player_order == "player"
-#     player_places_piece!(brd, current_player)
-#   elsif current_player == "X" && player_order == "computer"
-#     computer_places_piece!(brd, current_player)
-#   elsif current_player == "O" && player_order == "player"
-#     computer_places_piece!(brd, current_player)
-#   elsif current_player == "O" && player_order == "computer"
-#     player_places_piece!(brd, current_player)
-#   end
-# end
 
 def alternate_player(player)
   next_player_to_mark_a_square = "X" if player == "O"
