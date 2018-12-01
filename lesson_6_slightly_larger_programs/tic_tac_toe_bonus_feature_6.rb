@@ -89,15 +89,22 @@ def winning_move(brd, xoro)
   square
 end
 
-def block_players_winning_move(brd, xoro)
-  opponent = "X" if xoro == "O"
-  two_x = WINNING_LINES.select do |line|
+def players_potential_winning_squares(brd, xoro)
+  if xoro == "O"
+    opponent = "X"
+  elsif xoro == "X"
+    opponent = "O"
+  end
+  WINNING_LINES.select do |line|
     brd.values_at(line[0], line[1], line[2]).count(opponent) == 2
   end
-  block_this_square = two_x.select do |subarr|
+end
+
+def block_win_with_this_square(brd, xoro)
+  block_square = players_potential_winning_squares(brd, xoro).select do |subarr|
     brd.values_at(subarr[0], subarr[1], subarr[2]).count(xoro) == 0
   end
-  square = block_this_square.flatten.find { |sq| brd[sq] == " " }
+  square = block_square.flatten.find { |sq| brd[sq] == " " }
   square
 end
 
@@ -126,12 +133,16 @@ def mark_tie_square(brd)
   square
 end
 
-def computer_places_piece!(brd, xoro)
+def computer_offense_defense!(brd, xoro)
   if winning_move(brd, xoro).class == Integer
     brd[winning_move(brd, xoro)] = xoro
-  elsif block_players_winning_move(brd, xoro).class == Integer
-    brd[block_players_winning_move(brd, xoro)] = xoro
-  elsif brd[5] == " "
+  elsif block_win_with_this_square(brd, xoro).class == Integer
+    brd[block_win_with_this_square(brd, xoro)] = xoro
+  end
+end
+
+def computer_ai_logic!(brd, xoro)
+  if brd[5] == " "
     brd[5] = xoro
   elsif find_3_open_squares(brd, xoro).class == Integer && xoro == "O"
     brd[find_3_open_squares(brd, xoro)] = xoro
@@ -143,17 +154,37 @@ def computer_places_piece!(brd, xoro)
   brd
 end
 
-def place_piece!(brd, current_player, player_order)
-  if current_player == "X" && player_order == "player"
-    player_places_piece!(brd, current_player)
-  elsif current_player == "X" && player_order == "computer"
-    computer_places_piece!(brd, current_player)
-  elsif current_player == "O" && player_order == "player"
-    computer_places_piece!(brd, current_player)
-  elsif current_player == "O" && player_order == "computer"
-    player_places_piece!(brd, current_player)
+def computer_places_piece!(brd, xoro)
+  binding.pry
+  if computer_offense_defense!(brd, xoro).class == Integer
+    computer_offense_defense!(brd, xoro)
+    return
   end
+  computer_ai_logic!(brd, xoro)
 end
+
+def place_piece!(brd, current_player, player_order)
+  if player_order == "player" && current_player == P_ONE_MARKER
+    player_places_piece!(brd, current_player)
+    return
+  elsif player_order == "computer" && current_player == P_TWO_MARKER
+    player_places_piece!(brd, current_player)
+    return
+  end
+  computer_places_piece!(brd, current_player)
+end
+
+# def place_piece!(brd, current_player, player_order)
+#   if current_player == "X" && player_order == "player"
+#     player_places_piece!(brd, current_player)
+#   elsif current_player == "X" && player_order == "computer"
+#     computer_places_piece!(brd, current_player)
+#   elsif current_player == "O" && player_order == "player"
+#     computer_places_piece!(brd, current_player)
+#   elsif current_player == "O" && player_order == "computer"
+#     player_places_piece!(brd, current_player)
+#   end
+# end
 
 def alternate_player(player)
   next_player_to_mark_a_square = "X" if player == "O"
@@ -195,15 +226,23 @@ this game; however, your opponent will be referred to
 as "Computer"
 
 WELCOME
-
-prompt "Please choose the player who will go first. Player or Computer?"
-player_order = gets.chomp.downcase
-if player_order == "player"
-  player = P_ONE_MARKER
-  computer = P_TWO_MARKER
-elsif player_order == "computer"
-  computer = P_ONE_MARKER
-  player = P_TWO_MARKER
+player = nil
+computer = nil
+player_order = nil
+loop do
+  prompt "Please choose the player who will go first. Player or Computer?"
+  player_order = gets.chomp.downcase
+  if player_order == "player"
+    player = P_ONE_MARKER
+    computer = P_TWO_MARKER
+    break
+  elsif player_order == "computer"
+    computer = P_ONE_MARKER
+    player = P_TWO_MARKER
+    break
+  else
+    prompt "Valid answers are: player or computer"
+  end
 end
 player == "X" ? current_player = player : current_player = computer
 prompt "You are #{player}, the computer is #{computer}"
@@ -215,7 +254,6 @@ loop do
 
   loop do
     board = initialize_board
-
     loop do
       display_board(board, player_wins, computer_wins)
       place_piece!(board, current_player, player_order)

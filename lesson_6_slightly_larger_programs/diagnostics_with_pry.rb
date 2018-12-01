@@ -104,6 +104,8 @@ def block_win_with_this_square(brd, xoro)
   block_square = players_potential_winning_squares(brd, xoro).select do |subarr|
     brd.values_at(subarr[0], subarr[1], subarr[2]).count(xoro) == 0
   end
+  #refactor to :
+  # block_square.flatten.find { |sq| brd[sq] == " " } => should return the same thing, squre is an unecssary var
   square = block_square.flatten.find { |sq| brd[sq] == " " }
   square
 end
@@ -137,11 +139,17 @@ def computer_offense_defense!(brd, xoro)
   if winning_move(brd, xoro).class == Integer
     brd[winning_move(brd, xoro)] = xoro
   elsif block_win_with_this_square(brd, xoro).class == Integer
+    #{1=>"O", 2=>"O", 3=>"X", 4=>" ", 5=>"X", 6=>" ", 7=>" ", 8=>" ", 9=>"X"}
     brd[block_win_with_this_square(brd, xoro)] = xoro
+    # {1=>"O", 2=>"O", 3=>"X", 4=>" ", 5=>"X", 6=>"O", 7=>" ", 8=>" ", 9=>"X"}
+    #binding.pry
   end
 end
 
 def computer_ai_logic!(brd, xoro)
+  # binding.pry
+  # is the program entering into computer_ai_logic
+  # what is brd
   if brd[5] == " "
     brd[5] = xoro
   elsif find_3_open_squares(brd, xoro).class == Integer && xoro == "O"
@@ -155,11 +163,25 @@ def computer_ai_logic!(brd, xoro)
 end
 
 def computer_places_piece!(brd, xoro)
-  if computer_offense_defense!(brd, xoro).class == Integer
+  #binding.pry
+  if computer_offense_defense!(brd, xoro).class == Integer # square 6 is already marked here
+    #binding.pry # is square 6 marked here?
     computer_offense_defense!(brd, xoro)
-    return
+    #binding.pry # is square 6 marked here? => yes
+    # {1=>"O", 2=>"O", 3=>"X", 4=>" ", 5=>"X", 6=>"O", 7=>" ", 8=>" ", 9=>"X"}
+    # if square 6 is marked here then next line maybe?
+    #return if computer_offense_defense!(brd, xoro).class == Integer
+    # why is this not returning ? because the if statement executed BEFORE square 6 was marked?
+    # so line 159 returns false?
+    #return
+  #end
+  # binding.pry
+  # the computer is entering this methd because its the last line of the computerplaces piece!?
+  # why is computeroffense not causing computer_places_piece to exit?
+  else
+  binding.pry  # computer_offense_defense!(brd, xoro).class == Integer 
+    computer_ai_logic!(brd, xoro)
   end
-  computer_ai_logic!(brd, xoro)
 end
 
 def place_piece!(brd, current_player, player_order)
@@ -225,15 +247,23 @@ this game; however, your opponent will be referred to
 as "Computer"
 
 WELCOME
-
-prompt "Please choose the player who will go first. Player or Computer?"
-player_order = gets.chomp.downcase
-if player_order == "player"
-  player = P_ONE_MARKER
-  computer = P_TWO_MARKER
-elsif player_order == "computer"
-  computer = P_ONE_MARKER
-  player = P_TWO_MARKER
+player = nil
+computer = nil
+player_order = nil
+loop do
+  prompt "Please choose the player who will go first. Player or Computer?"
+  player_order = gets.chomp.downcase
+  if player_order == "player"
+    player = P_ONE_MARKER
+    computer = P_TWO_MARKER
+    break
+  elsif player_order == "computer"
+    computer = P_ONE_MARKER
+    player = P_TWO_MARKER
+    break
+  else
+    prompt "Valid answers are: player or computer"
+  end
 end
 player == "X" ? current_player = player : current_player = computer
 prompt "You are #{player}, the computer is #{computer}"

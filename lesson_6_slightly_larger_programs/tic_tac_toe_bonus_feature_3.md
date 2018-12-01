@@ -5848,6 +5848,172 @@ end
 
 
 
+def computer_places_piece!(brd, xoro)
+  binding.pry
+  if computer_offense_defense!(brd, xoro).class == Integer
+
+      def computer_offense_defense!(brd, xoro)
+        if winning_move(brd, xoro).class == Integer
+
+
+
+
+            def winning_move(brd, xoro)
+              winning_square_arrays = WINNING_LINES.select do |line|
+                (brd.values_at(line[0], line[1], line[2]).count(xoro) == 2 &&
+                 brd.values_at(line[0], line[1], line[2]).count(" ") == 1)
+              end
+              square = winning_square_arrays.flatten.find { |sq| brd[sq] == " " }
+              square
+            end
+            {1=>"O", 2=>"O", 3=>"X", 4=>" ", 5=>"X", 6=>" ", 7=>" ", 8=>" ", 9=>"X"}
+
+             => nil
+                   never executed => brd[winning_move(brd, xoro)] = xoro
+        elsif block_win_with_this_square(brd, xoro).class == Integer
+
+
+
+
+              def block_win_with_this_square(brd, xoro)
+                block_square = players_potential_winning_squares(brd, xoro).select do |subarr|
+                  brd.values_at(subarr[0], subarr[1], subarr[2]).count(xoro) == 0
+                end
+                square = block_square.flatten.find { |sq| brd[sq] == " " }
+                square
+              end
+
+              block_win_with_this_square(brd, xoro)
+              => 6 
+              => execute 
+
+          brd[block_win_with_this_square(brd, xoro)] = xoro
+          {1=>"O", 2=>"O", 3=>"X", 4=>" ", 5=>"X", 6=>"O", 7=>" ", 8=>" ", 9=>"X"}
+          the players win has been blocked with 6 being marked
+the program SHOULD BE EXITING computer_places_piece here because square 6 was marked 
+        end
+      end
+
+
+
+
+
+
+    computer_offense_defense!(brd, xoro)
+    return
+  end
+  computer_ai_logic!(brd, xoro)
+end
+
+
+
+
+def computer_places_piece!(brd, xoro)
+  binding.pry
+  if computer_offense_defense!(brd, xoro).class == Integer
+
+    computer_offense_defense!(brd, xoro)
+    return
+  end
+  computer_ai_logic!(brd, xoro)
+end
+
+
+
+
+
+
+
+
+
+def computer_places_piece!(brd, xoro)
+  binding.pry
+  if computer_offense_defense!(brd, xoro).class == Integer # square 6 is already marked here
+    binding.pry # is square 6 marked here?
+    computer_offense_defense!(brd, xoro)
+    binding.pry # is square 6 marked here? => yes
+    # {1=>"O", 2=>"O", 3=>"X", 4=>" ", 5=>"X", 6=>"O", 7=>" ", 8=>" ", 9=>"X"}
+    # if square 6 is marked here then next line maybe?
+    return if computer_offense_defense!(brd, xoro).class == Integer
+    # why is this not returning ? because the if statement executed BEFORE square 6 was marked?
+    # so line 159 returns false?
+    #return
+  end
+  binding.pry
+  # the computer is entering this methd because its the last line of the computerplaces piece!?
+  # why is computeroffense not causing computer_places_piece to exit?
+  computer_ai_logic!(brd, xoro)
+end
+
+
+
+
+
+
+separate the marking of thesquare from the conditionsl check
+
+
+
+
+
+def computer_offense_defense!(brd, xoro)
+  if winning_move(brd, xoro).class == Integer
+    return winning_move(brd, xoro)
+  elsif block_win_with_this_square(brd, xoro).class == Integer
+    return block_win_with_this_square(brd, xoro)
+    #{1=>"O", 2=>"O", 3=>"X", 4=>" ", 5=>"X", 6=>" ", 7=>" ", 8=>" ", 9=>"X"}
+    #brd[block_win_with_this_square(brd, xoro)] = xoro
+    # {1=>"O", 2=>"O", 3=>"X", 4=>" ", 5=>"X", 6=>"O", 7=>" ", 8=>" ", 9=>"X"}
+    #binding.pry
+  end
+end
+
+=> square to block 
+
+def computer_ai_logic!(brd, xoro)
+  # binding.pry
+  # is the program entering into computer_ai_logic
+  # what is brd
+  if brd[5] == " "
+    return 5
+  elsif find_3_open_squares(brd, xoro).class == Integer && xoro == "O"
+    return find_3_open_squares(brd, xoro)
+  elsif find_two_open_squares(brd, xoro).class == Integer
+    return find_two_open_squares(brd, xoro)
+  elsif mark_tie_square(brd).class == Integer
+    return mark_tie_square(brd)
+  end
+  brd
+end
+=> square to mark 
+
+
+def computer_places_piece!(brd, xoro)
+  binding.pry
+  if computer_offense_defense!(brd, xoro).class == Integer # square 6 is already marked here
+    brd[computer_offense_defense(brd, xoro)] = xoro
+    binding.pry # is square 6 marked here?
+    # {1=>"O", 2=>"O", 3=>"X", 4=>" ", 5=>"X", 6=>"O", 7=>" ", 8=>" ", 9=>"X"}
+    # if square 6 is marked here then next line maybe?
+    return #if computer_offense_defense!(brd, xoro).class == Integer
+    # why is this not returning ? because the if statement executed BEFORE square 6 was marked?
+    # so line 159 returns false?
+    #return
+  elsif
+  #binding.pry
+  # the computer is entering this methd because its the last line of the computerplaces piece!?
+  # why is computeroffense not causing computer_places_piece to exit?
+  computer_ai_logic!(brd, xoro)
+end
+
+brd[block_win_with_this_square(brd, xoro)] = xoro
+
+
+
+
+
+
+
 
 
 
