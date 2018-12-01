@@ -31,18 +31,18 @@ def display_board(brd, player_score, computer_score)
   puts "     |     |"
   puts ""
 end
+# rubocop:enable Metrics/AbcSize
 
-def joinor(arr, separator = ", ", conjunction = "or")
-  if arr.count == 1
-    arr.first
-  elsif arr.count == 2
-    arr[0].to_s + ' ' + conjunction + " " + arr[1].to_s
-    #=> "1 or 2"
-  elsif arr.count 3
-    arr[0..-2].join(separator) + separator + "#{conjunction} " + arr.last.to_s
+def joinor(arr, separator =', ', conjunction ='or')
+  case arr.size
+  when 0 then ''
+  when 1 then arr.first
+  when 2 then arr.join(" #{conjunction} ")
+  else
+    arr[-1] = "#{conjunction} #{arr.last}"
+    arr.join(separator)
   end
 end
-# rubocop:enable Metrics/AbcSize
 
 def initialize_board
   new_board = {}
@@ -56,7 +56,6 @@ end
 
 def set_player_order
   answer = ""
-
   loop do
     prompt "Who is first, player or computer?"
     answer = gets.chomp
@@ -77,7 +76,7 @@ def player_places_piece!(brd, current_player)
     break if empty_squares(brd).include?(square)
     prompt "Sorry that is not a valid choice"
   end
-  brd[square] = current_player # X or O
+  brd[square] = current_player
 end
 
 def winning_move(brd, xoro)
@@ -137,16 +136,14 @@ def mark_tie_square(brd)
 end
 
 def computer_offense_defense!(brd, xoro)
-  # return the square to mark
   if winning_move(brd, xoro).class == Integer
-    return winning_move(brd, xoro)
+    winning_move(brd, xoro)
   elsif block_win_with_this_square(brd, xoro).class == Integer
-    return block_win_with_this_square(brd, xoro)
+    block_win_with_this_square(brd, xoro)
   end
-end # => square to block 
+end
 
 def computer_ai_logic!(brd, xoro)
-  # return the square to mark
   if brd[5] == " "
     return 5
   elsif find_3_open_squares(brd, xoro).class == Integer && xoro == "O"
@@ -157,20 +154,13 @@ def computer_ai_logic!(brd, xoro)
     return mark_tie_square(brd)
   end
   brd
-end # => square to mark 
+end
 
 def computer_places_piece!(brd, xoro)
-  #binding.pry
-  if computer_offense_defense!(brd, xoro).class == Integer # square 6 is already marked here
-    # mark square then return
+  if computer_offense_defense!(brd, xoro).class == Integer
     brd[computer_offense_defense!(brd, xoro)] = xoro
-    #binding.pry # is square 6 marked here?
-    # {1=>"O", 2=>"O", 3=>"X", 4=>" ", 5=>"X", 6=>"O", 7=>" ", 8=>" ", 9=>"X"}
-    # if square 6 is marked here then next line should return
-    return 
-  elsif
-    # this should only execute if the first conditional is not met
-    computer_ai_logic!(brd, xoro).class == Integer
+    return
+  elsif computer_ai_logic!(brd, xoro).class == Integer
     brd[computer_ai_logic!(brd, xoro)] = xoro
   end
   brd

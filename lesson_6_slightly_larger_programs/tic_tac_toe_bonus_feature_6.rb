@@ -31,18 +31,18 @@ def display_board(brd, player_score, computer_score)
   puts "     |     |"
   puts ""
 end
+# rubocop:enable Metrics/AbcSize
 
-def joinor(arr, separator = ", ", conjunction = "or")
-  if arr.count == 1
-    arr.first
-  elsif arr.count == 2
-    arr[0].to_s + ' ' + conjunction + " " + arr[1].to_s
-    #=> "1 or 2"
-  elsif arr.count 3
-    arr[0..-2].join(separator) + separator + "#{conjunction} " + arr.last.to_s
+def joinor(arr, separator =', ', conjunction ='or')
+  case arr.size
+  when 0 then ''
+  when 1 then arr.first
+  when 2 then arr.join(" #{conjunction} ")
+  else
+    arr[-1] = "#{conjunction} #{arr.last}"
+    arr.join(separator)
   end
 end
-# rubocop:enable Metrics/AbcSize
 
 def initialize_board
   new_board = {}
@@ -56,8 +56,7 @@ end
 
 def set_player_order
   answer = ""
-
-  loop do # validate input
+  loop do
     prompt "Who is first, player or computer?"
     answer = gets.chomp
     if answer == "player" || answer == "computer"
@@ -77,7 +76,7 @@ def player_places_piece!(brd, current_player)
     break if empty_squares(brd).include?(square)
     prompt "Sorry that is not a valid choice"
   end
-  brd[square] = current_player # X or O
+  brd[square] = current_player
 end
 
 def winning_move(brd, xoro)
@@ -104,6 +103,9 @@ def block_win_with_this_square(brd, xoro)
   block_square = players_potential_winning_squares(brd, xoro).select do |subarr|
     brd.values_at(subarr[0], subarr[1], subarr[2]).count(xoro) == 0
   end
+  # refactor to :
+  # block_square.flatten.find { |sq| brd[sq] == " " }
+  # => should return the same thing, squre is an unecssary var
   square = block_square.flatten.find { |sq| brd[sq] == " " }
   square
 end
@@ -135,32 +137,33 @@ end
 
 def computer_offense_defense!(brd, xoro)
   if winning_move(brd, xoro).class == Integer
-    brd[winning_move(brd, xoro)] = xoro
+    winning_move(brd, xoro)
   elsif block_win_with_this_square(brd, xoro).class == Integer
-    brd[block_win_with_this_square(brd, xoro)] = xoro
+    block_win_with_this_square(brd, xoro)
   end
 end
 
 def computer_ai_logic!(brd, xoro)
   if brd[5] == " "
-    brd[5] = xoro
+    return 5
   elsif find_3_open_squares(brd, xoro).class == Integer && xoro == "O"
-    brd[find_3_open_squares(brd, xoro)] = xoro
+    return find_3_open_squares(brd, xoro)
   elsif find_two_open_squares(brd, xoro).class == Integer
-    brd[find_two_open_squares(brd, xoro)] = xoro
+    return find_two_open_squares(brd, xoro)
   elsif mark_tie_square(brd).class == Integer
-    brd[mark_tie_square(brd)] = xoro
+    return mark_tie_square(brd)
   end
   brd
 end
 
 def computer_places_piece!(brd, xoro)
-  binding.pry
   if computer_offense_defense!(brd, xoro).class == Integer
-    computer_offense_defense!(brd, xoro)
+    brd[computer_offense_defense!(brd, xoro)] = xoro
     return
+  elsif computer_ai_logic!(brd, xoro).class == Integer
+    brd[computer_ai_logic!(brd, xoro)] = xoro
   end
-  computer_ai_logic!(brd, xoro)
+  brd
 end
 
 def place_piece!(brd, current_player, player_order)
@@ -173,18 +176,6 @@ def place_piece!(brd, current_player, player_order)
   end
   computer_places_piece!(brd, current_player)
 end
-
-# def place_piece!(brd, current_player, player_order)
-#   if current_player == "X" && player_order == "player"
-#     player_places_piece!(brd, current_player)
-#   elsif current_player == "X" && player_order == "computer"
-#     computer_places_piece!(brd, current_player)
-#   elsif current_player == "O" && player_order == "player"
-#     computer_places_piece!(brd, current_player)
-#   elsif current_player == "O" && player_order == "computer"
-#     player_places_piece!(brd, current_player)
-#   end
-# end
 
 def alternate_player(player)
   next_player_to_mark_a_square = "X" if player == "O"
