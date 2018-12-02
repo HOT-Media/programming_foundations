@@ -6008,6 +6008,387 @@ brd[block_win_with_this_square(brd, xoro)] = xoro
 
 
 
+ def computer_places_piece!(brd, xoro)
+   if winning_move(brd, xoro).class == Integer
+     brd[winning_move(brd, xoro)] = xoro
+   elsif block_players_winning_move(brd, xoro).class == Integer
+     brd[block_players_winning_move(brd, xoro)] = xoro
+   elsif brd[5] == " "
+     brd[5] = xoro
+   elsif find_3_open_squares(brd, xoro).class == Integer && xoro == "O"
+     brd[find_3_open_squares(brd, xoro)] = xoro
+   elsif find_two_open_squares(brd, xoro).class == Integer
+     brd[find_two_open_squares(brd, xoro)] = xoro
+   elsif mark_tie_square(brd).class == Integer
+     brd[mark_tie_square(brd)] = xoro
+   end
+   brd
+ end
+
+
+
+def computer_offense_defense!(brd, xoro)
+  if winning_move(brd, xoro).class == Integer
+    winning_move(brd, xoro)
+  elsif block_win_with_this_square(brd, xoro).class == Integer
+    block_win_with_this_square(brd, xoro)
+  end
+end
+
+def computer_ai_logic!(brd, xoro)
+  if brd[5] == " "
+    return 5
+  elsif find_3_open_squares(brd, xoro).class == Integer && xoro == "O"
+    return find_3_open_squares(brd, xoro)
+  elsif find_two_open_squares(brd, xoro).class == Integer
+    return find_two_open_squares(brd, xoro)
+  elsif mark_tie_square(brd).class == Integer
+    return mark_tie_square(brd)
+  end
+  brd
+end
+
+def computer_places_piece!(brd, xoro)
+  if computer_offense_defense!(brd, xoro).class == Integer
+    brd[computer_offense_defense!(brd, xoro)] = xoro
+    return
+  elsif computer_ai_logic!(brd, xoro).class == Integer
+    brd[computer_ai_logic!(brd, xoro)] = xoro
+  end
+  brd
+end
+
+
+
+
+block for a future win with player staggered squares
+dont refrerence the board for this, reference the sequence 
+after the player places the second piece 
+
+check for win
+check for immediate block
+  if player_sequence_counter.size == 2
+check for BLOCK_THIS_SEQUENCE player sequence # not the board.
+  if BLOCK_THIS_SEQUENCE.select{ |blk_seq| blk_seq == plyr_seq_recorder }
+    brd[prediction_block] = xoro
+check for 5 open
+check for 3 squares open
+check for 2 squares open
+place tie 
+
+BLOCK_THIS_EXACT_SEQUENCE = [
+                             [1,6] # 3 
+                             [2,6] # 3 
+                             [5,9] # 3 
+                             [7,6] # 9
+                             [8,6] # 9
+                             [6,1] # 9
+                             [6,3] # 9
+                            ]
+
+initialize when board is initialized and reset when board is reset/initialized player_sequence_recorder.clear
+
+player_sequence_recorder = []
+
+player_sequence_recorder << square
+
+
+player_sequence_recorder = []
+
+player_sequence_recorder = []
+                                                [] << Integer => mutate and return 
+def player_places_piece!(brd, current_player, player_sequence_recorder)
+  square = ''
+  loop do
+    prompt "Choose a position to place a piece: #{joinor(empty_squares(brd))}"
+    square = gets.chomp.to_i
+    break if empty_squares(brd).include?(square)
+    prompt "Sorry that is not a valid choice"
+  end
+  brd[square] = current_player
+  player_sequence_recorder << square
+  # player_sequence [1,6] mutated so it does not need to be returned
+end
+
+brd hash is updated with the square the player chosen_player
+each player choice is appended to player_sequence_recorder 
+
+
+
+
+
+can i use x, y, z with .select to compare only index 0 and 1  of a two element array with a 3 element array
+
+then return index 2
+
+player_sequence_recorder = [1,6]
+block_sequence = [1,6,3]
+
+disrupt_player_strategy[2]
+=> 3
+
+def one_step_ahead_of_player(player_sequece_recorder)
+                                [1,6,3]
+  disrupt_player_strategy = BLOCK_THIS_SEQUENCE.select do |blk_seq| 
+    blk_seq == plyr_seq_recorder 
+
+  disrupt_player_strategy = BLOCK_THIS_SEQUENCE.select do |x,y,z| 
+    x == plyr_seq_recorder[0]
+    y == plyr_seq_recorder[1]
+  end
+
+
+
+player_sequence_recorder = [1,6]
+block_sequence = [1,6,3]
+
+disrupt_player_strategy[2]
+=> 3
+
+
+
+
+
+brd[one_step_ahead_of_player(player_sequence_recorder)] = xoro
+
+
+
+
+check for win
+check for immediate block
+  if player_sequence_counter.size == 2
+check for BLOCK_THIS_SEQUENCE player sequence # not the board.
+  if BLOCK_THIS_SEQUENCE.select{ |blk_seq| blk_seq == plyr_seq_recorder }
+    brd[prediction_block] = xoro
+check for 5 open
+check for 3 squares open
+check for 2 squares open
+place tie 
+
+
+
+
+
+
+
+
+
+def one_step_ahead_of_player(player_sequece_recorder)
+
+player_sequence [1,6]
+
+case player_sequence_recorder # compress with when || || then 3
+  when [1,6] # block 3
+    3
+  when [2,6]
+    3
+  when [5,9]
+    3
+  when [7,6]
+    9
+  when [8,6]
+    9
+  when [6,1]
+    9
+  when [6,3]
+    9
+else
+  nil
+
+
+
+
+
+BLOCK_THIS_EXACT_SEQUENCE = [
+                             [1,6] # 3 
+                             [2,6] # 3 
+                             [5,9] # 3 
+                             [7,6] # 9
+                             [8,6] # 9
+                             [6,1] # 9
+                             [6,3] # 9
+                            ]
+
+
+BLOCK_THIS_EXACT_SEQUENCE = [
+                             [1,6,3] # 3 
+                             [2,6,3] # 3 
+                             [5,9,3] # 3 
+                             [7,6,9] # 9
+                             [8,6,9] # 9
+                             [6,1,9] # 9
+                             [6,3,9] # 9
+                            ]
+
+player_sequence_recorder = []
+player_sequence_recorder.clear # after each round when board is reset
+
+
+
+
+brd[one_step_ahead_of_player(player_sequence_recorder)] = xoro
+
+
+
+
+
+
+                                            # player_sequence_recorder = []  << Integer
+                                            # => mutated
+def player_places_piece!(brd, current_player, player_sequence_recorder)
+  square = ''
+  loop do
+    prompt "Choose a position to place a piece: #{joinor(empty_squares(brd))}"
+    square = gets.chomp.to_i
+    break if empty_squares(brd).include?(square)
+    prompt "Sorry that is not a valid choice"
+  end
+  # update hash so no need to return brd[square] = current_player 
+  brd[square] = current_player
+
+  # player_sequence [1,6] 
+  # => mutated so no need to return
+  player_sequence_recorder << square
+end
+
+# brd hash is updated with the square the player chosen_player
+{1=>"X", 2=>" ", 3=>" ", 4=>" ", 5=>"O", 6=>"X", 7=>" ", 8=>" ", 9=>" "}
+
+# player_sequence_recorder is updated
+player_sequence_recorder 
+=> [1,6]
+
+
+
+
+check for win
+check for immediate block
+  if player_sequence_counter.size == 2
+check for BLOCK_THIS_SEQUENCE player sequence # not the board.
+  if BLOCK_THIS_SEQUENCE.select{ |blk_seq| blk_seq == plyr_seq_recorder }
+    brd[prediction_block] = xoro
+check for 5 open
+check for 3 squares open
+check for 2 squares open
+place tie 
+
+
+                                   [1,6]
+def one_step_ahead_of_player(player_sequece_recorder)
+  disrupt_player_strategy = BLOCK_THIS_SEQUENCE.select do |blk_seq| 
+    blk_seq == plyr_seq_recorder 
+  end entire_array
+  => [1,6]
+  or entire array
+  => [1,6,3]
+if BLOCK_THIS_SEQUENCE has the entire sequence 1,6,3 then i can return the whole array
+  1,6,3 then use the last element instead of doing a case statement
+
+  => [1,6,3]
+ return  disrupt_player_strategy.last
+end
+
+=> 3
+
+
+
+
+
+
+
+def computer_places_piece!(brd, xoro)
+  if computer_offense_defense!(brd, xoro).class == Integer
+    brd[computer_offense_defense!(brd, xoro)] = xoro
+    return
+  elsif one_step_ahead_of_player(player_sequence_recorder)] == Integer
+    brd[one_step_ahead_of_player(player_sequence_recorder)] = xoro
+    return
+  elsif computer_ai_logic!(brd, xoro).class == Integer
+    brd[computer_ai_logic!(brd, xoro)] = xoro
+  end
+  brd
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BLOCK_THIS_EXACT_SEQUENCE = [
+                             [1,6,3], # 3 
+                             [2,6,3], # 3 
+                             [5,9,3], # 3 
+                             [7,6,9], # 9
+                             [8,6,9], # 9
+                             [6,1,9], # 9
+                             [6,3,9] # 9
+                            ]
+
+
+initialize board
+player_sequence_recorder = []
+player_sequence_recorder.clear # after each round when board is reset
+
+
+def one_step_ahead_of_player(player_sequence_recorder)
+  disrupt_player_strategy = BLOCK_THIS_EXACT_SEQUENCE.select do |blk_seq|
+    blk_seq[0..1] == player_sequence_recorder[0..1]
+  end
+  # disrupt_player_strategy => [1,6,3]
+  disrupt_player_strategy[0][2]
+end
+
+def computer_places_piece!(brd, xoro)
+  if computer_offense_defense!(brd, xoro).class == Integer
+    brd[computer_offense_defense!(brd, xoro)] = xoro
+    return
+  elsif one_step_ahead_of_player(player_sequence_recorder)] == Integer
+    brd[one_step_ahead_of_player(player_sequence_recorder)] = xoro
+    return
+  elsif computer_ai_logic!(brd, xoro).class == Integer
+    brd[computer_ai_logic!(brd, xoro)] = xoro
+  end
+  brd
+end
+
+def player_places_piece!(brd, current_player, player_sequence_recorder)
+  square = ''
+  loop do
+    prompt "Choose a position to place a piece: #{joinor(empty_squares(brd))}"
+    square = gets.chomp.to_i
+    break if empty_squares(brd).include?(square)
+    prompt "Sorry that is not a valid choice"
+  end
+  brd[square] = current_player
+  player_sequence_recorder << square
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+# brd hash is updated with the square the player chosen_player
+{1=>"X", 2=>" ", 3=>" ", 4=>" ", 5=>"O", 6=>"X", 7=>" ", 8=>" ", 9=>" "}
+
+# player_sequence_recorder is updated
+player_sequence_recorder 
+=> [1,6]
 
 
 
@@ -6027,6 +6408,105 @@ brd[block_win_with_this_square(brd, xoro)] = xoro
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            # player_sequence_recorder = []  << Integer
+                                            # => mutated
+def player_places_piece!(brd, current_player, player_sequence_recorder)
+  square = ''
+  loop do
+    prompt "Choose a position to place a piece: #{joinor(empty_squares(brd))}"
+    square = gets.chomp.to_i
+    break if empty_squares(brd).include?(square)
+    prompt "Sorry that is not a valid choice"
+  end
+  # update hash so no need to return brd[square] = current_player 
+  brd[square] = current_player
+
+  # players first choice is 1         player_sequence_recorder << 1 
+  # => mutated so no need to return
+  player_sequence_recorder << square
+end
+
+# brd hash is updated with the square the player chosen_player
+{1=>"X", 2=>" ", 3=>" ", 4=>" ", 5=>"O", 6=>"X", 7=>" ", 8=>" ", 9=>" "}
+
+# player_sequence_recorder is updated
+player_sequence_recorder 
+=> [1,6]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  disrupt_player_strategy = BLOCK_THIS_SEQUENCE.select do |x,y,z| 
+    x == plyr_seq_recorder[0]
+    y == plyr_seq_recorder[1]
+  end
+
+
+
+player_sequence_recorder = [1,6]
+block_sequence = [1,6,3]
+
+disrupt_player_strategy[2]
+=> 3
+
+
+
+
+
+brd[one_step_ahead_of_player(player_sequence_recorder)] = xoro
+
+
+
+
+
+
+
+
+
+
+
+
+brd[one_step_ahead_of_player(player_sequence_recorder)] = xoro
 
 
 
