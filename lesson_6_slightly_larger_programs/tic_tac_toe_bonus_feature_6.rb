@@ -9,6 +9,17 @@ WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] +
                 [[1, 4, 7], [2, 5, 8], [3, 6, 9]] +
                 [[1, 5, 9], [7, 5, 3]]
 
+BLOCK_THIS_EXACT_SEQUENCE = [
+  [1, 6, 3],
+  [2, 6, 3],
+  [5, 9, 3],
+  [7, 6, 9],
+  [8, 6, 9],
+  [6, 1, 9],
+  [6, 3, 9],
+  [1, 8, 7]
+]
+
 def prompt(msg)
   puts "=> #{msg}"
 end
@@ -68,7 +79,8 @@ def set_player_order
   answer
 end
 
-def player_places_piece!(brd, current_player)
+def player_places_piece!(brd, current_player, player_sequence_recorder)
+  sleep 0.75
   square = ''
   loop do
     prompt "Choose a position to place a piece: #{joinor(empty_squares(brd))}"
@@ -77,6 +89,7 @@ def player_places_piece!(brd, current_player)
     prompt "Sorry that is not a valid choice"
   end
   brd[square] = current_player
+  player_sequence_recorder << square
 end
 
 def winning_move(brd, xoro)
@@ -103,11 +116,16 @@ def block_win_with_this_square(brd, xoro)
   block_square = players_potential_winning_squares(brd, xoro).select do |subarr|
     brd.values_at(subarr[0], subarr[1], subarr[2]).count(xoro) == 0
   end
-  # refactor to :
-  # block_square.flatten.find { |sq| brd[sq] == " " }
-  # => should return the same thing, squre is an unecssary var
   square = block_square.flatten.find { |sq| brd[sq] == " " }
   square
+end
+
+def one_step_ahead_of_player(player_sequence_recorder)
+  disrupt_player_strategy = BLOCK_THIS_EXACT_SEQUENCE.select do |blk_seq|
+    blk_seq[0..1] == player_sequence_recorder[0..1]
+  end
+  return nil if player_sequence_recorder.length > 2
+  disrupt_player_strategy.flatten.last
 end
 
 def find_3_open_squares(brd, _)
@@ -156,9 +174,14 @@ def computer_ai_logic!(brd, xoro)
   brd
 end
 
-def computer_places_piece!(brd, xoro)
+def computer_places_piece!(brd, xoro, player_sequence_recorder)
+  # binding.pry
+  sleep 0.75
   if computer_offense_defense!(brd, xoro).class == Integer
     brd[computer_offense_defense!(brd, xoro)] = xoro
+    return
+  elsif one_step_ahead_of_player(player_sequence_recorder).class == Integer
+    brd[one_step_ahead_of_player(player_sequence_recorder)] = xoro
     return
   elsif computer_ai_logic!(brd, xoro).class == Integer
     brd[computer_ai_logic!(brd, xoro)] = xoro
@@ -166,15 +189,15 @@ def computer_places_piece!(brd, xoro)
   brd
 end
 
-def place_piece!(brd, current_player, player_order)
+def place_piece!(brd, current_player, player_order, player_sequence_recorder)
   if player_order == "player" && current_player == P_ONE_MARKER
-    player_places_piece!(brd, current_player)
+    player_places_piece!(brd, current_player, player_sequence_recorder)
     return
   elsif player_order == "computer" && current_player == P_TWO_MARKER
-    player_places_piece!(brd, current_player)
+    player_places_piece!(brd, current_player, player_sequence_recorder)
     return
   end
-  computer_places_piece!(brd, current_player)
+  computer_places_piece!(brd, current_player, player_sequence_recorder)
 end
 
 def alternate_player(player)
@@ -245,9 +268,11 @@ loop do
 
   loop do
     board = initialize_board
+    player_sequence_recorder = []
     loop do
       display_board(board, player_wins, computer_wins)
-      place_piece!(board, current_player, player_order)
+      place_piece!(board, current_player, player_order, player_sequence_recorder)
+
       display_board(board, player_wins, computer_wins)
       if someone_won?(board, current_player, player_order)[0] == true
         prompt <<-WIN
