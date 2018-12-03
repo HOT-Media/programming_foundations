@@ -1,6 +1,3 @@
-require 'pry'
-require 'pry-byebug'
-
 INITIAL_MARKER = ' '
 P_ONE_MARKER = "X"
 P_TWO_MARKER = "O"
@@ -20,7 +17,7 @@ BLOCK_THIS_EXACT_SEQUENCE = [
   [8, 6, 9],
   [6, 1, 9],
   [6, 3, 9],
-  [6, 8, 9],
+  [6, 8, 9]
 ]
 
 def prompt(msg)
