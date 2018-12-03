@@ -6786,7 +6786,6 @@ I addressed the following issues you raised and updated the code:
  alternate_player has been updated for simplicity
  the logic for play again is now in the method play_again?
 
-
 I especially like the refactored current_player assignment
 
 ``ruby 
@@ -6795,7 +6794,7 @@ player == "X" ? current_player = player : current_player = computer
 current_player = player == "X" ? player : computer.
 ``
 
-Thank you very much for the feedback
+Thank's' for the feedback
 Jeremy
 
 
