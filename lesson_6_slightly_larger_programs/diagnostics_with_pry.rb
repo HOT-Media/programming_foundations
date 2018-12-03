@@ -5,6 +5,8 @@ INITIAL_MARKER = ' '
 P_ONE_MARKER = "X"
 P_TWO_MARKER = "O"
 
+WINNING_SCORE = 5
+
 WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] +
                 [[1, 4, 7], [2, 5, 8], [3, 6, 9]] +
                 [[1, 5, 9], [7, 5, 3]]
@@ -20,7 +22,7 @@ BLOCK_THIS_EXACT_SEQUENCE = [
   [8, 6, 9],
   [6, 1, 9],
   [6, 3, 9],
-  [6, 8, 9],
+  [6, 8, 9]
 ]
 
 def prompt(msg)
@@ -123,7 +125,7 @@ def block_win_with_this_square(brd, xoro)
   square
 end
 
-def one_step_ahead_of_player(plyr_sequence_recorder)
+def detect_plyr_fourth_sqr_win_seq(plyr_sequence_recorder)
   disrupt_player_strategy = BLOCK_THIS_EXACT_SEQUENCE.select do |blk_seq|
     blk_seq[0..1] == plyr_sequence_recorder[0..1]
   end
@@ -179,12 +181,12 @@ end
 
 def computer_places_piece!(brd, xoro, plyr_sequence_recorder)
   # binding.pry
-  sleep 0.75
+  # sleep 0.759
   if computer_offense_defense!(brd, xoro).class == Integer
     brd[computer_offense_defense!(brd, xoro)] = xoro
     return
-  elsif one_step_ahead_of_player(plyr_sequence_recorder).class == Integer
-    brd[one_step_ahead_of_player(plyr_sequence_recorder)] = xoro
+  elsif detect_plyr_fourth_sqr_win_seq(plyr_sequence_recorder).class == Integer
+    brd[detect_plyr_fourth_sqr_win_seq(plyr_sequence_recorder)] = xoro
     return
   elsif computer_ai_logic!(brd, xoro).class == Integer
     brd[computer_ai_logic!(brd, xoro)] = xoro
@@ -204,16 +206,17 @@ def place_piece!(brd, current_player, player_order, plyr_sequence_recorder)
 end
 
 def alternate_player(player)
-  next_player_to_mark_a_square = "X" if player == "O"
-  next_player_to_mark_a_square = "O" if player == "X"
-  next_player_to_mark_a_square
+  player == "O" ? "X" : "O"
+  # next_player_to_mark_a_square = "X" if player == "O"
+  # next_player_to_mark_a_square = "O" if player == "X"
+  # next_player_to_mark_a_square
 end
 
 def board_full?(brd)
   empty_squares(brd).empty?
 end
 
-def someone_won?(brd, current_player, player_order)
+def someone_won(brd, current_player, player_order)
   win_and_who_won = []
   win_and_who_won << !!detect_winner(brd, current_player, player_order)
   win_and_who_won << detect_winner(brd, current_player, player_order)
@@ -234,6 +237,21 @@ def detect_winner(brd, current_player, player_order)
   "Computer"
 end
 
+  def play_again?
+    answer = nil
+    loop do
+      puts "Play again? (yes or no)"
+      answer = gets.chomp.downcase
+      if answer == "no" || answer == "n"
+        return false
+      elsif answer == "yes" || answer == "y"
+        return true
+      else
+        puts "Valid answers are yes or no"
+      end
+    end
+  end
+
 system 'clear'
 prompt <<-WELCOME
 Welcome to TTT.
@@ -242,18 +260,23 @@ Your opponent is technically the Ruby source code for
 this game; however, your opponent will be referred to
 as "Computer"
 
+The first player to win #{WINNING_SCORE} rounds wins the game.
+
 WELCOME
 player = nil
 computer = nil
 player_order = nil
+
 loop do
   prompt "Please choose the player who will go first. Player or Computer?"
   player_order = gets.chomp.downcase
-  if player_order == "player"
+  if player_order == "player" || player_order == "p"
+    player_order = "player"
     player = P_ONE_MARKER
     computer = P_TWO_MARKER
     break
-  elsif player_order == "computer"
+  elsif player_order == "computer" || player_order == "c"
+    player_order = "computer"
     computer = P_ONE_MARKER
     player = P_TWO_MARKER
     break
@@ -261,10 +284,28 @@ loop do
     prompt "Valid answers are: player or computer"
   end
 end
-player == "X" ? current_player = player : current_player = computer
+
+# loop do
+#   prompt "Please choose the player who will go first. Player or Computer?"
+#   player_order = gets.chomp.downcase
+#   if player_order == "player"
+#     player = P_ONE_MARKER
+#     computer = P_TWO_MARKER
+#     break
+#   elsif player_order == "computer"
+#     computer = P_ONE_MARKER
+#     player = P_TWO_MARKER
+#     break
+#   else
+#     prompt "Valid answers are: player or computer"
+#   end
+# end
+
+current_player = player == "X" ? player : computer
+# player == "X" ? current_player = player : current_player = computer
 prompt "You are #{player}, the computer is #{computer}"
 
-sleep 1.75
+# sleep 1.75
 loop do
   player_wins = 0
   computer_wins = 0
@@ -277,11 +318,11 @@ loop do
       place_piece!(board, current_player, player_order, plyr_sequence_recorder)
 
       display_board(board, player_wins, computer_wins)
-      if someone_won?(board, current_player, player_order)[0] == true
+      if someone_won(board, current_player, player_order)[0] == true
         prompt <<-WIN
-"#{someone_won?(board, current_player, player_order)[1]} won that round!"
+"#{someone_won(board, current_player, player_order)[1]} won that round!"
 WIN
-        sleep 1.5
+        # sleep 1.5
         if detect_winner(board, current_player, player_order) == "Player"
           player_wins += 1
         elsif detect_winner(board, current_player, player_order) == "Computer"
@@ -293,28 +334,35 @@ WIN
         break
       elsif board_full?(board)
         prompt "It's a tie!"
-        sleep 1.5
+        # sleep 1.5
         current_player = player if player == "X"
         current_player = computer if computer == "X"
         break
       end
       current_player = alternate_player(current_player)
     end
-    break if computer_wins == 5 || player_wins == 5
+    break if computer_wins == WINNING_SCORE || player_wins == WINNING_SCORE
   end
 
-  prompt "Player won the game!" if player_wins == 5
-  prompt "Computer won the game!" if computer_wins == 5
-  answer = nil
-  loop do
-    prompt "Play again? (yes or no)"
-    answer = gets.chomp
-    if answer.downcase == "yes" || answer.downcase == "no"
-      break
-    else
-      prompt "Valid answers are yes or no"
+  prompt "Player won the game!" if player_wins == WINNING_SCORE
+  prompt "Computer won the game!" if computer_wins == WINNING_SCORE
+
+  def play_again?
+    answer = nil
+    loop do
+      puts "Play again? (yes or no)"
+      answer = gets.chomp.downcase
+      if answer == "no" || answer == "n"
+        return false
+      elsif answer == "yes" || answer == "y"
+        return true
+      else
+        puts "Valid answers are yes or no"
+      end
     end
   end
-  break if answer.downcase == "no"
+
+
+  break if play_again? == false
 end
 prompt "Thanks for playing Tic Tac Toe. Good bye!"

@@ -6514,6 +6514,346 @@ brd[one_step_ahead_of_player(player_sequence_recorder)] = xoro
 
 
 
+https://github.com/HOT-Media/programming_foundations/blob/master/lesson_6_slightly_larger_programs/tic_tac_toe_bonus_feature_6.rb
+
+
+
+[My version of the ttt bonus](https://github.com/HOT-Media/programming_foundations/blob/master/lesson_6_slightly_larger_programs/tic_tac_toe_bonus_feature_6.rb "My version of TTT")
+
+
+
+
+
+
+
+Gameplay
+I didn’t see it ever displayed what the game winning score is. 
+
+It would be nice to display to the user at the beginning how many round points one must earn to win the game. 
+
+
+This a multi-round game where the first player to reach 5 points wins, but that isn’t ever really expressed to the user.
+
+
+ The score board of overall points updates after each round, but consider including a message informing the user that the game is set up this way at the start of the game so that they know how many points they must reach to win.
+
+
+The first player to win 5 rounds wins the game.
+
+
+
+
+
+
+
+You might want to allow inputs p for player and c for computer aswell, case insensitive, as this is more user friendly. 
+
+
+
+loop do
+  prompt "Please choose the player who will go first. Player or Computer?"
+  player_order = gets.chomp.downcase
+  if player_order == "player" || player_order == "p"
+    player_order = "player"
+    player = P_ONE_MARKER
+    computer = P_TWO_MARKER
+    break
+  elsif player_order == "computer" || player_order == "c"
+    player_order = "player"
+    computer = P_ONE_MARKER
+    player = P_TWO_MARKER
+    break
+  else
+    prompt "Valid answers are: player or computer"
+  end
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Same goes with play again prompt. You could allow y and n as correct inputs.
+
+Source code
+You reference 5 several times in your code. Imagine if you later wanted to change the number of points that a player must reach to win the game. Or that someone else reading your code must determine what the number’s significance is. For improved readability and easier maintenance, I recommend using a constant instead.
+
+
+
+Clearing screen with code system('clear') || system('cls') would also allow it to work on Windows systems.
+
+
+I didn't understand from the name of this method what it does one_step_ahead_of_player ?
+
+Make sure to remove binding.pry from production code. Your's is commented out so remove that line.
+
+Your alternate_player method could be written like this to add simplicitys:
+
+def alternate_player(player)
+  player == "O" ? "X" : "O"
+end
+
+
+Methods ending with ? should by convention return a boolean. Your method someone_won? returns an array. You could create multiple smaller methods like player_won?, computer_won? and tie?.
+
+
+
+
+player == "X" ? current_player = player : current_player = computer could be written as 
+
+current_player = player == "X" ? player : computer.
+
+
+You could also separate all the logic for play again into separate method play_again? and you would just add break unless play_again? which reads better.
+
+
+def play_again?
+  answer = nil
+  loop do # validation loop 
+    puts "Play again? (yes or no)"
+    answer = gets.chomp.downcase
+    if answer == "no" || answer == "n"
+      return false 
+    elsif answer == "yes" || answer == "y"
+      return true
+    else
+      puts "Valid answers are yes or no"
+    end
+  end # end validation loop 
+end 
+
+
+  break play_again? == false
+
+
+
+
+
+break if play_again? == false
+
+
+Overall
+Nice job, Jeremy. 👍 Review my feedback and try to address some of the issues raised before moving forward.
+
+
+
+
+You might want to allow inputs p for player and c for computer aswell, case insensitive, as this is more user friendly. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+***************************************************************************************
+Hi Srdjan,
+
+Thanks for the system('clear') || system('cls') windows addition
+
+
+
+
+I didn't understand from the name of this method what it does one_step_ahead_of_player ?
+
+
+```
+
+I went one step further with the AI logic. 
+I hard coded the Computer's strategy as follows:
+1. Take the win if it is possible
+2. Check for an immediate block and do so if necessary.
+3. Monitor the sequence of squares the player has chosen which will result in a win on the players fourth square placement.
+
+For example: the player's sequence 1,6,3 will result in the player winning with square 2 or 9, and the computer will not be able to block both of the players winning squares, so by blocking 3 immediately after the sequence 1,6 is identified the players winning sequence is disrupted.
+
+4. Check for 5 open
+5. Check for 3 open squares
+6. Check for 2 open squares
+7. Mark the tie square.
+
+I think it is a bit risky to hard code the AI to both win and block; however, I have not been able to beat the computer either when I go first or when the computer does. I'm not saying it is unbeatable, so I am wondering how the AI could be more adaptive for blocking the players winning sequences. 
+
+```ruby
+
+
+WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] +
+                [[1, 4, 7], [2, 5, 8], [3, 6, 9]] +
+                [[1, 5, 9], [7, 5, 3]]
+Just as a conditional check is done for a complete  WINNING_LINES 
+
+
+This is a sequence of squares that will result in a win for the player on the players fourth square placement.
+I hard coded the program to block the players future win if a winning sequence detected 
+
+
+if the player marks square 1, the computer will mark square 5
+if the players second square is  2 , computer blocks with 3
+or
+if the players second square is 4, computer will blocks with 7
+  thats pretty straight forward.
+
+Here is where the one step ahead logic comes in:
+if the player marks square 1, the computer will mark square 5
+
+
+the computer is programmed to place pieces in numerical order  based on the winning lines constant
+while at the same time it is detecting block thissequence
+
+
+
+as soon as the player marks the squares 1,6, 3 , the player can not be prevented from winning 
+
+
+1,,6,3 will result in a non blockabl 
+
+BLOCK_THIS_EXACT_SEQUENCE = [
+  [1, 6, 3],
+  [2, 6, 3],
+  [5, 9, 3],
+  [6, 2, 3],
+  [1, 8, 7],
+  [8, 1, 7],
+  [7, 6, 9],
+  [8, 6, 9],
+  [6, 1, 9],
+  [6, 3, 9],
+  [6, 8, 9],
+]
+
+
+
+
+def detect_plyr_fourth_sq_win_strategy(plyr_sequence_recorder).class == Integer
+  disrupt_player_strategy = BLOCK_THIS_EXACT_SEQUENCE.select do |blk_seq|
+    blk_seq[0..1] == plyr_sequence_recorder[0..1]
+  end
+  return nil if plyr_sequence_recorder.length > 2
+  disrupt_player_strategy.flatten.last
+end
+
+
+def computer_places_piece!(brd, xoro, plyr_sequence_recorder)
+  # binding.pry
+  # sleep 0.75
+  if computer_offense_defense!(brd, xoro).class == Integer
+    brd[computer_offense_defense!(brd, xoro)] = xoro
+    return
+  elsif one_step_ahead_of_player(plyr_sequence_recorder).class == Integer
+    brd[one_step_ahead_of_player(plyr_sequence_recorder)] = xoro
+    return
+  elsif computer_ai_logic!(brd, xoro).class == Integer
+    brd[computer_ai_logic!(brd, xoro)] = xoro
+  end
+  brd
+end
+
+
+I didnt understand from the name of this method what it does one_step_ahead_of_player ?
+
+
+
+
+
+
+
+
+Hi Srdjan,
+
+I addressed the following issues you raised and updated the code:
+ the gameplay displays the requirements for winning the game.
+ the user input input validation for: player, computer, yes, no now accepts p,c y,n 
+ the integer 5 in the code has been replaced with the constant WINNING_SCORE = 5  
+ the screen will clear on Windows systems
+ the method one_step_ahead_of_player has been renamed to detect_plyr_fourth_sqr_win_seq
+ binding.pry has been removed
+ alternate_player has been updated for simplicity
+ the logic for play again is now in the method play_again?
+
+
+I especially like the refactored current_player assignment
+
+``ruby 
+player == "X" ? current_player = player : current_player = computer 
+
+current_player = player == "X" ? player : computer.
+``
+
+Thank you very much for the feedback
+Jeremy
+
+
+
+
+
+
+
+
+
+
+player == "X" ? current_player = player : current_player = computer
+
+
+
+current_player = player == "X" ? player : computer.
+
+
+
+
+
+evaluating the value of player 
+
+if player == "X" 
+  current_player = player 
+elsif player == "Y"
+  current_player = computer
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Methods ending with ? should by convention return a boolean. Your method someone_won? returns an array. You could create multiple smaller methods like player_won?, computer_won? and tie?.
+
+player == "X" ? current_player = player : current_player = computer could be written as current_player = player == "X" ? player : computer.
+
+You could also separate all the logic for play again into separate method play_again? and you would just add break unless play_again? which reads better.
+
+Overall
+Nice job, Jeremy. 👍 Review my feedback and try to address some of the issues raised before moving forward.
+
+
+
+Thank you very much
 
 
 
