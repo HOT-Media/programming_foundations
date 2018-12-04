@@ -6894,40 +6894,83 @@ prompt "Thanks for playing Tic Tac Toe. Good bye!"
 
 Yes, Im happy to explain.
 
+BLOCK_THIS_EXACT_SEQUENCE = [
+  [1, 6, 3],
+  [2, 6, 3],
+  [5, 9, 3],
+  [6, 2, 3],
+  [1, 8, 7],
+  [8, 1, 7],
+  [7, 6, 9],
+  [8, 6, 9],
+  [6, 1, 3],
+  [6, 8, 9],
+  [6, 7, 9]
+]
+
+player_sequence = [1,4]
+player_sequence = [1,8]
 
 
 
 
-            player_sequence
-def detect_plyr_fourth_sqr_win_seq(plyr_sequence_recorder)
 
-def detect_winning_sequence(player_sequence)
-  !disrupt_player_strategy = BLOCK_THIS_EXACT_SEQUENCE.select do |blk_seq|
-    blk_seq[0..1] == plyr_sequence_recorder[0..1]
+
+def detect_winning_sequence?(player_sequence)
+  stop_sequence = BLOCK_THIS_EXACT_SEQUENCE.select do |blk_seq|
+    blk_seq[0..1] == player_sequence[0..1]
   end
-  return nil if plyr_sequence_recorder.length > 2
-  disrupt_player_strategy.flatten.last
+  return false if player_sequence.length > 2 || stop_sequence.empty?
+  true
 end
 
 
 
-block_winning_sequence player_sequence
+def block_winning_sequence!(player_sequence)
+   block_sequence = BLOCK_THIS_EXACT_SEQUENCE.select do |blk_seq|
+    blk_seq[0..1] == player_sequence[0..1]
+  end
+  block_sequence.flatten.last
+end
 
 
 
+def computer_places_piece!(brd, xoro, plyr_sequence_recorder)
+  sleep 0.75
+  if computer_offense_defense!(brd, xoro).class == Integer
+    brd[computer_offense_defense!(brd, xoro)] = xoro
+    return
+  elsif detect_winning_sequence?(player_sequence)
+    brd[block_winning_sequence!(player_sequence)] = xoro
+    return
+  elsif computer_ai_logic!(brd, xoro).class == Integer
+    brd[computer_ai_logic!(brd, xoro)] = xoro
+  end
+  brd
+end
+
+
+```
+I have the AI hard coded all the way through, so because the computer is not randomly selecting squares, WINNING_LINES and board are the only collections used to determine the next square to mark, and the following scenario can occurr.
+___
+
+When the player marks 2 squares in separate lines: The computer can't detect that the player intends on winning with the 4th square. Instead of the computer blocking what would be the players third square in a sequence of four, and preventing the player from winning on their fourth turn, the computer marks the second square within its own winning line, so the computer can win with that line on it's third turn. The player intends on winning with their fourth square, so the player uses their third turn to block the computer from winning on the computers third turn. when the computer takes its third turn, it is now forced to block the player from winning but it can't because the player has an open square in two separate winning lines, and the computer can only block one. The player then marks the winning square and it's over.
+
+___
+
+I prevented the above scenario by adding adding 2 collections and one method, which I have now refactored into two methods:
+  + WINNING_SEQUENCES 
+  + player_sequence
+  + detect_winning_sequence  - to detect the players winning sequence after the player has marked their second square
+  + block_winning_sequence
+
+Thanks again for clarifying how to name methods!
 
 
 
+[TTT refactored with 2 methods](https://github.com/HOT-Media/programming_foundations/blob/master/lesson_6_slightly_larger_programs/tic_tac_toe_bonus_feature_6.rb "TTT refactored")
 
-
-
-
-
-
-
-
-
-
+```ruby
 
 
 
