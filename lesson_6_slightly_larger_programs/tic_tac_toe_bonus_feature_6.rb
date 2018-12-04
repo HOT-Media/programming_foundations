@@ -82,7 +82,7 @@ def set_player_order
   answer
 end
 
-def player_places_piece!(brd, current_player, plyr_sequence_recorder)
+def player_places_piece!(brd, current_player, player_sequence)
   sleep 0.75
   square = ''
   loop do
@@ -92,7 +92,7 @@ def player_places_piece!(brd, current_player, plyr_sequence_recorder)
     prompt "Sorry that is not a valid choice"
   end
   brd[square] = current_player
-  plyr_sequence_recorder << square
+  player_sequence << square
 end
 
 def winning_move(brd, xoro)
@@ -123,12 +123,19 @@ def block_win_with_this_square(brd, xoro)
   square
 end
 
-def detect_plyr_fourth_sqr_win_seq(plyr_sequence_recorder)
-  disrupt_player_strategy = BLOCK_THIS_EXACT_SEQUENCE.select do |blk_seq|
-    blk_seq[0..1] == plyr_sequence_recorder[0..1]
+def detect_winning_sequence?(player_sequence)
+  stop_sequence = BLOCK_THIS_EXACT_SEQUENCE.select do |blk_seq|
+    blk_seq[0..1] == player_sequence[0..1]
   end
-  return nil if plyr_sequence_recorder.length > 2
-  disrupt_player_strategy.flatten.last
+  return false if player_sequence.length > 2 || stop_sequence.empty?
+  true
+end
+
+def block_winning_sequence!(player_sequence)
+  block_sequence = BLOCK_THIS_EXACT_SEQUENCE.select do |blk_seq|
+    blk_seq[0..1] == player_sequence[0..1]
+  end
+  block_sequence.flatten.last
 end
 
 def find_3_open_squares(brd, _)
@@ -177,13 +184,13 @@ def computer_ai_logic!(brd, xoro)
   brd
 end
 
-def computer_places_piece!(brd, xoro, plyr_sequence_recorder)
+def computer_places_piece!(brd, xoro, player_sequence)
   sleep 0.75
   if computer_offense_defense!(brd, xoro).class == Integer
     brd[computer_offense_defense!(brd, xoro)] = xoro
     return
-  elsif detect_plyr_fourth_sqr_win_seq(plyr_sequence_recorder).class == Integer
-    brd[detect_plyr_fourth_sqr_win_seq(plyr_sequence_recorder)] = xoro
+  elsif detect_winning_sequence?(player_sequence)
+    brd[block_winning_sequence!(player_sequence)] = xoro
     return
   elsif computer_ai_logic!(brd, xoro).class == Integer
     brd[computer_ai_logic!(brd, xoro)] = xoro
@@ -191,15 +198,15 @@ def computer_places_piece!(brd, xoro, plyr_sequence_recorder)
   brd
 end
 
-def place_piece!(brd, current_player, player_order, plyr_sequence_recorder)
+def place_piece!(brd, current_player, player_order, player_sequence)
   if player_order == "player" && current_player == P_ONE_MARKER
-    player_places_piece!(brd, current_player, plyr_sequence_recorder)
+    player_places_piece!(brd, current_player, player_sequence)
     return
   elsif player_order == "computer" && current_player == P_TWO_MARKER
-    player_places_piece!(brd, current_player, plyr_sequence_recorder)
+    player_places_piece!(brd, current_player, player_sequence)
     return
   end
-  computer_places_piece!(brd, current_player, plyr_sequence_recorder)
+  computer_places_piece!(brd, current_player, player_sequence)
 end
 
 def alternate_player(player)
@@ -289,10 +296,10 @@ loop do
 
   loop do
     board = initialize_board
-    plyr_sequence_recorder = []
+    player_sequence = []
     loop do
       display_board(board, player_wins, computer_wins)
-      place_piece!(board, current_player, player_order, plyr_sequence_recorder)
+      place_piece!(board, current_player, player_order, player_sequence)
 
       display_board(board, player_wins, computer_wins)
       if someone_won(board, current_player, player_order)[0] == true
