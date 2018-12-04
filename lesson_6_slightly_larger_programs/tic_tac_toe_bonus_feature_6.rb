@@ -8,7 +8,7 @@ WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] +
                 [[1, 4, 7], [2, 5, 8], [3, 6, 9]] +
                 [[1, 5, 9], [7, 5, 3]]
 
-BLOCK_THIS_EXACT_SEQUENCE = [
+WINNING_SEQUENCES = [
   [1, 6, 3],
   [2, 6, 3],
   [5, 9, 3],
@@ -124,7 +124,7 @@ def block_win_with_this_square(brd, xoro)
 end
 
 def detect_winning_sequence?(player_sequence)
-  stop_sequence = BLOCK_THIS_EXACT_SEQUENCE.select do |blk_seq|
+  stop_sequence = WINNING_SEQUENCES.select do |blk_seq|
     blk_seq[0..1] == player_sequence[0..1]
   end
   return false if player_sequence.length > 2 || stop_sequence.empty?
@@ -132,7 +132,7 @@ def detect_winning_sequence?(player_sequence)
 end
 
 def block_winning_sequence!(player_sequence)
-  block_sequence = BLOCK_THIS_EXACT_SEQUENCE.select do |blk_seq|
+  block_sequence = WINNING_SEQUENCES.select do |blk_seq|
     blk_seq[0..1] == player_sequence[0..1]
   end
   block_sequence.flatten.last
