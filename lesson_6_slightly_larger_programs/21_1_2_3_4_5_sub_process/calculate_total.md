@@ -29,12 +29,14 @@ def calculate_hand_values(hand)
   sum
 end
 
-
+DEALER DOWN CARD CALCULATION 
+ADD IF hand[0] == ? 
+sum += 0 
 
 
 players_hand = [["D", "K"], ["H", "4"]]
 
-dealers_hand = [["?", "0"], ["S", "7"], ["H", "9"]]
+dealers_hand = [["?", "?"], ["S", "7"], ["H", "9"]]
 
 calculate_without_downcard = dealers_downcard_hand(dealers_hand) # during players turn
 => [["?", "0"],["H", "9"]]
