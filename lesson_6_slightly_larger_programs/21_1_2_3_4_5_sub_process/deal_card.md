@@ -2,7 +2,7 @@ INITIALIZE THE PLAYERS HAND
 DEAL A CARD TO THE PLAYER
 REMOVE THE DEALT CARD FROM THE DECK
 ```ruby
-def subprocess_deal
+def deal
 end
 
 
@@ -38,6 +38,8 @@ dealers_hand
 
 
 
+def construct_deck_md
+end
 
 
 UNSHUFFLED_DECK =  [["H", "1"], ["H", "4"], ["D", "K"], ["H", "Q"]]
