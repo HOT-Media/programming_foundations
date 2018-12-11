@@ -1,6 +1,4 @@
 ```ruby
-def display_hand_values_md
-end
 
 def display_hand_values(player, dealer)
   puts "Players hand total: #{player}    Dealers hand total: #{dealer}"
