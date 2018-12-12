@@ -38,8 +38,8 @@ players_hand = [["D", "K"], ["H", "4"]]
 
 dealers_hand = [["?", "?"], ["S", "7"], ["H", "9"]]
 
-calculate_without_downcard = dealers_downcard_hand(dealers_hand) # during players turn
-=> [["?", "0"],["H", "9"]]
+downcard_hand = dealers_downcard_hand(dealers_hand) # during players turn
+=> [["?", "?"],["H", "9"]]
 
 dealer_reveal_downcard(dealers_hand) # after players turn
 => [["S", "7"], ["H", "9"]]
@@ -55,6 +55,12 @@ dealers_hand_value = calculate_hand_values(calculate_without_downcard) # during 
 => 9
 dealers_hand_value = calculate_hand_values(dealers_hand) # after players turn
 => 16
+
+
+
+
+
+
 
 
 

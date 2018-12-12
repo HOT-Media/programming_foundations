@@ -6,7 +6,6 @@ end
 
 
 
-deal with dealers down card?
 
 
 

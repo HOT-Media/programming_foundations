@@ -1,5 +1,8 @@
 ```ruby
 def display_rules
+  puts RULES
+end
+
 
 RULES = <<TWENTY_ONE_RULES
 
@@ -58,6 +61,7 @@ The game is won when you or the dealer win 5 hands.
 
 
 TWENTY_ONE_RULES
+
 
 
 

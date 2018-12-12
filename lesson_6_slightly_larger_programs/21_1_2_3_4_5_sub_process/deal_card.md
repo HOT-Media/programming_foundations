@@ -6,7 +6,7 @@ def deal
 end
 
 
-UNSHUFFLED_DECK = [ ["H","1"], ["H","4"], ["D", "K"], ["H", "Q"]]
+
 UNSHUFFLED_DECK.freeze
 
 deck = UNSHUFFLED_DECK.shuffle!
@@ -20,7 +20,7 @@ def deal_to_dealer(dealers_hand, deck)
 end
 
 players_hand = []
-dealers_hand = [ ["?", "0"]]
+dealers_hand = [ ["?", "?"]]
 
 deal_to_player players_hand, deck
 
@@ -50,25 +50,25 @@ deck = UNSHUFFLED_DECK.shuffle
 
 players_hand = []
 => []
-dealers_hand = [ ["?", "0"]]
-=> [["?", "0"]]
+dealers_hand = [ ["?", "?"]]
+=> [["?", "?"]]
 deal_to_player players_hand, deck
 => [["D", "K"]]
 
 deal_to_dealer dealers_hand, deck 
-=> [["?", "0"], ["H", "Q"]]
+=> [["?", "?"], ["H", "Q"]]
 
 deal_to_player players_hand, deck
 => [["D", "K"], ["H", "4"]]
 
 deal_to_dealer dealers_hand, deck 
-=> [["?", "0"], ["H", "Q"], ["H", "1"]]
+=> [["?", "?"], ["H", "Q"], ["H", "1"]]
 
 players_hand
 => [["D", "K"], ["H", "4"]]
 
 dealers_hand
-=> [["?", "0"], ["H", "Q"], ["H", "1"]]
+=> [["?", "?"], ["H", "Q"], ["H", "1"]]
 
 
 

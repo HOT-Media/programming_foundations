@@ -4,11 +4,6 @@ end
 
 
 
-
-
-
-
-
 WHO WON THE LAST HAND
 
 md_link -> calculate_total_md
@@ -58,10 +53,15 @@ DISPLAY GAME SCORE
 dealers_score = 0
 players_score = 0
 
+
+
+
+
 def display_game_score(dealers_score,players_score)
   p "Your score: #{players_score}"
   p "Dealers score: #{dealers_score}"
 end
+
 
 display_game_score dealers_score,player_score
 "Your score: 0"
