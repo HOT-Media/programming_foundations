@@ -1,6 +1,7 @@
 require 'pry'
 require 'pry-byebug'
 
+
 RULES = <<TWENTY_ONE_RULES
 
 You start with a normal 52-card deck consisting of the 4 suits: 
@@ -62,7 +63,6 @@ TWENTY_ONE_RULES
 
 
 UNSHUFFLED_DECK = [
-                  ["H", "1"],
                   ["H", "2"],
                   ["H", "3"],
                   ["H", "4"],
@@ -76,7 +76,6 @@ UNSHUFFLED_DECK = [
                   ["H", "K"],
                   ["H", "Q"],
                   ["H", "J"],
-                  ["D", "1"],
                   ["D", "2"],
                   ["D", "3"],
                   ["D", "4"],
@@ -90,7 +89,6 @@ UNSHUFFLED_DECK = [
                   ["D", "K"],
                   ["D", "Q"],
                   ["D", "J"],
-                  ["S", "1"],
                   ["S", "2"],
                   ["S", "3"],
                   ["S", "4"],
@@ -104,7 +102,6 @@ UNSHUFFLED_DECK = [
                   ["S", "K"],
                   ["S", "Q"],
                   ["S", "J"],
-                  ["C", "1"],
                   ["C", "2"],
                   ["C", "3"],
                   ["C", "4"],
@@ -127,7 +124,9 @@ UNSHUFFLED_DECK = [
 WINNING_SCORE = 5
 UNSHUFFLED_DECK.freeze
 
-
+def clear_screen
+  system('clear') || system('cls')
+end
 
 def welcome_message
   msg =  <<WELCOME 
@@ -139,9 +138,9 @@ WELCOME
 end
 
 def display_rules?
-  puts "Would you like to see the rules? yes or no "
-  answer = gets.chomp.downcase
   loop do 
+    puts "Would you like to see the rules? yes or no "
+    answer = gets.chomp.downcase
     if answer == "yes" || answer == "y"
       return true
       break
@@ -150,6 +149,7 @@ def display_rules?
       break
     else puts "Valid answers are yes or no"
     end
+  end
 end
 
 def display_rules
@@ -157,19 +157,15 @@ def display_rules
 end
 
 
-def display_game_score(dealers_score,players_score)
-  p "Your score: #{players_score}"
-  p "Dealers score: #{dealers_score}"
-end
-
-
 def deal_to_player(players_hand, deck)
   players_hand << deck.delete(deck.sample)
 end
 
+
 def deal_to_dealer(dealers_hand, deck)
   dealers_hand << deck.delete(deck.sample)
 end
+
 
 def dealers_downcard_hand(dealers_hand)
   downcard_hand = []
@@ -180,33 +176,42 @@ end
 
 
 def display_cards_player_turn(player, dealer)
-  puts "#{player[0]}  #{player[1]}"
-  puts "#{dealer[0]}  #{dealer[2]}"
+  puts "Your hand:"
+  player.each{|card| puts "#{card}" }
+  puts
+  puts "Dealers hand"
+  puts "#{dealer[0]}"
+  puts "#{dealer[2]}"
 end
 
 
 def display_cards_dealer_turn(player, dealer)
-puts "#{player[0]}  #{player[1]}"
-puts "#{dealer[0]}  #{dealer[1]}"
+puts "Your hand:"
+  player.each{|card| puts "#{card}" }
+  puts
+  puts "Dealers hand"
+  dealer.each{|card| puts "#{card}" }
 end
 
 
 
-
 def calculate_hand_values(hand)
-  values = hand.map { |card| card[1] }
-  sum = 0
-  values.each do |value|
-    if value == "A" # "ACE"
-      sum += 11
-    elsif value.to_i == 0 # J, Q, K 
-      sum += 10 
-    else
-      sum += value.to_i
+  values = hand.map{ |card_sub_array| card_sub_array[1] }
+    sum = 0
+    #binding.pry
+    values.each do |value|
+      if value == "A" # "ACE"
+        sum += 11
+      elsif value == "?"
+        sum += 0
+      elsif value.to_i == 0 # J, Q, K 
+        sum += 10 
+      else
+        sum += value.to_i
+      end
     end
-  end
   # correct for Aces
-  values.select { |value| value == "A" }.count.times do
+  values.select{ |card_value| card_value == "A" }.count.times do
     sum -= 10 if sum > 21
   end
   sum
@@ -244,9 +249,10 @@ def hit?
   "Enter hit for another card"
   "Enter stay if you do not want another card"
 HIT_OR_NOT
-  puts hit_question
-  answer = gets.chomp.downcase
+  #binding.pry
   loop do 
+    puts hit_question
+    answer = gets.chomp.downcase
     if answer == "hit" || answer == "h"
       return true
       break
@@ -260,22 +266,14 @@ HIT_OR_NOT
 end
 
 
-
-if hit? == true
-  deal_to_player(player)
-end
-
-
-
-
 def dealer_reveal_downcard(dealers_hand)
-  dealer_hand.unshift
-  dealer_hand
+  dealers_hand.shift
+  dealers_hand
 end
 
 
 def who_won_hand?(player,dealer)
-  players_hand_value > dealers_hand_value? ? "Player" : "Dealer"
+  player > dealer ? "Player" : "Dealer"
 end
 
 
@@ -288,26 +286,27 @@ end
 
 def add_one_point(hand_winner, dealer, player)
   if hand_winner == "Dealer"
-    dealers_score += 1
+    dealer << 1
   elsif hand_winner == "Player"
-    players_score += 1
+    player << 1
   end
-  hand_winner
 end
 
+
+
 def display_game_score(dealers_score,players_score)
-  p "Your score: #{players_score}"
-  p "Dealers score: #{dealers_score}"
+  p "Your score: #{players_score.sum}"
+  p "Dealers score: #{dealers_score.sum}"
 end
 
 
 def someone_won_game? player_score, dealer_score
-  player_score == WINNING_SCORE || dealer_score == WINNING_SCORE
+  player_score.sum == WINNING_SCORE || dealer_score.sum == WINNING_SCORE
 end
 
 
 def who_won_game? player_score, dealer_score
-  player_score > dealer_score? ? "Player" : "Dealer" 
+  player_score.sum > dealer_score.sum ? "Player" : "Dealer" 
 end
 
 
@@ -332,59 +331,75 @@ def play_again?
 end
 
 
-deck = UNSHUFFLED_DECK.shuffle!
-players_hand = []
-dealers_hand = [ ["?", "?"]]
-player_score = 0
-dealer_score = 0
+deck = UNSHUFFLED_DECK.shuffle
+
+player_score = []
+dealer_score = []
+
+
 welcome_message
 display_rules if display_rules? 
+clear_screen
 
 # loop do #exit game after reading rules but before starting game
 #   quit_game = exit_game? if begin_game? == false
 #   break if quit_game == true
 # end
-binding.pry
-display_game_score dealers_score,player_score# points for each round
-binding.pry
+
+display_game_score dealer_score,player_score# points for each round
+
 loop do # play again loop
-  loop do # break when the player or dealer score is 5, WINNING_SCORE = 5 
+  loop do # break when the player or dealer score is 5, WINNING_SCORE = 5
+  players_hand = []
+  dealers_hand = [ ["?", "?"]] 
 
     deal_to_player players_hand, deck
     deal_to_dealer dealers_hand, deck 
     deal_to_player players_hand, deck
     deal_to_dealer dealers_hand, deck 
     downcard_hand = dealers_downcard_hand(dealers_hand)
-    display_cards_player_turn(players_hand, dealers_hand) # maybe go back to display_cards and use downcard hand and player hand card with question mark for dealer + 1 card up 
-    players_hand_value = calculate_hand_values(players_hand) # 16
-    dealers_hand_value = calculate_hand_values(downcard_hand) # 10
-    display_hand_values(players_hand_value, dealers_hand_value) # display players full hand value and dealers upcard value
-
+    #binding.pry
+    display_cards_player_turn(players_hand, dealers_hand) 
+    player_hand_value = calculate_hand_values(players_hand) 
+    dealer_hand_value = calculate_hand_values(downcard_hand) 
+    #binding.pry # 10
+    display_hand_values(player_hand_value, dealer_hand_value) 
+    #binding.pry
     loop do # players turn
-      break if twenty_one?(players_hand_value) == true #=> 16 - false
-      deal_to_player(players_hand, deck) if hit? == true
+      break if twenty_one?(player_hand_value) == true 
+      hit_player = hit?
+      #clear_screen
+      deal_to_player(players_hand, deck) if hit_player == true
       display_cards_player_turn(players_hand, dealers_hand)
-      players_hand_value = calculate_hand_values(players_hand)
-      display_hand_values(players_hand_value, dealers_hand_value)
-      break if bust?(players_hand_value) == true # => false
+      break if hit_player == false
+      #binding.pry
+      player_hand_value = calculate_hand_values(players_hand)
+      display_hand_values(player_hand_value, dealer_hand_value)
+      #binding.pry
+      break if bust?(player_hand_value) == true
     end # end players turn loop
 
     dealer_reveal_downcard(dealers_hand) # 2,10 => 12
     loop do # dealers hand loop
       display_cards_dealer_turn(players_hand, dealers_hand) # players hand and show dealers full hand 2,10,8
-      dealers_hand_value = calculate_hand_values(dealers_hand)
-      display_hand_values(players_hand_value, dealers_hand_value)
-      break if bust?(players_hand_value) == true
-      break if twenty_one?(dealers_hand_value) == true# => false
-      break if push?(players_hand_value, dealers_hand_value) == true
-      break if over_seventeen?(dealers_hand_value) == true
-      deal_to_dealer(dealers_hand, deck) if over_seventeen?(dealers_hand_value) == false # false - 12  => 8  dealers hand value 20 now
+      sleep 2
+      dealer_hand_value = calculate_hand_values(dealers_hand)
+      display_hand_values(player_hand_value, dealer_hand_value)
+      sleep 2
+      #binding.pry
+      break if bust?(player_hand_value) == true
+      break if twenty_one?(dealer_hand_value) == true
+      break if push?(player_hand_value, dealer_hand_value) == true
+      break if over_seventeen?(dealer_hand_value) == true
+      #binding.pry
+      deal_to_dealer(dealers_hand, deck) if over_seventeen?(dealer_hand_value) == false
+      sleep 2
     end # end dealer hand
 
-    hand_winner = who_won_hand? players_hand_value, dealers_hand_value
+    hand_winner = who_won_hand? player_hand_value, dealer_hand_value
     display_hand_winner(hand_winner)
-    add_one_point(hand_winner, dealers_score, players_score)
-    display_game_score(dealers_score,players_score)
+    add_one_point(hand_winner, dealer_score, player_score)
+    display_game_score(dealer_score,player_score)
     break if someone_won_game?(player_score, dealer_score)# break gameplay loop
   end # end first to five loop
   who_won_game?(player_score, dealer_score)
@@ -393,5 +408,3 @@ loop do # play again loop
   break if continue == false
   puts "Thanks for playing"
 end # end play again loop
-binding.pry
-end

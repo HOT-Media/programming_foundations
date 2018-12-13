@@ -58,6 +58,29 @@ dealers_hand_value = calculate_hand_values(dealers_hand) # after players turn
 
 
 
+def calculate_hand_values(hand)
+  values = hand.map{ |card_sub_array| card_sub_array[1] }
+    sum = 0
+    binding.pry
+    values.each do |value|
+      if value == "A" # "ACE"
+        sum += 11
+      elsif value == "?"
+        sum += 0
+      elsif value.to_i == 0 # J, Q, K 
+        sum += 10 
+      else
+        sum += value.to_i
+      end
+    end
+  # correct for Aces
+  values.select{ |card_value| card_value == "A" }.count.times do
+    sum -= 10 if sum > 21
+  end
+  sum
+end
+
+
 
 
 

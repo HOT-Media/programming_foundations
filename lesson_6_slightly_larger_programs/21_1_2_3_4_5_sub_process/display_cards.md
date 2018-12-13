@@ -27,7 +27,12 @@ dealer_reveal_downcard(dealers_hand) # after player turn
 
 
 
-
+def display_cards_player_turn(player, dealer)
+  player.each{|card| puts "#{card}" }
+  dealer.each{|card| puts "#{card}" }
+  # puts "#{player[0]}  #{player[1]}"
+  # puts "#{dealer[0]}  #{dealer[2]}"
+end
 
 
 
