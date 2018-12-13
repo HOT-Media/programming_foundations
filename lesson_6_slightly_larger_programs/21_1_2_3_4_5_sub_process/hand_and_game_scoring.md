@@ -68,14 +68,7 @@ display_game_score dealers_score,player_score
 "Dealers score: 1"
 
 
-def add_one_point(hand_winner, dealer, player)
-  if hand_winner == "Dealer"
-    dealers_score += 1
-  elsif hand_winner == "Player"
-    players_score += 1
-  end
-  hand_winner
-end
+
 
 add_one_point(hand_winner, dealers_score, players_score)
 => dealers_score
@@ -97,4 +90,44 @@ def display_game_winner winner
   puts "#{winner} won the game!"
 end
 => "Dealer won the game!"
+
+
+
+
+
+
+dealers_score = []
+player_score = []
+
+def add_one_point(hand_winner, dealer, player)
+  if hand_winner == "Dealer"
+    dealer << 1
+  elsif hand_winner == "Player"
+    player << 1
+  end
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

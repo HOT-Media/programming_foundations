@@ -365,19 +365,47 @@ loop do # play again loop
     #binding.pry # 10
     display_hand_values(player_hand_value, dealer_hand_value) 
     #binding.pry
-    loop do # players turn
+
+
+loop do # players turn
       break if twenty_one?(player_hand_value) == true 
       hit_player = hit?
       #clear_screen
       deal_to_player(players_hand, deck) if hit_player == true
-      display_cards_player_turn(players_hand, dealers_hand)
-      break if hit_player == false
-      #binding.pry
       player_hand_value = calculate_hand_values(players_hand)
+      display_game_score dealer_score,player_score
       display_hand_values(player_hand_value, dealer_hand_value)
-      #binding.pry
-      break if bust?(player_hand_value) == true
+      display_cards_player_turn(players_hand, dealers_hand)
+      break if hit_player == false || bust?(player_hand_value) == true
     end # end players turn loop
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # loop do # players turn
+    #   break if twenty_one?(player_hand_value) == true 
+    #   hit_player = hit?
+    #   #clear_screen
+    #   deal_to_player(players_hand, deck) if hit_player == true
+    #   display_cards_player_turn(players_hand, dealers_hand)
+    #   break if hit_player == false
+    #   #binding.pry
+    #   player_hand_value = calculate_hand_values(players_hand)
+    #   display_hand_values(player_hand_value, dealer_hand_value)
+    #   #binding.pry
+    #   break if bust?(player_hand_value) == true
+    # end # end players turn loop
 
     dealer_reveal_downcard(dealers_hand) # 2,10 => 12
     loop do # dealers hand loop
