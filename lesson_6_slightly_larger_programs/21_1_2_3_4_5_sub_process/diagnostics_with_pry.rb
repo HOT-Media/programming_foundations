@@ -1,7 +1,6 @@
 require 'pry'
 require 'pry-byebug'
 
-
 RULES = <<TWENTY_ONE_RULES
 
 You start with a normal 52-card deck consisting of the 4 suits: 
@@ -60,8 +59,6 @@ The game is won when you or the dealer win 5 hands.
 
 TWENTY_ONE_RULES
 
-
-
 UNSHUFFLED_DECK = [
                   ["H", "2"],
                   ["H", "3"],
@@ -117,10 +114,6 @@ UNSHUFFLED_DECK = [
                   ["C", "J"]
                  ]
 
-
-
-
-
 WINNING_SCORE = 5
 UNSHUFFLED_DECK.freeze
 
@@ -156,24 +149,19 @@ def display_rules
   puts RULES
 end
 
-
 def deal_to_player(players_hand, deck)
   players_hand << deck.delete(deck.sample)
 end
 
-
 def deal_to_dealer(dealers_hand, deck)
   dealers_hand << deck.delete(deck.sample)
 end
-
 
 def dealers_downcard_hand(dealers_hand)
   downcard_hand = []
   downcard_hand << dealers_hand[0] << dealers_hand[2]
   downcard_hand
 end
-
-
 
 def display_cards_player_turn(player, dealer)
   puts 
@@ -186,7 +174,6 @@ def display_cards_player_turn(player, dealer)
   puts
 end
 
-
 def display_cards_dealer_turn(player, dealer)
   puts
   puts "Your hand:"
@@ -196,18 +183,6 @@ def display_cards_dealer_turn(player, dealer)
   dealer.each{|card| puts "#{card}" }
   puts
 end
-
-
-# def display_downcard(player, dealer)
-# puts "Your hand:"
-#   player.each{|card| puts "#{card}" }
-#   puts 
-#   sleep 5
-#   puts "Dealer displaying downcard"
-#   dealer.each{|card| puts "#{card}" }
-# end
-
-
 
 def display_downcard_message(player, dealer)
   puts 
@@ -219,29 +194,6 @@ def display_downcard_message(player, dealer)
   puts "#{dealer[2]}"
   puts
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-# def display_cards_dealer_turn(dealer)
-#   puts
-#   puts "Dealers hand"
-#   dealer.each{|card| puts "#{card}" }
-# end
-
-
-
-
-
 
 def calculate_hand_values(hand)
   values = hand.map{ |card_sub_array| card_sub_array[1] }
@@ -408,30 +360,36 @@ def who_won_game? player_score, dealer_score
 end
 
 
-def display_game_winner winner 
+def display_game_winner winner
+winner = "You" if winner == "Player" 
   puts "#{winner} won the game!"
 end
 
-
 def play_again?
-   puts "Would you like to play another game?, yes or no "
-  answer = gets.chomp.downcase
-  loop do 
+  loop do
+    puts "Would you like to play another game?, yes or no "
+    answer = gets.chomp.downcase 
     if answer == "yes" || answer == "y"
       return true
       break
     elsif answer == "no" || answer == "n"
       return false
       break
-    else puts "Valid answers are yes or no"
+    else 
+      puts "Valid answers are yes or no"
     end
   end
 end
 
 def enter_to_continue
-  puts "enter to continue"
+  puts "Press enter to continue"
   gets
 end  
+
+def enter_to_deal_cards
+  puts "Press enter to deal the cards"
+  gets
+end
 
 
 
@@ -445,44 +403,27 @@ player_busted = nil
 clear_screen
 welcome_message
 display_rules if display_rules? 
-enter_to_continue
-clear_screen
+enter_to_deal_cards
+#clear_screen
 
 
-loop do # play again loop
-  loop do # break when the player or dealer score is 5, WINNING_SCORE = 5
+loop do
+  clear_screen
+  loop do
     display_game_score dealer_score,player_score
-  players_hand = []
-  dealers_hand = [ ["?", "?"]] 
-
+    players_hand = []
+    dealers_hand = [ ["?", "?"]]
     deal_to_player players_hand, deck
-    deal_to_dealer dealers_hand, deck 
+    deal_to_dealer dealers_hand, deck
     deal_to_player players_hand, deck
-    deal_to_dealer dealers_hand, deck 
+    deal_to_dealer dealers_hand, deck
     downcard_hand = dealers_downcard_hand(dealers_hand)
-    #binding.pry
-    display_cards_player_turn(players_hand, dealers_hand) 
-    player_hand_value = calculate_hand_values(players_hand) 
-    dealer_hand_value = calculate_hand_values(downcard_hand) 
-    #binding.pry # 10
-    display_hand_values(player_hand_value, dealer_hand_value) 
-    #binding.pry
+    display_cards_player_turn(players_hand, dealers_hand)
+    player_hand_value = calculate_hand_values(players_hand)
+    dealer_hand_value = calculate_hand_values(downcard_hand)
+    display_hand_values(player_hand_value, dealer_hand_value)
 
-
-# loop do # players turn
-#       break if twenty_one?(player_hand_value) == true 
-#       hit_player = hit?
-#       #clear_screen
-#       deal_to_player(players_hand, deck) if hit_player == true
-#       player_hand_value = calculate_hand_values(players_hand)
-#       display_game_score dealer_score,player_score
-#       display_hand_values(player_hand_value, dealer_hand_value)
-#       display_cards_player_turn(players_hand, dealers_hand)
-#       break if hit_player == false || bust?(player_hand_value) == true
-#     end # end players turn loop
-
-
-loop do # players turn
+    loop do # players turn
       twenty_one = twenty_one?(player_hand_value)
       display_player_twenty_one if twenty_one == true
       break if twenty_one == true 
@@ -494,28 +435,12 @@ loop do # players turn
       display_cards_player_turn(players_hand, dealers_hand)
       display_hand_values(player_hand_value, dealer_hand_value)
       player_busted = bust?(player_hand_value)
-      #hand_winner = "Dealer" if player_busted == true
       display_player_bust if player_busted == true
-      # display_hand_winner("Dealer") if player_busted == true
       break if hit_player == false || player_busted == true
     end # end players turn loop
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    #display_hand_winner("Dealer") if player_busted == true
 
     clear_screen
     display_game_score dealer_score,player_score
@@ -523,74 +448,30 @@ loop do # players turn
     display_hand_values(player_hand_value, dealer_hand_value)
     sleep 2
 
-
-    #clear_screen # score disappears
-    #display_game_score dealer_score,player_score
-
     dealer_reveal_downcard(dealers_hand) # shift / delete downcard
 
-
-    #display_cards_dealer_turn(players_hand, dealers_hand)
-    #dealer_hand_value = calculate_hand_values(dealers_hand)
-    #display_hand_values(player_hand_value, dealer_hand_value)
-    #sleep 3
-    #puts "Dealer reveals downcard:"
-    #display_game_score dealer_score,player_score
     loop do # dealers hand loop
-
-
       clear_screen
       display_game_score dealer_score,player_score
-      display_cards_dealer_turn(players_hand, dealers_hand) # players hand and show dealers full hand 2,10,8
+      display_cards_dealer_turn(players_hand, dealers_hand)
       dealer_hand_value = calculate_hand_values(dealers_hand)
       display_hand_values(player_hand_value, dealer_hand_value)
       dealer_busted = bust?(dealer_hand_value)
-      #hand_winner = "Dealer" if player_busted == true
       display_dealer_bust if dealer_busted == true
-      #enter_to_continue
-      #binding.pry
       break if player_busted == true
       break if twenty_one?(dealer_hand_value) == true
-      #break if push?(player_hand_value, dealer_hand_value) == true
       break if over_seventeen?(dealer_hand_value) == true
-      #binding.pry
-      #clear_screen
       display_dealing_to_dealer
       sleep 2
       deal_to_dealer(dealers_hand, deck) if over_seventeen?(dealer_hand_value) == false
-      
     end # end dealer hand
 
 
-
-
-
-    # dealer_reveal_downcard(dealers_hand) # 2,10 => 12
-    # loop do # dealers hand loop
-    #   display_cards_dealer_turn(players_hand, dealers_hand) # players hand and show dealers full hand 2,10,8
-    #   sleep 2
-    #   dealer_hand_value = calculate_hand_values(dealers_hand)
-    #   display_hand_values(player_hand_value, dealer_hand_value)
-    #   sleep 2
-    #   #binding.pry
-    #   break if bust?(player_hand_value) == true
-    #   break if twenty_one?(dealer_hand_value) == true
-    #   break if push?(player_hand_value, dealer_hand_value) == true
-    #   break if over_seventeen?(dealer_hand_value) == true
-    #   #binding.pry
-    #   deal_to_dealer(dealers_hand, deck) if over_seventeen?(dealer_hand_value) == false
-    #   sleep 2
-    # end # end dealer hand
-
-
-
-#hand_winner == "Dealer" => true
 
     hand_winner = who_won_hand? player_hand_value, dealer_hand_value
     display_hand_winner(hand_winner)
     add_one_point(hand_winner, dealer_score, player_score)
     enter_to_continue
-    #display_game_score(dealer_score,player_score)
     clear_screen
     break if someone_won_game?(player_score, dealer_score)# break gameplay loop
   end # end first to five loop
@@ -599,7 +480,7 @@ loop do # players turn
   display_game_winner(game_winner)
   player_score.clear
   dealer_score.clear 
-  continue = play_again?
-  break if continue == false
-  puts "Thanks for playing"
+  play_another_game = play_again? # y true
+  break if play_another_game == false
 end # end play again loop
+puts "Thanks for playing"

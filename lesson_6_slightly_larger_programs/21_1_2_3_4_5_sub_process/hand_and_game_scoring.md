@@ -14,7 +14,20 @@ dealers_hand_value = 16
 
                   players_hand_value, dealers_hand_value
 def who_won_hand?(player,dealer)
-  players_hand_value > dealers_hand_value? "Player" : "Dealer"
+  return "Dealer" if player > 21
+  return "Player" if dealer > 21
+  dealer > player ? "Dealer" : "Player"
+end
+
+
+
+
+
+
+
+
+
+
 end
 
 hand_winner = who_won_hand? players_hand_value, dealers_hand_value
