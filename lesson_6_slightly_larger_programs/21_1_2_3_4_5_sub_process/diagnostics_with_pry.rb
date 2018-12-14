@@ -217,28 +217,23 @@ def calculate_hand_values(hand)
   sum
 end
 
-
 def display_hand_values(player, dealer)
   puts "Your hand total: #{player}    Dealers hand total: #{dealer}"
   puts
 end
 
-
 def twenty_one?(hand)
   hand == 21 
 end
-
 
 def over_seventeen?(hand)
   hand >= 17
 end
 
-
 def display_player_twenty_one
   puts "!!! TWENTY ONE !!!"
   sleep 3
 end
-
 
 def display_player_bust
   puts "!!! YOU BUSTED !!!"
@@ -250,16 +245,13 @@ def display_dealer_bust
   sleep 3
 end
 
-
 def bust?(hand)
   hand > 21
 end
 
-
 def push?(players_hand_value, dealers_hand_value)
   players_hand_value == dealers_hand_value
 end
-
 
 def hit?
   hit_question = <<HIT_OR_NOT
@@ -283,28 +275,14 @@ HIT_OR_NOT
   end
 end
 
-
 def dealer_reveal_downcard(dealers_hand)
   dealers_hand.shift
   dealers_hand
 end
 
-
-
-
 def display_dealing_to_dealer
   puts "The dealer is dealing themself another card"
 end
-
-
-
-
-
-# def who_won_hand?(player,dealer)
-#   player > dealer ? "Player" : "Dealer"
-# end
-
-
 
 def who_won_hand?(player,dealer)
   #binding.pry
@@ -313,14 +291,6 @@ def who_won_hand?(player,dealer)
   return "Player" if dealer > 21
   dealer > player ? "Dealer" : "Player"
 end
-
-
-
-
-
-
-
-
 
 def display_hand_winner(hand_winner)
   hand_winner = "You" if hand_winner == "Player"
@@ -332,9 +302,6 @@ def display_hand_winner(hand_winner)
   end
 end
 
-
-
-
 def add_one_point(hand_winner, dealer, player)
   if hand_winner == "Dealer"
     dealer << 1
@@ -343,22 +310,17 @@ def add_one_point(hand_winner, dealer, player)
   end
 end
 
-
-
 def display_game_score(dealers_score,players_score)
   puts "Your score: #{players_score.sum} Dealers score: #{dealers_score.sum}"
 end
-
 
 def someone_won_game? player_score, dealer_score
   player_score.sum == WINNING_SCORE || dealer_score.sum == WINNING_SCORE
 end
 
-
 def who_won_game? player_score, dealer_score
   player_score.sum > dealer_score.sum ? "Player" : "Dealer" 
 end
-
 
 def display_game_winner winner
 winner = "You" if winner == "Player" 
@@ -391,21 +353,14 @@ def enter_to_deal_cards
   gets
 end
 
-
-
-
 deck = UNSHUFFLED_DECK.shuffle
-
 player_score = []
 dealer_score = []
 player_busted = nil
-
 clear_screen
 welcome_message
-display_rules if display_rules? 
+display_rules if display_rules?
 enter_to_deal_cards
-#clear_screen
-
 
 loop do
   clear_screen
@@ -439,15 +394,11 @@ loop do
       break if hit_player == false || player_busted == true
     end # end players turn loop
 
-
-
-
     clear_screen
     display_game_score dealer_score,player_score
     display_downcard_message(players_hand, dealers_hand) # dealer revealing downcard
     display_hand_values(player_hand_value, dealer_hand_value)
     sleep 2
-
     dealer_reveal_downcard(dealers_hand) # shift / delete downcard
 
     loop do # dealers hand loop
@@ -465,8 +416,6 @@ loop do
       sleep 2
       deal_to_dealer(dealers_hand, deck) if over_seventeen?(dealer_hand_value) == false
     end # end dealer hand
-
-
 
     hand_winner = who_won_hand? player_hand_value, dealer_hand_value
     display_hand_winner(hand_winner)
