@@ -330,4 +330,4 @@ loop do
   play_another_game = play_again?
   break if play_another_game == false
 end
-puts "Thanks for playing"
+puts "Thanks for playing!"

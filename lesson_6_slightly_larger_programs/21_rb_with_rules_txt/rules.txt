@@ -31,7 +31,7 @@ Type "hit" for another card.
 Type "stay" if you are satified with your "hand" and you do not want
 another card.
 If the total exceeds 21 after a card has been dealt to you, then you
-"bust" and the dealer wins.
+"bust", and the dealer wins.
 
 
 After you "stay", the dealer will reveal their downcard.
