@@ -171,9 +171,9 @@ def push?(players_hand_value, dealers_hand_value)
 end
 
 HIT_QUESTION = <<HIT_OR_NOT
-  "What do you want to do?"
-  "Enter hit for another card"
-  "Enter stay if you do not want another card"
+What do you want to do?
+Enter hit for another card
+Enter stay if you do not want another card
 HIT_OR_NOT
 
 def hit?
