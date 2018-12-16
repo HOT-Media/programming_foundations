@@ -256,12 +256,12 @@ def play_again?
 end
 
 def enter_to_continue
-  puts "Press enter to continue"
+  puts "Press enter to continue."
   gets
 end
 
 def enter_to_deal_cards
-  puts "Press enter to deal the cards"
+  puts "Press enter to deal the cards."
   gets
 end
 

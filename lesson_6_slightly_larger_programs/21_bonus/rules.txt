@@ -36,7 +36,7 @@ If the total exceeds 21 after a card has been dealt to you, then you
 
 After you "stay", the dealer will reveal their downcard.
 If the value of the dealers "hand" is less than 17, the dealer
-"hits" until the value of their "hand" is greater than 17
+"hits" until the value of their "hand" is greater than 17.
 If the value of the dealers "hand" is now greater than 21, the dealer
 "busts"
 If the value of the dealers "hand" is now less than 21, and the value
