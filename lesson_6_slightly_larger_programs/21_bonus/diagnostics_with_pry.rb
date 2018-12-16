@@ -1,6 +1,8 @@
 require 'pry'
 require 'pry-byebug'
 
+WIN_HAND = 21
+DEALER_HITS_UNTIL = 17
 RULES = File.read('rules.txt')
 WINNING_SCORE = 5
 FACE_CARDS = ["K", "Q", "J", "A"]
@@ -20,7 +22,7 @@ end
 
 def welcome_message
   msg = <<WELCOME
-Welcome to 21.
+Welcome to #{WIN_HAND}.
 The winner of each "hand" will earn 1 point.
 The game is won when either you or the dealer win 5 hands.
 WELCOME
@@ -120,7 +122,7 @@ def calculate_hand_values(hand)
   value_array = extract_values(hand)
   integer_array = convert_values_to_integers(value_array)
   total = integer_array.sum
-  if (extract_values(hand).include? "A") && total > 21
+  if (extract_values(hand).include? "A") && total > WIN_HAND
     return correct_aces(extract_values(hand), total)
   end
   total
@@ -139,11 +141,11 @@ def display_hand_values(player, dealer)
 end
 
 def twenty_one?(hand)
-  hand == 21
+  hand == WIN_HAND
 end
 
 def over_seventeen?(hand)
-  hand >= 17
+  hand >= DEALER_HITS_UNTIL
 end
 
 def display_player_twenty_one
@@ -162,7 +164,7 @@ def display_dealer_bust
 end
 
 def bust?(hand)
-  hand > 21
+  hand > WIN_HAND
 end
 
 def push?(players_hand_value, dealers_hand_value)
@@ -200,8 +202,8 @@ end
 
 def who_won_hand?(player, dealer)
   return "Push" if player == dealer
-  return "Dealer" if player > 21
-  return "Player" if dealer > 21
+  return "Dealer" if player > WIN_HAND
+  return "Player" if dealer > WIN_HAND
   dealer > player ? "Dealer" : "Player"
 end
 
