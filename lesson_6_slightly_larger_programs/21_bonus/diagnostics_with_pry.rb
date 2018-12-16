@@ -1,6 +1,3 @@
-require 'pry'
-require 'pry-byebug'
-
 WIN_HAND = 21
 DEALER_HITS_UNTIL = 17
 RULES = File.read('rules.txt')
@@ -23,6 +20,7 @@ end
 def welcome_message
   msg = <<WELCOME
 Welcome to #{WIN_HAND}.
+
 The winner of each "hand" will earn 1 point.
 The game is won when either you or the dealer win 5 hands.
 WELCOME
@@ -30,6 +28,7 @@ WELCOME
 end
 
 def display_rules?
+  puts
   loop do
     puts "Would you like to see the rules? yes or no "
     answer = gets.chomp.downcase
@@ -150,17 +149,17 @@ end
 
 def display_player_twenty_one
   puts "!!! TWENTY ONE !!!"
-  sleep 3
+  sleep 1.75
 end
 
 def display_player_bust
   puts "!!! YOU BUSTED !!!"
-  sleep 3
+  sleep 1.75
 end
 
 def display_dealer_bust
   puts "!!! DEALER BUST !!!"
-  sleep 3
+  sleep 1.75
 end
 
 def bust?(hand)
